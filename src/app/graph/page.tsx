@@ -1,23 +1,28 @@
 "use client";
 
 import { useMemo, useState, useCallback } from "react";
-import ForceGraph2D from "react-force-graph-2d";
-import { genRandomTree } from "../helpers/genRandomTree";
+import ForceGraph2D, { ForceGraphMethods } from "react-force-graph-2d";
+import { genRandomTree, Link, Node } from "../helpers/genRandomTree";
+
+interface GraphData {
+  nodes: Node[];
+  links: Link[];
+}
 
 const NODE_R = 8;
+
 const HighlightGraph = () => {
   const data = useMemo(() => {
-    const gData = genRandomTree(80);
+    const gData: GraphData = genRandomTree(80);
 
     // cross-link node objects
     gData.links.forEach((link) => {
-      const a = gData.nodes[link.source];
-      const b = gData.nodes[link.target];
+      const a = gData.nodes.find((n) => n.id === link.source) as Node;
+      const b = gData.nodes.find((n) => n.id === link.target) as Node;
       !a.neighbors && (a.neighbors = []);
       !b.neighbors && (b.neighbors = []);
       a.neighbors.push(b);
       b.neighbors.push(a);
-      console.log("a", a.neighbors);
 
       !a.links && (a.links = []);
       !b.links && (b.links = []);
@@ -28,46 +33,57 @@ const HighlightGraph = () => {
     return gData;
   }, []);
 
-  const [highlightNodes, setHighlightNodes] = useState(new Set());
-  const [highlightLinks, setHighlightLinks] = useState(new Set());
-  const [hoverNode, setHoverNode] = useState(null);
+  const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
+  const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
+  const [hoverNode, setHoverNode] = useState<Node | null>(null);
 
   const updateHighlight = () => {
-    setHighlightNodes(highlightNodes);
-    setHighlightLinks(highlightLinks);
+    setHighlightNodes(new Set(highlightNodes));
+    setHighlightLinks(new Set(highlightLinks));
   };
 
-  const handleNodeHover = (node) => {
+  const handleNodeHover = (node: Node | null) => {
     highlightNodes.clear();
     highlightLinks.clear();
     if (node) {
       highlightNodes.add(node);
-      node.neighbors.forEach((neighbor) => highlightNodes.add(neighbor));
-      node.links.forEach((link) => highlightLinks.add(link));
+      node.neighbors?.forEach((neighbor) => highlightNodes.add(neighbor));
+      node.links?.forEach((link) => highlightLinks.add(link));
     }
 
-    setHoverNode(node || null);
+    setHoverNode(node);
     updateHighlight();
   };
 
-  const handleLinkHover = (link) => {
+  const handleLinkHover = (link: Link | null) => {
     highlightNodes.clear();
     highlightLinks.clear();
 
     if (link) {
       highlightLinks.add(link);
-      highlightNodes.add(link.source);
-      highlightNodes.add(link.target);
+      const sourceNode =
+        typeof link.source === "object"
+          ? link.source
+          : data.nodes.find((n) => n.id === link.source);
+      const targetNode =
+        typeof link.target === "object"
+          ? link.target
+          : data.nodes.find((n) => n.id === link.target);
+
+      if (sourceNode && targetNode) {
+        highlightNodes.add(sourceNode);
+        highlightNodes.add(targetNode);
+      }
     }
 
     updateHighlight();
   };
 
   const paintRing = useCallback(
-    (node, ctx) => {
+    (node: Node, ctx: CanvasRenderingContext2D) => {
       // add ring just for highlighted nodes
       ctx.beginPath();
-      ctx.arc(node.x, node.y, NODE_R * 1.4, 0, 2 * Math.PI, false);
+      ctx.arc(node.x || 0, node.y || 0, NODE_R * 1.4, 0, 2 * Math.PI, false);
       ctx.fillStyle = node === hoverNode ? "red" : "orange";
       ctx.fill();
     },
@@ -79,23 +95,18 @@ const HighlightGraph = () => {
       graphData={data}
       nodeRelSize={NODE_R}
       autoPauseRedraw={false}
-      // linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
+      linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
       linkDirectionalParticles={4}
-      // linkDirectionalParticleWidth={(link) =>
-      //   highlightLinks.has(link) ? 4 : 0
-      // }
-      // nodeCanvasObjectMode={(node) =>
-      //   highlightNodes.has(node) ? "before" : undefined
-      // }
-      nodeCanvasObject={paintRing}
-      onNodeHover={handleNodeHover}
-      onLinkHover={handleLinkHover}
-      onNodeClick={(id) => console.log("id", id)}
+      linkDirectionalParticleWidth={(link: Link) =>
+        highlightLinks.has(link) ? 4 : 0
+      }
+      nodeCanvasObjectMode={() => "before"}
+      nodeCanvasObject={paintRing as any}
+      onNodeHover={handleNodeHover as any}
+      onLinkHover={handleLinkHover as any}
       backgroundColor="white"
     />
   );
 };
 
 export default HighlightGraph;
-
-// ReactDOM.render(<HighlightGraph />, document.getElementById("graph"));
