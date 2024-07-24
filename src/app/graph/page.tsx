@@ -3,6 +3,8 @@
 import { useMemo, useState, useCallback } from "react";
 import ForceGraph2D, { ForceGraphMethods } from "react-force-graph-2d";
 import { genRandomTree, Link, Node } from "../helpers/genRandomTree";
+import GraphHeader from "./components/GraphHeader";
+import GraphSidebar from "./components/GraphSidebar";
 
 interface GraphData {
   nodes: Node[];
@@ -12,6 +14,12 @@ interface GraphData {
 const NODE_R = 8;
 
 const HighlightGraph = () => {
+  const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>(
+    []
+  );
+  const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
+    useState<string[]>([]);
+
   const data = useMemo(() => {
     const gData: GraphData = genRandomTree(80);
 
@@ -91,21 +99,39 @@ const HighlightGraph = () => {
   );
 
   return (
-    <ForceGraph2D
-      graphData={data}
-      nodeRelSize={NODE_R}
-      autoPauseRedraw={false}
-      linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-      linkDirectionalParticles={4}
-      linkDirectionalParticleWidth={(link: Link) =>
-        highlightLinks.has(link) ? 4 : 0
-      }
-      nodeCanvasObjectMode={() => "before"}
-      nodeCanvasObject={paintRing as any}
-      onNodeHover={handleNodeHover as any}
-      onLinkHover={handleLinkHover as any}
-      backgroundColor="white"
-    />
+    <div className="flex flex-col h-screen">
+      {/* Header */}
+      <GraphHeader />
+
+      <div className="flex">
+        {/* Sidebar */}
+        <GraphSidebar
+          selectedNodesCheckBox={selectedNodesCheckBox}
+          setSelectedNodesCheckBox={setSelectedNodesCheckBox}
+          selectedConnectionsCheckBox={selectedConnectionsCheckBox}
+          setSelectedConnectionsCheckBox={setSelectedConnectionsCheckBox}
+        />
+
+        {/* Graph */}
+        <main>
+          <ForceGraph2D
+            graphData={data}
+            nodeRelSize={NODE_R}
+            autoPauseRedraw={false}
+            linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
+            linkDirectionalParticles={4}
+            linkDirectionalParticleWidth={(link: Link) =>
+              highlightLinks.has(link) ? 4 : 0
+            }
+            nodeCanvasObjectMode={() => "before"}
+            nodeCanvasObject={paintRing as any}
+            onNodeHover={handleNodeHover as any}
+            onLinkHover={handleLinkHover as any}
+            backgroundColor="white"
+          />
+        </main>
+      </div>
+    </div>
   );
 };
 
