@@ -13,7 +13,7 @@ interface GraphData {
 
 const NODE_R = 8;
 
-const HighlightGraph = () => {
+const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>(
     []
   );
@@ -114,28 +114,30 @@ const HighlightGraph = () => {
 
         {/* Graph */}
         <main>
-          <ForceGraph2D
-            graphData={data}
-            nodeRelSize={NODE_R}
-            autoPauseRedraw={false}
-            linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-            linkDirectionalParticles={4}
-            linkDirectionalParticleWidth={(link: Link) =>
-              highlightLinks.has(link) ? 4 : 0
-            }
-            nodeCanvasObjectMode={() => "before"}
-            nodeCanvasObject={paintRing}
-            onNodeHover={handleNodeHover}
-            onLinkHover={handleLinkHover}
-            backgroundColor="white"
-            nodeAutoColorBy={"id"}
-            nodeLabel={"id"}
-            // nodeVal={"id"}
-          />
+          {typeof window !== "undefined" && (
+            <ForceGraph2D
+              graphData={data}
+              nodeRelSize={NODE_R}
+              autoPauseRedraw={false}
+              linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
+              linkDirectionalParticles={4}
+              linkDirectionalParticleWidth={(link: Link) =>
+                highlightLinks.has(link) ? 4 : 0
+              }
+              nodeCanvasObjectMode={() => "before"}
+              nodeCanvasObject={paintRing as any}
+              onNodeHover={handleNodeHover as any}
+              onLinkHover={handleLinkHover as any}
+              backgroundColor="white"
+              nodeAutoColorBy={"id"}
+              nodeLabel={"id"}
+              // nodeVal={"id"}
+            />
+          )}
         </main>
       </div>
     </div>
   );
 };
 
-export default HighlightGraph;
+export default GraphPage;
