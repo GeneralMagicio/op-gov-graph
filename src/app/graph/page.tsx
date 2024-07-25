@@ -124,10 +124,13 @@ const HighlightGraph = () => {
               highlightLinks.has(link) ? 4 : 0
             }
             nodeCanvasObjectMode={() => "before"}
-            nodeCanvasObject={paintRing as any}
-            onNodeHover={handleNodeHover as any}
-            onLinkHover={handleLinkHover as any}
+            nodeCanvasObject={paintRing}
+            onNodeHover={handleNodeHover}
+            onLinkHover={handleLinkHover}
             backgroundColor="white"
+            nodeAutoColorBy={"id"}
+            nodeLabel={"id"}
+            // nodeVal={"id"}
           />
         </main>
       </div>
