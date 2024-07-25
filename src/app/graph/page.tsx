@@ -13,7 +13,7 @@ interface GraphData {
 
 const NODE_R = 8;
 
-const HighlightGraph = () => {
+const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>(
     []
   );
@@ -114,25 +114,27 @@ const HighlightGraph = () => {
 
         {/* Graph */}
         <main>
-          <ForceGraph2D
-            graphData={data}
-            nodeRelSize={NODE_R}
-            autoPauseRedraw={false}
-            linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-            linkDirectionalParticles={4}
-            linkDirectionalParticleWidth={(link: Link) =>
-              highlightLinks.has(link) ? 4 : 0
-            }
-            nodeCanvasObjectMode={() => "before"}
-            nodeCanvasObject={paintRing as any}
-            onNodeHover={handleNodeHover as any}
-            onLinkHover={handleLinkHover as any}
-            backgroundColor="white"
-          />
+          {typeof window !== "undefined" && (
+            <ForceGraph2D
+              graphData={data}
+              nodeRelSize={NODE_R}
+              autoPauseRedraw={false}
+              linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
+              linkDirectionalParticles={4}
+              linkDirectionalParticleWidth={(link: Link) =>
+                highlightLinks.has(link) ? 4 : 0
+              }
+              nodeCanvasObjectMode={() => "before"}
+              nodeCanvasObject={paintRing as any}
+              onNodeHover={handleNodeHover as any}
+              onLinkHover={handleLinkHover as any}
+              backgroundColor="white"
+            />
+          )}
         </main>
       </div>
     </div>
   );
 };
 
-export default HighlightGraph;
+export default GraphPage;
