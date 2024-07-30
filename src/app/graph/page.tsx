@@ -139,6 +139,13 @@ const GraphPage = () => {
               nodeCanvasObject={paintRing as any}
               onNodeHover={handleNodeHover as any}
               backgroundColor="white"
+              nodeColor={(node) => {
+                if (node.name === "Projects") {
+                  return "blue";
+                } else {
+                  return "#3388ff";
+                }
+              }}
             />
           )}
         </main>
