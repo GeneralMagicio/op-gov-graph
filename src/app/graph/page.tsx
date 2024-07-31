@@ -1,7 +1,18 @@
 "use client";
 
-import { useMemo, useState, useCallback, useEffect } from "react";
-import ForceGraph2D, { ForceGraphMethods } from "react-force-graph-2d";
+import {
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  MutableRefObject,
+} from "react";
+import ForceGraph2D, {
+  ForceGraphMethods,
+  NodeObject,
+  LinkObject,
+} from "react-force-graph-2d";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
 
@@ -51,6 +62,10 @@ const GraphPage = () => {
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
+
+  // const fgRef = useRef<ForceGraphMethods<NodeObject<IProject472>>>(null);
+  const fgRef =
+    useRef<ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>>(null);
 
   const updateHighlight = () => {
     setHighlightNodes(new Set(highlightNodes));
@@ -109,6 +124,13 @@ const GraphPage = () => {
     fetchProjects472Data();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      fgRef.current?.zoomToFit(200, 100);
+      // fgRef.current?.d3Force("charge")?.strength(-300);
+    }, 100);
+  }, [fgRef]);
+
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
@@ -124,17 +146,19 @@ const GraphPage = () => {
         />
 
         {/* Graph */}
-        <main>
+        <main className="max-w-fit overflow-hidden">
           {typeof window !== "undefined" && (
             <ForceGraph2D
+              ref={
+                fgRef as MutableRefObject<
+                  | ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>
+                  | undefined
+                >
+              }
               graphData={project472GraphData}
               nodeRelSize={NODE_R}
               autoPauseRedraw={false}
-              linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-              linkDirectionalParticles={4}
-              linkDirectionalParticleWidth={(link: Link) =>
-                highlightLinks.has(link) ? 4 : 0
-              }
+              linkWidth={0.3}
               nodeCanvasObjectMode={() => "before"}
               nodeCanvasObject={paintRing as any}
               onNodeHover={handleNodeHover as any}
