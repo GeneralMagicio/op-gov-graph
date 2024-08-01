@@ -48,9 +48,9 @@ interface Link {
 const NODE_R = 2;
 
 const GraphPage = () => {
-  const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>(
-    []
-  );
+  const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
+    "Project Developer",
+  ]);
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<string[]>([]);
 
@@ -126,10 +126,9 @@ const GraphPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      fgRef.current?.zoomToFit(200, 100);
-      // fgRef.current?.d3Force("charge")?.strength(-300);
+      fgRef.current?.zoomToFit(500, 100);
     }, 100);
-  }, [fgRef]);
+  }, [fgRef, selectedNodesCheckBox]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -146,32 +145,39 @@ const GraphPage = () => {
         />
 
         {/* Graph */}
-        <main className="max-w-fit overflow-hidden">
-          {typeof window !== "undefined" && (
-            <ForceGraph2D
-              ref={
-                fgRef as MutableRefObject<
-                  | ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>
-                  | undefined
-                >
-              }
-              graphData={project472GraphData}
-              nodeRelSize={NODE_R}
-              autoPauseRedraw={false}
-              linkWidth={0.3}
-              nodeCanvasObjectMode={() => "before"}
-              nodeCanvasObject={paintRing as any}
-              onNodeHover={handleNodeHover as any}
-              backgroundColor="white"
-              nodeColor={(node) => {
-                if (node.name === "Projects") {
-                  return "blue";
-                } else {
-                  return "#3388ff";
+        <main className="max-w-fit flex-grow overflow-hidden flex justify-center items-center">
+          {typeof window !== "undefined" &&
+            selectedNodesCheckBox.includes("Project Developer") && (
+              <ForceGraph2D
+                ref={
+                  fgRef as MutableRefObject<
+                    | ForceGraphMethods<
+                        NodeObject<Node>,
+                        LinkObject<Node, Link>
+                      >
+                    | undefined
+                  >
                 }
-              }}
-            />
-          )}
+                graphData={project472GraphData}
+                nodeRelSize={NODE_R}
+                autoPauseRedraw={false}
+                linkWidth={0.3}
+                nodeCanvasObjectMode={() => "before"}
+                nodeCanvasObject={paintRing as any}
+                onNodeHover={handleNodeHover as any}
+                backgroundColor="white"
+                nodeColor={(node) => {
+                  if (node.name === "Projects") {
+                    return "blue";
+                  } else {
+                    return "#3388ff";
+                  }
+                }}
+                onEngineStop={() => {
+                  fgRef.current?.zoomToFit();
+                }}
+              />
+            )}
         </main>
       </div>
     </div>

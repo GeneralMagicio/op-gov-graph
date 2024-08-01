@@ -20,7 +20,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
       <div className="mb-4">
         <h2 className="font-semibold mb-2">Nodes</h2>
         <div className="space-y-2">
-          {["Delegate", "Project Developer", "Citizen"].map((node) => (
+          {["Project Developer"].map((node) => (
             <div key={node} className="flex items-center flex-shrink-0">
               <label className="flex items-center w-full text-gray-700 text-sm">
                 <input
@@ -45,11 +45,11 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
         <h2 className="font-semibold mb-2">Connections</h2>
         <div className="space-y-2">
           {[
-            "Team member",
-            "Voting support",
-            "Donation",
-            "Praise",
-            "Trusted Seed",
+            // "Team member",
+            // "Voting support",
+            // "Donation",
+            // "Praise",
+            // "Trusted Seed",
           ].map((connection) => (
             <div key={connection} className="flex items-center flex-shrink-0">
               <label className="flex items-center w-full text-gray-700 text-sm">
