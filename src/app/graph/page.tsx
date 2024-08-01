@@ -1,49 +1,71 @@
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
-import ForceGraph2D, { ForceGraphMethods } from "react-force-graph-2d";
-import { genRandomTree, Link, Node } from "../helpers/genRandomTree";
+import {
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  MutableRefObject,
+} from "react";
+import ForceGraph2D, {
+  ForceGraphMethods,
+  NodeObject,
+  LinkObject,
+} from "react-force-graph-2d";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
+
+interface IProject472 {
+  attester?: string;
+  category?: string;
+  farcasterID?: number;
+  id: string;
+  metadataType?: number;
+  metadataUrl?: string;
+  name?: string;
+  parentProjectRefUID?: string;
+  projectRefUID?: string;
+  x?: number;
+  y?: number;
+}
 
 interface GraphData {
   nodes: Node[];
   links: Link[];
 }
 
-const NODE_R = 8;
+interface Node {
+  id: string;
+  name?: string;
+}
+
+interface Link {
+  source: string;
+  target: string;
+}
+
+const NODE_R = 2;
 
 const GraphPage = () => {
-  const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>(
-    []
-  );
+  const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
+    "Project Developer",
+  ]);
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<string[]>([]);
 
-  const data = useMemo(() => {
-    const gData: GraphData = genRandomTree(80);
-
-    // cross-link node objects
-    gData.links.forEach((link) => {
-      const a = gData.nodes.find((n) => n.id === link.source) as Node;
-      const b = gData.nodes.find((n) => n.id === link.target) as Node;
-      !a.neighbors && (a.neighbors = []);
-      !b.neighbors && (b.neighbors = []);
-      a.neighbors.push(b);
-      b.neighbors.push(a);
-
-      !a.links && (a.links = []);
-      !b.links && (b.links = []);
-      a.links.push(link);
-      b.links.push(link);
-    });
-
-    return gData;
-  }, []);
+  const [project472GraphData, setProject472GraphData] = useState<GraphData>({
+    nodes: [],
+    links: [],
+  });
 
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
+
+  // const fgRef = useRef<ForceGraphMethods<NodeObject<IProject472>>>(null);
+  const fgRef =
+    useRef<ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>>(null);
 
   const updateHighlight = () => {
     setHighlightNodes(new Set(highlightNodes));
@@ -55,40 +77,14 @@ const GraphPage = () => {
     highlightLinks.clear();
     if (node) {
       highlightNodes.add(node);
-      node.neighbors?.forEach((neighbor) => highlightNodes.add(neighbor));
-      node.links?.forEach((link) => highlightLinks.add(link));
     }
 
     setHoverNode(node);
     updateHighlight();
   };
 
-  const handleLinkHover = (link: Link | null) => {
-    highlightNodes.clear();
-    highlightLinks.clear();
-
-    if (link) {
-      highlightLinks.add(link);
-      const sourceNode =
-        typeof link.source === "object"
-          ? link.source
-          : data.nodes.find((n) => n.id === link.source);
-      const targetNode =
-        typeof link.target === "object"
-          ? link.target
-          : data.nodes.find((n) => n.id === link.target);
-
-      if (sourceNode && targetNode) {
-        highlightNodes.add(sourceNode);
-        highlightNodes.add(targetNode);
-      }
-    }
-
-    updateHighlight();
-  };
-
   const paintRing = useCallback(
-    (node: Node, ctx: CanvasRenderingContext2D) => {
+    (node: IProject472, ctx: CanvasRenderingContext2D) => {
       // add ring just for highlighted nodes
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, NODE_R * 1.4, 0, 2 * Math.PI, false);
@@ -97,6 +93,42 @@ const GraphPage = () => {
     },
     [hoverNode]
   );
+
+  useEffect(() => {
+    const fetchProjects472Data = async () => {
+      const response = await fetch("/data/Projects_Attestation_472.json");
+      const projects = (await response.json()) as IProject472[];
+
+      const centralNode: IProject472 = { id: "central", name: "Projects" };
+
+      const nodes: IProject472[] = [
+        centralNode,
+        ...projects.map((project) => ({
+          ...project,
+        })),
+      ];
+
+      const links: Link[] = projects.map((project) => ({
+        source: "central",
+        target: project.id,
+      }));
+
+      console.log("Nodes and Links", {
+        nodes,
+        links,
+      });
+
+      setProject472GraphData({ nodes, links });
+    };
+
+    fetchProjects472Data();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fgRef.current?.zoomToFit(500, 100);
+    }, 100);
+  }, [fgRef, selectedNodesCheckBox]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -113,24 +145,39 @@ const GraphPage = () => {
         />
 
         {/* Graph */}
-        <main>
-          {typeof window !== "undefined" && (
-            <ForceGraph2D
-              graphData={data}
-              nodeRelSize={NODE_R}
-              autoPauseRedraw={false}
-              linkWidth={(link) => (highlightLinks.has(link) ? 5 : 1)}
-              linkDirectionalParticles={4}
-              linkDirectionalParticleWidth={(link: Link) =>
-                highlightLinks.has(link) ? 4 : 0
-              }
-              nodeCanvasObjectMode={() => "before"}
-              nodeCanvasObject={paintRing as any}
-              onNodeHover={handleNodeHover as any}
-              onLinkHover={handleLinkHover as any}
-              backgroundColor="white"
-            />
-          )}
+        <main className="max-w-fit flex-grow overflow-hidden flex justify-center items-center">
+          {typeof window !== "undefined" &&
+            selectedNodesCheckBox.includes("Project Developer") && (
+              <ForceGraph2D
+                ref={
+                  fgRef as MutableRefObject<
+                    | ForceGraphMethods<
+                        NodeObject<Node>,
+                        LinkObject<Node, Link>
+                      >
+                    | undefined
+                  >
+                }
+                graphData={project472GraphData}
+                nodeRelSize={NODE_R}
+                autoPauseRedraw={false}
+                linkWidth={0.3}
+                nodeCanvasObjectMode={() => "before"}
+                nodeCanvasObject={paintRing as any}
+                onNodeHover={handleNodeHover as any}
+                backgroundColor="white"
+                nodeColor={(node) => {
+                  if (node.name === "Projects") {
+                    return "blue";
+                  } else {
+                    return "#3388ff";
+                  }
+                }}
+                onEngineStop={() => {
+                  fgRef.current?.zoomToFit();
+                }}
+              />
+            )}
         </main>
       </div>
     </div>
