@@ -49,7 +49,7 @@ const NODE_R = 2;
 
 const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
-    "Project Developer",
+    "Projects",
   ]);
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<string[]>([]);
@@ -147,7 +147,7 @@ const GraphPage = () => {
         {/* Graph */}
         <main className="max-w-fit flex-grow overflow-hidden flex justify-center items-center">
           {typeof window !== "undefined" &&
-            selectedNodesCheckBox.includes("Project Developer") && (
+            selectedNodesCheckBox.includes("Projects") && (
               <ForceGraph2D
                 ref={
                   fgRef as MutableRefObject<
