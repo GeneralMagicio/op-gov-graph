@@ -129,6 +129,9 @@ const GraphPage = () => {
               onNodeHover={handleNodeHover as any}
               onLinkHover={handleLinkHover as any}
               backgroundColor="white"
+              nodeAutoColorBy={"id"}
+              nodeLabel={"id"}
+              // nodeVal={"id"}
             />
           )}
         </main>
