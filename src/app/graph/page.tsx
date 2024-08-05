@@ -112,16 +112,25 @@ const GraphPage = () => {
       const citizensResponse = await fetch("/data/Citizens.json");
       const citizens = (await citizensResponse.json()) as ICitizens[];
 
-      const centralNode: IProject472 = { id: "central", name: "Projects" };
+      const centralNode: IProject472 = {
+        id: "central",
+        name: "Projects",
+        x: 0,
+        y: 0,
+      };
 
-      const projectNodes: IProject472[] = projects.map((project) => ({
+      const projectNodes: IProject472[] = projects.map((project, index) => ({
         ...project,
         type: "project472",
+        x: Math.random() * 50 - 25, // Tighter clustering around the central node
+        y: Math.random() * 50 - 25,
       }));
 
-      const citizenNodes: ICitizens[] = citizens.map((citizen) => ({
+      const citizenNodes: ICitizens[] = citizens.map((citizen, index) => ({
         ...citizen,
         type: "citizen",
+        x: -30 + Math.random() * 10, // Very close to the central node and within a narrow range
+        y: Math.random() * 10 - 5, // Very tight clustering
       }));
 
       const nodes: (IProject472 | ICitizens)[] = [
@@ -130,17 +139,10 @@ const GraphPage = () => {
         ...citizenNodes,
       ];
 
-      console.log("Nodes", nodes);
-
       const links: Link[] = projects.map((project) => ({
         source: "central",
         target: project.id,
       }));
-
-      console.log("Nodes and Links", {
-        nodes,
-        links,
-      });
 
       setGraphData({ nodes, links });
     };
