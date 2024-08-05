@@ -30,6 +30,13 @@ interface IProject472 {
   y?: number;
 }
 
+interface ICitizens {
+  id: string;
+  ens?: string;
+  x?: number;
+  y?: number;
+}
+
 interface GraphData {
   nodes: Node[];
   links: Link[];
@@ -38,6 +45,8 @@ interface GraphData {
 interface Node {
   id: string;
   name?: string;
+  x?: number;
+  y?: number;
 }
 
 interface Link {
@@ -84,7 +93,7 @@ const GraphPage = () => {
   };
 
   const paintRing = useCallback(
-    (node: IProject472, ctx: CanvasRenderingContext2D) => {
+    (node: Node, ctx: CanvasRenderingContext2D) => {
       // add ring just for highlighted nodes
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, NODE_R * 1.4, 0, 2 * Math.PI, false);
@@ -96,18 +105,32 @@ const GraphPage = () => {
 
   useEffect(() => {
     const fetchProjects472Data = async () => {
-      const response = await fetch("/data/Projects_Attestation_472.json");
-      const projects = (await response.json()) as IProject472[];
+      const projectsResponse = await fetch(
+        "/data/Projects_Attestation_472.json"
+      );
+      const projects = (await projectsResponse.json()) as IProject472[];
+      const citizensResponse = await fetch("/data/Citizens.json");
+      const citizens = (await citizensResponse.json()) as ICitizens[];
 
       const centralNode: IProject472 = { id: "central", name: "Projects" };
 
-      const nodes: IProject472[] = [
+      const projectNodes: IProject472[] = projects.map((project) => ({
+        ...project,
+        type: "project472",
+      }));
+
+      const citizenNodes: ICitizens[] = citizens.map((citizen) => ({
+        ...citizen,
+        type: "citizen",
+      }));
+
+      const nodes: (IProject472 | ICitizens)[] = [
         centralNode,
-        ...projects.map((project) => ({
-          ...project,
-          type: "project472",
-        })),
+        ...projectNodes,
+        ...citizenNodes,
       ];
+
+      console.log("Nodes", nodes);
 
       const links: Link[] = projects.map((project) => ({
         source: "central",
@@ -161,6 +184,12 @@ const GraphPage = () => {
                 }
                 graphData={graphData}
                 nodeRelSize={NODE_R}
+                nodeLabel={(node) => {
+                  if (node.type === "citizen") {
+                    return node.ens ?? node.id;
+                  }
+                  return node.name ?? node.id; // Fallback to node.id if name is undefined
+                }}
                 autoPauseRedraw={false}
                 linkWidth={0.3}
                 nodeCanvasObjectMode={() => "before"}
@@ -168,6 +197,9 @@ const GraphPage = () => {
                 onNodeHover={handleNodeHover as any}
                 backgroundColor="white"
                 nodeColor={(node) => {
+                  if (node.type === "citizen") {
+                    return "green";
+                  }
                   if (node.name === "Projects") {
                     return "blue";
                   } else {
