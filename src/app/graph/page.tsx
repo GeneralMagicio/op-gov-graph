@@ -54,7 +54,7 @@ const GraphPage = () => {
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<string[]>([]);
 
-  const [project472GraphData, setProject472GraphData] = useState<GraphData>({
+  const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
     links: [],
   });
@@ -105,6 +105,7 @@ const GraphPage = () => {
         centralNode,
         ...projects.map((project) => ({
           ...project,
+          type: "project472",
         })),
       ];
 
@@ -118,7 +119,7 @@ const GraphPage = () => {
         links,
       });
 
-      setProject472GraphData({ nodes, links });
+      setGraphData({ nodes, links });
     };
 
     fetchProjects472Data();
@@ -158,7 +159,7 @@ const GraphPage = () => {
                     | undefined
                   >
                 }
-                graphData={project472GraphData}
+                graphData={graphData}
                 nodeRelSize={NODE_R}
                 autoPauseRedraw={false}
                 linkWidth={0.3}
