@@ -15,22 +15,24 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
   selectedConnectionsCheckBox,
   setSelectedConnectionsCheckBox,
 }) => {
+  const nodeOptions = ["Citizens"];
+
   return (
     <aside className="p-4 flex-shrink-0">
       <div className="mb-4">
         <h2 className="font-semibold mb-2">Nodes</h2>
         <div className="space-y-2">
-          {["Projects"].map((node) => (
+          {nodeOptions.map((node) => (
             <div key={node} className="flex items-center flex-shrink-0">
               <label className="flex items-center w-full text-gray-700 text-sm">
                 <input
                   type="checkbox"
-                  checked={selectedNodesCheckBox.includes(node)}
+                  checked={selectedNodesCheckBox.includes(node.toLowerCase())} // Use lowercase to match internal state
                   onChange={() => {
                     setSelectedNodesCheckBox((prev) =>
-                      prev.includes(node)
-                        ? prev.filter((n) => n !== node)
-                        : [...prev, node]
+                      prev.includes(node.toLowerCase())
+                        ? prev.filter((n) => n !== node.toLowerCase())
+                        : [...prev, node.toLowerCase()]
                     );
                   }}
                   className="mr-2"
@@ -45,11 +47,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
         <h2 className="font-semibold mb-2">Connections</h2>
         <div className="space-y-2">
           {[
-            // "Team member",
-            // "Voting support",
-            // "Donation",
-            // "Praise",
-            // "Trusted Seed",
+            // Placeholder for connection types
           ].map((connection) => (
             <div key={connection} className="flex items-center flex-shrink-0">
               <label className="flex items-center w-full text-gray-700 text-sm">
