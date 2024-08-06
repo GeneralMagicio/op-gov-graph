@@ -1,0 +1,3992 @@
+[
+  {
+    "id": "0x5584e380c5ba129ccb5c1ce89c2e9d66881f4800",
+    "balance": "144,633.87775369670556797",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5b7575494b1e28974efe6ea71ec569b34958f72e",
+    "balance": "106,053.271906183110187564",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x839395e20bbb182fa440d08f850e6c7a8f6f0780",
+    "balance": "78,000.000057657032699231",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdf290293c4a4d6ebe38fd7085d7721041f927e0a",
+    "balance": "69,537.51323315764029396",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaa01dec5307cf17f20881a3286dcaa062578cea7",
+    "balance": "54,758.970137943584806954",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5acbeb30fde4049a8fc928f562d9ce5fdad59d32",
+    "balance": "52,247.665520792046088994",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7221b104fba7701084759fd25faca19ac6300855",
+    "balance": "51,337",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8110d1d04ac316fdcace8f24fd60c86b810ab15a",
+    "balance": "31,306.9285719512",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcb59b745668aa7f6d6da1c92641d6d60d8f5c4be",
+    "balance": "28,041.462049998430559021",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x778549eb292ac98a96a05e122967f22efa003707",
+    "balance": "26,127.700160431056136717",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc131afe6dbd5a71f16d8b292f0b4ae1aa200da3f",
+    "balance": "25,752.052410310430359592",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x40dc654af5ce40c122ffdc679fa8e8ca8b91556a",
+    "balance": "24,500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8289432acd5eb0214b1c2526a5edb480aa06a9ab",
+    "balance": "24,418.772480539430566975",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x955327d8f7589725fdc23af8cd27bff7f6f3ed0b",
+    "balance": "24,143.767",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe5ac570506ff6289146cc43626d6af540aa67241",
+    "balance": "23,368.864293788149810775",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x690ab933c5082049d20e53b21dd37f9a346c8b47",
+    "balance": "23,036.283379146714505366",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcf52f1402e73418bc5e6accbd246ee8dfb055605",
+    "balance": "23,024.831808530943520934",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x29567bdbcc92acf37ac6b56b69180857bb69f7d1",
+    "balance": "22,766.3301649487",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5041a1c1dcc760337e99b03db60feaf5f6f6c802",
+    "balance": "22,587.20707532757",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x852b8763ecb27beddc190d1792029bc17fd5439a",
+    "balance": "20,779.286972497584424155",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb2821c0df0c414ff51d3e8033cba26df6aac587b",
+    "balance": "18,997.066725774317490847",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7d547666209755fb833f9b37eebea38ebf513abb",
+    "balance": "16,918.843340039036952521",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc46c67bb7e84490d7ebdd0b8ecdaca68cf3823f4",
+    "balance": "15,429.912261245371121325",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8a8fd287f9c0d69c8d749b32e10a1e0a96dedcf3",
+    "balance": "15,080.922461113070284859",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x18139f297ccf99a686c847eb5406b62e5330837f",
+    "balance": "14,536.154792953851064035",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcf79c7eaec5bdc1a9e32d099c5d6bdf67e4cf6e8",
+    "balance": "14,241.175224388021935332",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7944fc7bd79b25e6ffe24921d88a1f36f22be843",
+    "balance": "12,723.23812049980714714",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x27c72e4bd23c910218d8f06c4a1742e06657c874",
+    "balance": "12,018.302760630578685241",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x05a1ff0a32bc24265bcb39499d0c5d9a6cb2011c",
+    "balance": "11,405.86465962846703827",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4f8c531df3d97c6cd437ac8dfe756975445d1161",
+    "balance": "11,299.2928742978",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb8c2c29ee19d8307cb7255e1cd9cbde883a267d5",
+    "balance": "11,250",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9aa6db877742ad8d8c7fe209f561fbd2be19d5f4",
+    "balance": "10,556.313402412479918125",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0faad92032b0984642a29bc9dcafc35d70474bc7",
+    "balance": "10,462.79579787048226935",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa3eac0016f6581ac34768c0d4b99ddcd88071c3c",
+    "balance": "10,069",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1dba1131000664b884a1ba238464159892252d3a",
+    "balance": "10,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf0cdfa126a944849a6e9982253cd5259afae0355",
+    "balance": "10,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcf0fa79c915f12592c352ffe35000fda5c96a158",
+    "balance": "9,170.30976850929051773",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x38dfd788db4cfab7b9da57b06cfc06c6e0f33c3b",
+    "balance": "8,571.717791291134116574",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x94860ea6872d863e91f3ce3f8cf574ef0859620b",
+    "balance": "8,245.081316887238819997",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x75d923fbbc9d224ad4a92c370dcc60043010648f",
+    "balance": "7,978.885161",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x62e4851e88bec4f5c5ee3dd347f2c601a18af1af",
+    "balance": "7,766.186193022490938704",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc8d65e1bd67f16522e3117b980e1c9d2caeb9dc3",
+    "balance": "7,751.104363242981818015",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x978aad63fe35f7a72573c411c3dff53608aaeac9",
+    "balance": "7,719.076660376417802639",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf0a3b6daac28a0fce094f2cf264e040373d86f3f",
+    "balance": "7,704.094489260550514387",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaee23b2c38732a191aa5ce33d2db5efcf51868ae",
+    "balance": "7,521.403826732296559778",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb604cda24cca1838428be7d40fcd830451c23a0e",
+    "balance": "7,391.823804",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4cd6b4503d02973d78cff59c9c56f5f378688274",
+    "balance": "7,163.33844691713",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x85ed40dbca94b5bc73c6c7ec7f4ecaad04a03a22",
+    "balance": "7,079.5867492578212149",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc6b0a4c5ba85d082ecd4fb05fbf63eb92ac1083a",
+    "balance": "6,934.967373145797296297",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc38b9fbb57b0c33f85cb0a03669a9d6127538369",
+    "balance": "6,878.05707389752",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdf00e071996de3336899bbd5722592b3d972e788",
+    "balance": "6,548.367273934649338487",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd91ec22114897e5e68997f77a6182de3cb09ba9b",
+    "balance": "6,301.451629091783114014",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfc25ad98c1a2725745df9ec85e6e7b5d4bb0d396",
+    "balance": "6,270.422558465372227379",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf5dcd98a1c99c2c65c62025cb23cfb6f12f35497",
+    "balance": "6,202.855302892842709885",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0d1331af19df0110826aaec6f6ef7debf85bf107",
+    "balance": "6,120.871031008743631158",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3c63b262c54f45ba1ca8e127f14a2b93fdc826ca",
+    "balance": "5,885.484458838296158363",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xec952ed8e7c2aa466cac36fd611d2e87df1243d7",
+    "balance": "5,642.680287040820288969",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6dc43be93a8b5fd37dc16f24872babc6da5e5e3e",
+    "balance": "5,500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x34aa3f359a9d614239015126635ce7732c18fdf3",
+    "balance": "5,450",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa1f01e5cc9562ed061b0e3dddd3e82ef69a1cebd",
+    "balance": "5,414.335756394704",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x648da25c49b16476515392e01ed587d3bbed0db6",
+    "balance": "5,397.56715435583",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb2d60143097b4f992bfbe955a22dbb2acd9a8eab",
+    "balance": "5,283.368339220287620317",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x85bead65c61db8cf230b3ec30552b8b3e6388570",
+    "balance": "5,200.361346989183757397",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2fee53687906ba239602ed42cceee2ac8a4ada36",
+    "balance": "5,185.763970766906568966",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaac7d612c1f23a45967f772ea587963952cc0b80",
+    "balance": "5,133.43593596091485195",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1d8a08c8c3ce0a852cb4da902754991759f7f625",
+    "balance": "5,118.60331675711025711",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1df428833f2c9fb1ef098754e5d710432450d706",
+    "balance": "5,036.769772029166530143",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1026effae689c49f3655e74dc45c8869e3f6fd35",
+    "balance": "5,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7f93e58a999d85879c2f051619f6879ba771f2bf",
+    "balance": "5,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb08f0ca73e8a59a1b7970e22b8ed2f9142c3fa53",
+    "balance": "4,910.345461742856432052",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x224aba5d489675a7bd3ce07786fada466b46fa0f",
+    "balance": "4,311.053367335580376539",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x536c7e8f18d09d04697e0d2624b44bba575388c2",
+    "balance": "4,215.253070060066597179",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8aac40061e258d6e45fd13e214710abdf356285a",
+    "balance": "4,210.043404609818357945",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf8d1d34956cea24718cf8687588d6fedbc6d9aa6",
+    "balance": "4,154.450151137491625352",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc89ed88b54fd663b86ffd76f6ad2cda09d2ce13c",
+    "balance": "4,100.320954081928399553",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0bf920dfe6d36829ab5b0e153857d4ca689e46fb",
+    "balance": "3,909.495436215974560653",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfcbc07905fee2d64025461b8ddb27f77f256827f",
+    "balance": "3,820.20447860453106",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa0f780d46f103db59cfc5ffec8b25ffd36940ea7",
+    "balance": "3,750.869323683277060312",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9ac9c636404c8d46d9eb966d7179983ba5a3941a",
+    "balance": "3,677.851857219387970648",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x57f540a736a647ef2d2ef9cd823c4a4e655858a4",
+    "balance": "3,602.050105524103691626",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8041748a2a16e9b7a3980107f4376774421642c8",
+    "balance": "3,554.378126942582741948",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8f942eced007bd3976927b7958b50df126feecb5",
+    "balance": "3,500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd6f5646d9e7fbee7cc907eb8e12dafa5378431e6",
+    "balance": "3,463.693031362682163679",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xefb49ddb9511180aeefd78da68ea4977fe02b0cb",
+    "balance": "3,383.345081694732709465",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x701d0ecb3ba780de7b2b36789aec4493a426010a",
+    "balance": "3,361.815916000085424183",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xad2dcb058f10b4e11611f9c1fc0aa1a532e270d6",
+    "balance": "3,341.416707782569085726",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf35960302a07022aba880dffaec2fdd64d5bf1c1",
+    "balance": "3,300",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf503017d7baf7fbc0fff7492b751025c6a78179b",
+    "balance": "3,165.681555832827686204",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0922c198e06365936d5b564c84ed1fec61afeb45",
+    "balance": "3,120.798085",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcaaa39294a02bf3bf6a806d11d687e244ce56378",
+    "balance": "3,114.803139840066859262",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x16e8d400ed871fb5e74a2db3c680838c9d383a26",
+    "balance": "3,076.63",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x48a63097e1ac123b1f5a8bbffafa4afa8192fab0",
+    "balance": "3,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x92b0fd2bd1991b2bdbb1306a719bd45dbfa46768",
+    "balance": "3,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe69f0f444e37e4e7a9068cd79808a90182ab21d0",
+    "balance": "2,966.1299232479765",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcb5fba4419abc4d7c11af0c24ba0f2e555407f5b",
+    "balance": "2,925.66896826246976855",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf83775c95a00612d4cac5053dd484ffa81bae0ad",
+    "balance": "2,913.07178295953808568",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd602d991dc99f6632c9f1e587d93c3c8ce7220b6",
+    "balance": "2,863.694092152441590389",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf23ea0b5f14afcbe532a1df273f7b233ebe41c78",
+    "balance": "2,841.966784278439858408",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x539bf564bfa8bbf73a0c5bf130746149986eaca1",
+    "balance": "2,787.48255",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x59ae7f21d18b2f5fdc7a99c4fd6dd9e67cec0bc9",
+    "balance": "2,779.853163587537923489",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8fc83879bb5fd3a6177ad3dc1239ae1a6866a642",
+    "balance": "2,772.5",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc8c3a753eb4ebea74b724d6509c30e419b6b0f23",
+    "balance": "2,744.08177",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe73a198e7c07c418d7dcfd42f5e953074abbd125",
+    "balance": "2,713.733554904884680436",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2fe25372a45d024ade1adeb9dce29e4da1368b35",
+    "balance": "2,675.752347143973799518",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x00432996c5cf8200cf208200613aec2329be0e39",
+    "balance": "2,650",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xff6d6a7718a234a84f740480dbb07f6c09cf1cd5",
+    "balance": "2,627.995787229821528141",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x96ede46d5302e53de4ba9bd2dea1ba4546410ef7",
+    "balance": "2,550.078276",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xed77a2406bb16f56a5dc5cc6d893f6500585a115",
+    "balance": "2,544.255197019577706798",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xda04c025f4d8ac555fdb3497b197d28fcecf4d41",
+    "balance": "2,252.5196218265",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa444987a5d2c45150399c5cec0c8bf719a6dea3e",
+    "balance": "2,214.203280172496987718",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2ce202ad36adb3b7515d2e6ec1395f55298dc230",
+    "balance": "2,087.213549232976531918",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa81fa36c51c95b52431038352d3d452c5de5e6e8",
+    "balance": "2,086.255002037795237041",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd1b8db70ded72db850713b2ce7e1a4ffafad95d1",
+    "balance": "2,070.546813",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2920620b47d51170319a531a2d6d5810610e8c2a",
+    "balance": "2,028.209978483541742527",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x981e7512e87d2f7228d3f03b65950eb6a1b21bac",
+    "balance": "2,010.626388077284710113",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcbc473f08a515cd8e612f63a254278879f1ed315",
+    "balance": "2,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdee4fbf0b62febe20000826eaeb939e2cc7876b4",
+    "balance": "1,981.701498279929705557",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x89e12f054526b985188b946063ddc874a62fed45",
+    "balance": "1,966.997784776401674822",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xad8cf397c33239fbd8a3de25b3b536da7270fe7f",
+    "balance": "1,928.568558755035469361",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb1a549920b38b2f7c80443b49b5a75db3a4cd5f5",
+    "balance": "1,884.852705992709188382",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdc81d807f0e1a638ddd5cbf37f1320d86d0de30c",
+    "balance": "1,846.463719",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1b8c7f06f537711a7caf6770051a43b4f3e69a7e",
+    "balance": "1,839.163209",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7e75c3fbe3aa9007d9e93eb948e02329b8b35dfe",
+    "balance": "1,800",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbbd107d7717f9d8556aa0abd444bc8ae6e288956",
+    "balance": "1,789.95338",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xae9a1bbd8a53e6bd845d1b493cd174e6b0531eb8",
+    "balance": "1,778.925120508348120399",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdc0046b52e2e38aee2271b6171ebb65ccd337518",
+    "balance": "1,777.34",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb3e43abf014cb2d8cf8dc3d8c2e62157e6093343",
+    "balance": "1,754.160929092843211841",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4744cda32be7b3e75b9334001da9ed21789d4c0d",
+    "balance": "1,743.51972213481",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x711b4f66c19a741d7db95ac87641bd8635fb21c8",
+    "balance": "1,670.0475797180548",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x39c00e3584a2176f55bb31bdc3450889927f5016",
+    "balance": "1,636.415901667659230162",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa70c50a58473b12e8da58f1471d48c1ad8b3415a",
+    "balance": "1,633.619827986005604981",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0f46540678c7e6d2ef983b382cc07fa815ab148c",
+    "balance": "1,526.260043239337994128",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x874b3e815b02d3dcd5008fdee96127c16292ba1f",
+    "balance": "1,476.230815937315153655",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x02317bb3f16ce21e9239c217b21bd18aa24ab0d3",
+    "balance": "1,475.564232853294647017",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc7bf5da444c923aaa80d77d288e86f3246dd4170",
+    "balance": "1,473.21316891421263907",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf2130236412b8f6ed7b19fb9ce6f3f4b8dc12867",
+    "balance": "1,458.5663623021",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3b0459c53fd6fc216fea8817512990c886310386",
+    "balance": "1,410.154379385407469676",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x18190831552ec91237d68ff94fe9124ccbac4163",
+    "balance": "1,405",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeee2e0166e342e0b56fe9d5b76ce2c8eadd935b4",
+    "balance": "1,381.279971171904277449",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xac446dd360716acef4e930612dcb1f652a98d750",
+    "balance": "1,374.677796902325638554",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x533fb569aa9f442f7acb4756e4fb69e4da9e71a4",
+    "balance": "1,353.637195",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x831f4ed6c49557318f06bfb7bce8488090cd9ecc",
+    "balance": "1,325.752925",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc47878441a1b619ae3a995b35e8c5e1b9e8bc4ae",
+    "balance": "1,307.11241569052",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6d3b98452c8f2dffa0487ce6c66ca3cc3ab01308",
+    "balance": "1,294.961239587444561704",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9d5a0ec9dcab69075e4ff40b46813f6d952bbd65",
+    "balance": "1,257.993596063645080527",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x706e714e63eabaa8602c209ecc92943655e0c7b8",
+    "balance": "1,249.23051893416714723",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x81e80b838e04644a93e4f3c701038889d3a1b95e",
+    "balance": "1,183",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6543c99d0e073c140fd08a741c6cfdcd1449da94",
+    "balance": "1,171.927636528251737279",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb5e5559c6b85e8e867405bfff3d15f59693ebe2f",
+    "balance": "1,133.332915",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9959dda625ba12809849f9b0f44e660c0f136733",
+    "balance": "1,128.506046209428653185",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1e975f53956d644868f3ea25690b1bbeda658565",
+    "balance": "1,126.296978345680368627",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xefa21088f3830cd7d9f526ea268f7aaba34f785f",
+    "balance": "1,103.759144006935966",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2915f137dab849f0b27aaab4d0dbd67aaee3c5f0",
+    "balance": "1,075",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x182312c44a219fd492f3ae177d11120a3ccd2ef3",
+    "balance": "1,039.29471989012935754",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa8221b722b624651d48ebc881c4b6e9f17f4d03e",
+    "balance": "1,036.135525103731481972",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6636a1ccbdf54485067304c1a590de016dead9f0",
+    "balance": "1,015.42145593455698061",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdd505da2e2a8017f38a715948c6b6a2922ba27f0",
+    "balance": "1,000.000065797221826646",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x204323a83506ca93ef23731894b450071541e9df",
+    "balance": "1,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x37341cbb14c5f128a70b149726ad8b2ce6f4c793",
+    "balance": "1,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc5c4f3145b252407e25cfc92da0fb0bce2bc3310",
+    "balance": "1,000",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe95a7326b06a97bf30e348e4840c1b8de4dbedf8",
+    "balance": "999.512987264556882164",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4ae70efbc57df5f16fc5fa2ccf016887e6312afb",
+    "balance": "999",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6576dcd9f751c99adb07411b22ddda0be7ffe420",
+    "balance": "996.09",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd478230ac12b747d9796222b8ac9989abedf5b00",
+    "balance": "984.0724373",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x47a5ba5be900fc22ad31bec4c1ff54df8e67cd70",
+    "balance": "957.433297944162248305",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6466386897a82cb8c96c8680631da7489f154004",
+    "balance": "936.531885966217773034",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9e476f951dc5af8e4f7fd02c78f0cd765a25c8c0",
+    "balance": "925.584816960458499874",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x21c9aba2392dd5e15ce74bf9c8685ac4907b5fab",
+    "balance": "916.21327418234557245",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1dc96f305645b5ac12dda5151eb6704677c7db12",
+    "balance": "899",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x73992890f2c1c0cadf475a630746556a3c6ed910",
+    "balance": "892.5457379",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9f6b969ee3f9c2b0a528b3029049e34bbd4bdb49",
+    "balance": "889.872619516663633",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2744d3088e3c2c273d3e845fc96c875fbac0c052",
+    "balance": "889.7666578",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0363f3c31076a64b85ceb69a28f958a7c1181cee",
+    "balance": "882.5",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xed8db37778804a913670d9367aaf4f043aad938b",
+    "balance": "879.20334949014362248",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x14d92832265eeafdef9e526356fefc90105966c3",
+    "balance": "832.959191485720955879",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe50ceff4ecde1a76afc5153a99e5c7f84d1d25c8",
+    "balance": "808.388401154268590608",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf32b6e90a3ff5bee0dad681bd488cf9a023d090d",
+    "balance": "797.976167926446859828",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf2283b9c60bdbaf9b0c41b2f52907af7362a3302",
+    "balance": "762.276679817275333832",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd06a907b7baaef9958fedc765f2c1d66c7cb4212",
+    "balance": "717.982581038826164716",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb00784c401d42f03ccbe1e85b9f2a4ae056c7251",
+    "balance": "717.76",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x88b353202e61fffef56bbfbc2748839e7c707e9f",
+    "balance": "702.282766162353376103",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x29a31e68a5c3b052ac04a663f1e60a2cf184ff53",
+    "balance": "700",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x63a32f1595a68e811496d820680b74a5cca303c5",
+    "balance": "698.370470770733887344",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x79de94216395eafe072b8b50216b5648edb3f609",
+    "balance": "697.124896262425965641",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7710e7e881333fd3396ca5966bed6e72746b612d",
+    "balance": "694.050409441695071591",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc7b2f15b62f186dcc69f35cd9ae833f6de6146ab",
+    "balance": "692.892661446761105181",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4194ce73ac3fbbece8ffa878c2b5a8c90333e724",
+    "balance": "684.330028194794335626",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8a79889c80e0e0ae07151acdc4537ffbace553f1",
+    "balance": "683.173391808526677024",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd70a0999e4afcd794ae01dd7194f34d60e5e21f4",
+    "balance": "668.787103218870392006",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x38f80f8f76b1c44b2beefb63bb561f570fb6ddb6",
+    "balance": "664.093777983502803953",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x177a68f3c836a2a37a3c594cd16004d7b9589476",
+    "balance": "651.86800290985371111",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2d65f3ff78b1784fb24ffb8a2ec9d0dcc4ff6b98",
+    "balance": "650",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdcdf8164aaf9345e48e747e95b07d2782d09cb40",
+    "balance": "642.72",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x80fe61720fe2bb8b54b028f037189de0b13aa50b",
+    "balance": "632.977600619007985025",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x489add7680605f6fc4806595cd75e65d7f1675eb",
+    "balance": "632.31728199405353774",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9de0c4bcc1fb8faab56aa04c2e18fb3d8b694bbb",
+    "balance": "631.060559171702593998",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x63960487872023231e4c3fbde536c34e2c93de55",
+    "balance": "620.300489763405960755",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfe6b3daf5db93c8203316956844b3ae23521a722",
+    "balance": "615.889155627005734734",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe23e317463fac259700d95572ee3417ccbb3cb8c",
+    "balance": "615.82572833268224518",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa05d7ce8d84eeaae6cc851850fe055e0d4095512",
+    "balance": "608.18412620500800558",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x343ef442add9bd565d51b606f444f9221ad0aeb6",
+    "balance": "602.043672667132984898",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2e96053c70a92d9771c076e11fe4dda87a989fdd",
+    "balance": "600",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf3c9f190dbeec5a7101c936e62c1c5b130771608",
+    "balance": "598.6083526",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x56e9cbe44e612aad90737fcd911c4756423c533a",
+    "balance": "597.631266317134149809",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x85f9c38a44efb45cef47cbf510e6e18cddf2a78a",
+    "balance": "589.213591964995381277",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7d990c17573b9fe410767723080fcb1734ff7d5b",
+    "balance": "587",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3b067af83f540cb827825a6ee5480441a4237e77",
+    "balance": "585.223386062430079874",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3e7f054563682c42bd4907b88d0dc27557992576",
+    "balance": "580.558939790939030764",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe8082fff7d65efb95b97a3b42b7e8a0c2d218cc1",
+    "balance": "559.9892336",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7e1f8358943580724290277167b86ab4734752fe",
+    "balance": "544.165965",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb81e88279f3208001aeda20689d3e5d818758dbf",
+    "balance": "544",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3eb717f284ea6ef65b9d770694bbc6c7e1b1dd84",
+    "balance": "540.708244418459573047",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1c1bfc1763c8e88fccce1b57eefc79a461fa4944",
+    "balance": "529.3952597479028946",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7fcfeb41316c67ca985c652e639367762d5e98da",
+    "balance": "526.897475544168432321",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3eed07fc683037565e54408a6800c9c3a6f70c45",
+    "balance": "513.180933427995320398",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xddd97ac55815d7eee8884daaa5a3ea2097a00569",
+    "balance": "505.28",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc154eb56388c8ce13492b3b149d451bb1b42ac5b",
+    "balance": "503.7828",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf11704511975cc5908f6dbd89be922f5c86c1055",
+    "balance": "502.856144924401398",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe1f325b7d5eda8cc78e1460af593330d04a98bde",
+    "balance": "500.189296",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x99272db5353e13c18b711d99d3a8f36ba459f747",
+    "balance": "500.161506544184463488",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x152ad2e12e102abf64280c5e3d70257effb0ede0",
+    "balance": "500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5ac583feb2b1f288c0a51d6cdca2e8c814bfe93b",
+    "balance": "500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5b93ff82faaf241c15997ea3975419dddd8362c5",
+    "balance": "500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf9299c8663d195481cd54b6f7e32bb45ad1c9a2b",
+    "balance": "500",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x933fe343746549ac10d471ce4dfa20baab3ede86",
+    "balance": "499",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x13257e783dc8ded7e227a28edb0428c42d31202e",
+    "balance": "490",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x16e26789b4052815d450043a637b368bfb3ea63a",
+    "balance": "482.197547331890273",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1210ba92eb82cc256213c78f0ef9d5212c7034a9",
+    "balance": "481.55002435654661666",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa0a1a1736d98c835bd2608abfe242ba7e65d2126",
+    "balance": "477.89232608499436118",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x44ddf3e35cd2d629d78674ff6bf5b953e2b069fe",
+    "balance": "469.383204924501890795",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5303d37018b0e7e6f4fe8c706b7001735e5d430a",
+    "balance": "467.390349745813797641",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x949bba9f1c13f2461835366aebcb53c852dd4308",
+    "balance": "460.8834782277142515",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xff6cc994776b77f3b309014ddb6ff09584fde195",
+    "balance": "451.619157624082007932",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x12a63bd7c98fc55c4402923991685303ca7b75a2",
+    "balance": "451.371236776884889688",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb19df2bce7c036b69b20180413b58012fa328e58",
+    "balance": "433.658914296518138776",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf780ee9f9e50248e7f8433a132a4b0b00b3da313",
+    "balance": "426.708320214695975142",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xefcdc3a4164846b7e39c4708a7c816f4459f26bf",
+    "balance": "421.377359606225437974",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xadb620ec86eeb3570cc142bbc4b5556886cd259b",
+    "balance": "411.386376053585588081",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0f5bd2404ebb70410462c22cacb062cd285bfc52",
+    "balance": "409.66532148903444736",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb24f31bc22338ff0425f2e16c4902a8aa307807d",
+    "balance": "407.625265504087951796",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd0ccfeef904cce8e0c70014db37e5133a6a8aa1c",
+    "balance": "400",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb46a595c65f62236eb7934b43397e0a05ea33c10",
+    "balance": "390.531801186471119",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x826976d7c600d45fb8287ca1d7c76fc8eb732030",
+    "balance": "383.686384670338326903",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x41e235560175a75c49c2e11e0e7a452a81c35808",
+    "balance": "367.883828572930299015",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa6bba3fd4493e614c97e1dfc39fd55759aea4f9a",
+    "balance": "360.631324477953589268",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0a1751fcf226669952c0baf7361f90bc274dc03a",
+    "balance": "349",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x11de816f60cb82af2c1bea5aa7507c8cece0b3f1",
+    "balance": "348.1608698",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd3898129d4acb0f8039b1b9d6367b236f1e6100f",
+    "balance": "348.134659074408761759",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x360d28d34f1a35a8d677af02d919a9baef766040",
+    "balance": "346",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1f83a7b86480e6142a85558ef6999f6091041906",
+    "balance": "329.3717841980584355",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbcad90f4a1ed4067d9bc33d4089ff18a82250253",
+    "balance": "324.1444212351646949",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5299c7d2b73b6a96231081dabfd54dfcc84fedeb",
+    "balance": "313.3062554302815302",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4f58456954b429cf11276b4aaeb1ee91d45daa0e",
+    "balance": "312.112016954538056659",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4b7c0da1c299ce824f55a0190efb13663442fa2c",
+    "balance": "300.000058088851334097",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x37ec0203c1cc3cb574c4144d490f770b86e3b557",
+    "balance": "300",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x90299ec59b94398a3a31a795bc585f743d0e5cc9",
+    "balance": "300",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4318cc449b1cbe6d64dd82e16abe58c79e076c2b",
+    "balance": "294.595950024075563823",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf9903c5d11e8f4bfebcf02747d53319e9c4a10c6",
+    "balance": "272.3590899082602667",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x19c4e72f327ccc3b47e6749dcc3920dc232c8ddf",
+    "balance": "267.483208646467561556",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa26d6aeb775a9528c012b748ace66e3b0fd574ce",
+    "balance": "266.018138365",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xceacc735c67217101abd0ffb46661c42dec366a8",
+    "balance": "263.54623547660805772",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x97d25ce39d27fbafc60c3bf50f2675c0eed71b5c",
+    "balance": "256.07569773762",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc0ac93abb5539769edac951d9ebd5bcbfb854b0f",
+    "balance": "250.6267735451049",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe0144fa05a0d32b5b1de10ccee7211616b3e3ef0",
+    "balance": "245.914557452140638136",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x83e57888cd55c3ea1cfbf0114c963564d81e318d",
+    "balance": "244.479052315707175659",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9f2942ff27e40445d3cb2aad90f84c3a03574f26",
+    "balance": "244.40448480284997269",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x32cefb2dc869bbfe636f7547cda43f561bf88d5a",
+    "balance": "239.968145964013398644",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf9c171fb0480fac34289cc5791519fec1d7978c3",
+    "balance": "238.888499375",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbcae3f1ab2ac4a82d199720be78c5a32bb144e8b",
+    "balance": "235.912598103761009448",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1d921dff757610fbdb0073479e12c0a07d382677",
+    "balance": "225.589375313213395111",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x914c0e63f98a091e74b7c5e78993bb8de735ae74",
+    "balance": "216.082950582016539",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x97a4abcfc3c99e42fb621da62153be5ecdf16677",
+    "balance": "212.8886255",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x68f272fcaae074cb33e68d88a32c325ed0df8379",
+    "balance": "210",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x07dea0c0c2d50ed66cb9d1d110e21f5b9c26184b",
+    "balance": "208.044361637463437697",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeebc0ff65baeafbd971ff01b0e28aabd379936ad",
+    "balance": "200.42",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2171f0655712bf4b5b1bcb7fcb46c1d3386683ea",
+    "balance": "200",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5c95fed053997f30b7aa69979c208a5d15479f5d",
+    "balance": "200",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe5f470e376554fb613a43fde223e40a3bb338765",
+    "balance": "199.058894807037528254",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3e31155a1c17c9f85e74828447aec412090a4622",
+    "balance": "194.283338279006823",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x317bbc1927be411cd05615d2ffdf8d320c6c4052",
+    "balance": "189.090181850454761813",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe60b9d951da8488405da3ee341431417898870c8",
+    "balance": "185.977959295632278376",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbe6f56ed9e10e5f58876f7bdf1c83eedaa721fbc",
+    "balance": "184.506843842611358",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x80a8c828673b928db79e47ec1b0cad5a7d71deea",
+    "balance": "184.075324621129320718",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe7dc0ecc39160f1535a77b43989fa327936108c5",
+    "balance": "181.431839005687358674",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd0ef3a2ae7fb496c0897400f1be46693b6183b0a",
+    "balance": "180.604514264982427742",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1308d923e02c38492962d75c26e487ffcdce821c",
+    "balance": "178.420420999829775795",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2982e755b58dbbb1df8240748f8976eb0cd8a3b5",
+    "balance": "176.098157505267319498",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xffc02940b6f297bb3aaca6d790f65c1d28e891f7",
+    "balance": "174.975827077642410649",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5832834966933bec942bb06a3b55dd1176cbddd2",
+    "balance": "173.906851169935623649",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6f4a8930ef9c175ec0f3f63a97686d5c505e0e32",
+    "balance": "170.746133877561773218",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1be3505328880f1f204c664d430a9d2817d9d4cc",
+    "balance": "170.3879297656981784",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x033e64537940e0602e8f27f571d93904c0009486",
+    "balance": "168.73406",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xca63608615de005339652c0eca93c5836eb0c2bd",
+    "balance": "166.5217921991918999",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9542225b26ae10b4c47625d75da5123d838b30d8",
+    "balance": "165.190524278738277357",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x711cdabcfdedef2c82d9da533268d8bb6b7468f8",
+    "balance": "164.8995504964681672",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe42f8e2c4b778fcd572c55e457ed77db4cb20a69",
+    "balance": "163.3921693021582538",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf0da4128a4ed2ed3ffe5d8618a6e002f338b8e52",
+    "balance": "159.116840039310795875",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6b6c5652d7cb8fcb470213912381bca77183e641",
+    "balance": "158.71023435579994251",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x05a45e7416c77c822e24e9679af29d1f07589b40",
+    "balance": "158.2189993294795089",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb1a1225bcf9408f4a8c980f1858734ecb0d537b9",
+    "balance": "157.500423362595846858",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x328713d71ce23228d35263ca760984753d08bb59",
+    "balance": "156.6678856391662907",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbc5089e3a8a163c437030f5a497c86f555a7f1cd",
+    "balance": "150",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xed2ef70e8b1ebf95bdfd7ba692454143b2a8263b",
+    "balance": "149.691795912662429",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x76efa04a76d4662ee3544ac40bbecbe0cd196ad4",
+    "balance": "148",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x760c7b2403a9ee72e704b35adecf94e3d42a9d4f",
+    "balance": "145",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb943626070bf44232174769fd1e8a233da7686de",
+    "balance": "141.007055794179211608",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x33878e070db7f70d2953fe0278cd32adf8104572",
+    "balance": "138.600827453100915496",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x405bb3cdf23833bb27bad6629b7cd4f01688235f",
+    "balance": "138.112123182164103",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x14edc14b3886b2c8068bdef3fb8c05bf07a21c2c",
+    "balance": "138.08934239868727",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb941365430a16659658bb23b88efaede1d839354",
+    "balance": "128.462582530541299014",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe3181f4596509af72d684d89947df309f41f65ff",
+    "balance": "127.82400267040622746",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe621a0b2d4f837fa2a4d15059dae91ea8d9aa9ac",
+    "balance": "126.486289294933689676",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x82079d8b7fa26d82b3db500c84b213b4b6a013c7",
+    "balance": "125.876861702765319751",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7136fbddd4dffa2369a9283b6e90a040318011ca",
+    "balance": "122.474856530247434597",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf632ce27ea72dea30d30c1a9700b6b3bceaa05cf",
+    "balance": "120.504274216767570055",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6844d559655f8fb1b8644624c9e84217137c9788",
+    "balance": "120.211108678980333",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x457ea659aaabd496550264c6d9d6351666f2fb4b",
+    "balance": "118.568860465371598",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8fdc1f4191a1d6b35117e475ccf6ad1fb4485248",
+    "balance": "116.914825391301268",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd2bc5cb641ae6f7a880c3dd5aee0450b5210be23",
+    "balance": "111.27548030550604",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x46d79ec988a2f603477e81ff2c0c7edef3901145",
+    "balance": "110.679337242900454",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdf0259238271427c469abc18a2cb3047d5c12466",
+    "balance": "103.268307097751447341",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x66df5a7715c5d4afbbfa52435c66aa20733be0d1",
+    "balance": "100.67",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xedb892bbd19188cd2def63249d6a657ac6f98935",
+    "balance": "100.606661087779151864",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9fe5829435eb70d4a3c51f8df130f6aad3475efa",
+    "balance": "100.506402296261697236",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf386b1f376a776fcfe7a686d04319f4e7177665c",
+    "balance": "100.213292490918055808",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc2fb4b3ea53e10c88d193e709a81c4dc7aec902e",
+    "balance": "100.111848527104673601",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfb074aba249f6a75eda10996c3efa6d66465b8b3",
+    "balance": "100.080557126691771584",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x47b2c37ffee6e8d71ef9dfbe84ee596571885492",
+    "balance": "99.99",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x28499c2115299beff0c07fe7574ce7222d891c76",
+    "balance": "94.584318327126277625",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe64113140960528f6af928d7ca4f45d192286a7a",
+    "balance": "88.536246282675068935",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3e95bf6df91a0593333f550b6e1485299dfb86be",
+    "balance": "86.920724079665675871",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd1a317989c846e42f64128daebd975f857068a8c",
+    "balance": "86.398524117126936006",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5a227e2919a49f9d4698e9fd2b318efcd0f16bda",
+    "balance": "86.159106472023123834",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x634977e11c823a436e587c1a1eca959588c64287",
+    "balance": "86.10537470398905779",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0e950e75b652878e6a3d3ecb6e5797452a918a05",
+    "balance": "85.80370727059264",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2f0d3461157cac82dc5beea69b8e624a9acf55dc",
+    "balance": "84.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3e4fdd0e9dfd280634878f6a7daf5af75ce499d0",
+    "balance": "84.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x42f09c7615cff2ef232219fe968b30a446e2ee27",
+    "balance": "84.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa39b12ccbd66c3b4624d7eda1ac0a3a8ae830bc0",
+    "balance": "84.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa573ed241036d43c3e8a7b01d5721af0ed824746",
+    "balance": "84.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb11634eaa8e9be1654850cffd9c753f42299fd68",
+    "balance": "84.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xec415d97af1834e5d2a5ceb444d030cd582ab594",
+    "balance": "82.628156988214570554",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x884ff907d5fb8bae239b64aa8ad18ba3f8196038",
+    "balance": "81.85741640606918969",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc19a8a1e9f2059138a3d11a7335fd215694e088a",
+    "balance": "81.2758927103779185",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcaff17d5c7c349be300e93cbaf56bc868ef75982",
+    "balance": "76.064161290520005099",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x44a60575bafadbf1471d628e7a8bdad64e2e7d5f",
+    "balance": "75.7376",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x33dcb3ec1918b6913c00954d8f40bfc04a5cfd20",
+    "balance": "74",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3c84f8e5d1df84dbca05346a26a45eec73aed0d6",
+    "balance": "72.598696964660808134",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x82d41c07c20437d8398a2c5d62a03c64c7235f45",
+    "balance": "70.762361959515862335",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4d64152d23260f399af956c6a777740cfc263d1c",
+    "balance": "69.974699392402406372",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x62edaac42add454ebf7f228f50ec8093ea446176",
+    "balance": "68.0773127155888114",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfe96d1ed2a4c9e60e0e3030609af0361a515169e",
+    "balance": "68.071304558861877234",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x82487122c146965ce3cc7f1fa16512f08af8b616",
+    "balance": "67.999505506470871403",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2cecb3b75bc8dfb22725ff657062c47d6ddd4629",
+    "balance": "65.3948803769342981",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0a1f2e1a4585bbf5e54a894fffa74133654bfadc",
+    "balance": "64.70893120322852875",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x269ceb186ae90b062cff495465b1eb7fc2fee9fd",
+    "balance": "64.3480560338184211",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd054c5ebf6ab2302b63c4fb30d78d5a2c5996b58",
+    "balance": "63.74472129429074",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd7ceb70354178914024d795e918ebadfff7c3ba6",
+    "balance": "63.06",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcaa271e642bdb4c63ebbabf52b4040b12526e6c9",
+    "balance": "61.317461637308986256",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5ce15dbcdf9a7c65ef7f31d11ccd49df4ecd860d",
+    "balance": "53.1381240089214",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1f9e7984eddb135ab6d6f354e229970bb332dcc4",
+    "balance": "51.2192392935554004",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9d0a3e2b1669b9d272db2800dd55418837f21645",
+    "balance": "50.695538832854040169",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xde2be7c9c542c55a7a77489a3a7745493988947f",
+    "balance": "50.480437252924713085",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x66d9dfddc3ad45d6383d5b9e9354f60bc9d16a8e",
+    "balance": "50.000006073118247627",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x537afb1bb98386d41fe5f4472c505d6baec9e3d2",
+    "balance": "50",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7b5635e98844f6f47619a5582fa3531a0d263c38",
+    "balance": "50",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa4c1bc63983bcdaf93659b1aa66bbcb8c1a65544",
+    "balance": "47.561624849988223888",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x58c67b6fc7b96f7f83e023e2beb7f641febc6270",
+    "balance": "45.368256002266087925",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa3fcc4d905f381c5e9392207bf7918ef01b1ba44",
+    "balance": "43.96107429893217",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3f20a6fe04b3a4b37bbbbea826ae23be56baed74",
+    "balance": "41.6301684418",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xec3de6e05f3c5a0b8304488be1f114ed0104e10d",
+    "balance": "41.561712134",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3e64874d23fe0ba34ad023bc2478bb9da07f460c",
+    "balance": "40.338576850234606027",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa7c2981dad6496882f51f338fb811783c477e605",
+    "balance": "38.2381955318938679",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcb84a9c28e74a87e118cf23889cf2d4c16de8c5e",
+    "balance": "37.567317902979849643",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1745a4549c94cedd7501721d6fd105639541097a",
+    "balance": "37.36374879",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7688660055967db4d0b68d4e0cc3a43b2a5f044b",
+    "balance": "37.36374879",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x721ba19c32051fd8e851a74958c52936516c7fdc",
+    "balance": "35.2366434392",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x84a9be5ef7514e0fcf77728a8b647b0aa69eb7cf",
+    "balance": "33",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7735f817ac266ec4385e3c38df96082dd632895b",
+    "balance": "32.8898688533983293",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf1458cd0973528b4b4d7331c163fb52cdb11028c",
+    "balance": "32.7852861722619226",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4246c2afb5b4061cc5392f77541ecda853b0b10f",
+    "balance": "32.546443671709364921",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3e0cf03f718520f30300266dcf4db50ba12d3331",
+    "balance": "31.534289430874876719",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x16204069922fc4242fbbc5c664970c9601015865",
+    "balance": "30.319545226601772",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfe99402763531258875949d449db20157b77ec5c",
+    "balance": "30.24339394",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7f3eb18e46bc6350722f981e8750de6d0655509a",
+    "balance": "28.37965258",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf48d4780a886900c263e72d475b1d8b0c7e5a987",
+    "balance": "27.7040624616156137",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x88f5b00db5b39070a3a80ffada765b9cf8c2584b",
+    "balance": "27.0468048566557386",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb52b225ecdfd6b3eac926af87baf7920d74abcb6",
+    "balance": "26.758093977050650663",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x47acab378bf6a67b8a0bd722be323568bdca4203",
+    "balance": "26.187048037346564681",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x42fc62b9e79209b74ef9ee746498242a572e174d",
+    "balance": "25.361441954968098317",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xea5f027482561b25ca3e5a5498cbd1e979932774",
+    "balance": "25.113897852773476",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5d28fe1e9f895464aab52287d85ebff32b351674",
+    "balance": "24.822107409703024636",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x83ac2bb284930f4a9acfffb7cfb0dc0c92b5ab97",
+    "balance": "23.297934074756953506",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x91bfd8a63e1ae35aaaf44420a169f46dce74d138",
+    "balance": "22.7112835857145562",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa66e832f8c1c51282a944a899587d4b26902296d",
+    "balance": "21.415",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4fb0d2f859925710650d7ffc06c4d6bac2a76b6e",
+    "balance": "21.273084678815535907",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2f4bcd8adbe961290f2c4df752852466e7d655c9",
+    "balance": "20.656564638448041729",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x89b88322de558a87ccbf05293166c6eb67bc946a",
+    "balance": "20.280604259217159499",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3ef1b0db4d10d2e3ce06699c0bd4ef0aaf897614",
+    "balance": "20.212815777697567758",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x79bdc0ed65704a84483daa611cf6921b67b39da5",
+    "balance": "19.89",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x128b7e7f0bfa7cda46bb4728a0da88dbaa095026",
+    "balance": "19.8398914406842754",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9d1484054e345accd19b4d8c78672795a52b2ad1",
+    "balance": "19.243183476413701149",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7ace0b7a0cfb2980aa25310af5c2602144d58db2",
+    "balance": "19.123932617395974",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9d123aa9846fc9404dc7d6bd48f16ac769d64f3a",
+    "balance": "18.681874445463490762",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x82bac30ece2279650724b6b69ccb10cd0865dd70",
+    "balance": "18.655672737957003024",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0393931783b1d0ead3b8b0e0f44c1f23ec3c4af5",
+    "balance": "18.481445274852808188",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8bac937c3727b89f273dabe81898227a0e3afe6f",
+    "balance": "18.247602931166282059",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9f082e184259d2f7089df5ced36679bb88bfe123",
+    "balance": "17.952554990321047189",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf8a798764a7c12e031b05c0f4acde7a950ef71a0",
+    "balance": "17.2120390717777316",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6c3850f04b48817557afab3c79015c3e86d6d0e5",
+    "balance": "17.001165520937522825",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb9573982875b83aadc1296726e2ae77d13d9b98f",
+    "balance": "16.422998610568534989",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd7542dc0f58095064bfef6117fac82e4c5504d28",
+    "balance": "16.34737519814352955",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfab71618c291d0363b5c6a4a5784cb829deb4a38",
+    "balance": "16.207307952963367857",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa4d506434445bb7303ea34a07bc38484cdc64a95",
+    "balance": "15.689584176828692736",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe016dbd0041e7292e59b37afcf1ab4b81896676e",
+    "balance": "15.440913706093595681",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x65c20b3e50fc7575fdea5a76f99a2c4140155531",
+    "balance": "15.407986962061104442",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0dfb07cf6d50cb92bd3bdefffded691189b9344c",
+    "balance": "14.483427461750596824",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe77e4c796faedee124a490a2f02ab17be383fbed",
+    "balance": "14.070589662606968",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x56c246b01fbd17695a8579e8b3f0e4f7a1e9ccfc",
+    "balance": "14",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfc58f4dec2dfbb61f633ae4b7676028a626b443c",
+    "balance": "13.881595895704413",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb0ccf43ada6cbaa26dcf4907117b496d49f74242",
+    "balance": "13.3262712372658761",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x491ffc953e1ab2751817ff90a5f32694a4841474",
+    "balance": "12.8130899884933",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x75428842ebc4f94fdc4af18533265c4a57102d34",
+    "balance": "12.61521490191292831",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2f9e113434aebdd70bb99cb6505e1f726c578d6d",
+    "balance": "12.50365807540494285",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2c9200b41d2af97868f6e458400640969f324afe",
+    "balance": "12.030716442943824",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1ba12164ce1f4fbf7b528498c9864c432a53da16",
+    "balance": "12",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb7562f12e41c762cecda99d62bd6eac7b0c3b4c1",
+    "balance": "11.562140982336296403",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8aa27e90e139d5ab5704df69429341cbcb2d2464",
+    "balance": "11.515227316634520752",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdec0ded0606b7d0560adebd6c3a919a671db4d66",
+    "balance": "11.191802099814948366",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xda36327edce4a0611ae87a881200f361b80635ed",
+    "balance": "11",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x423d60df46d885ffcea367a4efd776ef3cd53032",
+    "balance": "10.873916784968456",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc70c7f140d095381bfe45c9de8f16f7548547832",
+    "balance": "10.674363904869084413",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xae7f11378daba3757e9d7691be04285938be35b5",
+    "balance": "10.309471579238060609",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x96bdad64f1436005ad9ca93ea5a157949b5c5bec",
+    "balance": "10.2238732715210476",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x75dddfb045c0f0ef72d940fe935bf36e773eb05b",
+    "balance": "10.1",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8758e5741de847363dd2715a62431cc0cbda4ca6",
+    "balance": "10.095570304048068587",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7fc80fad32ec41fd5cfcc14eee9c31953b6b4a8b",
+    "balance": "10.044759052099615635",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1ccd9f598a51ce30a912c0b1713dec9478762deb",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x221d5d198f000695690809c10af4c6b8d9577726",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x23284ed2beb480134922e4c63240d3a1ec714d87",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2dd2036c9db2ada2739509af0047c00c8b9291ef",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x346173fa66f95bfa53d4222c09321279365b8a85",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x62ab4db8335ce5f9106bc55ff5f3ba3949f93050",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x63d174bcba40f77e82e25b559a389c147bdbdb1d",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6d465d2081b799770d0ce7e755d8db1665903ffb",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x74c02fe52a544d3d1775796a9037ce560c40f581",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x82f8c0ee18963bbb68a66123411a760229845e51",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x831b98fb588e62a6858b189371555445de2da229",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x85670c918fd6a80bdc92202c59d20b6e0c01c7e9",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa02e54e65d6b3f119ea72fc251feff8d08f9297d",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa8f0048a0d1a04663ca5010d0beac5bcaeea0eef",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaca2f322d69e07993e073c8730180fb139ca4446",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb2b164d83103f6cf62005c2c50928bfcd5eaa018",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc584f09928d490237831f6e5da805cba82652497",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd1a0b66835d830e9ada42eef436f3aa8005b20b5",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xda44b8414e1c001d3fdc0c5e6d366f94459bc3e6",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xda47bdcc48f26fb4709f90316341d9104cb1fb89",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe77ad9c5af60332d24e5531b51a6b7f61d0b8703",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xecd02810db92ff027ea1b0850d46bda963676d74",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf8706636919f7c76878ebf53e38c676d8510caeb",
+    "balance": "10",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x15a2cf25b43050379be6220143ae467962f1cbf4",
+    "balance": "9.900615463737826123",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcdaeb3bce9df386b574f2aefb06b9a2a156835b4",
+    "balance": "9.0821081774580474",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x104e4d9e51a045c90802f75272a4b91df916f01d",
+    "balance": "8.939458343177445421",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8c55acd4477e1ef76401e7ff5fd3eb37925d29c3",
+    "balance": "8.623280226",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x320c338bcf70baaae26e96201c33b48105bc62c2",
+    "balance": "7.938192772",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbcdb34fc6dcb3e6f24e1196f79e529155262d13c",
+    "balance": "7.704379331491346449",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x45602bfba960277bf917c1b2007d1f03d7bd29e4",
+    "balance": "6.9810184945760543",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xba0e393d0d47ae81a22f27d68bac043bb64ddb31",
+    "balance": "6.242351418800259",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8df46d8bb10d79f89e00e0a6859327f7189c45de",
+    "balance": "6.13065219240782",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x73278a12a96b95b37ba35149a958fb8e02f35f5a",
+    "balance": "6.0202373303491037",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xadf34dcf407f15653aff0d1ce2d09612949bcca3",
+    "balance": "6.00424699256436",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x49fe1f832ea70c207b6e555e160dc2df51c00107",
+    "balance": "5.786658081351493723",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x27abc2b0dfb20c0314748efad0826266b99d2be0",
+    "balance": "5.67979102921818",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7926dad04fe7c482425d784985b5e24aea03c9ff",
+    "balance": "5.5599927332889299",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6814a5e9d556c834aec5293ed80748cd0f58bd14",
+    "balance": "5.0270783012616662",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3fec1e88498529838f1103dd69f3139a90b97972",
+    "balance": "5",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7267db34b6072080923f92e626c2fc5da91ff25b",
+    "balance": "5",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x73c5d6d06c7e7c4571e7f837a959a59b675acd95",
+    "balance": "5",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8049c62fdd46a3cd388e93fc10012d0d8fea2274",
+    "balance": "5",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8e8fcb51a955afd4d208bb18d54385b2fc7d1123",
+    "balance": "4.87047280264365",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x986e92868a27548a31e88f7692e746cd7e86f39a",
+    "balance": "4.634977005021589595",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbacc12d6fc38c8edc957a9200accf6f06ba84b93",
+    "balance": "4.53489866903350584",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe1f00d978fe9ea074bf2eebb8b30b54c6bc8af1c",
+    "balance": "4.397143137727041757",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x58a6552ccb091f9a2fc6c062344e653779a7db45",
+    "balance": "4.395838700306397",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x407b68d75d0b874e40eb864289388503ef5cc382",
+    "balance": "4.355741197897028",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x809c9f8dd8ca93a41c3adca4972fa234c28f7714",
+    "balance": "4.022084218957072035",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0762248fa639a8c365f004c5753e5d9c302112d3",
+    "balance": "3.898732756244007977",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7601a873a53e367e2a0462c4a0e30e59374f5db8",
+    "balance": "3.884582664837177668",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x262b4f07e42bbc33f597fcf0d854e9dafaf3d469",
+    "balance": "3.669931548936832736",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2bf034eccebc8cd60dab9c249b6c2996dcb7d8ec",
+    "balance": "3.611601203164379837",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x285832da8a9388db611f0304778418ae9e62d234",
+    "balance": "3.1027130786998507",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc517d11676cdba59751cb2544d478de7e6c25a0c",
+    "balance": "3",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x577330c3ab28b6ea0797d1552ea9edeb067c912c",
+    "balance": "2.826783342448629",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0e76602324bd961e3e928b4bd5dc578b9883df11",
+    "balance": "2.727317273499920922",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x151a64570e4997739458455ba4ab5a535fd2e306",
+    "balance": "2.6279034621886543",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x15ecd31318fa645b6496f1f21b22ebfe3ad0c865",
+    "balance": "2.480963829450477148",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1fcabba469b151df83a6a72cdd1113c154f7a402",
+    "balance": "2.4008377026671313",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8a35d1eb766f4f0cb3bb34760b7628f3e04c1c0d",
+    "balance": "2.38654935166929181",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf924ff0f192f0c7c073161e0d62ce7635114e74f",
+    "balance": "2.319500530089448836",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x590d24003d5ec516502db08e01421ba56a5cd611",
+    "balance": "2.092221653",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb525f6b3b5efcc0c54582de2f08d890f7793e3e4",
+    "balance": "2",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfb2e9d1c95dcd5665ee230352d9973263f822f8a",
+    "balance": "2",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x08c0c95618600526a4b130c1ab4ad82489f83b66",
+    "balance": "1.974878978213967811",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x363cd931403c4a7251e064bd26e7542ea9699f5c",
+    "balance": "1.8755507940073615",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7ca63384feac2d37952181ba1ddbf3bac75ed324",
+    "balance": "1.77655700932345352",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9b2d6e2d5ef25c0454abaa392fcd9796e05567c9",
+    "balance": "1.7377875484080032",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x80e7041b85488c0aa64eb9c3e6c326209f5954de",
+    "balance": "1.727713190372965698",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x89a4a16c04f39ed35bb9539d50048845b3c1713d",
+    "balance": "1.72339806862775",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcbfe8790c588dba594830f0f12c85f6d78c5d70e",
+    "balance": "1.720331097722651574",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf9c86cab4db95d685c570cffd2c288bdc1d9cb3a",
+    "balance": "1.704683873065063816",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2f1f672c7a55679cb3acbf9aacfb55b61738b045",
+    "balance": "1.6424396638679089",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc4d9d1a93068d311ab18e988244123430eb4f1cd",
+    "balance": "1.61408766381793614",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7311b7bf2f004b8070efaf4a130348eeb18ef369",
+    "balance": "1.403940915340703653",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa00259e66c0fddaf98d0c49033b01dfbded225bd",
+    "balance": "1.4",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xee6593620e6743c1b5290397da9d693a2f6afa8a",
+    "balance": "1.152681368283246044",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa9ccd6b0919e43fd7cfc990572e43c3cf6a17397",
+    "balance": "1.144189412",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe882c0cbb836c34447dc58f74c08f373a6d37cd8",
+    "balance": "1.019141618816528303",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbb86e5b229526c644f4d384a32ef0b162a243285",
+    "balance": "1.0124369028613696",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe89c2545e4e05a79d21351cdeeda4651ca48debc",
+    "balance": "1.011994160257272",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9b04a9eee500302980a117f514bc2de0fd1f683d",
+    "balance": "1.008995890295122194",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdc8cd7cf5c9bf25aedaf9c01bf3f992354f95081",
+    "balance": "1.000712662563497691",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4beae88bfa81f623ca87f7efb42bfed76466bdc4",
+    "balance": "0.9596019831030466",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x078631decd6d8a4055761c4e15927a1ae974e606",
+    "balance": "0.951588144529274453",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9ef53569800e203c20200256cf134abc675bc8e1",
+    "balance": "0.936793379448593848",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x076d1faa88ee180a4cf83afc4379112727fc7a4a",
+    "balance": "0.8637393546370812",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd5288ed50a195017e5b30595f65091a7767817a4",
+    "balance": "0.838460407894026679",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8321926c8aae281ef9d8520a772eb1d94a9ec6dd",
+    "balance": "0.836",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf64c845ac5b14cf8dd500b3ecd4cc57cd414c391",
+    "balance": "0.8047006358",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x41143b6ec3329d60adfb7761192f00a8e9ed83ff",
+    "balance": "0.7852175951246192",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4d53016e20c8615bfdef02f3a13f969b9a0ec031",
+    "balance": "0.770749375541092059",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x516cafd745ec780d20f61c0d71fe258ea765222d",
+    "balance": "0.6756578900564159",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x136d54e730ad568cf49f8d7b8d36e1b079f37e1e",
+    "balance": "0.625070837221250372",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3afbbfc8c43359bd971ec8ab0e866193dc36e8f6",
+    "balance": "0.617358929159087996",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x57b00c981363c67b11e07eaa71364bf20e8025fe",
+    "balance": "0.574377462302210655",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd3888a7e6d6a05c6b031f05ddaf3d3dcab92fc5b",
+    "balance": "0.516439001674083917",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x73d52bf205839bb5b090ad68d8691a2462492bf1",
+    "balance": "0.350621749329351911",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xab368cc17b7de9071907428a6fe3c2ed8347abc5",
+    "balance": "0.345895727722233383",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfcf7174841d19af02e59b89e6d2eedc3b4007243",
+    "balance": "0.344174656680408701",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeb2865c3324c0839ef657fc080128fcf440b9a91",
+    "balance": "0.344174460396820385",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x068cd36905e1b27c1e988dbe45a886491a589793",
+    "balance": "0.344174264113483622",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x26849c34fccb6313198b6a87832f229e69b65239",
+    "balance": "0.344174067830398411",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x70f815368be4ab2b0f01293e03fe7ef545d474b7",
+    "balance": "0.344173871547564752",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x921a20719e59375925cfe20b485638cc110f995d",
+    "balance": "0.344173675264982644",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8d04b6f1ad76a3d8f70c9644b86049d49537e73b",
+    "balance": "0.344173478982652088",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb2cfc9688f2d7e4ce84a249cb29e8a82ec292885",
+    "balance": "0.344173282700573082",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5c414c2fd2e132e3b0b5c0988cc7027b4b800542",
+    "balance": "0.344173086418745625",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe077b943bd4209ed07f93395f76412f60de6b606",
+    "balance": "0.31408703804984767",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcc71d2ff046b1464fa39f5d1108695d92d01767e",
+    "balance": "0.214393043867348829",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc8b93c4079841353760dc7d268490ed61040d91c",
+    "balance": "0.129462615519318144",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x382ffce2287252f930e1c8dc9328dac5bf282ba1",
+    "balance": "0.110123684497644328",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf9344061881a5df17bc1bba38423c10bf13760b6",
+    "balance": "0.098191933637528209",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc3435a9bc9849aa2787f9d7412453a9005e7be26",
+    "balance": "0.082338567998735576",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xed86ce6be7124f876e8027a9be304621667c1862",
+    "balance": "0.08",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2dd3d3b07bc822aa9bef925f06fabacd23e7022a",
+    "balance": "0.075198232943864182",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x55e44dde847a63a00df5ef9d2396d845405648b7",
+    "balance": "0.070705414796410112",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbec643bd5b7f5e9190617ca4187ef0455950c51c",
+    "balance": "0.069187",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb20a327c9b4da091f454b1ce0e2e4dc5c128b5b4",
+    "balance": "0.058061477894410027",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7a3190dcf1797630df096bc0c3c2cc1d264e21bb",
+    "balance": "0.052521357534268131",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5b0f8d8f47e3fdf7ee1c337abca19dbba98524e6",
+    "balance": "0.051077296228944847",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x741670c5085da689944faa9543e9ab610a00a06d",
+    "balance": "0.050158426838596529",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd41a998d43349f2894d7f6c07a05969b71e22446",
+    "balance": "0.049858443108563951",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9f55abf3a9b3ab9401131db5961a1845545dbd47",
+    "balance": "0.044612864828596631",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x80b1b27e94ddbd687f5200dd48c408d7e5f53740",
+    "balance": "0.0435",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4229affc78cbde266d46e0fec13c4fe90d4b7697",
+    "balance": "0.03",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x223b326117073ba9c887649419aae7e56588d6ca",
+    "balance": "0.028114902338969453",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x327308223a5aff1e8ea5cc3f54122710fe1f241b",
+    "balance": "0.02790894808603215",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3174b9a08c9df92c9a04a6be0b67cdcf61d81641",
+    "balance": "0.025697807619628904",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x183bdb344a07ee3d27f07ac4799a56e4a2fe5439",
+    "balance": "0.025591506775836086",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0f11796c594c7bdacf600bbd46f10d2aed2a37b5",
+    "balance": "0.020964794889995415",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x69a3ffc3d5f861db20a03940241bf987a05462c7",
+    "balance": "0.019445497027704827",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x67eb77d75f5ef2b469c8f85049049c4c4d6ca920",
+    "balance": "0.019405006063889929",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb06714043e81e2d34d1df3886e9dfb5eda70dd96",
+    "balance": "0.019208534309502977",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa4d7d0da1ea9eb05ff4be794c2ab5b3b099b16d3",
+    "balance": "0.019195975362876841",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7ccd823888bd7d46f5a8c8a46dc09254c9df5bc3",
+    "balance": "0.019057319360782929",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xae706706f3ef51409cbb69ea41c7ff5bb2041079",
+    "balance": "0.016686579922440113",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x625236038836cecc532664915bd0399647e7826b",
+    "balance": "0.015853712400561387",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb183596e3f32b4911223d3c07270ca846c09749b",
+    "balance": "0.014564312249503563",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x38f5e5b4da37531a6e85161e337e0238bb27aa90",
+    "balance": "0.012911999008001512",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x740d618e92484b6f142e49b3644b26cc370232be",
+    "balance": "0.010958740520994261",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xef7b295cbe6760e30737bef4833e88d962dae06b",
+    "balance": "0.010762261402963514",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe32bf4b7b9cb091b04e8500344a578d56b8f2593",
+    "balance": "0.009003274621494617",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe64f06f695de4c4e21ba8f383a2675fd884ac720",
+    "balance": "0.009000930029920342",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x17a7e7f6a493d137e84b4420575527f6ef725f8c",
+    "balance": "0.008399989444750401",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x69e3c9f8a735ddcccfbad2dabde9963d55202988",
+    "balance": "0.008351287088158375",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9384eb57f892cce158c9ad5446d815cc7584d42b",
+    "balance": "0.007473988100759784",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x47e4c324bc5539be3dd8588ecc6ce31295b693e5",
+    "balance": "0.006627838569504568",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x299be0ee0daea498c0b37eeeb95cb2dba0723611",
+    "balance": "0.006514090248139845",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeb545d3b2fd2143c41513a53104034f957bcaea5",
+    "balance": "0.005968953138512017",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x98cb3eaae7b9da2ff57852f0c20e9bf386681970",
+    "balance": "0.005652767752689404",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x95ea77bd92ed57a576414146312712fa05eeda71",
+    "balance": "0.003104996599565372",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1483196e7a4ea292fbf99e8f59d8f3e5fd43c4da",
+    "balance": "0.002730921471707374",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9fb971da34539d36696ca63d688dcdfec0275462",
+    "balance": "0.002226260320954588",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb53d946dc4048df4f6527a1d722a1540681c75fc",
+    "balance": "0.002114323642910825",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4cd53cdc5821cb30304716eba268d9d2ed2784fe",
+    "balance": "0.002113456430051494",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x383ff027e07641364a1f4a81b9ca7efe753472e9",
+    "balance": "0.002084042160913165",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8f0e4ef236614c250e078689cc6a9b7d7d66086a",
+    "balance": "0.002084037607063417",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x33e141131b3d0a70d886baaabcb243a01219a510",
+    "balance": "0.002012344503851179",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa2ef65aececb83cd1bd3579a8669779099317952",
+    "balance": "0.00201035353259276",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf35735f287a7febfbe7854b872d0811e2b675af9",
+    "balance": "0.001909309295180584",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x82b8bf8ebdce6f5f8fc7657fd1b79cf1811b81b0",
+    "balance": "0.001865610145097364",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x512aaf0703b5596ea6e68f05108df213424d2f9a",
+    "balance": "0.001674141713102568",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6fc86f522c064722a138f91256fe96b8174ec82b",
+    "balance": "0.001479335433213344",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4ebb6457422a469e9fa312387c5c45004ee0fa4a",
+    "balance": "0.001085876366827798",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x15a25073bf65bccaad640d7629cf25682de8b638",
+    "balance": "0.001072606766318844",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb0bce529daf05311babe687f87cae85a63822b7e",
+    "balance": "0.001067397167904913",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x59ed734194e3229e57854c20bd2d0b067de5e766",
+    "balance": "0.001055298141704545",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb0888f128d728400cf329970eab1c48ca8c1f67e",
+    "balance": "0.001048043389883174",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x46d82e19a4dfd57a1cf061b3a963c942f4d45c0c",
+    "balance": "0.001045074845278551",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe92301eb553b07ff6e02076c2f886710e0a3d955",
+    "balance": "0.001040552932913704",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6951d2ccef836b34e949ff088ba6547134f24f03",
+    "balance": "0.001027548935942187",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe07adf74fff34a3473e1aa89881bb54d571e16a1",
+    "balance": "0.001022766808438236",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x909510f6ff962d70bae2da3c97dfb0024f491dc8",
+    "balance": "0.001022237214238542",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4e7b574e3cd2be31a2ba66c20871e640a1fdcb84",
+    "balance": "0.001020465269240283",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7368c9b89583d2b83dfdb0556f98006c8d1dbe3f",
+    "balance": "0.000996164801440617",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9885a84930e3c8c865a1d3debdc204f990bab7c3",
+    "balance": "0.00098617799681522",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9918ccc83f453965e634eb0788f94729775554c0",
+    "balance": "0.000984539995723968",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5f5f7bdaf27c7700159fa2e52cfb5cdb95f9cdf1",
+    "balance": "0.000976296319013151",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xae4542cf7f688d314e8dab306ffd2f43e10e118c",
+    "balance": "0.000950470202554635",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xefe60e8415bdd75e1cfb9a9d1720e3996480d8f0",
+    "balance": "0.000915374007792219",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xefac889dcdb6d7e0d9b1b7396547a86a91640f7c",
+    "balance": "0.000903279536262088",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x92a28b6dffe7c1f8a3b6b0f20539c223423b288b",
+    "balance": "0.000884811483503611",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2fa130927814b590623031e846f059df9554fdde",
+    "balance": "0.000861262258229",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbd238ecfa48f3573efe0ce74dd3d4902f760dd30",
+    "balance": "0.000858851433197364",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x34c70805ca93a25ab71eb2d108c953b1cb44b5d6",
+    "balance": "0.00085662758392657",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf49a19f72d0e106df462cfd6b5bebe42b6001616",
+    "balance": "0.00083400163114",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4b7363cd9644aff4fd8f9f07affe2cea945f3946",
+    "balance": "0.00083149962255085",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcd47c5b110e424e61d94b98c8cf8cf75eeb9bd68",
+    "balance": "0.000825386894975711",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2273a141694829ae1957d296e86c49f904e1c162",
+    "balance": "0.000800109707662544",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x90c20d6f68e63f8689191d34be64590b2b7f0855",
+    "balance": "0.000796030550992437",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x32479bbff97812f2341fd6033405f7a4724759a4",
+    "balance": "0.000777891643759656",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe8be20ac9c271f5eb09d05ce2b4749f92fd5bae0",
+    "balance": "0.000739199466572761",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9194b1713a8e07bc47b90fb7937e28e09b6cd100",
+    "balance": "0.000724528607964708",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbb8606d402cf629bde7cde20d56114214a431427",
+    "balance": "0.000704307046344389",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd87e86b4f45dfdc6ed62549f2e4c897a4bd818ce",
+    "balance": "0.000694959320678357",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbb3740634d01d6f8b23640106a77f1fd1caf711f",
+    "balance": "0.000663342837476471",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4aea436b3939792a26afecf233d967d6bd5f4940",
+    "balance": "0.000654794406498341",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe5dda44c692a41f19ba07f2f7c546d273e953f15",
+    "balance": "0.000646286567148361",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa32aecda752cf4ef89956e83d60c04835d4fa867",
+    "balance": "0.000645900086357036",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6ac0c22198d53682277c57a53602dc0e0d95b840",
+    "balance": "0.000625407454351641",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa409399fd51c642c3cdc5b4f4e4f3c858f33f589",
+    "balance": "0.000618338164129355",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x09ee4911ceff35d61d6b0591432c03a43034fd0f",
+    "balance": "0.000613993738105202",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe9812f14cda5f02287a970f90e42c77ebb3cb6d7",
+    "balance": "0.00060528136617837",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2581b0b09128456cad8f1db96db06f1c12851ae3",
+    "balance": "0.000604426078813701",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7c94e08a908e235b1a87c2d2b9926d36d6233fcc",
+    "balance": "0.00060058710057343",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2256fd44a0aa09df90797927f0cfe8491bbe5b39",
+    "balance": "0.000597152177913455",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc2492693fb6da4e4423c6264eb7faa2f542f9baf",
+    "balance": "0.000596914807197211",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbcf3e665c04e9cad40ffdabe4eb665af1b1ccd39",
+    "balance": "0.000591977440596878",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9860f78719fdddf3bb1b83e4619609f413c67a1b",
+    "balance": "0.000586745989111525",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc49652b682f72b46c44279b42a539f69c5f7efcd",
+    "balance": "0.000585464539077011",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7bc43896da0f7ac10ad5123765cc1b81f8911881",
+    "balance": "0.000572131525148505",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1964b1d5d69f96e6751da98c69b6fbba48a111b5",
+    "balance": "0.000570452802550226",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5a1f3d0c18607e022db4fa7a6c2543e38f8f1f4b",
+    "balance": "0.000553557643140586",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x08e303095f51c50839286432e6c4e3fd6f65f515",
+    "balance": "0.000550985621839",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x00d18ca9782be1caef611017c2fbc1a39779a57c",
+    "balance": "0.000537641168364073",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaac097814dfdf7186d6148156f8d2572d27d4ab8",
+    "balance": "0.000534135803452321",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3d2f68f4e2112fe3f2bfd08ae8cbcdb3a802812a",
+    "balance": "0.000520620796333326",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1f82e35704599102398e0c61f30adcba37660b50",
+    "balance": "0.000518545039192361",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf0eeea29eded3a0d87ba766c0d3cdf77ce13f581",
+    "balance": "0.00051470710981916",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc706ce8f9ad6bc55490fef5352d981d82f562189",
+    "balance": "0.000513640493040922",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x06eb1dc6528baa360399e6507f4a12c6bf1d7c6c",
+    "balance": "0.000510739091730284",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x42908562a35ce09ed310629b54faddd73efdb95b",
+    "balance": "0.000508589926548202",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xdea7b90d9443c6c544b45f877e3a57069f1ce166",
+    "balance": "0.000507042197875063",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x00327f8cbe974958fb79855653071bc5d1bed963",
+    "balance": "0.000504660915740113",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd2b2d0e150c2e14167b6432b2166e0cfb6b227da",
+    "balance": "0.000502065501252969",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x211d241f15ed07ee6cd2338c12f83cfa68ea1bc3",
+    "balance": "0.000501517626026025",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0c1bb48ab83ccaf83c0afedb2303fa17983fa0f3",
+    "balance": "0.000497363992253576",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3365d7dd135c1d5aa1504d52f6faeff0ac3b24b6",
+    "balance": "0.000486727308711406",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0a714182b3cac3be9e1f023aec0a18f35ffc994f",
+    "balance": "0.00048172091237393",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x407f16c6334e76534c7d238767ea843493744605",
+    "balance": "0.000477487752258781",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa89bb4ce2aa0a7876aace4b9384eede3239c4f70",
+    "balance": "0.000476525473917513",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd82d864604e6cfe680d4562d24499dce4d6ee99e",
+    "balance": "0.000471244610421368",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb99997f108edeb4ff1ed0ae233b870afb7a5d4c1",
+    "balance": "0.000468807024140621",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1aa514aa9e26b5e0d3c60268a8732eec25d6e4b2",
+    "balance": "0.000464896336209675",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf377921ff437276385fb9722412d690c647a87d1",
+    "balance": "0.000464463209452176",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9f95ced81a4b43c65e4158047fcaa97f5d4811e6",
+    "balance": "0.000462458484688851",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc1582c0e57a144131d0546128203e8fc6924b17f",
+    "balance": "0.000400838116992854",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4c1a316de360e08817eb88dd31a0e7305005fb65",
+    "balance": "0.0004",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x60a9372862bd752cd02d9ae482f94cd2fe92a0bf",
+    "balance": "0.000349580764892876",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x84f36bd98fed29df05bb50eca3d0ec825feb98e4",
+    "balance": "0.000346327471364615",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeefaef10ac38f9751d1acdcc03fadd2f7d5ccec0",
+    "balance": "0.000341937363918661",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7b20a66b7b002289149a5173a66161a47a6fdb4a",
+    "balance": "0.000339348168937232",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2aca99880c69a715d7819b116d3f9400bfe71695",
+    "balance": "0.00033546786177765",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0f86b8e80b2348be4726a7df2f218fd68fb69561",
+    "balance": "0.00033156809858243",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0bc7fcf4bf885259dc09b20418b2353e15ff9646",
+    "balance": "0.000331230363701721",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4820d8970327eb6891c4d581b9254275dcfea0ec",
+    "balance": "0.000329968828246357",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc68e8827fc1dd3b2bc94ca8b0228268f16dd6cf6",
+    "balance": "0.0003250069108353",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4299caecefa01fc58b229572d4a527b2285139bf",
+    "balance": "0.000312101622170417",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x106a8946a2930c52c39436ca93190d01ca2a55f4",
+    "balance": "0.000305955408996718",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4efc1db07e1e7f3af655c3f10f7f8cee842c116d",
+    "balance": "0.00030057310231696",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc0343dc9486e8ee6874fbaf30a5f3908081479ae",
+    "balance": "0.000294160333384094",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x68b7d1f108dbfef2ff70499395e91862787fd606",
+    "balance": "0.000288314465705925",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf1b085e939e20d154d3d3a5819330d02e4b66e28",
+    "balance": "0.00028709416729866",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x74ae2d3429a62ff4c46a6630b1d8a072ea9a3a2a",
+    "balance": "0.000281528805368832",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x37205cc0072c2525dd6d3114157e7ff10f51c458",
+    "balance": "0.000272058295501931",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe1f522bfbc7317a4803ce654c3254958b2dfef6b",
+    "balance": "0.000267903690006748",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaa0044570c017d7322ac604c2c15b6bce0fc491c",
+    "balance": "0.000266688658488024",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5d946eaeae394166d178073bae3f3fd881edce60",
+    "balance": "0.000263390295475422",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd2fa59811af055e0e94d570ea7f9800c0e5c0428",
+    "balance": "0.000263383524411582",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xae519a6d0c4143fdbea652f0a936ea045d64b8cb",
+    "balance": "0.000263347036258713",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9339fb447e7a5f22b21e1114e318d69396595a69",
+    "balance": "0.000262988066128952",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x498f4cd055326be41081f199adb06d2fb8232575",
+    "balance": "0.00026286937238122",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x847c61b2d84195bd315e8da05f5f5a69b91b5214",
+    "balance": "0.000262776949751268",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x848d11f575bdb37259ed152a992873b638151ce5",
+    "balance": "0.000261367509312172",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xceff973253865af8ade3b845bb6f6936cfeb6576",
+    "balance": "0.000256255811068869",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6f8d4d86a31409e0b615a8dc0fdadc68e3993197",
+    "balance": "0.000255072883052997",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe337ce72e24a0d20183924d46d5a2ce6d430a6c4",
+    "balance": "0.000252988775002593",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x53c19d44c88cdd480145bf791c0abbd5a76b80c0",
+    "balance": "0.000252510231207546",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfd7174f1c635516e42039a31843b46dfe9bc7296",
+    "balance": "0.000251707081920632",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1006296c5cab8900411070eb3e1c3eff9057c70d",
+    "balance": "0.000246974590367693",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc9e0f1e12808416337c59cda820fa274b77f2148",
+    "balance": "0.000246768707735795",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x16d2015663de8cbebeab0f25d0cab8dabd8b9540",
+    "balance": "0.000246768612026431",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf731eb5888195fe9a52274f3b8ef96e8ec054164",
+    "balance": "0.000246768516317102",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe57ddbc57ac07782ad9706a24370fd2f492d3281",
+    "balance": "0.00024676842060785",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe1b58072cd41c70c36aacc0340bcfca9967e65a8",
+    "balance": "0.000246760707027478",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x369e2bd313667e8e595f2b0bc0e0d6c1643874c4",
+    "balance": "0.000245189102773837",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa6b0f7dc7e3ea4ad4888adc63ba42d7f2f2080fe",
+    "balance": "0.000244342375772298",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6bda98b112c20baeb01ff3953c5f43e7a740eddc",
+    "balance": "0.000243705338897723",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x485862e9d8e1bd4a5e4b4999b358dba2e23c7a80",
+    "balance": "0.000243705245535352",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb2eaa19dbf6a8d0f82fb4e8ea1622f5b3b1296af",
+    "balance": "0.000243705152173033",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x2ba19182c3f7f88cdcc34939b2f522f48bde7490",
+    "balance": "0.000243705058810769",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfb9827082dadc960bdbe43c61c48ed64153408fe",
+    "balance": "0.000241134257862132",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x011f55a7e0fddcb9d1b94c1b0cff62faeee1559e",
+    "balance": "0.000241134164955885",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1eb36474544aba0c0a2f1daacd12cf6da163d4fd",
+    "balance": "0.000241134072049671",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6c29564f6878b9c0dc70ac620c69135339796f8a",
+    "balance": "0.000241133979143531",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb498233b3afcb3f211dda0be72217a46db38cf54",
+    "balance": "0.000240863340908481",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa7fe31c36e4f378f0a63695af0f803110c7c593c",
+    "balance": "0.000240775289546988",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x71e58ed520ec790960ca39e8c9dd382abca9a417",
+    "balance": "0.00024064515674786",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd04ca9bee01dfbefc0708e4200547bc8f6bf1e5f",
+    "balance": "0.00024064506421173",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xaa9b58fdd5b8c2df017e754e9bd8a8005922ddd5",
+    "balance": "0.000240644971675653",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x84964d19319947cc889616f612b905bf5b5571d9",
+    "balance": "0.000240491042915342",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa2a01e8151dfaf476f7400fc84dba2d5dbdefe38",
+    "balance": "0.00024049094676836",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1ea2c162dea5c034e15489a6921918e25fd00946",
+    "balance": "0.000240490850621455",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe696dcb10f85ce2d9d90bd4aeef5ab93dd8ee1f0",
+    "balance": "0.000240490754474589",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeef1a1677cb0647064da2ee6e92f77801f31834b",
+    "balance": "0.00023961081401722",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xeaf515a45e33f94cb229544ce9e7de4750dad53d",
+    "balance": "0.000238937211701211",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe6c3eb070ae51a98ac690399b5c8a9ad557589bb",
+    "balance": "0.00023893711600149",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xabe2222ff6bdbb1f65211e3c6a4d0c8d7d74c1ce",
+    "balance": "0.000238937020301826",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9e2acbcdee148dfeb1eb8a9f6249bde0363bf1a6",
+    "balance": "0.000238936924602201",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9978e9ba435f004d3da54d6690dbf63f48edb27e",
+    "balance": "0.00023850914165972",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x18ec0954a86dcd2b3faf16ddc76156cb4b54bb1a",
+    "balance": "0.000238509046300374",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa888c7e41c5855bd539bf71cdd7d6c37b065319b",
+    "balance": "0.000238508950941084",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd0bfe9c4ad815a9ec4ff2e33922ad77207d52b17",
+    "balance": "0.000238508855581851",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6c65f473247fcd3d449fe9acb9d397149645de52",
+    "balance": "0.00023640218048281",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x817335651daad53f09368408c5199daf023b9e0d",
+    "balance": "0.000235653216057929",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6026c08e1d305b241643b351b64f6e87b3d51185",
+    "balance": "0.000235622167835062",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xcaaf18466d0ceb743a3ed6bb35ce72f932b54b2d",
+    "balance": "0.000235313085422995",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd1974322bf4fd3b92c1f01215b22d1182c960227",
+    "balance": "0.000235235987719599",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5c70184e999141c81910950de0b4498185534bb5",
+    "balance": "0.000234385630855312",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x01ca7b6567251c69e31a28e8aba350f02f5077df",
+    "balance": "0.00023410451946522",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x39235f8196b8e187a8b5666d25afb09492041dc2",
+    "balance": "0.000234087361123197",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb953440e70c08e3d374576f5ddb9dccc61b94c1a",
+    "balance": "0.000234087273675427",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf2a9c105bcef5625ac2bc4508fb19a49f5296954",
+    "balance": "0.000234087186227709",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x19a0bec1779b877574704a42d97e0c11daabc89c",
+    "balance": "0.000234087098780017",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa145c5546d38a3315831ca18053b549bb37f9425",
+    "balance": "0.0002290536445897",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x44cb0864ca769737fced10d6296f0d77493be079",
+    "balance": "0.000228856156961932",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x29ca11aa895ba01e66443535823657b43ce52b44",
+    "balance": "0.00022731838091706",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa3f8167deab5e9d15c26c00631ab4a5a64359dcd",
+    "balance": "0.000223557548750516",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3512a8fc6dd30d77059e8da19f6bda82baf2d116",
+    "balance": "0.00022250556115175",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1e655feec2767b4c6409ccffa76d7560da11f2cb",
+    "balance": "0.000213225931333231",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbcf29cc851f453a66d2ec2ed0f7645b28dcf7d11",
+    "balance": "0.000199795762545075",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x9b0cd71699ed10a0745f99e6824db256615f665e",
+    "balance": "0.000196943911050286",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf921f66d9c5a2894c55fc367dc5dcf4aacf89cad",
+    "balance": "0.000192006221053544",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6aed9da433e6c54a5c25e69b9029f3b01a3b2519",
+    "balance": "0.000188283746934751",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe874692c611a05e5fe9a20d1ee0a7039d5167606",
+    "balance": "0.000176329234484993",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf85eb7c061d79411b2cb2bb65a0ead47582ea342",
+    "balance": "0.000172086450540411",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x4a51733204230ed0a0cac7a6f2258ea108847533",
+    "balance": "0.000168094555716431",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xee054c82648ded1cb60e470b94a571e93fedc3be",
+    "balance": "0.000162543869570853",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8996b1690dcac30c3b443716a10facf6dc25ba7d",
+    "balance": "0.000160544227639096",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xa89b076c1f7aa56f759003c52d7c07cddae0031f",
+    "balance": "0.000157181044606855",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf27838b0c3ba2eee13b6ed3fe13a90ef7b57a2cc",
+    "balance": "0.000116840605793462",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbad1ecc94f1343d9d6b4ae7c8d94938a2d0c03b6",
+    "balance": "0.000100906205370833",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x3102c7a4e095db58f07e12093cf1c2524603deed",
+    "balance": "0.0001002454",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x321a2144259a3a8d6322e2de56db8310042441ef",
+    "balance": "0.000092085303410075",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x7071b0b4fe2df3bdbb60fb7089700d3fd174014c",
+    "balance": "0.000092050690279841",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xbf72f0123005df8127d9a033fd9215513b9db413",
+    "balance": "0.00009028058954503",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5e3c72ee812153e03e0b71f3c9dc6ff5380862c0",
+    "balance": "0.000080076425360032",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x763d7d362b59aea3858a92a302e18cd41b1252d4",
+    "balance": "0.000078055564970138",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x562f34de6626ece43f8d3f85557ff51d4bd8fcb2",
+    "balance": "0.00007336434487172",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xe91fc24cf5646663aa58940a820517c0e3e16b75",
+    "balance": "0.000063983245772657",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xc8e448365f1bd5b545b0bfcfac947a827507998d",
+    "balance": "0.000061814340212064",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xf2ce84548ed0a9f59337723a2a0673d8ce499679",
+    "balance": "0.000029049498959902",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x84b35ed67db72698849a5fa12cea9d3c35f5abdd",
+    "balance": "0.000024361247689587",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x27a390b1ad4c183289e44271fdc2f159df87d76f",
+    "balance": "0.000024353927761461",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb1b51ccbac02f33685b64f65b5de3f6622901f79",
+    "balance": "0.000015908473686768",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x21c50acbd2d695884e1d5476b6c68b53391283b5",
+    "balance": "0.000015212693",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x6807fab0ed27079a27bad9f0ecc060a9da26bb91",
+    "balance": "0.00001521242",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x62c1bfe30423a9e8d5caa903be24fb63e0038140",
+    "balance": "0.0000141211112",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xfe2fa1eb1f6fe89ee19bf55e341ac3dcf5501c3d",
+    "balance": "0.000012314612",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0cad7af8b05d0438ffa1a1b73d05676154ae1dca",
+    "balance": "0.0000121132942",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8ac0f401eccea0e50c92380e36f07823aa8183a9",
+    "balance": "0.000002232222432059",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x89010e1adb2e3e90e7f94245090615c297c733de",
+    "balance": "0.000000199312951538",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x5acfd914f2dfd41f07f27407bd7936f43d0db167",
+    "balance": "0.000000079106295269",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x0b58857708a6f84e7ee04beaef069a7e6d1d4a0b",
+    "balance": "0.00000000011505115",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xd5b927956057075377263aab7f8afc12f85100db",
+    "balance": "0.000000000000000006",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x1111111254eeb25477b68fb85ed929f73a960582",
+    "balance": "0.000000000000000001",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8b6f3d1afe70e5b8ab5a4c46f3562ba7b04ca0db",
+    "balance": "0.000000000000000001",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0x8cc2284c90d05578633418f9cde104f402375a65",
+    "balance": "0.000000000000000001",
+    "pendingBalanceUpdate": "No"
+  },
+  {
+    "id": "0xb63aae6c353636d66df13b89ba4425cfe13d10ba",
+    "balance": "0.000000000000000001",
+    "pendingBalanceUpdate": "No"
+  }
+]

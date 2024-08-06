@@ -57,6 +57,15 @@ interface Link {
   target: string;
 }
 
+interface TECHolder {
+  id: string;
+  balance: string;
+  pendingBalanceUpdate: string;
+  x?: number;
+  y?: number;
+  type?: string;
+}
+
 const NODE_R = 30;
 
 const GraphPage = () => {
@@ -121,28 +130,11 @@ const GraphPage = () => {
   }, [graphData, selectedNodesCheckBox]);
 
   useEffect(() => {
-    const fetchProjects472Data = async () => {
-      const projectsResponse = await fetch(
-        "/data/Projects_Attestation_472.json"
-      );
-      const projects = (await projectsResponse.json()) as IProject472[];
+    const fetchData = async () => {
       const citizensResponse = await fetch("/data/Citizens.json");
       const citizens = (await citizensResponse.json()) as ICitizen[];
-
-      const centralNode: IProject472 = {
-        id: "central",
-        name: "Projects",
-        x: 0,
-        y: 0,
-        type: "central",
-      };
-
-      const projectNodes: IProject472[] = projects.map((project, index) => ({
-        ...project,
-        type: "projects", // Use lowercase to match your selectedNodesCheckBox
-        x: Math.random() * 50 - 25,
-        y: Math.random() * 50 - 25,
-      }));
+      const tecHoldersResponse = await fetch("/data/TECHolders.json");
+      const tecHolders = (await tecHoldersResponse.json()) as TECHolder[];
 
       const citizenNodes: ICitizen[] = citizens.map((citizen, index) => ({
         ...citizen,
@@ -151,17 +143,21 @@ const GraphPage = () => {
         y: Math.random() * 10 - 5,
       }));
 
-      const nodes: Node[] = [centralNode, ...projectNodes, ...citizenNodes];
+      const tecHolderNode: Node = {
+        id: "TECHolder",
+        type: "TECHolder",
+        x: 30,
+        y: 0,
+      };
 
-      const links: Link[] = projects.map((project) => ({
-        source: "central",
-        target: project.id,
-      }));
+      const nodes: Node[] = [...citizenNodes];
+
+      const links: Link[] = [];
 
       setGraphData({ nodes, links });
     };
 
-    fetchProjects472Data();
+    fetchData();
   }, []);
 
   useEffect(() => {
