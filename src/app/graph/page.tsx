@@ -115,15 +115,17 @@ const GraphPage = () => {
   );
 
   const filteredGraphData = useMemo(() => {
-    const filteredNodes = graphData.nodes.filter((node) =>
-      selectedNodesCheckBox.includes(node.type || "")
+    const filteredNodes = graphData.nodes.filter(
+      (node) =>
+        selectedNodesCheckBox.includes(node.type || "") ||
+        node.type === "TECHolder"
     );
 
-    const nodeIds = new Set(filteredNodes.map((node) => node.id)); // Create a set of filtered node IDs
+    const nodeIds = new Set(filteredNodes.map((node) => node.id));
     console.log("nodeIds", nodeIds);
 
     const filteredLinks = graphData.links.filter(
-      (link) => nodeIds.has(link.source) || nodeIds.has(link.target) // Only include links where both source and target nodes are in filteredNodes
+      (link) => nodeIds.has(link.source) || nodeIds.has(link.target)
     );
 
     return { nodes: filteredNodes, links: filteredLinks };
@@ -136,7 +138,7 @@ const GraphPage = () => {
       const tecHoldersResponse = await fetch("/data/TECHolders.json");
       const tecHolders = (await tecHoldersResponse.json()) as TECHolder[];
 
-      const citizenNodes: ICitizen[] = citizens.map((citizen, index) => ({
+      const citizenNodes: ICitizen[] = citizens.map((citizen) => ({
         ...citizen,
         type: "citizens", // Use lowercase to match your selectedNodesCheckBox
         x: -30 + Math.random() * 10,
@@ -150,10 +152,24 @@ const GraphPage = () => {
         y: 0,
       };
 
-      const nodes: Node[] = [...citizenNodes];
+      const nodes: Node[] = [...citizenNodes, tecHolderNode];
 
       const links: Link[] = [];
 
+      // Iterate through each citizen and check if they exist in tecHolders
+      citizens.forEach((citizen) => {
+        const matchingTEC = tecHolders.find(
+          (holder) => holder.id === citizen.id
+        );
+        if (matchingTEC) {
+          links.push({
+            source: citizen.id,
+            target: tecHolderNode.id,
+          });
+        }
+      });
+      console.log("links", links);
+      console.log("nodes", nodes);
       setGraphData({ nodes, links });
     };
 
@@ -208,7 +224,7 @@ const GraphPage = () => {
                 if (node.type === "citizens") {
                   return "#a4b2e1";
                 }
-                if (node.name === "Projects") {
+                if (node.id === "TECHolder") {
                   return "blue";
                 } else {
                   return "#3388ff";
