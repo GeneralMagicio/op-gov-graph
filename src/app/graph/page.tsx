@@ -159,7 +159,7 @@ const GraphPage = () => {
       // Iterate through each citizen and check if they exist in tecHolders
       citizens.forEach((citizen) => {
         const matchingTEC = tecHolders.find(
-          (holder) => holder.id === citizen.id
+          (holder) => holder.id.toLowerCase() === citizen.id.toLowerCase()
         );
         if (matchingTEC) {
           links.push({
@@ -172,6 +172,8 @@ const GraphPage = () => {
       console.log("nodes", nodes);
       setGraphData({ nodes, links });
     };
+
+    fgRef.current?.d3Force("link")?.distance(150);
 
     fetchData();
   }, []);
@@ -215,7 +217,11 @@ const GraphPage = () => {
                 return node.name ?? node.id; // Fallback to node.id if name is undefined
               }}
               autoPauseRedraw={false}
-              linkWidth={0.3}
+              linkWidth={1}
+              linkDirectionalParticles={4}
+              linkDirectionalParticleWidth={(link) =>
+                highlightLinks.has(link) ? 4 : 0
+              }
               nodeCanvasObjectMode={() => "before"}
               nodeCanvasObject={paintRing as any}
               onNodeHover={handleNodeHover as any}
