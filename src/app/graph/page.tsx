@@ -13,6 +13,7 @@ import ForceGraph2D, {
   NodeObject,
   LinkObject,
 } from "react-force-graph-2d";
+import d3 from "d3";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
 
@@ -76,7 +77,14 @@ interface RegenScore {
   type?: string;
 }
 
-const NODE_R = 30;
+interface TrustedSeed {
+  id: string;
+  x?: number;
+  y?: number;
+  type?: string;
+}
+
+const NODE_R = 15;
 
 const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
@@ -113,15 +121,26 @@ const GraphPage = () => {
     updateHighlight();
   };
 
-  const paintRing = useCallback(
-    (node: Node, ctx: CanvasRenderingContext2D) => {
-      // add ring just for highlighted nodes
+  const paintNode = useCallback(
+    (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
+      const label = node.name || node.id;
+      const fontSize = 12 / globalScale; // Adjust the font size based on the scale
+      ctx.font = `${fontSize}px Sans-Serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      // Draw the node
       ctx.beginPath();
-      ctx.arc(node.x || 0, node.y || 0, NODE_R * 1.4, 0, 2 * Math.PI, false);
-      ctx.fillStyle = node === hoverNode ? "#3b60db" : "transparent";
+      ctx.arc(node.x || 0, node.y || 0, NODE_R, 0, 2 * Math.PI, false);
       ctx.fill();
+
+      // Draw the label only if the node type is not "citizens"
+      if (node.type !== "citizens") {
+        ctx.fillStyle = "black"; // Label color
+        ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize); // Draw text below the node
+      }
     },
-    [hoverNode]
+    []
   );
 
   const filteredGraphData = useMemo(() => {
@@ -129,7 +148,8 @@ const GraphPage = () => {
       (node) =>
         selectedNodesCheckBox.includes(node.type || "") ||
         node.type === "TECHolder" ||
-        node.type === "RegenScore"
+        node.type === "RegenScore" ||
+        node.type === "TrustedSeed"
     );
 
     const nodeIds = new Set(filteredNodes.map((node) => node.id));
@@ -148,17 +168,17 @@ const GraphPage = () => {
       const citizens = (await citizensResponse.json()) as ICitizen[];
       const tecHoldersResponse = await fetch("/data/TECHolders.json");
       const tecHolders = (await tecHoldersResponse.json()) as TECHolder[];
-      const regenScoreResponse = await fetch("/data/RegenScore.json");
-      const regenScore = (await regenScoreResponse.json()) as RegenScore[];
+      const regenScoresResponse = await fetch("/data/RegenScore.json");
+      const regenScores = (await regenScoresResponse.json()) as RegenScore[];
+      const trustedSeedResponse = await fetch("/data/TrustedSeed.json");
+      const trustedSeeds = (await trustedSeedResponse.json()) as TrustedSeed[];
 
       const citizenNodes: ICitizen[] = citizens.map((citizen) => ({
         ...citizen,
         type: "citizens", // Use lowercase to match your selectedNodesCheckBox
-        x: -30 + Math.random() * 10,
-        y: Math.random() * 10 - 5,
       }));
 
-      const tecHolderNode: Node = {
+      const TecHolderNode: Node = {
         id: "TECHolder",
         type: "TECHolder",
       };
@@ -168,7 +188,17 @@ const GraphPage = () => {
         type: "RegenScore",
       };
 
-      const nodes: Node[] = [...citizenNodes, tecHolderNode, RegenScoreNode];
+      const TrustedSeedNode: Node = {
+        id: "TrustedSeed",
+        type: "TrustedSeed",
+      };
+
+      const nodes: Node[] = [
+        ...citizenNodes,
+        TecHolderNode,
+        RegenScoreNode,
+        TrustedSeedNode,
+      ];
 
       const links: Link[] = [];
 
@@ -177,13 +207,18 @@ const GraphPage = () => {
         const matchingTEC = tecHolders.find(
           (holder) => holder.id.toLowerCase() === citizen.id.toLowerCase()
         );
-        const matchingRegenScore = regenScore.find(
+        const matchingRegenScore = regenScores.find(
           (score) => score.address.toLowerCase() === citizen.id.toLowerCase()
         );
+        const matchingTrustedSeed = trustedSeeds.find(
+          (trustedSeed) =>
+            trustedSeed?.id.toLowerCase() === citizen.id.toLowerCase()
+        );
+
         if (matchingTEC) {
           links.push({
             source: citizen.id,
-            target: tecHolderNode.id,
+            target: TecHolderNode.id,
           });
         }
         if (matchingRegenScore) {
@@ -192,20 +227,29 @@ const GraphPage = () => {
             target: RegenScoreNode.id,
           });
         }
+        if (matchingTrustedSeed) {
+          links.push({
+            source: citizen.id,
+            target: TrustedSeedNode.id,
+          });
+        }
       });
       console.log("links", links);
       console.log("nodes", nodes);
       setGraphData({ nodes, links });
     };
 
-    fgRef.current?.d3Force("link")?.distance(250);
-
     fetchData();
   }, [selectedConnectionsCheckBox, selectedNodesCheckBox]);
 
   useEffect(() => {
     setTimeout(() => {
-      fgRef.current?.zoomToFit(500, 120);
+      fgRef.current?.zoomToFit(500, 250);
+      fgRef.current?.d3Force("link")?.distance(250);
+      fgRef.current?.d3Force(
+        "collision",
+        d3?.forceCollide((node) => node.r)
+      );
     }, 100);
   }, [fgRef, filteredGraphData]);
 
@@ -248,7 +292,7 @@ const GraphPage = () => {
                 highlightLinks.has(link) ? 4 : 0
               }
               nodeCanvasObjectMode={() => "before"}
-              nodeCanvasObject={paintRing as any}
+              nodeCanvasObject={paintNode as any}
               onNodeHover={handleNodeHover as any}
               backgroundColor="white"
               nodeColor={(node) => {
@@ -257,6 +301,12 @@ const GraphPage = () => {
                 }
                 if (node.id === "TECHolder") {
                   return "blue";
+                }
+                if (node.id === "RegenScore") {
+                  return "green";
+                }
+                if (node.id === "TrustedSeed") {
+                  return "red";
                 } else {
                   return "#3388ff";
                 }
