@@ -45,7 +45,7 @@ interface GraphData {
   links: Link[];
 }
 
-interface Node {
+interface Node extends ICitizen {
   id: string;
   name?: string;
   x?: number;
@@ -124,7 +124,7 @@ const GraphPage = () => {
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const label = node.name || node.id;
-      const fontSize = 12 / globalScale; // Adjust the font size based on the scale
+      const fontSize = 8 / globalScale; // Adjust the font size based on the scale
       ctx.font = `${fontSize}px Sans-Serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -136,6 +136,16 @@ const GraphPage = () => {
 
       // Draw the label only if the node type is not "citizens"
       if (node.type !== "citizens") {
+        ctx.fillStyle = "black"; // Label color
+        ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize); // Draw text below the node
+      } else {
+        let label = "";
+        if (node.ens) {
+          label = node.ens;
+        } else if (node.id) {
+          const address = node.id;
+          label = `${address.slice(0, 4)}...${address.slice(-4)}`;
+        }
         ctx.fillStyle = "black"; // Label color
         ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize); // Draw text below the node
       }
