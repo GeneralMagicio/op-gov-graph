@@ -66,6 +66,16 @@ interface TECHolder {
   type?: string;
 }
 
+interface RegenScore {
+  id: string;
+  score: number;
+  address: string;
+  meta: string;
+  x?: number;
+  y?: number;
+  type?: string;
+}
+
 const NODE_R = 30;
 
 const GraphPage = () => {
@@ -118,7 +128,8 @@ const GraphPage = () => {
     const filteredNodes = graphData.nodes.filter(
       (node) =>
         selectedNodesCheckBox.includes(node.type || "") ||
-        node.type === "TECHolder"
+        node.type === "TECHolder" ||
+        node.type === "RegenScore"
     );
 
     const nodeIds = new Set(filteredNodes.map((node) => node.id));
@@ -137,6 +148,8 @@ const GraphPage = () => {
       const citizens = (await citizensResponse.json()) as ICitizen[];
       const tecHoldersResponse = await fetch("/data/TECHolders.json");
       const tecHolders = (await tecHoldersResponse.json()) as TECHolder[];
+      const regenScoreResponse = await fetch("/data/RegenScore.json");
+      const regenScore = (await regenScoreResponse.json()) as RegenScore[];
 
       const citizenNodes: ICitizen[] = citizens.map((citizen) => ({
         ...citizen,
@@ -148,11 +161,14 @@ const GraphPage = () => {
       const tecHolderNode: Node = {
         id: "TECHolder",
         type: "TECHolder",
-        x: 30,
-        y: 0,
       };
 
-      const nodes: Node[] = [...citizenNodes, tecHolderNode];
+      const RegenScoreNode: Node = {
+        id: "RegenScore",
+        type: "RegenScore",
+      };
+
+      const nodes: Node[] = [...citizenNodes, tecHolderNode, RegenScoreNode];
 
       const links: Link[] = [];
 
@@ -161,10 +177,19 @@ const GraphPage = () => {
         const matchingTEC = tecHolders.find(
           (holder) => holder.id.toLowerCase() === citizen.id.toLowerCase()
         );
+        const matchingRegenScore = regenScore.find(
+          (score) => score.address.toLowerCase() === citizen.id.toLowerCase()
+        );
         if (matchingTEC) {
           links.push({
             source: citizen.id,
             target: tecHolderNode.id,
+          });
+        }
+        if (matchingRegenScore) {
+          links.push({
+            source: citizen.id,
+            target: RegenScoreNode.id,
           });
         }
       });
@@ -173,10 +198,10 @@ const GraphPage = () => {
       setGraphData({ nodes, links });
     };
 
-    fgRef.current?.d3Force("link")?.distance(150);
+    fgRef.current?.d3Force("link")?.distance(250);
 
     fetchData();
-  }, []);
+  }, [selectedConnectionsCheckBox, selectedNodesCheckBox]);
 
   useEffect(() => {
     setTimeout(() => {
