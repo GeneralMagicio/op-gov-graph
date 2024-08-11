@@ -16,6 +16,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
   setSelectedConnectionsCheckBox,
 }) => {
   const nodeOptions = ["Citizens"];
+  const connectionOptions = ["TECHolder", "RegenScore", "TrustedSeed"];
 
   return (
     <aside className="p-4 flex-shrink-0">
@@ -46,9 +47,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
       <div>
         <h2 className="font-semibold mb-2">Connections</h2>
         <div className="space-y-2">
-          {[
-            // Placeholder for connection types
-          ].map((connection) => (
+          {connectionOptions.map((connection) => (
             <div key={connection} className="flex items-center flex-shrink-0">
               <label className="flex items-center w-full text-gray-700 text-sm">
                 <input
