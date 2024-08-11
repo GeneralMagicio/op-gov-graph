@@ -91,7 +91,7 @@ const GraphPage = () => {
     "citizens",
   ]);
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
-    useState<string[]>([]);
+    useState<string[]>(["TECHolder", "RegenScore", "TrustedSeed"]); // Default selected
 
   const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
@@ -162,15 +162,18 @@ const GraphPage = () => {
         node.type === "TrustedSeed"
     );
 
-    const nodeIds = new Set(filteredNodes.map((node) => node.id));
-    console.log("nodeIds", nodeIds);
-
     const filteredLinks = graphData.links.filter(
-      (link) => nodeIds.has(link.source) || nodeIds.has(link.target)
+      (link) =>
+        (selectedConnectionsCheckBox.includes("TECHolder") &&
+          (link.target === "TECHolder" || link.source === "TECHolder")) ||
+        (selectedConnectionsCheckBox.includes("RegenScore") &&
+          (link.target === "RegenScore" || link.source === "RegenScore")) ||
+        (selectedConnectionsCheckBox.includes("TrustedSeed") &&
+          (link.target === "TrustedSeed" || link.source === "TrustedSeed"))
     );
 
     return { nodes: filteredNodes, links: filteredLinks };
-  }, [graphData, selectedNodesCheckBox]);
+  }, [graphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -244,8 +247,6 @@ const GraphPage = () => {
           });
         }
       });
-      console.log("links", links);
-      console.log("nodes", nodes);
       setGraphData({ nodes, links });
     };
 
@@ -255,13 +256,17 @@ const GraphPage = () => {
   useEffect(() => {
     setTimeout(() => {
       fgRef.current?.zoomToFit(500, 250);
-      fgRef.current?.d3Force("link")?.distance(250);
+      fgRef.current?.d3Force("link")?.distance(500);
+      fgRef.current?.d3Force(
+        "charge",
+        d3.forceManyBody().strength(-200) // Add this line to increase repulsion
+      );
       fgRef.current?.d3Force(
         "collision",
-        d3?.forceCollide((node) => node.r)
+        d3.forceCollide().radius(NODE_R * 1.5) // Increase this value to space nodes apart more
       );
     }, 100);
-  }, [fgRef, filteredGraphData]);
+  }, [fgRef, filteredGraphData, selectedConnectionsCheckBox]);
 
   return (
     <div className="flex flex-col h-screen">
