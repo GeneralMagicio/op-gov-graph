@@ -1,0 +1,1738 @@
+[
+  {
+    "Unnamed: 0": 2,
+    "id": "0x00f5503f62f4904aed2030bf1d3701077f0db8b0633bf730f29bfc45d5007afb",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x91031DCFdEa024b4d51e775486111d2b2A715871",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 4,
+    "id": "0x0223af5cc350a6ab0cf11f2bd0613bdb7aeae1a9db2dbe791af54129b07cb0d9",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x5555763613a12D8F3e73be831DFf8598089d3dCa",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 5,
+    "id": "0x022b0e831ccb9ebcb7a6742a14590c0d103a5d7b4c362f7bcde94f1a84a2a1b6",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 6,
+    "id": "0x02efa05e99e91a40bdd9f049d125b28c53c9f83f5b8691cde6f3c448f713c428",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x69DC230B06A15796e3f42bAF706e0e55d4D5eAA1",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 10,
+    "id": "0x057d38fc52f04f09ba3b734e8cba646aab149b2ad7ebcb8b4dc53e6c7f03d104",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xBF430a49C4d85AeeD3908619D5387A1fbF8E74A9",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 14,
+    "id": "0x07c80f0fcef51954a3f87f819ff0851863163be73f240b70c70beb3bc6b3cb09",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 16,
+    "id": "0x08be83a9c1b6002d333b6c57fe983d1c7b61f11f8bb3f4843d4ed3f66461c42c",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 17,
+    "id": "0x0920e1824f080c107971bf9b367d4e166d625c6577307dbc9897cc0525955db7",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 20,
+    "id": "0x09940482e87180eac0bf22edce623652496f881935da71041822ceee9043e20b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 24,
+    "id": "0x0b05bf02d19bf532e8af40c996cbd1bc19353852113c7145975c7f28b20a6031",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 25,
+    "id": "0x0c16e98341767bea76359a3f18bfc6fa7afdb699b34d68cac6cf772e070b81dc",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 26,
+    "id": "0x0d1ebe30dcdba58b818a24b83765516bd6f43fa152ae18f88a1509b27853ce6f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xDaDd7c883288Cfe2E257B0A361865E5e9349808b",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 27,
+    "id": "0x0d9e6b6251e614b619c1de9a6d1a181b30823982ba5a0ea884deb83b719706e6",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x488b2608A66e5d32E5a91eba21A198bd3Fd8BcD9",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 28,
+    "id": "0x0dda88bb8c8740cc4ea47159a1a5561f1c67702eba128e96a22c1eef4dec3e1a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 30,
+    "id": "0x0f016fba2e607daa23c60658bf38c2d25ab1c0faa7aff461bd279bc71383d067",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xfA53D837B5dDd616007F91487F041d27edb683A0",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 33,
+    "id": "0x110df26f54ba2ea03b275c5d496b38d4a1e152fd4522a7d59f1b8958ccf0e886",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xF68D2BfCecd7895BBa05a7451Dd09A1749026454",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 39,
+    "id": "0x15104e322f27de819d2c7ced32beed686b22cab6becbcb84673ff086c74b4d38",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 40,
+    "id": "0x15368a0a187525d26fcf4ce7699f5659362ebed0cd2f5fff584eeecfa688a7ba",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xdA60aceb12A1A61d09B008ae4a60c760dB32220F",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 42,
+    "id": "0x163f6cab2c8bf770211033e7e578c950474c7224ef6dadab8067dd5059d837d5",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 43,
+    "id": "0x16af7e84b184c5db99ff4d2674db934fa51dcdbc866c8aab88a72cdd99c0b237",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 47,
+    "id": "0x1b857e7ec52ff75dfcc2b00851e845b3a33a4dfbdb3354c4bad7be61ddd70987",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 48,
+    "id": "0x1bc7ab80119b8d4896dc8251f9d3b186941feff8f1fd714913e7b4ab949c16f8",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x5d36a202687fD6Bd0f670545334bF0B4827Cc1E2",
+    "referredMethod": "Foundation Choice Selection"
+  },
+  {
+    "Unnamed: 0": 49,
+    "id": "0x1bdd54e3d91f433abc72dab402150aa35e0a04cb42b854a01d24a91ddb150baf",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x14276eB29e90541831cb94C80331484ae6D2A1D8",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 54,
+    "id": "0x1d41f494df02acf68de7a55c47ba2ce848a22b0241485e43487f005081f93a2f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 55,
+    "id": "0x1dcb8288786e086df08fd89a1f8c29e66499d27b4581fd8f94c1ec0beb8f6686",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 56,
+    "id": "0x1dfb18d3e94af94955e239e258a74964c91f7d51a95fb06472c5a55f187de34a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 58,
+    "id": "0x1e9bf8260ff993642caf16a5d16111d7a51282d3629e262baa48ca65cd31d646",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xAC3A69DD4a8fEcC18b172Bfa9643D6b0863819c8",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 62,
+    "id": "0x21b5e47e4d6c10e9dbe0cde78822d25b2d196401432db853c7a945c0647eed0e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x7899d9b1181cbB427b0b1BE0684C096C260F7474",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 63,
+    "id": "0x22e12ced8471a10329c854352c799af07c6392c65ca57a05e7818250032a52fa",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000006916a87b82333f4245046623b23794C65C",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 64,
+    "id": "0x22ec0d0baa1119a52b32bb41b8d12ceaf721d57bdfe7795d784258349125727d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 66,
+    "id": "0x2477daaa5cb243d46a8f1348a398cd876e0fbdbe86d18d1b17ee67ad9d34763c",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 69,
+    "id": "0x2773f424b9ab0b19acba60659faf4c65c8af9b9292d622e4052e05a26a38fc57",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 73,
+    "id": "0x28d73872fd85b4af77b5ceda47e2be8392a5ff6fd2bb013728aba528ac7d38f6",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x5e349eca2dc61aBCd9dD99Ce94d04136151a09Ee",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 74,
+    "id": "0x29048caae2989d41a28e8ca4e202de00d38fd4384d3324358cfbdbfe676538f3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 75,
+    "id": "0x290c5f33680b8147786384ee8a060e1bbb8bfc1f1fb193e2fed1d42bdbffe79e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xE73F9c181B571Cac2bf3173634d04a9921b7fFcf",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 76,
+    "id": "0x2d6bc577533e9918ebe150d16c550bd78956d7398105ca7d7df7c09b0b33ddb3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 79,
+    "id": "0x2e2e8c019956d8612c95e57c02f2a6c86388a6a91a5c7c68fb3e04d4428c3b00",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 80,
+    "id": "0x2e5c90b557669da557f07347db1b9aeb88f8799a5efb849fbd36797e9a644885",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xdb5781a835b60110298fF7205D8ef9678Ff1f800",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 81,
+    "id": "0x2e95677be2cb25bb81aba0e11ba85e199ad55b4e22cb2638d2af9a844d7bed08",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x3B3980936707A8299AFb5424Fa807c1CBac37cCb",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 83,
+    "id": "0x2f74e017ebc75e3d0ced5966460edffa1a4560a06eacd884b4ae98c2a0313f16",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x29C4dbC1a81d06c9AA2fAed93Bb8B4a78F3eabDb",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 85,
+    "id": "0x2fac7262652a328f4ac0b04200a83f415d39c166ad73da7d480611a72694fd21",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 86,
+    "id": "0x313663ea6d2fb822e4e24684761bed81032ca882e68473a0c1c1781a3b5247e2",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x48A63097E1Ac123b1f5A8bbfFafA4afa8192FaB0",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 88,
+    "id": "0x32648995531e1cbda7ccca6906cb6583e6bbf68b23e7bcfafbad2ad0455bf5fc",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x1de2A056508E0D0dd88A88f1f5cdf9cfa510795c",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 91,
+    "id": "0x3441635ce3d14ca85320c8f0972df47d9d5b47881238948de8f19cf99b5304ca",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xdb5781a835b60110298fF7205D8ef9678Ff1f800",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 94,
+    "id": "0x3556f6f9becda550266ed7ab4318aa11fde840beb7ec6171f8c85e5bfd33529f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 96,
+    "id": "0x35c2b229e1d25141c53a187ac50d440797575b9eb15a4dd0292ffa7df189c40b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 97,
+    "id": "0x36d3f37ea197f233818f4fd284058123c6c837ff2b55ee21cd480675d19ea737",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 98,
+    "id": "0x36dd1b98c353b2e054d6ab21b1abbb747827fc7752cd9b117316d1155b3c9086",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x5a5D9aB7b1bD978F80909503EBb828879daCa9C3",
+    "referredMethod": "Foundation Choice Selection"
+  },
+  {
+    "Unnamed: 0": 103,
+    "id": "0x3c9e96fb31ae92d13c188c98ba28470ac4cedfac4b85b740fb949a5e9bd13007",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 106,
+    "id": "0x3e31b1a41d51bd25eb2e19c4b1b9050d2b3a1d7b3046e8169858e13b9c9bbfb5",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xBF430a49C4d85AeeD3908619D5387A1fbF8E74A9",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 107,
+    "id": "0x3e95d1d1edc8b2f3fb38e51898d2d1e28793607399df3824b4e52604c07d3ebb",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 108,
+    "id": "0x3ef6cc3d97a1386c1eb6a9ed7903c7247883f348eb8784db17678b1392c0c136",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xDCfe20E6C1d14c26930a28B1f92fB981CDa26884",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 109,
+    "id": "0x3f03e84304fba1ad6e8fb1f0b3a99b14cd167707385b344c3c40ca910b1beadd",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x94Db037207F6fB697DBd33524aaDffD108819DC8",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 110,
+    "id": "0x400a6f1ee64750f5587a2e9f4703bb2ac01e8504fd4ec3b62692b7104f984f85",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 111,
+    "id": "0x401dc680aba5e507d261985a63162db1c179505ae8e081a46992fdc3285a8aa4",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 114,
+    "id": "0x41e906ab0e8c9bfa9c805b5ef41ce2f485a24a4e2011880d51a6cda376c7138f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x45a10F35BeFa4aB841c77860204b133118B7CcAE",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 115,
+    "id": "0x41fadacc99d3cbfce8cb2bfa7fdb4423f50c37340248b1959ad1ac4d2c582afb",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xC5A756D63C5fe67b438acBE468aA62a52093fDEf",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 119,
+    "id": "0x42d23c7184a29c58b8cc231df62eee3ebf62593643c805a4506b09ff19a65408",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xa142aB9eab9264807A41F0E5cbDab877D204E233",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 120,
+    "id": "0x432d797e2f3141f2c9055e53ad03b6730d6b6bd5bb36bd2ec740386a5ec7179e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x69DC230B06A15796e3f42bAF706e0e55d4D5eAA1",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 122,
+    "id": "0x4526c67ee59107790df029eac79c6238d9b5e16d217f8d77fd40ec10075b170b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xB352bB4E2A4f27683435f153A259f1B207218b1b",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 124,
+    "id": "0x4632621c1e4bdbe9d42b9e7c42d187f7bd23c9bc4566f746e83d2d91cd612b5e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x9531C059098e3d194fF87FebB587aB07B30B1306",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 125,
+    "id": "0x47121316acdeae76aab0b1e7a1b7b33278c0c7ec35c3555d981d75f7f78534b7",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 126,
+    "id": "0x4733c0dc37d10c6f0340cf9785bd1302c3c8055f349a613913b2668db1a89e25",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x8f07bc36ff569312FDC41F3867D80bBd2FE94b76",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 129,
+    "id": "0x47c2545b96f396701f39186b2b6424fc5cc9e3b73241bdb7e57d4e19a5bfdb9f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x429F9aDA43e9F345CbB85EC88681BB70Df808892",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 131,
+    "id": "0x4852defa4babdb290ace5d55bf552db2581b5b5a17351bbf482ba8ddc806c0e1",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 132,
+    "id": "0x48aa519e117f542a5169a743a67812db836bcbfc84d426ff3a37eaf6d23f41e6",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x894Aa5F1E45454677A8560ddE3B45Cb5C427Ef92",
+    "referredMethod": "Foundation Choice Selection"
+  },
+  {
+    "Unnamed: 0": 133,
+    "id": "0x48c3bd095dfbcf6e0e94595f9ebb7a74f0661c8562b55ad25b5e6a9f66782de3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 136,
+    "id": "0x4b653b80b9ea2192acb0d53a78200337b9b07d5b47f8b8dc503802d7499306e7",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 137,
+    "id": "0x4c4ac8209f02a9ac697a7d8d04e7dff6e517a1ad901a7965e3b522dcd0c099bf",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x7AE8b0D6353F0931EB9FaC0A3562fA9e4C6Ff933",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 139,
+    "id": "0x4c8f28c5121344b1ba53172e652a0f7a137d03863899edae74250fdd890193d7",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 140,
+    "id": "0x4e7a4187c75a7658be8a0f22373c427cf69119ae75822bacd1fd1292afc9c160",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x28F569cC6C29D804A1720edC16bF1eBab2eA35B4",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 143,
+    "id": "0x512f857a8fe2566d2e936d84386e277183d34dfaae184d426237adde905188e9",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 148,
+    "id": "0x52fbe23d8b5a3b39f0e9525149de7eb322d98fe24547881cdb69c95b025fa004",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x7eD52863829AB99354F3a0503A622e82AcD5F7d3",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 150,
+    "id": "0x53b705b1e4225cb23a024a8ff1d413061df890830de56c3373f8de70e0190e97",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 151,
+    "id": "0x53d4cf2baebe91c20604cca6dd35aa59f4a54fc17159011b8d381c072c875237",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x9D20893054afC4A74b856089c44F9A09d1C38Db0",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 154,
+    "id": "0x559ec2ad6dc775efcba103d491780fa938c806d5812d202a0d3a75e1398a89d7",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x45a10F35BeFa4aB841c77860204b133118B7CcAE",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 156,
+    "id": "0x58056ba15b5bb72402202f1726f1f0149102ba213d72f4f465695b07ab502dd2",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 157,
+    "id": "0x582eee8cca3713177fb71e4261f2a91ba3bf45e6f923ff2a7846216901f31934",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 158,
+    "id": "0x59c411b429880d26de1ae8934562904fabc10a704651b2fd6585809a44caac32",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x75536CF4f01c2bFa528F5c74DdC1232Db3aF3Ee5",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 161,
+    "id": "0x5a1e4e8fd232fb4bc056fb97955bdade57ec7106599340eaff92bd7e5583e4a5",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x48A63097E1Ac123b1f5A8bbfFafA4afa8192FaB0",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 162,
+    "id": "0x5a2fe0c5b1dd1cf92eddc85abf8e0c6107f72856242feda643bd394959da5dfd",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xFED0e586cB372Fd0b17ead9F8cb1347BF8a5937f",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 164,
+    "id": "0x5ad2f697bc2f15a5242968e3703a1c81c5d8f204f57540c51707f57ce634ade0",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 165,
+    "id": "0x5b522cc07c06dac08ea39026f9b1955d1f8d7d63484937a7d0682a32ba037818",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xd35E119782059A27FEAd4EddA8B555f393650BC8",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 166,
+    "id": "0x5b8efd54ba7200444dad6b6d4ccbf18eccd2fadcdd928c20bdac828c2839b2ff",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xf5f7dd81069256ccBbB558FC29729d050636E7a0",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 169,
+    "id": "0x5c1e668c12da46a547ae4ac887760ecdfb2cbe91c9e995a928cb2217709f62c0",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xdb5781a835b60110298fF7205D8ef9678Ff1f800",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 173,
+    "id": "0x5d83275630da8e211051a471555506a023c3cb53528b907b8f251d75b7375ee9",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x3B16821A5dBBFF86E4a88eA0621EC6be016cd79A",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 177,
+    "id": "0x5e031d59dd85c70dbef4618c64c868f44317aaca4b8b3fd4e744d594f8217e5e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 184,
+    "id": "0x601fddea5174a1b8742aef8d9741a23e251badf2c3a261f718c7387a7cb243ee",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 188,
+    "id": "0x621fcd676d6a7f1c20c5329c9d469da896099c23fe45941adeb29207c937788f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 190,
+    "id": "0x62f27826fc10d370d14509af88544cd25403d3288861ba41fcfe5ce18c906168",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 191,
+    "id": "0x6464ad52a0873cfe80576e5d3e56b51f0621ea80747dc9906d24d7a771fa1ee0",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xd2135CfB216b74109775236E36d4b433F1DF507B",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 194,
+    "id": "0x65d3a1ac6c4ebb2ba0f17dad319af752e823ce0bd27c5612782c0e71dda64fbe",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 195,
+    "id": "0x65f83ceede740e700532363a5eaab4b547eeba610928dab7281aa39a063b55e7",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 198,
+    "id": "0x68c9b88e028a697c916e6ee86723ad6ed3cb755a57c448b51a6d4d64885f573f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 200,
+    "id": "0x6934e9d55f1f2ce54b396c55dd4582c7e98e7fd14c55e4687e56946d80494c40",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 202,
+    "id": "0x6a0f3f1894d063601a0611482bdaebc226d885758adf3502d39f23c5ce581aca",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x3E31155a1c17c9F85e74828447aec412090a4622",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 203,
+    "id": "0x6b3a937aeea1b982ff2b4a9e13e67f54d19552a59e8e3adc48e06a97eac27f53",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 205,
+    "id": "0x6b738efa5a022e73a60fe9d5391291f9daa1953d1d308f0716ecda018778e117",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 207,
+    "id": "0x6ca0c01bef046cb1d7b2acef9e925b5d4770df1afb48fa73bf41cb047ff47f6e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 208,
+    "id": "0x6cde83b16641f21be946eaf564d3bc8c44f3de7bca2c1e9dd1cb2e00ccac8cea",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x59cc3Fc56B8B2988F259EC1E6f3446907130f728",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 211,
+    "id": "0x6ded0be5b1f7b22e227d56379d831b24ac4a08091392d1d25dc53777127a6806",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xf5f7dd81069256ccBbB558FC29729d050636E7a0",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 214,
+    "id": "0x6e4194e970518b5354146e48c3228ee277f724bef890f65840071916f022fa70",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x429F9aDA43e9F345CbB85EC88681BB70Df808892",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 222,
+    "id": "0x712dad726c1eca3529ee713701a05e55d8b56508fc293ef4d88b5fbb1520669b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xd31b671F1a398B519222FdAba5aB5464B9F2a3Fa",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 223,
+    "id": "0x71902cdb20131b5c04292408b7afd64b8bf1fce353aebc53be642520e1eccf12",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x94Db037207F6fB697DBd33524aaDffD108819DC8",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 231,
+    "id": "0x7894a1554fa4fd8b12318d7f431067dca1f3191a67d1cc5c649e805d7051e37a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 232,
+    "id": "0x795b62156b73e9755b661370e7c08418ec04370e6c9bfa68ce29423da2248dd3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xe53e89d978Ff1da716f80BaA6E6D8B3FA23f2284",
+    "referredMethod": "Foundation Choice Selection"
+  },
+  {
+    "Unnamed: 0": 233,
+    "id": "0x7b33f617d946a055bcc9d405a2741377717bbf3c47a6b5818e4b29f05fe6c854",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 235,
+    "id": "0x7b8ca847a981e4c24ee3e26ca0152480ba725d8833120ccad0692e318faf76b8",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x25a2dF1d1310da75e8BC115cc797673E777B7e27",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 238,
+    "id": "0x7bb834759cf358e2beb4785432fd41c296d0c499b276ba205fc1cc422966e21d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x1C9a6c17BA87451520cC4aA4ca63DB07Dc180242",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 242,
+    "id": "0x7d14828b1155dca106136c17689bea6f6b8b7eb7e97451b9ec20ad1bb131ba40",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 246,
+    "id": "0x80ed1d8e50628b005ce4f4335181bfe62550bc57583326740ab3b7d5d9b65835",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x48A63097E1Ac123b1f5A8bbfFafA4afa8192FaB0",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 247,
+    "id": "0x8102107e3b84c28278adac7ea0bc5451743c20f6e45c28117901bde741484c58",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x2B888954421b424C5D3D9Ce9bB67c9bD47537d12",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 248,
+    "id": "0x81c86d223856e01f1b746867af4dee68ce2776082480215c330c69592c919c23",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 249,
+    "id": "0x82da1316d738b68424e2ba128ce94a2c7a11929ed0bc3e4d29b643c64576e86f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 250,
+    "id": "0x82f309f6bd76279260d5f6d08010c2046033bfd91c84120518a9b0ae830d6820",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 253,
+    "id": "0x84da152ee1cb06320baa1f5bbfbcb64c67eed99bd6c20533746b380e7c76a753",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 256,
+    "id": "0x863f9f712b6291d1922a89b83ca47f9df1f9c4a627145e76be1388839f348aee",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 260,
+    "id": "0x8857fe3d20cf275013285f3cbd95752dc698dd75b4b87bc5da8bf405fc5a3668",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 261,
+    "id": "0x88db7921f0dfd4e6a331a3e4fd9b59acc85e2b5fc7f70accf2e083b9869710c0",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 262,
+    "id": "0x89fbac2e3aaf321c7d4c4005247b754d95ad51047c523703f2cfcbc7ef5dc091",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xd9ED89A0f4cfbC1be4b7b1aA744b5bd25ACA9979",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 263,
+    "id": "0x8a0a3519d1eb960ceb821ff5dfa722927611591b1a46cb03ec58834631bc4d9e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xDd7a79b1b6e8Dd444F99d68a7D493A85556944a2",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 269,
+    "id": "0x8c7965994c9e165b2103043653f0fdfff93ff86c64bb5d8e8fb3448c9e5d11f1",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xDb150346155675dd0C93eFd960d5985244a34820",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 270,
+    "id": "0x8ce7baa6b0feb693bf206355139c57238133378fdc0a52ec7c11bd9d05923dd4",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xdA60aceb12A1A61d09B008ae4a60c760dB32220F",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 275,
+    "id": "0x8f0983714989c8efabd2bc6551983e3521af350749bd9db6fbeb8a3799da3089",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 280,
+    "id": "0x91226937e1e4f16536180c1377667e04039c9518e6ae2b1e8bab15a613061c89",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 284,
+    "id": "0x93f4688b3649fabc2a0bb03bc8f1f3ea96d53164beed3d8fa0705e12064eb3f5",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x4f41877773e44F2275dA1942FEe898556821bf66",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 285,
+    "id": "0x9481cdb407582c0bdb32bda9f599ae745acbaca69240021252d846536c935f1d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 289,
+    "id": "0x95979fd19454b8ca20f218ff1ce181fde8e22d5e01be5deeecdb514710cbc99a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 293,
+    "id": "0x9686f4149ac77bed8de6e419b4e2ecac8270dedbc6b1eaa8891d102777dcf9b4",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 294,
+    "id": "0x968e523f531d9cfeb3a8e3e653aa80af9c740aa35345d5ac4f80595a6454019f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 301,
+    "id": "0x9a22a22807a2c0e992be51fded26cbdc29bab80459798b72d9bac98e8df1b8ae",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 303,
+    "id": "0x9a92308922cf4a49f25421b7ea8c48cce8a1da54837bdd6d85d8dfcb7a8be3fa",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xD8ce5Ae15E2A9C8528FDce195AD43015782C5079",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 307,
+    "id": "0x9c81ae8517ba76508845b67f80521dd37f62b8ad31f751da5a4c6f77912a2732",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x75cac0CEb8A39DdB4942A83AD2aAfaF0C2A3e13f",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 309,
+    "id": "0x9d690c4b02f2740a9eee33daaf0365ff1cf10219cdbb3e675c7cd491c512f02f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x28F569cC6C29D804A1720edC16bF1eBab2eA35B4",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 311,
+    "id": "0x9e3a94d563ee63bd7ee6a0e2d566a4b48033d10fa5445433f46ad02c7b3b4ca1",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 314,
+    "id": "0xa2c5493be64a0c31c45ccda39cc93b92d3425799564b9245e907492e11173888",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xDb150346155675dd0C93eFd960d5985244a34820",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 318,
+    "id": "0xa40acb4aa8ac26c740b56592fa76dd5b377ce6225f12f4b7395553fb6bfb386f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 319,
+    "id": "0xa44404f21b4737355682550165f70134c747c8cf1fc8aaa43d70de3777592f55",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 322,
+    "id": "0xa710575e06cd5c489cdddfdec2c459d824d442af2a905c1447a0b8959a79926b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 324,
+    "id": "0xaa60b93c619ca21391d6ab5ada600e0a50d5e575d70499c6ae5d5f5e45d9531e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 325,
+    "id": "0xaa9404fd47c195ea1d8649b988ab7d7c8ee4b9a4220318d24dfb6b1345e27d2a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 326,
+    "id": "0xaab90f6a0dd304c9bc9b204718338afc7e13700b12b3ce26c40b061550440f9c",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 328,
+    "id": "0xab81957b467402da09e059a259878039e8c5992aa3ea9a6cda2dbf9cf47da3b0",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 329,
+    "id": "0xabf496a16bba6f3664855348fb8f48419a8e9ae71a3635e551c18238630a2b87",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x13ebd3443fa5575F0Eb173e323D8419F7452CfB1",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 330,
+    "id": "0xac7d3e47ab56f3964917c13f62db95a946d3f63146ed92f0e3c59e241cedd192",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x29C4dbC1a81d06c9AA2fAed93Bb8B4a78F3eabDb",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 332,
+    "id": "0xad47db84179ada6ec30444157ff21090468fe02c27666e1832f75fa77067769f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 333,
+    "id": "0xad5af856cdbdc14f252adade03f46599d249826f8de29ed0756130a2ecf0e551",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x5e349eca2dc61aBCd9dD99Ce94d04136151a09Ee",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 335,
+    "id": "0xae9e22eab234fea2faff3faa9231d3dec672791015e055befbd0306a46681a0a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x00De4B13153673BCAE2616b67bf822500d325Fc3",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 336,
+    "id": "0xaed8bb1723808d12dae47ac1a187962d86980ee76c6370bfad4a849e478dc0a8",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xe4c3768f48D4E676aE48c189db726eDF8C1D401e",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 337,
+    "id": "0xafc42ba071284dab3b8600ed4df71fbb0aebed1890cfca65f217f6ab237614a1",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 339,
+    "id": "0xb252d26bebedd21e886088f8ae39d3050cb4125caa6bccaedecbc32981b52ad1",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x5872Ce037211233b9F6F5095c25988021f270C21",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 341,
+    "id": "0xb35daa76d76cef8d301dfb31d410f88425a07a6d47f9cc457c2f2305ee8f2e5f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 342,
+    "id": "0xb414e1c0f1bf2dab29be3afdb655b0356d70f54583b2dd9016c8157c4beeaf18",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x1d3bf13f8f7A83390d03Db5E23A950778e1d1309",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 343,
+    "id": "0xb46ba44a9bf3478ccf08db666325b0072cdb171bbb069328556ab94309d9fcc3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 354,
+    "id": "0xbbb45b5d9c65480481343c18560385f4a920cdf9bdceb329f1b93b9c3fb161dd",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xe993486B257Cd1481aef74b3B909A2627Fc8d305",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 356,
+    "id": "0xbccfefe8e494783301527d05c0dd4ac8172c147d55f9a84a3b34c29e649c6971",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 358,
+    "id": "0xbd4b10d330ddeb5b28e6744a2d5442f6c81fd24b0f3f793343e1fe1c2c75bcbb",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 359,
+    "id": "0xbdf229904089f5ac69ef2e96e0e644fae4f7285d752d8e057adcab876793ea4d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 361,
+    "id": "0xbe699662daa37977a3af78c0dfec81c0c5cd1ee57e74315073a2c7be9a0b9fbe",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 362,
+    "id": "0xbe838f36ad5a605a0c17e47d42b0762f4f5efd3ab48dfdcbb5457074ce42568b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 363,
+    "id": "0xbe94fd92b20babf0d4491867bbac8455de6f6bf5eff9f8a40ba60069fa6b35f3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 364,
+    "id": "0xbed29c1726421ad65769bed41605fc4c7074c67e22d4313ea3957d0bf0581749",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 365,
+    "id": "0xbf97e85e507f6290f97469b9c7f1dd81029a176a5cce8d540406d38a122108ca",
+    "attester": "0xE4553b743E74dA3424Ac51f8C1E586fd43aE226F",
+    "rpgfRound": 4,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": ""
+  },
+  {
+    "Unnamed: 0": 371,
+    "id": "0xc296904a04e984c3b048fcd4887156e87d9a1dc54f07890564ccea65b396b9dc",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 372,
+    "id": "0xc332b1818433446f3fa68e292d6061e2aac93fcc6c633f2a28d271ba2564bdb2",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 379,
+    "id": "0xc5756f64c7741cc1b3177db5f4f2e641a12dd886b6e80d30656853f5658f0b39",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 380,
+    "id": "0xc5ee773ef33715a7999a4daf47f20f6fa7d43be59e9bc2a61a4c41a438fd81f6",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 384,
+    "id": "0xc6d1bf1daecae481edfad4a3f1c42df3920f6780f8587538efc5f27edf1f788d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 388,
+    "id": "0xc7cddd481ef7bc9115356cf60272b2b569e74b0ddb1d04ccde6562b13af66aa4",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 389,
+    "id": "0xcabba3eef3423394e8900d7747140318841237ed105e7e896c2b6b2aae6f4628",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x9D727911B54C455B0071A7B682FcF4Bc444B5596",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 390,
+    "id": "0xcbf891a1c52cc777b1fc49a4f8e61b9ffba729009d8d4eb0ac0ed866b2bcd555",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 391,
+    "id": "0xcc136e45214f5cb944bd90dfc569a56e00b9b906123fd7eae4fc3751e6af4593",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 395,
+    "id": "0xcda202602cffc77f1e4f9da21ba8c659454afd85ea7b0ce73e183ce87ebcbcc8",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x4Fd6B3204A6Ab48978018b25821682F090840333",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 396,
+    "id": "0xcdaf761a6de6f2e402fdbe72fd21155082477d33cee11cef20d1eec946236f33",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x53C61cfb8128ad59244E8c1D26109252ACe23d14",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 397,
+    "id": "0xcf13524cc562b6be7ad57a057d517bc7d4dfed8e630b18ba1e3ca7b939116320",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 398,
+    "id": "0xcf2dfcd6088a3594e37be29a51c8adc6db98032d28511b51998632fc005c8260",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 402,
+    "id": "0xd08fc8edd25b2e6936578f0874a2d36cc90646531f199e9e776dd4eb9c098afa",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 406,
+    "id": "0xd211bc3821cfd45cbd250f71218a4b028bf7983761b3e890b3e2bcd4896287a8",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 408,
+    "id": "0xd318ccb3325a2048e1a5f4f4ea6589e134f7db70556bddf9791d41cd4e6553ab",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 410,
+    "id": "0xd33ebc7dc5aa45d9f4c0f19e2ff26f2dc0d7c02b912caa4dd08a89e74611e5da",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 413,
+    "id": "0xd3cec1a47366cc6e07525e88d96e6020bad9fa60cdeeca0c68242dda5312c32a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xa142aB9eab9264807A41F0E5cbDab877D204E233",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 414,
+    "id": "0xd42d9aaa8de2f7d4520d85d8dac6471a7be93049ddbf98cb7cf8c9c9c952b481",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xf503017D7baF7FBC0fff7492b751025c6A78179b",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 419,
+    "id": "0xd747e08468a36072eb0394a3d633c2c29d1a2967c47cb57039503b93f292be40",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 423,
+    "id": "0xd98e35a35fd5a725400388cac1b84b47ec1ac2ff0bc53ad6b535d7215806c5fa",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xF90494E746Be5674F3121C62A588DAdd2b3D3d4E",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 424,
+    "id": "0xd98f5151c489e8f5a5c83f06d85547d8cb897b2e828f651623ad30198c83e032",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xE4239eb12C1C6e5a84727dB0A7B0507311eb5389",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 426,
+    "id": "0xd9c93067bb8654d059624d74dcd8936e0e4440f15fd4446639f83cc364f99705",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x7AE8b0D6353F0931EB9FaC0A3562fA9e4C6Ff933",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 427,
+    "id": "0xda02c00cfac93c3fff7bea01acd4ca0c457a92dd0417c216c5ed22b34f83db58",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xc5CD017ce8EFD2FefeDf114350657394531477AE",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 430,
+    "id": "0xdc18bc7c265bb8d673474e83351b18eb17f42ca315cef13d2b0bd3fe80e9f93d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x9F87C1aCaF3Afc6a5557c58284D9F8609470b571",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 431,
+    "id": "0xdc6ab704586dd752ac2ab194d2d19bb9c0ece8149d0425c1da186dcaaff58206",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 433,
+    "id": "0xdd194f764f314c13afbb6107bbc54a5dc82036a77c50f470f620db30458860bb",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x8f07bc36ff569312FDC41F3867D80bBd2FE94b76",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 434,
+    "id": "0xdd8491e3a9fcc22d989583f36ecd36bf22bb043f4ebe69ed5bad82d262f3030c",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 437,
+    "id": "0xde0ff6b0e15fe7b13f872b6e313e5fc90664474677ce0411e17b658b93da722b",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xDCF7bE2ff93E1a7671724598b1526F3A33B1eC25",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 438,
+    "id": "0xdf09780f327653d710c1a54a92de18394aab2be6709941b96d72795f7124bed3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 440,
+    "id": "0xe04988e4a8c7399a7b70661757f3f77c5e80c7834b32a4b3eab177f053b640b2",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 441,
+    "id": "0xe04bd414b41598070dae650a6947afb01557ccc89366d6cbaee55d996ef937a8",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 442,
+    "id": "0xe07e699c2880966453fd3a804d40be8b76c7173e768e992ffd29baaa5e16e842",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x61B647D3b5a04Eec7E78B1d9CFbF9deA593c7865",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 453,
+    "id": "0xe48056b5a1c8568a581858a1f47dd9ac945613e3b20468edd0036d3121468f30",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xF68D2BfCecd7895BBa05a7451Dd09A1749026454",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 454,
+    "id": "0xe4c057137ed9457bf575827fdca53edcb046f2cd02760b25f81cbe48bb5198fa",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 455,
+    "id": "0xe61941a52b1956d1f9fda025d01c4ecb4ac21617d36bb056eb1218b83eba54be",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0xf665F2eD351696817898fe0Ace20c5C1Bc3c5796",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 471,
+    "id": "0xe9d4e5a14ec840656d9def34075d9523d1536176d5f0a7d574f2e93bea641b66",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 472,
+    "id": "0xea3ca9c88a7ffd16f8c945ac0afe0ffe4a7e60e113bad04d5c5de97b655d169d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x512fce9B07Ce64590849115EE6B32fd40eC0f5F3",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 476,
+    "id": "0xedf86f3ae7e9cef7bf4f4296417071fbefa32be5554eb6f0fbf5ef7c5d5a54b3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 479,
+    "id": "0xeeaf8290c52375c55e2122e21404eaa19520e28925b6afcc0444e39fdde4713e",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 480,
+    "id": "0xef3b4bf9e8359e5e1958963a92bd9c8eb9d86e8262f3de0560def857e657a15c",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xbb105E3c6D6406A3F0aAB98cD8D0E3a127bD6436",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 481,
+    "id": "0xf01084d7da382501d5c908ee3ff0c2a840498a740880926b57b74c4001a03a12",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0xC728DEa8B2972E6e07493BE8DC2F0314F7dC3E98",
+    "referredMethod": "Project Selection"
+  },
+  {
+    "Unnamed: 0": 482,
+    "id": "0xf09fa2143e8606a116b0a4ebd65a46746302e71b342199d2ca09b54f9b01fb72",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 484,
+    "id": "0xf0bdc4197d45e7718574fa9c367681871a8345533e8b103161b93774c33fe690",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x00409fC839a2Ec2e6d12305423d37Cd011279C09",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 488,
+    "id": "0xf359c6133729780630561808896490a5f4373c122b42d63461ff3b8dfcef811c",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x585639fBf797c1258eBA8875c080Eb63C833d252",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 489,
+    "id": "0xf3b00a08881039b15a45614bf444b68bdbe3fcc60c6a33fed4c68cf2bba8e0e4",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Token House"
+  },
+  {
+    "Unnamed: 0": 491,
+    "id": "0xf427a10b36e334ef344c9037eb5c008a9583ceee11c3d2c0123895359448b0ee",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 496,
+    "id": "0xf63df843ff3e5b416107fd44d966c66e7028fb5a18613407521358e61aa07d1d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Foundation Choice"
+  },
+  {
+    "Unnamed: 0": 498,
+    "id": "0xf78f9467f2aeffa03bd95e7b601fbda8e8e9c41d2320a3ee6e422b8d4ec6c302",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 499,
+    "id": "0xf82649b2ac5daa8f9ced4d602e4aa6c9fc957f6ac73f54628f8d888858b6bfe3",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 505,
+    "id": "0xfa19ee388613f2be4cbf74a795b5df664a66603ea5fff4e64fb8456a7e030d24",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 506,
+    "id": "0xfad0ba1e8c507e7d45d878ca03ae002e28fd967430208a8bfaac8292c241017a",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x1F5D295778796a8b9f29600A585Ab73D452AcB1c",
+    "referredMethod": "Badgeholder Choice"
+  },
+  {
+    "Unnamed: 0": 508,
+    "id": "0xfbf30c2e9e8586e63a9946e72f34b6fc870c9e03102552607f7fc9b0ed4a264f",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 3,
+    "referredBy": "0x0000000000000000000000000000000000000000",
+    "referredMethod": "Past Badgeholder"
+  },
+  {
+    "Unnamed: 0": 510,
+    "id": "0xfccee0eac92ccf0ebf05c879eee0fbbc087814b9425131dd3a6c1c58c10aef4d",
+    "attester": "0x621477dBA416E12df7FF0d48E14c4D20DC85D7D9",
+    "rpgfRound": 2,
+    "referredBy": "0x34aA3F359A9D614239015126635CE7732c18fDF3",
+    "referredMethod": "Badgeholder Choice"
+  }
+]
