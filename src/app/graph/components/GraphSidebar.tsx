@@ -16,7 +16,12 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
   setSelectedConnectionsCheckBox,
 }) => {
   const nodeOptions = ["Citizens"];
-  const connectionOptions = ["TECHolder", "RegenScore", "TrustedSeed"];
+  const connectionOptions = [
+    "TECHolder",
+    "RegenScore",
+    "TrustedSeed",
+    "FarcasterConnection",
+  ];
 
   return (
     <aside className="p-4 flex-shrink-0">
