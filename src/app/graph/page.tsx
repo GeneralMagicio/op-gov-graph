@@ -17,6 +17,12 @@ import d3 from "d3";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
 
+interface Link {
+  source: string;
+  target: string;
+  type: string;
+}
+
 interface IProject472 {
   attester?: string;
   category?: string;
@@ -53,11 +59,6 @@ interface Node extends ICitizen {
   type?: string;
 }
 
-interface Link {
-  source: string;
-  target: string;
-}
-
 interface TECHolder {
   id: string;
   balance: string;
@@ -84,14 +85,24 @@ interface TrustedSeed {
   type?: string;
 }
 
-const NODE_R = 15;
+interface FarcasterConnection {
+  source: string;
+  target: string;
+}
+
+const NODE_R = 10;
 
 const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
     "citizens",
   ]);
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
-    useState<string[]>(["TECHolder", "RegenScore", "TrustedSeed"]); // Default selected
+    useState<string[]>([
+      "TECHolder",
+      "RegenScore",
+      "TrustedSeed",
+      "FarcasterConnection",
+    ]);
 
   const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
@@ -124,20 +135,18 @@ const GraphPage = () => {
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const label = node.name || node.id;
-      const fontSize = 8 / globalScale; // Adjust the font size based on the scale
+      const fontSize = 8 / globalScale;
       ctx.font = `${fontSize}px Sans-Serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // Draw the node
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, NODE_R, 0, 2 * Math.PI, false);
       ctx.fill();
 
-      // Draw the label only if the node type is not "citizens"
       if (node.type !== "citizens") {
-        ctx.fillStyle = "black"; // Label color
-        ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize); // Draw text below the node
+        ctx.fillStyle = "black";
+        ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize);
       } else {
         let label = "";
         if (node.ens) {
@@ -165,11 +174,13 @@ const GraphPage = () => {
     const filteredLinks = graphData.links.filter(
       (link) =>
         (selectedConnectionsCheckBox.includes("TECHolder") &&
-          (link.target === "TECHolder" || link.source === "TECHolder")) ||
+          link.type === "TECHolder") ||
         (selectedConnectionsCheckBox.includes("RegenScore") &&
-          (link.target === "RegenScore" || link.source === "RegenScore")) ||
+          link.type === "RegenScore") ||
         (selectedConnectionsCheckBox.includes("TrustedSeed") &&
-          (link.target === "TrustedSeed" || link.source === "TrustedSeed"))
+          link.type === "TrustedSeed") ||
+        (selectedConnectionsCheckBox.includes("FarcasterConnection") &&
+          link.type === "FarcasterConnection")
     );
 
     return { nodes: filteredNodes, links: filteredLinks };
@@ -185,10 +196,15 @@ const GraphPage = () => {
       const regenScores = (await regenScoresResponse.json()) as RegenScore[];
       const trustedSeedResponse = await fetch("/data/TrustedSeed.json");
       const trustedSeeds = (await trustedSeedResponse.json()) as TrustedSeed[];
+      const farcasterConnectionsResponse = await fetch(
+        "/data/CitizensFarcasterConnections.json"
+      );
+      const farcasterConnections =
+        (await farcasterConnectionsResponse.json()) as FarcasterConnection[];
 
       const citizenNodes: ICitizen[] = citizens.map((citizen) => ({
         ...citizen,
-        type: "citizens", // Use lowercase to match your selectedNodesCheckBox
+        type: "citizens",
       }));
 
       const TecHolderNode: Node = {
@@ -232,21 +248,34 @@ const GraphPage = () => {
           links.push({
             source: citizen.id,
             target: TecHolderNode.id,
+            type: "TECHolder",
           });
         }
         if (matchingRegenScore) {
           links.push({
             source: citizen.id,
             target: RegenScoreNode.id,
+            type: "RegenScore",
           });
         }
         if (matchingTrustedSeed) {
           links.push({
             source: citizen.id,
             target: TrustedSeedNode.id,
+            type: "TrustedSeed",
           });
         }
       });
+
+      // Add FarcasterConnection links
+      farcasterConnections.forEach((connection) => {
+        links.push({
+          source: connection.source,
+          target: connection.target,
+          type: "FarcasterConnection",
+        });
+      });
+
       setGraphData({ nodes, links });
     };
 
@@ -270,11 +299,9 @@ const GraphPage = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Header */}
       <GraphHeader />
 
       <div className="flex">
-        {/* Sidebar */}
         <GraphSidebar
           selectedNodesCheckBox={selectedNodesCheckBox}
           setSelectedNodesCheckBox={setSelectedNodesCheckBox}
@@ -282,7 +309,6 @@ const GraphPage = () => {
           setSelectedConnectionsCheckBox={setSelectedConnectionsCheckBox}
         />
 
-        {/* Graph */}
         <main className="max-w-fit flex-grow overflow-hidden flex justify-center items-center">
           {typeof window !== "undefined" && (
             <ForceGraph2D
@@ -298,10 +324,10 @@ const GraphPage = () => {
                 if (node.type === "citizens") {
                   return node.ens ?? node.id;
                 }
-                return node.name ?? node.id; // Fallback to node.id if name is undefined
+                return node.name ?? node.id;
               }}
               autoPauseRedraw={false}
-              linkWidth={1}
+              linkWidth={0.5}
               linkDirectionalParticles={4}
               linkDirectionalParticleWidth={(link) =>
                 highlightLinks.has(link) ? 4 : 0
@@ -325,6 +351,22 @@ const GraphPage = () => {
                 } else {
                   return "#3388ff";
                 }
+              }}
+              linkColor={(link) => {
+                if (link.type === "FarcasterConnection") {
+                  return "purple";
+                }
+                if (link.type === "TECHolder") {
+                  return "blue";
+                }
+                if (link.type === "RegenScore") {
+                  return "green";
+                }
+                if (link.type === "TrustedSeed") {
+                  return "red";
+                }
+
+                return "#999"; // Default color for other link types
               }}
               onEngineStop={() => {
                 fgRef.current?.zoomToFit();
