@@ -164,6 +164,34 @@ const GraphPage = () => {
     return { nodes: filteredNodes, links: filteredLinks };
   }, [graphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
+  const processedGraphData = useMemo(() => {
+    const gData: GraphDataWithNeighbors = { ...filteredGraphData };
+
+    // cross-link node objects
+    gData.links.forEach((link) => {
+      const a = gData.nodes.find(
+        (n) => n.id === link.source
+      ) as NodeWithNeighbors;
+      const b = gData.nodes.find(
+        (n) => n.id === link.target
+      ) as NodeWithNeighbors;
+
+      if (a && b) {
+        !a.neighbors && (a.neighbors = []);
+        !b.neighbors && (b.neighbors = []);
+        a.neighbors.push(b);
+        b.neighbors.push(a);
+
+        !a.links && (a.links = []);
+        !b.links && (b.links = []);
+        a.links.push(link);
+        b.links.push(link);
+      }
+    });
+
+    return gData;
+  }, [graphData]);
+
   useEffect(() => {
     setTimeout(() => {
       fgRef.current?.zoomToFit(500, 250);
@@ -200,7 +228,7 @@ const GraphPage = () => {
                   | undefined
                 >
               }
-              graphData={filteredGraphData}
+              graphData={processedGraphData}
               nodeRelSize={NODE_R}
               nodeLabel={(node) => {
                 if (node.type === "citizens") {
