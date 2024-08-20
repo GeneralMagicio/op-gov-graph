@@ -90,6 +90,15 @@ interface FarcasterConnection {
   target: string;
 }
 
+interface NodeWithNeighbors extends Node {
+  neighbors?: Node[];
+  links?: Link[];
+}
+
+interface GraphDataWithNeighbors extends GraphData {
+  nodes: NodeWithNeighbors[];
+}
+
 const NODE_R = 10;
 
 const GraphPage = () => {
@@ -121,15 +130,60 @@ const GraphPage = () => {
     setHighlightLinks(new Set(highlightLinks));
   };
 
-  const handleNodeHover = (node: Node | null) => {
+  const handleLinkHover = (link: Link | null) => {
+    highlightNodes.clear();
+    highlightLinks.clear();
+
+    if (link) {
+      highlightLinks.add(link);
+      const sourceNode =
+        typeof link.source === "object"
+          ? link.source
+          : graphData.nodes.find((n) => n.id === link.source);
+      const targetNode =
+        typeof link.target === "object"
+          ? link.target
+          : graphData.nodes.find((n) => n.id === link.target);
+
+      if (sourceNode && targetNode) {
+        highlightNodes.add(sourceNode);
+        highlightNodes.add(targetNode);
+      }
+    }
+
+    updateHighlight();
+  };
+
+  const handleNodeHover = (node: NodeWithNeighbors | null) => {
     highlightNodes.clear();
     highlightLinks.clear();
     if (node) {
       highlightNodes.add(node);
+      node.links?.forEach((link) => {
+        highlightLinks.add(link);
+        const targetNode =
+          typeof link.target === "object"
+            ? link.target
+            : graphData.nodes.find((n) => n.id === link.target);
+        const sourceNode =
+          typeof link.source === "object"
+            ? link.source
+            : graphData.nodes.find((n) => n.id === link.source);
+        if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
+        if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
+      });
     }
 
     setHoverNode(node);
     updateHighlight();
+  };
+
+  const getNodeColor = (node: Node) => {
+    if (node.type === "citizens") return "#a4b2e1";
+    if (node.id === "TECHolder") return "blue";
+    if (node.id === "RegenScore") return "green";
+    if (node.id === "TrustedSeed") return "red";
+    return "#3388ff";
   };
 
   const paintNode = useCallback(
@@ -140,30 +194,62 @@ const GraphPage = () => {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
+      const isHighlighted = node === hoverNode || highlightNodes.has(node);
+
+      ctx.globalAlpha = isHighlighted ? 1 : 0.3; // Reduce opacity for non-highlighted nodes
+
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, NODE_R, 0, 2 * Math.PI, false);
+      ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
       ctx.fill();
 
-      if (node.type !== "citizens") {
-        ctx.fillStyle = "black";
-        ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize);
+      ctx.fillStyle = isHighlighted ? "red" : "black";
+      const labelY = (node.y || 0) + NODE_R + fontSize;
+
+      if (node.type === "citizens") {
+        let label =
+          node.ens ||
+          (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
+        ctx.fillText(label, node.x || 0, labelY);
       } else {
-        let label = "";
-        if (node.ens) {
-          label = node.ens;
-        } else if (node.id) {
-          const address = node.id;
-          label = `${address.slice(0, 4)}...${address.slice(-4)}`;
-        }
-        ctx.fillStyle = "black"; // Label color
-        ctx.fillText(label, node.x || 0, (node.y || 0) + NODE_R + fontSize); // Draw text below the node
+        ctx.fillText(label, node.x || 0, labelY);
       }
+
+      ctx.globalAlpha = 1; // Reset global alpha
     },
-    []
+    [hoverNode, highlightNodes]
   );
 
+  const processedGraphData = useMemo(() => {
+    const gData: GraphDataWithNeighbors = { ...graphData };
+
+    // cross-link node objects
+    gData.links.forEach((link) => {
+      const a = gData.nodes.find(
+        (n) => n.id === link.source
+      ) as NodeWithNeighbors;
+      const b = gData.nodes.find(
+        (n) => n.id === link.target
+      ) as NodeWithNeighbors;
+
+      if (a && b) {
+        !a.neighbors && (a.neighbors = []);
+        !b.neighbors && (b.neighbors = []);
+        a.neighbors.push(b);
+        b.neighbors.push(a);
+
+        !a.links && (a.links = []);
+        !b.links && (b.links = []);
+        a.links.push(link);
+        b.links.push(link);
+      }
+    });
+
+    return gData;
+  }, [graphData]);
+
   const filteredGraphData = useMemo(() => {
-    const filteredNodes = graphData.nodes.filter(
+    const filteredNodes = processedGraphData.nodes.filter(
       (node) =>
         selectedNodesCheckBox.includes(node.type || "") ||
         node.type === "TECHolder" ||
@@ -171,7 +257,7 @@ const GraphPage = () => {
         node.type === "TrustedSeed"
     );
 
-    const filteredLinks = graphData.links.filter(
+    const filteredLinks = processedGraphData.links.filter(
       (link) =>
         (selectedConnectionsCheckBox.includes("TECHolder") &&
           link.type === "TECHolder") ||
@@ -184,7 +270,7 @@ const GraphPage = () => {
     );
 
     return { nodes: filteredNodes, links: filteredLinks };
-  }, [graphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
+  }, [processedGraphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -327,15 +413,16 @@ const GraphPage = () => {
                 return node.name ?? node.id;
               }}
               autoPauseRedraw={false}
-              linkWidth={0.5}
               linkDirectionalParticles={4}
               linkDirectionalParticleWidth={(link) =>
                 highlightLinks.has(link) ? 4 : 0
               }
               nodeCanvasObjectMode={() => "before"}
-              nodeCanvasObject={paintNode as any}
-              onNodeHover={handleNodeHover as any}
+              nodeCanvasObject={paintNode}
+              onNodeHover={handleNodeHover}
+              linkWidth={(link) => (highlightLinks.has(link) ? 2 : 0.5)}
               backgroundColor="white"
+              onLinkHover={handleLinkHover as any}
               nodeColor={(node) => {
                 if (node.type === "citizens") {
                   return "#a4b2e1";
@@ -353,20 +440,13 @@ const GraphPage = () => {
                 }
               }}
               linkColor={(link) => {
-                if (link.type === "FarcasterConnection") {
-                  return "purple";
-                }
-                if (link.type === "TECHolder") {
-                  return "blue";
-                }
-                if (link.type === "RegenScore") {
-                  return "green";
-                }
-                if (link.type === "TrustedSeed") {
-                  return "red";
-                }
-
-                return "#999"; // Default color for other link types
+                if (highlightLinks.has(link)) return "#32CD32";
+                if (link.type === "FarcasterConnection")
+                  return "rgba(128, 0, 128, 0.2)"; // purple with 0.2 opacity
+                if (link.type === "TECHolder") return "rgba(0, 0, 255, 0.2)"; // blue with 0.2 opacity
+                if (link.type === "RegenScore") return "rgba(0, 128, 0, 0.2)"; // green with 0.2 opacity
+                if (link.type === "TrustedSeed") return "rgba(255, 0, 0, 0.2)"; // red with 0.2 opacity
+                return "rgba(153, 153, 153, 0.2)"; // #999 with 0.2 opacity
               }}
               onEngineStop={() => {
                 fgRef.current?.zoomToFit();
