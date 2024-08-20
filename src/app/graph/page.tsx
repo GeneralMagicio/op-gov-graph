@@ -140,34 +140,6 @@ const GraphPage = () => {
     [hoverNode, highlightNodes]
   );
 
-  const processedGraphData = useMemo(() => {
-    const gData: GraphDataWithNeighbors = { ...graphData };
-
-    // cross-link node objects
-    gData.links.forEach((link) => {
-      const a = gData.nodes.find(
-        (n) => n.id === link.source
-      ) as NodeWithNeighbors;
-      const b = gData.nodes.find(
-        (n) => n.id === link.target
-      ) as NodeWithNeighbors;
-
-      if (a && b) {
-        !a.neighbors && (a.neighbors = []);
-        !b.neighbors && (b.neighbors = []);
-        a.neighbors.push(b);
-        b.neighbors.push(a);
-
-        !a.links && (a.links = []);
-        !b.links && (b.links = []);
-        a.links.push(link);
-        b.links.push(link);
-      }
-    });
-
-    return gData;
-  }, [graphData]);
-
   const filteredGraphData = useMemo(() => {
     const filteredNodes = graphData.nodes.filter(
       (node) =>
