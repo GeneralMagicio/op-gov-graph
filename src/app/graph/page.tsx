@@ -16,88 +16,18 @@ import ForceGraph2D, {
 import d3 from "d3";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
-
-interface Link {
-  source: string;
-  target: string;
-  type: string;
-}
-
-interface IProject472 {
-  attester?: string;
-  category?: string;
-  farcasterID?: number;
-  id: string;
-  metadataType?: number;
-  metadataUrl?: string;
-  name?: string;
-  parentProjectRefUID?: string;
-  projectRefUID?: string;
-  x?: number;
-  y?: number;
-  type?: string;
-}
-
-interface ICitizen {
-  id: string;
-  ens?: string;
-  x?: number;
-  y?: number;
-  type?: string;
-}
-
-interface GraphData {
-  nodes: Node[];
-  links: Link[];
-}
-
-interface Node extends ICitizen {
-  id: string;
-  name?: string;
-  x?: number;
-  y?: number;
-  type?: string;
-}
-
-interface TECHolder {
-  id: string;
-  balance: string;
-  pendingBalanceUpdate: string;
-  x?: number;
-  y?: number;
-  type?: string;
-}
-
-interface RegenScore {
-  id: string;
-  score: number;
-  address: string;
-  meta: string;
-  x?: number;
-  y?: number;
-  type?: string;
-}
-
-interface TrustedSeed {
-  id: string;
-  x?: number;
-  y?: number;
-  type?: string;
-}
-
-interface FarcasterConnection {
-  source: string;
-  target: string;
-}
-
-interface NodeWithNeighbors extends Node {
-  neighbors?: Node[];
-  links?: Link[];
-}
-
-interface GraphDataWithNeighbors extends GraphData {
-  nodes: NodeWithNeighbors[];
-}
+import {
+  NodeWithNeighbors,
+  GraphDataWithNeighbors,
+  ICitizen,
+  Link,
+  TECHolder,
+  RegenScore,
+  TrustedSeed,
+  FarcasterConnection,
+  Node,
+  GraphData,
+} from "./types";
 
 const NODE_R = 10;
 
