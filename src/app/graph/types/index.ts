@@ -16,6 +16,7 @@ export interface ICitizen {
 
 export interface Node extends ICitizen {
   id: string;
+  degree?: number;
   name?: string;
   x?: number;
   y?: number;
