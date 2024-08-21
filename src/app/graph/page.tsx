@@ -167,6 +167,21 @@ const GraphPage = () => {
   const processedGraphData = useMemo(() => {
     const gData: GraphDataWithNeighbors = { ...filteredGraphData };
 
+    // Calculate the degree of each node (number of connections)
+    const nodeDegreeMap = new Map();
+    gData.nodes.forEach((node) => {
+      nodeDegreeMap.set(node.id, 0);
+    });
+
+    gData.links.forEach((link) => {
+      nodeDegreeMap.set(link.source, (nodeDegreeMap.get(link.source) || 0) + 1);
+      nodeDegreeMap.set(link.target, (nodeDegreeMap.get(link.target) || 0) + 1);
+    });
+
+    gData.nodes.forEach((node) => {
+      node.degree = nodeDegreeMap.get(node.id) || 0;
+    });
+
     // cross-link node objects
     gData.links.forEach((link) => {
       const a = gData.nodes.find(
@@ -194,15 +209,41 @@ const GraphPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      fgRef.current?.zoomToFit(500, 250);
-      fgRef.current?.d3Force("link")?.distance(500);
+      // fgRef.current?.zoomToFit(500, 250);
+      fgRef.current?.zoom(0.5, 500);
+
+      // Dynamic force based on node degree
+      fgRef.current?.d3Force("charge")?.strength((node: any) => {
+        if (node.degree === 0) {
+          return -500;
+        }
+        return -60 - node.degree * 40;
+      });
+
+      fgRef.current?.d3Force("link")?.distance((link: any) => {
+        const sourceDegree = link.source.degree || 0;
+        const targetDegree = link.target.degree || 0;
+        const baseDistance = 100;
+
+        if (sourceDegree === 0 || targetDegree === 0) {
+          return baseDistance * 0.3; // Bring nodes connected to no-degree nodes even closer
+        }
+
+        return baseDistance - Math.min(sourceDegree, targetDegree) * 10;
+      });
+
+      // Apply a radial force to nodes without connections to pull them even closer to the center
+      fgRef.current?.d3Force("center", d3.forceCenter());
       fgRef.current?.d3Force(
-        "charge",
-        d3.forceManyBody().strength(-200) // Add this line to increase repulsion
+        "radial",
+        d3.forceRadial(50, 0, 0).strength((node: any) => {
+          return node.degree === 0 ? 1.2 : 0.05; // Stronger pull for unconnected nodes
+        })
       );
+
       fgRef.current?.d3Force(
         "collision",
-        d3.forceCollide().radius(NODE_R * 1.5) // Increase this value to space nodes apart more
+        d3.forceCollide().radius(NODE_R * 1.5)
       );
     }, 100);
   }, [fgRef, filteredGraphData, selectedConnectionsCheckBox]);
@@ -271,9 +312,6 @@ const GraphPage = () => {
                 if (link.type === "RegenScore") return "rgba(0, 128, 0, 0.2)"; // green with 0.2 opacity
                 if (link.type === "TrustedSeed") return "rgba(255, 0, 0, 0.2)"; // red with 0.2 opacity
                 return "rgba(153, 153, 153, 0.2)"; // #999 with 0.2 opacity
-              }}
-              onEngineStop={() => {
-                fgRef.current?.zoomToFit();
               }}
             />
           )}
