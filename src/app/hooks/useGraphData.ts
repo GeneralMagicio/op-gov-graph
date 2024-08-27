@@ -8,6 +8,8 @@ import {
   Link,
   Node,
   GraphData,
+  BadgeHolder,
+  NodeLinkType,
 } from "../graph/types";
 
 const DATA_URLS = {
@@ -16,6 +18,7 @@ const DATA_URLS = {
   regenScores: "/data/RegenScore.json",
   trustedSeed: "/data/TrustedSeed.json",
   farcasterConnections: "/data/CitizensFarcasterConnections.json",
+  badgeHolders: "/data/BadgeHolders.json",
 };
 
 const fetchData = async <T>(url: string): Promise<T> => {
@@ -25,7 +28,11 @@ const fetchData = async <T>(url: string): Promise<T> => {
 
 const createNode = (id: string, type: string): Node => ({ id, type });
 
-const createLink = (source: string, target: string, type: string): Link => ({
+const createLink = (
+  source: string,
+  target: string,
+  type: NodeLinkType
+): Link => ({
   source,
   target,
   type,
@@ -34,12 +41,43 @@ const createLink = (source: string, target: string, type: string): Link => ({
 const processCitizens = (citizens: ICitizen[]): Node[] =>
   citizens.map((citizen) => ({ ...citizen, type: "citizens" }));
 
+const processBadgeHolders = (
+  badgeHolders: BadgeHolder[],
+  citizens: ICitizen[]
+): Link[] => {
+  const links: Link[] = [];
+  const citizenIds = new Set(
+    citizens.map((citizen) => citizen.id.toLowerCase())
+  );
+
+  badgeHolders.forEach((badgeHolder) => {
+    const referredBy = badgeHolder.referredBy.toLowerCase();
+    const recipient = badgeHolder.recipient.toLowerCase();
+
+    if (
+      referredBy !== "0x0000000000000000000000000000000000000000" &&
+      citizenIds.has(referredBy) &&
+      citizenIds.has(recipient)
+    ) {
+      links.push(
+        createLink(
+          badgeHolder.referredBy,
+          badgeHolder.recipient,
+          NodeLinkType.BadgeHolderReferral
+        )
+      );
+    }
+  });
+  return links;
+};
+
 const processConnections = (
   citizens: ICitizen[],
   tecHolders: TECHolder[],
   regenScores: RegenScore[],
   trustedSeeds: TrustedSeed[],
-  farcasterConnections: FarcasterConnection[]
+  farcasterConnections: FarcasterConnection[],
+  badgeHolders: BadgeHolder[]
 ): Link[] => {
   const links: Link[] = [];
   const specialNodes = {
@@ -53,23 +91,35 @@ const processConnections = (
     const lowerCaseId = id.toLowerCase();
 
     if (tecHolders.some((holder) => holder.id.toLowerCase() === lowerCaseId)) {
-      links.push(createLink(id, specialNodes.TECHolder.id, "TECHolder"));
+      links.push(
+        createLink(id, specialNodes.TECHolder.id, NodeLinkType.TECHolder)
+      );
     }
     if (
       regenScores.some((score) => score.address.toLowerCase() === lowerCaseId)
     ) {
-      links.push(createLink(id, specialNodes.RegenScore.id, "RegenScore"));
+      links.push(
+        createLink(id, specialNodes.RegenScore.id, NodeLinkType.RegenScore)
+      );
     }
     if (trustedSeeds.some((seed) => seed.id.toLowerCase() === lowerCaseId)) {
-      links.push(createLink(id, specialNodes.TrustedSeed.id, "TrustedSeed"));
+      links.push(
+        createLink(id, specialNodes.TrustedSeed.id, NodeLinkType.TrustedSeed)
+      );
     }
   });
 
   farcasterConnections.forEach((connection) => {
     links.push(
-      createLink(connection.source, connection.target, "FarcasterConnection")
+      createLink(
+        connection.source,
+        connection.target,
+        NodeLinkType.FarcasterConnection
+      )
     );
   });
+
+  links.push(...processBadgeHolders(badgeHolders, citizens));
 
   return links;
 };
@@ -90,12 +140,14 @@ export const useGraphData = (
       regenScores,
       trustedSeeds,
       farcasterConnections,
+      badgeHolders,
     ] = await Promise.all([
       fetchData<ICitizen[]>(DATA_URLS.citizens),
       fetchData<TECHolder[]>(DATA_URLS.tecHolders),
       fetchData<RegenScore[]>(DATA_URLS.regenScores),
       fetchData<TrustedSeed[]>(DATA_URLS.trustedSeed),
       fetchData<FarcasterConnection[]>(DATA_URLS.farcasterConnections),
+      fetchData<BadgeHolder[]>(DATA_URLS.badgeHolders),
     ]);
 
     return {
@@ -104,6 +156,7 @@ export const useGraphData = (
       regenScores,
       trustedSeeds,
       farcasterConnections,
+      badgeHolders,
     };
   }, []);
 
@@ -115,6 +168,7 @@ export const useGraphData = (
         regenScores,
         trustedSeeds,
         farcasterConnections,
+        badgeHolders,
       } = data;
       const nodes: Node[] = [
         ...processCitizens(citizens),
@@ -127,7 +181,8 @@ export const useGraphData = (
         tecHolders,
         regenScores,
         trustedSeeds,
-        farcasterConnections
+        farcasterConnections,
+        badgeHolders
       );
       return { nodes, links };
     },
@@ -138,13 +193,13 @@ export const useGraphData = (
     fetchAllData()
       .then(processData)
       .then((data) => {
-        setGraphData(data); // Set all data without filtering
+        setGraphData(data); //Set all data without filtering
       });
   }, [
     fetchAllData,
     processData,
     selectedConnectionsCheckBox,
-    selectedConnectionsCheckBox,
+    selectedNodesCheckBox,
   ]);
 
   return graphData;
