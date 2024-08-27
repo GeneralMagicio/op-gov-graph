@@ -1,9 +1,17 @@
 // types.ts
 
+export enum NodeLinkType {
+  TECHolder = "TECHolder",
+  RegenScore = "RegenScore",
+  TrustedSeed = "TrustedSeed",
+  FarcasterConnection = "FarcasterConnection",
+  BadgeHolderReferral = "BadgeHolderReferral",
+}
+
 export interface Link {
   source: string;
   target: string;
-  type: string;
+  type: NodeLinkType;
 }
 
 export interface ICitizen {
@@ -66,4 +74,13 @@ export interface TrustedSeed {
 export interface FarcasterConnection {
   source: string;
   target: string;
+}
+
+export interface BadgeHolder {
+  id: string;
+  attester: string;
+  recipient: string;
+  rpgfRound: string;
+  referredBy: string;
+  referredMethod: string;
 }
