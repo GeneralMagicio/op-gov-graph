@@ -21,6 +21,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
     "RegenScore",
     "TrustedSeed",
     "FarcasterConnection",
+    "BadgeHolderReferral",
   ];
 
   return (
