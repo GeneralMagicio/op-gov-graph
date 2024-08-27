@@ -107,6 +107,24 @@ const GraphPage = () => {
     return "#3388ff";
   };
 
+  const getLinkColor = useCallback((link: Link, highlighted: boolean) => {
+    const opacity = highlighted ? 1 : 0.2;
+    switch (link.type) {
+      case "FarcasterConnection":
+        return `rgba(128, 0, 128, ${opacity})`; // purple
+      case "TECHolder":
+        return `rgba(0, 0, 255, ${opacity})`; // blue
+      case "RegenScore":
+        return `rgba(0, 128, 0, ${opacity})`; // green
+      case "TrustedSeed":
+        return `rgba(255, 0, 0, ${opacity})`; // red
+      case "BadgeHolderReferral":
+        return `rgba(255, 165, 0, ${opacity})`; // orange
+      default:
+        return `rgba(153, 153, 153, ${opacity})`; // #999
+    }
+  }, []);
+
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const label = node.name || node.id;
@@ -307,17 +325,7 @@ const GraphPage = () => {
                   return "#3388ff";
                 }
               }}
-              linkColor={(link) => {
-                if (highlightLinks.has(link)) return "#32CD32";
-                if (link.type === "FarcasterConnection")
-                  return "rgba(128, 0, 128, 0.2)"; // purple with 0.2 opacity
-                if (link.type === "TECHolder") return "rgba(0, 0, 255, 0.2)"; // blue with 0.2 opacity
-                if (link.type === "RegenScore") return "rgba(0, 128, 0, 0.2)"; // green with 0.2 opacity
-                if (link.type === "TrustedSeed") return "rgba(255, 0, 0, 0.2)"; // red with 0.2 opacity
-                if (link.type === "BadgeHolderReferral")
-                  return "rgba(255, 165, 0, 0.2)"; // orange with 0.2 opacity
-                return "rgba(153, 153, 153, 0.2)"; // #999 with 0.2 opacity
-              }}
+              linkColor={(link) => getLinkColor(link, highlightLinks.has(link))}
             />
           )}
         </main>
