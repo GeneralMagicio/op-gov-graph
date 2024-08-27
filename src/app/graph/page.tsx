@@ -31,6 +31,7 @@ const GraphPage = () => {
       "RegenScore",
       "TrustedSeed",
       "FarcasterConnection",
+      "BadgeHolderReferral",
     ]);
 
   const graphData = useGraphData(
@@ -158,7 +159,9 @@ const GraphPage = () => {
         (selectedConnectionsCheckBox.includes("TrustedSeed") &&
           link.type === "TrustedSeed") ||
         (selectedConnectionsCheckBox.includes("FarcasterConnection") &&
-          link.type === "FarcasterConnection")
+          link.type === "FarcasterConnection") ||
+        (selectedConnectionsCheckBox.includes("BadgeHolderReferral") &&
+          link.type === "BadgeHolderReferral")
     );
 
     return { nodes: filteredNodes, links: filteredLinks };
@@ -311,6 +314,8 @@ const GraphPage = () => {
                 if (link.type === "TECHolder") return "rgba(0, 0, 255, 0.2)"; // blue with 0.2 opacity
                 if (link.type === "RegenScore") return "rgba(0, 128, 0, 0.2)"; // green with 0.2 opacity
                 if (link.type === "TrustedSeed") return "rgba(255, 0, 0, 0.2)"; // red with 0.2 opacity
+                if (link.type === "BadgeHolderReferral")
+                  return "rgba(255, 165, 0, 0.2)"; // orange with 0.2 opacity
                 return "rgba(153, 153, 153, 0.2)"; // #999 with 0.2 opacity
               }}
             />
