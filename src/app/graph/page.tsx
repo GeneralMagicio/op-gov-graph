@@ -32,6 +32,7 @@ const GraphPage = () => {
       "TrustedSeed",
       "FarcasterConnection",
       "BadgeHolderReferral",
+      "RegenPOAP",
     ]);
 
   const graphData = useGraphData(
@@ -104,6 +105,7 @@ const GraphPage = () => {
     if (node.id === "TECHolder") return "blue";
     if (node.id === "RegenScore") return "green";
     if (node.id === "TrustedSeed") return "red";
+    if (node.id === "RegenPOAP") return "indigo";
     return "#3388ff";
   };
 
@@ -120,6 +122,8 @@ const GraphPage = () => {
         return `rgba(255, 0, 0, ${opacity})`; // red
       case "BadgeHolderReferral":
         return `rgba(255, 165, 0, ${opacity})`; // orange
+      case "RegenPOAP":
+        return `rgba(75, 0, 130, ${opacity})`; // indigo
       default:
         return `rgba(153, 153, 153, ${opacity})`; // #999
     }
@@ -165,7 +169,8 @@ const GraphPage = () => {
         selectedNodesCheckBox.includes(node.type || "") ||
         node.type === "TECHolder" ||
         node.type === "RegenScore" ||
-        node.type === "TrustedSeed"
+        node.type === "TrustedSeed" ||
+        node.type === "RegenPOAP"
     );
 
     const filteredLinks = graphData.links.filter(
@@ -179,7 +184,9 @@ const GraphPage = () => {
         (selectedConnectionsCheckBox.includes("FarcasterConnection") &&
           link.type === "FarcasterConnection") ||
         (selectedConnectionsCheckBox.includes("BadgeHolderReferral") &&
-          link.type === "BadgeHolderReferral")
+          link.type === "BadgeHolderReferral") ||
+        (selectedConnectionsCheckBox.includes("RegenPOAP") &&
+          link.type === "RegenPOAP")
     );
 
     return { nodes: filteredNodes, links: filteredLinks };
@@ -321,6 +328,9 @@ const GraphPage = () => {
                 }
                 if (node.id === "TrustedSeed") {
                   return "red";
+                }
+                if (node.id === "RegenPOAP") {
+                  return "indigo";
                 } else {
                   return "#3388ff";
                 }
