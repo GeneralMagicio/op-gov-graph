@@ -22,6 +22,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
     { name: "TrustedSeed", color: "red" },
     { name: "FarcasterConnection", color: "purple" },
     { name: "BadgeHolderReferral", color: "orange" },
+    { name: "RegenPOAP", color: "indigo" },
   ];
 
   return (
