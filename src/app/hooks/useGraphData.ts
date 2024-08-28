@@ -10,6 +10,7 @@ import {
   GraphData,
   BadgeHolder,
   NodeLinkType,
+  RegenPOAPHolder,
 } from "../graph/types";
 
 const DATA_URLS = {
@@ -19,6 +20,7 @@ const DATA_URLS = {
   trustedSeed: "/data/TrustedSeed.json",
   farcasterConnections: "/data/CitizensFarcasterConnections.json",
   badgeHolders: "/data/BadgeHolders.json",
+  regenPOAP: "/data/RegenPOAP.json",
 };
 
 const fetchData = async <T>(url: string): Promise<T> => {
@@ -77,13 +79,15 @@ const processConnections = (
   regenScores: RegenScore[],
   trustedSeeds: TrustedSeed[],
   farcasterConnections: FarcasterConnection[],
-  badgeHolders: BadgeHolder[]
+  badgeHolders: BadgeHolder[],
+  regenPOAPHolders: RegenPOAPHolder[]
 ): Link[] => {
   const links: Link[] = [];
   const specialNodes = {
     TECHolder: createNode("TECHolder", "TECHolder"),
     RegenScore: createNode("RegenScore", "RegenScore"),
     TrustedSeed: createNode("TrustedSeed", "TrustedSeed"),
+    RegenPOAP: createNode("RegenPOAP", "RegenPOAP"),
   };
 
   citizens.forEach((citizen) => {
@@ -105,6 +109,15 @@ const processConnections = (
     if (trustedSeeds.some((seed) => seed.id.toLowerCase() === lowerCaseId)) {
       links.push(
         createLink(id, specialNodes.TrustedSeed.id, NodeLinkType.TrustedSeed)
+      );
+    }
+    if (
+      regenPOAPHolders.some(
+        (holder) => holder.Collection.toLowerCase() === lowerCaseId
+      )
+    ) {
+      links.push(
+        createLink(id, specialNodes.RegenPOAP.id, NodeLinkType.RegenPOAP)
       );
     }
   });
@@ -141,6 +154,7 @@ export const useGraphData = (
       trustedSeeds,
       farcasterConnections,
       badgeHolders,
+      regenPOAPHolders,
     ] = await Promise.all([
       fetchData<ICitizen[]>(DATA_URLS.citizens),
       fetchData<TECHolder[]>(DATA_URLS.tecHolders),
@@ -148,6 +162,7 @@ export const useGraphData = (
       fetchData<TrustedSeed[]>(DATA_URLS.trustedSeed),
       fetchData<FarcasterConnection[]>(DATA_URLS.farcasterConnections),
       fetchData<BadgeHolder[]>(DATA_URLS.badgeHolders),
+      fetchData<RegenPOAPHolder[]>(DATA_URLS.regenPOAP),
     ]);
 
     return {
@@ -157,6 +172,7 @@ export const useGraphData = (
       trustedSeeds,
       farcasterConnections,
       badgeHolders,
+      regenPOAPHolders,
     };
   }, []);
 
@@ -169,12 +185,14 @@ export const useGraphData = (
         trustedSeeds,
         farcasterConnections,
         badgeHolders,
+        regenPOAPHolders,
       } = data;
       const nodes: Node[] = [
         ...processCitizens(citizens),
         createNode("TECHolder", "TECHolder"),
         createNode("RegenScore", "RegenScore"),
         createNode("TrustedSeed", "TrustedSeed"),
+        createNode("RegenPOAP", "RegenPOAP"),
       ];
       const links = processConnections(
         citizens,
@@ -182,8 +200,10 @@ export const useGraphData = (
         regenScores,
         trustedSeeds,
         farcasterConnections,
-        badgeHolders
+        badgeHolders,
+        regenPOAPHolders
       );
+
       return { nodes, links };
     },
     [selectedConnectionsCheckBox, selectedNodesCheckBox]
