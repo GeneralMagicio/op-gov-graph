@@ -6,6 +6,12 @@ export enum NodeLinkType {
   TrustedSeed = "TrustedSeed",
   FarcasterConnection = "FarcasterConnection",
   BadgeHolderReferral = "BadgeHolderReferral",
+  RegenPOAP = "RegenPOAP",
+}
+
+export interface RegenPOAPHolder {
+  Collection: string;
+  Count: number;
 }
 
 export interface Link {
