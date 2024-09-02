@@ -11,6 +11,7 @@ import {
   BadgeHolder,
   NodeLinkType,
   RegenPOAPHolder,
+  CitizenTransaction,
 } from "../graph/types";
 
 const DATA_URLS = {
@@ -21,6 +22,7 @@ const DATA_URLS = {
   farcasterConnections: "/data/CitizensFarcasterConnections.json",
   badgeHolders: "/data/BadgeHolders.json",
   regenPOAP: "/data/RegenPOAP.json",
+  citizenTransactions: "/data/citizenTransactions.json",
 };
 
 const fetchData = async <T>(url: string): Promise<T> => {
@@ -35,7 +37,7 @@ const createLink = (
   target: string,
   type: NodeLinkType
 ): Link => ({
-  source,
+  source: source,
   target,
   type,
 });
@@ -80,7 +82,8 @@ const processConnections = (
   trustedSeeds: TrustedSeed[],
   farcasterConnections: FarcasterConnection[],
   badgeHolders: BadgeHolder[],
-  regenPOAPHolders: RegenPOAPHolder[]
+  regenPOAPHolders: RegenPOAPHolder[],
+  citizenTransactions: CitizenTransaction[]
 ): Link[] => {
   const links: Link[] = [];
   const specialNodes = {
@@ -90,6 +93,7 @@ const processConnections = (
     RegenPOAP: createNode("RegenPOAP", "RegenPOAP"),
   };
 
+  // Process citizen connections
   citizens.forEach((citizen) => {
     const { id } = citizen;
     const lowerCaseId = id.toLowerCase();
@@ -122,6 +126,7 @@ const processConnections = (
     }
   });
 
+  // Process Farcaster connections
   farcasterConnections.forEach((connection) => {
     links.push(
       createLink(
@@ -132,7 +137,26 @@ const processConnections = (
     );
   });
 
+  // Process citizen transactions
+  citizenTransactions.forEach((transaction) => {
+    if (transaction.from !== transaction.to) {
+      links.push(
+        createLink(
+          transaction.from,
+          transaction.to,
+          NodeLinkType.CitizenTransaction
+        )
+      );
+    }
+  });
+
+  // Process badge holders
   links.push(...processBadgeHolders(badgeHolders, citizens));
+
+  console.log(
+    "CitizenTransactions in processConnections:",
+    links.filter((link) => link.type === NodeLinkType.CitizenTransaction).length
+  );
 
   return links;
 };
@@ -155,6 +179,7 @@ export const useGraphData = (
       farcasterConnections,
       badgeHolders,
       regenPOAPHolders,
+      citizenTransactions,
     ] = await Promise.all([
       fetchData<ICitizen[]>(DATA_URLS.citizens),
       fetchData<TECHolder[]>(DATA_URLS.tecHolders),
@@ -163,6 +188,7 @@ export const useGraphData = (
       fetchData<FarcasterConnection[]>(DATA_URLS.farcasterConnections),
       fetchData<BadgeHolder[]>(DATA_URLS.badgeHolders),
       fetchData<RegenPOAPHolder[]>(DATA_URLS.regenPOAP),
+      fetchData<CitizenTransaction[]>(DATA_URLS.citizenTransactions),
     ]);
 
     return {
@@ -173,8 +199,9 @@ export const useGraphData = (
       farcasterConnections,
       badgeHolders,
       regenPOAPHolders,
+      citizenTransactions,
     };
-  }, []);
+  }, [selectedConnectionsCheckBox, selectedNodesCheckBox]);
 
   const processData = useCallback(
     (data: Awaited<ReturnType<typeof fetchAllData>>) => {
@@ -186,6 +213,7 @@ export const useGraphData = (
         farcasterConnections,
         badgeHolders,
         regenPOAPHolders,
+        citizenTransactions,
       } = data;
       const nodes: Node[] = [
         ...processCitizens(citizens),
@@ -201,26 +229,36 @@ export const useGraphData = (
         trustedSeeds,
         farcasterConnections,
         badgeHolders,
-        regenPOAPHolders
+        regenPOAPHolders,
+        citizenTransactions
+      );
+
+      console.log("Total nodes:", nodes.length);
+      console.log("Total links:", links.length);
+      console.log(
+        "CitizenTransactions in processData:",
+        links.filter((link) => link.type === NodeLinkType.CitizenTransaction)
+          .length
       );
 
       return { nodes, links };
     },
-    [selectedConnectionsCheckBox, selectedNodesCheckBox]
+    []
   );
 
   useEffect(() => {
     fetchAllData()
       .then(processData)
       .then((data) => {
-        setGraphData(data); //Set all data without filtering
+        setGraphData(data);
+        console.log(
+          "CitizenTransactions in setGraphData:",
+          data.links.filter(
+            (link) => link.type === NodeLinkType.CitizenTransaction
+          ).length
+        );
       });
-  }, [
-    fetchAllData,
-    processData,
-    selectedConnectionsCheckBox,
-    selectedNodesCheckBox,
-  ]);
+  }, [fetchAllData, processData]);
 
   return graphData;
 };
