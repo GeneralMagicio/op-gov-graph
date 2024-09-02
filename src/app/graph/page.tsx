@@ -33,6 +33,7 @@ const GraphPage = () => {
       "FarcasterConnection",
       "BadgeHolderReferral",
       "RegenPOAP",
+      "CitizenTransaction",
     ]);
 
   const graphData = useGraphData(
@@ -46,6 +47,26 @@ const GraphPage = () => {
 
   const fgRef =
     useRef<ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>>(null);
+
+  const lowercaseGraphData = useMemo(() => {
+    return {
+      nodes: graphData.nodes.map((node) => ({
+        ...node,
+        id: node.id.toLowerCase(),
+      })),
+      links: graphData.links.map((link) => ({
+        ...link,
+        source:
+          typeof link.source === "string"
+            ? link.source.toLowerCase()
+            : link.source,
+        target:
+          typeof link.target === "string"
+            ? link.target.toLowerCase()
+            : link.target,
+      })),
+    };
+  }, [graphData]);
 
   const updateHighlight = () => {
     setHighlightNodes(new Set(highlightNodes));
@@ -124,6 +145,8 @@ const GraphPage = () => {
         return `rgba(255, 165, 0, ${opacity})`; // orange
       case "RegenPOAP":
         return `rgba(75, 0, 130, ${opacity})`; // indigo
+      case "CitizenTransaction":
+        return `rgba(255, 192, 203, ${opacity})`; // pink
       default:
         return `rgba(153, 153, 153, ${opacity})`; // #999
     }
@@ -164,7 +187,7 @@ const GraphPage = () => {
   );
 
   const filteredGraphData = useMemo(() => {
-    const filteredNodes = graphData.nodes.filter(
+    const filteredNodes = lowercaseGraphData.nodes.filter(
       (node) =>
         selectedNodesCheckBox.includes(node.type || "") ||
         node.type === "TECHolder" ||
@@ -173,22 +196,40 @@ const GraphPage = () => {
         node.type === "RegenPOAP"
     );
 
-    const filteredLinks = graphData.links.filter(
-      (link) =>
-        (selectedConnectionsCheckBox.includes("TECHolder") &&
+    const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
+    console.log("nodeds", nodeIds);
+    const filteredLinks = lowercaseGraphData.links.filter((link) => {
+      const isValidLink = nodeIds.has(link.source) && nodeIds.has(link.target);
+      if (link.type === "CitizenTransaction") {
+        console.log("CitizenTransactionLink:", link);
+      }
+      return (
+        isValidLink &&
+        ((selectedConnectionsCheckBox.includes("TECHolder") &&
           link.type === "TECHolder") ||
-        (selectedConnectionsCheckBox.includes("RegenScore") &&
-          link.type === "RegenScore") ||
-        (selectedConnectionsCheckBox.includes("TrustedSeed") &&
-          link.type === "TrustedSeed") ||
-        (selectedConnectionsCheckBox.includes("FarcasterConnection") &&
-          link.type === "FarcasterConnection") ||
-        (selectedConnectionsCheckBox.includes("BadgeHolderReferral") &&
-          link.type === "BadgeHolderReferral") ||
-        (selectedConnectionsCheckBox.includes("RegenPOAP") &&
-          link.type === "RegenPOAP")
-    );
+          (selectedConnectionsCheckBox.includes("RegenScore") &&
+            link.type === "RegenScore") ||
+          (selectedConnectionsCheckBox.includes("TrustedSeed") &&
+            link.type === "TrustedSeed") ||
+          (selectedConnectionsCheckBox.includes("FarcasterConnection") &&
+            link.type === "FarcasterConnection") ||
+          (selectedConnectionsCheckBox.includes("BadgeHolderReferral") &&
+            link.type === "BadgeHolderReferral") ||
+          (selectedConnectionsCheckBox.includes("RegenPOAP") &&
+            link.type === "RegenPOAP") ||
+          (selectedConnectionsCheckBox.includes("CitizenTransaction") &&
+            link.type === "CitizenTransaction"))
+      );
+    });
 
+    console.log("Filtered Nodes:", filteredNodes.length);
+    console.log("Filtered Links:", filteredLinks.length);
+    // console.log(
+    //   "CitizenTransactions:",
+    //   filteredLinks.filter((link) => link.type === "CitizenTransaction").length
+    // );
+    console.log("filteredLinks:", filteredLinks);
+    console.log("filteredNodes:", filteredNodes);
     return { nodes: filteredNodes, links: filteredLinks };
   }, [graphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
