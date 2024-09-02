@@ -7,6 +7,7 @@ export enum NodeLinkType {
   FarcasterConnection = "FarcasterConnection",
   BadgeHolderReferral = "BadgeHolderReferral",
   RegenPOAP = "RegenPOAP",
+  CitizenTransaction = "CitizenTransaction",
 }
 
 export interface RegenPOAPHolder {
@@ -89,4 +90,14 @@ export interface BadgeHolder {
   rpgfRound: string;
   referredBy: string;
   referredMethod: string;
+}
+
+export interface CitizenTransaction {
+  date: string;
+  from: string;
+  to: string;
+  tokenName: string;
+  tokenSymbol: string;
+  value: number;
+  hash: string;
 }
