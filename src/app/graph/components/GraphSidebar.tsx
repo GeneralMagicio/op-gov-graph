@@ -23,8 +23,9 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
     { name: "FarcasterConnection", color: "purple" },
     { name: "BadgeHolderReferral", color: "orange" },
     { name: "RegenPOAP", color: "indigo" },
+    { name: "CitizenTransaction", color: "pink" },
   ];
-
+  console.log("Selected connect:", selectedConnectionsCheckBox);
   return (
     <aside className="p-4 flex-shrink-0">
       <div className="mb-4">
