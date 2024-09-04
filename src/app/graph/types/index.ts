@@ -27,6 +27,20 @@ export interface ICitizen {
   x?: number;
   y?: number;
   type?: string;
+  userId?: string;
+  userAssociatedAddresses?: string[];
+  identity?: string;
+  profileImage?: string;
+  profileName?: string;
+  profileDisplayName?: string;
+  profileBio?: string;
+  userAddress?: string;
+  chainId?: string;
+  followings?: {
+    id: string;
+    blockchain: string;
+    followingProfileId: string;
+  }[];
 }
 
 export interface Node extends ICitizen {
@@ -36,6 +50,11 @@ export interface Node extends ICitizen {
   x?: number;
   y?: number;
   type?: string;
+  tecBalance?: string;
+  regenScore?: number;
+  trustedSeed?: boolean;
+  regenPOAP?: boolean;
+  hasFarcaster?: boolean;
 }
 
 export interface GraphData {
