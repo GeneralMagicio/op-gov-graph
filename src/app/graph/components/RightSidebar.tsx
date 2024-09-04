@@ -102,7 +102,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
                       TEC Balance
                     </h3>
                     <p className="text-2xl font-bold text-indigo-600">
-                      {selectedNode.tecBalance} TEC
+                      {Math.floor(parseFloat(selectedNode.tecBalance))} TEC
                     </p>
                   </div>
                 )}
