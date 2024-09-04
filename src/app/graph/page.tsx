@@ -18,6 +18,7 @@ import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
 import { NodeWithNeighbors, GraphDataWithNeighbors, Link, Node } from "./types";
 import { useGraphData } from "../hooks/useGraphData";
+import RightSidebar from "./components/RightSidebar";
 
 const NODE_R = 10;
 
@@ -35,6 +36,8 @@ const GraphPage = () => {
       "RegenPOAP",
       "CitizenTransaction",
     ]);
+
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   const graphData = useGraphData(
     selectedConnectionsCheckBox,
@@ -96,6 +99,14 @@ const GraphPage = () => {
 
     updateHighlight();
   };
+
+  const handleNodeClick = useCallback((node: Node) => {
+    setSelectedNode(node);
+  }, []);
+
+  const handleCloseRightSidebar = useCallback(() => {
+    setSelectedNode(null);
+  }, []);
 
   const handleNodeHover = (node: NodeWithNeighbors | null) => {
     highlightNodes.clear();
@@ -377,9 +388,14 @@ const GraphPage = () => {
                 }
               }}
               linkColor={(link) => getLinkColor(link, highlightLinks.has(link))}
+              onNodeClick={handleNodeClick}
             />
           )}
         </main>
+        <RightSidebar
+          selectedNode={selectedNode}
+          onClose={handleCloseRightSidebar}
+        />
       </div>
     </div>
   );
