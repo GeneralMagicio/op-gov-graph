@@ -372,16 +372,16 @@ const GraphPage = () => {
                 if (node.type === "citizens") {
                   return "#a4b2e1";
                 }
-                if (node.id === "TECHolder") {
+                if (node.type === "TECHolder") {
                   return "blue";
                 }
-                if (node.id === "RegenScore") {
+                if (node.type === "RegenScore") {
                   return "green";
                 }
-                if (node.id === "TrustedSeed") {
+                if (node.type === "TrustedSeed") {
                   return "red";
                 }
-                if (node.id === "RegenPOAP") {
+                if (node.type === "RegenPOAP") {
                   return "indigo";
                 } else {
                   return "#3388ff";
