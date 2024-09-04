@@ -67,7 +67,8 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
               </div>
             )}
             <h2 className="text-2xl font-bold text-gray-800">
-              {selectedNode.ens || selectedNode.id}
+              {selectedNode.ens ||
+                `${selectedNode.id.slice(0, 4)}...${selectedNode.id.slice(-4)}`}
             </h2>
             {selectedNode.profileName && (
               <p className="text-indigo-600 font-medium mt-1">
