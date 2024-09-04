@@ -71,9 +71,14 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
                 `${selectedNode.id.slice(0, 4)}...${selectedNode.id.slice(-4)}`}
             </h2>
             {selectedNode.profileName && (
-              <p className="text-indigo-600 font-medium mt-1">
+              <a
+                href={`https://warpcast.com/${selectedNode.profileName}`}
+                className="text-indigo-600 font-medium mt-1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 @{selectedNode.profileName}
-              </p>
+              </a>
             )}
           </div>
           <div className="space-y-6">
