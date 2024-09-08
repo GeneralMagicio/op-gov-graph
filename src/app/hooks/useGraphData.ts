@@ -12,6 +12,7 @@ import {
   NodeLinkType,
   RegenPOAPHolder,
   CitizenTransaction,
+  BadgeHolderReferralInfo,
 } from "../graph/types";
 
 const DATA_URLS = {
@@ -58,9 +59,6 @@ const createLink = (
   target,
   type,
 });
-
-const processCitizens = (citizens: ICitizen[]): Node[] =>
-  citizens.map((citizen) => ({ ...citizen, type: "citizens" }));
 
 const processBadgeHolders = (
   badgeHolders: BadgeHolder[],
@@ -228,6 +226,44 @@ export const useGraphData = (
         citizenTransactions,
       } = data;
 
+      const badgeHolderReferrals = new Map<
+        string,
+        {
+          referredBy: BadgeHolderReferralInfo[];
+          referred: BadgeHolderReferralInfo[];
+        }
+      >();
+
+      badgeHolders.forEach((badgeHolder) => {
+        const referredBy = badgeHolder.referredBy.toLowerCase();
+        const recipient = badgeHolder.recipient.toLowerCase();
+
+        if (referredBy !== "0x0000000000000000000000000000000000000000") {
+          const referredByData = badgeHolderReferrals.get(referredBy) || {
+            referredBy: [],
+            referred: [],
+          };
+          referredByData.referred.push({
+            address: recipient,
+            rpgfRound: badgeHolder.rpgfRound,
+            referredMethod: badgeHolder.referredMethod,
+          });
+          badgeHolderReferrals.set(referredBy, referredByData);
+
+          // Update referredBy for recipient
+          const recipientData = badgeHolderReferrals.get(recipient) || {
+            referredBy: [],
+            referred: [],
+          };
+          recipientData.referredBy.push({
+            address: referredBy,
+            rpgfRound: badgeHolder.rpgfRound,
+            referredMethod: badgeHolder.referredMethod,
+          });
+          badgeHolderReferrals.set(recipient, recipientData);
+        }
+      });
+
       const nodes: Node[] = citizensWithFarcaster.map((citizen) => {
         const tecHolder = tecHolders.find(
           (holder) => holder.id.toLowerCase() === citizen.id.toLowerCase()
@@ -242,6 +278,9 @@ export const useGraphData = (
           (holder) =>
             holder.Collection.toLowerCase() === citizen.id.toLowerCase()
         );
+        const badgeHolderReferral = badgeHolderReferrals.get(
+          citizen.id.toLowerCase()
+        );
 
         return {
           ...citizen,
@@ -251,6 +290,7 @@ export const useGraphData = (
           trustedSeed: !!trustedSeed,
           regenPOAP: !!regenPOAP,
           hasFarcaster: !!citizen.userId,
+          badgeHolderReferrals: badgeHolderReferral,
         };
       });
 
