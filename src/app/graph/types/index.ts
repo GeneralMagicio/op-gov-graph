@@ -15,6 +15,12 @@ export interface RegenPOAPHolder {
   Count: number;
 }
 
+export interface BadgeHolderReferralInfo {
+  address: string;
+  rpgfRound: string;
+  referredMethod: string;
+}
+
 export interface Link {
   source: string;
   target: string;
@@ -55,6 +61,10 @@ export interface Node extends ICitizen {
   trustedSeed?: boolean;
   regenPOAP?: boolean;
   hasFarcaster?: boolean;
+  badgeHolderReferrals?: {
+    referredBy: BadgeHolderReferralInfo[];
+    referred: BadgeHolderReferralInfo[];
+  };
 }
 
 export interface GraphData {
