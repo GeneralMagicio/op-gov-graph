@@ -1,10 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Node } from "../types";
+import { BadgeHolderReferralInfo, Node } from "../types";
+import { useConvertAddressToENS } from "@/app/hooks/useConvertAddressToENS";
 
 interface RightSidebarProps {
   selectedNode: Node | null;
   onClose: () => void;
 }
+
+const AddressDisplay: React.FC<{ address: string }> = ({ address }) => {
+  const { ensName, isLoading } = useConvertAddressToENS(address);
+
+  if (isLoading) {
+    return <p>Loading address...</p>;
+  }
+
+  return (
+    <p>
+      <span className="font-semibold">Address:</span>{" "}
+      {ensName !== address ? (
+        <>
+          {ensName} <span className="text-xs text-gray-500">({address})</span>
+        </>
+      ) : (
+        <span className="text-xs text-gray-500">({ensName})</span>
+      )}
+    </p>
+  );
+};
 
 const RightSidebar: React.FC<RightSidebarProps> = ({
   selectedNode,
@@ -24,6 +46,34 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
     setIsVisible(false);
     setTimeout(onClose, 300); // Delay onClose to allow animation to complete
   };
+
+  const renderReferralList = (
+    referrals: BadgeHolderReferralInfo[],
+    title: string
+  ) => (
+    <div className="mt-4">
+      <h4 className="text-md font-semibold text-gray-700 mb-2">{title}</h4>
+      {referrals.length > 0 ? (
+        <ul className="space-y-2">
+          {referrals.map((referral, index) => (
+            <li key={index} className="bg-white rounded p-1 text-sm">
+              <AddressDisplay address={referral.address} />
+              <p>
+                <span className="font-semibold">RPGF Round:</span>{" "}
+                {referral.rpgfRound}
+              </p>
+              <p>
+                <span className="font-semibold">Method:</span>{" "}
+                {referral.referredMethod}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-gray-500">No referrals</p>
+      )}
+    </div>
+  );
 
   return (
     <div
@@ -152,6 +202,21 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
                 <p className="text-3xl font-bold text-indigo-600">
                   {selectedNode.followings.length}
                 </p>
+              </div>
+            )}
+            {selectedNode.badgeHolderReferrals && (
+              <div className="bg-white rounded-lg p-4 shadow">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                  Badge Holder Referrals
+                </h3>
+                {renderReferralList(
+                  selectedNode.badgeHolderReferrals.referredBy,
+                  "Referred By"
+                )}
+                {renderReferralList(
+                  selectedNode.badgeHolderReferrals.referred,
+                  "Referred"
+                )}
               </div>
             )}
           </div>
