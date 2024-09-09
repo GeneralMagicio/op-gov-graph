@@ -1,15 +1,40 @@
 import React from "react";
+import SearchResultsDropdown from "./SearchResultsDropdown";
+import { Node } from "../types";
 
-const GraphHeader = () => {
+interface GraphHeaderProps {
+  searchTerm: string;
+  onSearch: (term: string) => void;
+  searchResults: Node[];
+  onSelectSearchedNode: (node: Node) => void;
+}
+
+const GraphHeader: React.FC<GraphHeaderProps> = ({
+  searchTerm,
+  onSearch,
+  searchResults,
+  onSelectSearchedNode,
+}) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    onSearch(term);
+  };
+
   return (
     <header className="p-4 border-b">
       <div className="flex items-center gap-8">
         <h1 className="text-2xl font-bold">OP GovGraph</h1>
-        <div className="border-l pl-8 flex-grow">
+        <div className="border-l pl-8 flex-grow relative">
           <input
             type="text"
-            placeholder="Search by address, ENS or Attestation"
+            placeholder="Search by address, ENS or Farcaster ID"
             className="w-96 p-2 rounded"
+            value={searchTerm}
+            onChange={handleInputChange}
+          />
+          <SearchResultsDropdown
+            searchResults={searchResults}
+            onSelectNode={onSelectSearchedNode}
           />
         </div>
       </div>
