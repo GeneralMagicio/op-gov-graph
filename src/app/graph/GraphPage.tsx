@@ -19,6 +19,7 @@ import GraphSidebar from "./components/GraphSidebar";
 import { NodeWithNeighbors, GraphDataWithNeighbors, Link, Node } from "./types";
 import { useGraphData } from "../hooks/useGraphData";
 import RightSidebar from "./components/RightSidebar";
+import { useSearchCitizens } from "../hooks/useSearchCitizens";
 
 const NODE_R = 10;
 
@@ -47,6 +48,15 @@ const GraphPage = () => {
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
+
+  const {
+    searchTerm,
+    searchedNodes,
+    selectedSearchedNode,
+    handleSearch,
+    handleSelectSearchedNode,
+    resetSearch,
+  } = useSearchCitizens(graphData.nodes);
 
   const fgRef =
     useRef<ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>>(null);
@@ -102,6 +112,7 @@ const GraphPage = () => {
 
   const handleNodeClick = useCallback((node: Node) => {
     setSelectedNode(node);
+    resetSearch();
   }, []);
 
   const handleCloseRightSidebar = useCallback(() => {
@@ -172,13 +183,23 @@ const GraphPage = () => {
       ctx.textBaseline = "middle";
 
       const isHighlighted = node === hoverNode || highlightNodes.has(node);
+      const isSearchSelected =
+        selectedSearchedNode &&
+        node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
 
-      ctx.globalAlpha = isHighlighted ? 1 : 0.3; // Reduce opacity for non-highlighted nodes
+      ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3; // Reduce opacity for non-highlighted nodes
 
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, NODE_R, 0, 2 * Math.PI, false);
       ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
       ctx.fill();
+
+      // Add stroke for selectedSearchedNode
+      if (isSearchSelected) {
+        ctx.strokeStyle = "#FF00FF"; // Magenta stroke for selectedSearchedNode
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
 
       ctx.fillStyle = isHighlighted ? "red" : "black";
       const labelY = (node.y || 0) + NODE_R + fontSize;
@@ -194,7 +215,7 @@ const GraphPage = () => {
 
       ctx.globalAlpha = 1; // Reset global alpha
     },
-    [hoverNode, highlightNodes]
+    [hoverNode, highlightNodes, selectedSearchedNode]
   );
 
   const filteredGraphData = useMemo(() => {
@@ -233,14 +254,6 @@ const GraphPage = () => {
       );
     });
 
-    console.log("Filtered Nodes:", filteredNodes.length);
-    console.log("Filtered Links:", filteredLinks.length);
-    // console.log(
-    //   "CitizenTransactions:",
-    //   filteredLinks.filter((link) => link.type === "CitizenTransaction").length
-    // );
-    console.log("filteredLinks:", filteredLinks);
-    console.log("filteredNodes:", filteredNodes);
     return { nodes: filteredNodes, links: filteredLinks };
   }, [graphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
@@ -287,11 +300,13 @@ const GraphPage = () => {
     return gData;
   }, [graphData]);
 
+  console.log("processedGraphData", processedGraphData.nodes[1]);
+
   useEffect(() => {
     setTimeout(() => {
       // fgRef.current?.zoomToFit(500, 250);
       fgRef.current?.zoom(0.5, 500);
-
+      console.log("fgRef.cu", fgRef.current);
       // Dynamic force based on node degree
       fgRef.current?.d3Force("charge")?.strength((node: any) => {
         if (node.degree === 0) {
@@ -328,10 +343,39 @@ const GraphPage = () => {
     }, 100);
   }, [fgRef, filteredGraphData, selectedConnectionsCheckBox]);
 
+  useEffect(() => {
+    if (selectedSearchedNode && fgRef.current) {
+      const node = processedGraphData.nodes.find(
+        (n) => n.id.toLowerCase() === selectedSearchedNode.id.toLowerCase()
+      );
+      if (node && typeof node.x === "number" && typeof node.y === "number") {
+        const distanceToMove = 40;
+
+        // Step 1: Zoom out
+        fgRef.current.zoom(0.5, 300);
+
+        // Step 2: Center on node
+        setTimeout(() => {
+          fgRef.current?.centerAt(node.x, node.y, 300);
+        }, 350);
+
+        // Step 3: Zoom in
+        setTimeout(() => {
+          fgRef.current?.zoom(2, 300);
+        }, 700);
+      }
+    }
+  }, [selectedSearchedNode, processedGraphData.nodes]);
+
   return (
     <div className="flex flex-col h-screen">
-      <GraphHeader />
-
+      <GraphHeader
+        searchTerm={searchTerm}
+        onSearch={handleSearch}
+        searchResults={searchedNodes}
+        onSelectSearchedNode={handleSelectSearchedNode}
+        onSearchInputClick={handleCloseRightSidebar}
+      />
       <div className="flex">
         <GraphSidebar
           selectedNodesCheckBox={selectedNodesCheckBox}
