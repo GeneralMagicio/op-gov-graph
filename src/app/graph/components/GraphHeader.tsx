@@ -7,6 +7,7 @@ interface GraphHeaderProps {
   onSearch: (term: string) => void;
   searchResults: Node[];
   onSelectSearchedNode: (node: Node) => void;
+  onSearchInputClick: () => void;
 }
 
 const GraphHeader: React.FC<GraphHeaderProps> = ({
@@ -14,6 +15,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
   onSearch,
   searchResults,
   onSelectSearchedNode,
+  onSearchInputClick,
 }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
@@ -31,6 +33,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
             className="w-96 p-2 rounded"
             value={searchTerm}
             onChange={handleInputChange}
+            onClick={onSearchInputClick}
           />
           <SearchResultsDropdown
             searchResults={searchResults}
