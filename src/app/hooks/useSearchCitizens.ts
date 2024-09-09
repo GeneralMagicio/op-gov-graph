@@ -38,7 +38,12 @@ export const useSearchCitizens = (nodes: Node[]) => {
 
   const handleSelectSearchedNode = useCallback((node: Node) => {
     setSelectedSearchedNode(node);
-    setSearchTerm(node.ens || node.id);
+    setSearchTerm("");
+  }, []);
+
+  const resetSearch = useCallback(() => {
+    setSearchTerm("");
+    setSelectedSearchedNode(null);
   }, []);
 
   return {
@@ -47,5 +52,7 @@ export const useSearchCitizens = (nodes: Node[]) => {
     selectedSearchedNode,
     handleSearch,
     handleSelectSearchedNode,
+    resetSearch,
+    setSearchTerm,
   };
 };
