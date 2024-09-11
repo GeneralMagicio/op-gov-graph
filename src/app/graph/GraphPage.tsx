@@ -36,6 +36,7 @@ const GraphPage = () => {
       "BadgeHolderReferral",
       "RegenPOAP",
       "CitizenTransaction",
+      // "RefiDAO",
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
@@ -149,6 +150,8 @@ const GraphPage = () => {
     if (node.id === "RegenScore") return "green";
     if (node.id === "TrustedSeed") return "red";
     if (node.id === "RegenPOAP") return "indigo";
+    // if (node.id === "RefiDAO") return "yellow";
+
     return "#3388ff";
   };
 
@@ -169,6 +172,8 @@ const GraphPage = () => {
         return `rgba(75, 0, 130, ${opacity})`; // indigo
       case "CitizenTransaction":
         return `rgba(255, 192, 203, ${opacity})`; // pink
+      // case "RefiDAO":
+      //   return `rgba(255, 255, 0, ${opacity})`; // yellow
       default:
         return `rgba(153, 153, 153, ${opacity})`; // #999
     }
@@ -191,6 +196,7 @@ const GraphPage = () => {
 
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, NODE_R, 0, 2 * Math.PI, false);
+
       ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
       ctx.fill();
 
@@ -226,6 +232,7 @@ const GraphPage = () => {
         node.type === "RegenScore" ||
         node.type === "TrustedSeed" ||
         node.type === "RegenPOAP"
+      // node.type === "RefiDAO"
     );
 
     const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
@@ -251,6 +258,8 @@ const GraphPage = () => {
             link.type === "RegenPOAP") ||
           (selectedConnectionsCheckBox.includes("CitizenTransaction") &&
             link.type === "CitizenTransaction"))
+        // (selectedConnectionsCheckBox.includes("RefiDAO") &&
+        //   link.type === "RefiDAO")
       );
     });
 
@@ -427,6 +436,9 @@ const GraphPage = () => {
                 }
                 if (node.type === "RegenPOAP") {
                   return "indigo";
+                }
+                if (node.type === "RefiDAO") {
+                  return "yellow";
                 } else {
                   return "#3388ff";
                 }

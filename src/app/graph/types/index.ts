@@ -8,6 +8,7 @@ export enum NodeLinkType {
   BadgeHolderReferral = "BadgeHolderReferral",
   RegenPOAP = "RegenPOAP",
   CitizenTransaction = "CitizenTransaction",
+  // RefiDAO = "RefiDAO",
 }
 
 export interface RegenPOAPHolder {
@@ -65,6 +66,7 @@ export interface Node extends ICitizen {
     referredBy: BadgeHolderReferralInfo[];
     referred: BadgeHolderReferralInfo[];
   };
+  // refiDAO?: boolean;
 }
 
 export interface GraphData {
@@ -129,4 +131,8 @@ export interface CitizenTransaction {
   tokenSymbol: string;
   value: number;
   hash: string;
+}
+
+export interface RefiDAO {
+  address: string;
 }

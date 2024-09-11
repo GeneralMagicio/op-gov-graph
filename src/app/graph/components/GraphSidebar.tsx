@@ -24,6 +24,7 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
     { name: "BadgeHolderReferral", color: "orange" },
     { name: "RegenPOAP", color: "indigo" },
     { name: "CitizenTransaction", color: "pink" },
+    // { name: "RefiDAO", color: "yellow" },
   ];
   console.log("Selected connect:", selectedConnectionsCheckBox);
   return (
