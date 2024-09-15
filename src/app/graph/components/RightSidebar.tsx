@@ -77,7 +77,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 
   return (
     <div
-      className={`fixed right-0 top-0 h-full w-96 bg-gradient-to-b from-blue-50 to-indigo-100 shadow-lg overflow-y-auto transition-transform transform ease-in-out duration-300 ${
+      className={`fixed right-0 top-0 h-full w-96 bg-dark-surface shadow-lg overflow-y-auto transition-transform transform ease-in-out duration-300 ${
         isVisible ? "translate-x-0" : "translate-x-full"
       }`}
     >
