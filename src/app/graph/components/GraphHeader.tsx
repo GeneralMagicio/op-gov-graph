@@ -23,7 +23,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
   };
 
   return (
-    <header className="p-4 border-b">
+    <header className="p-4 bg-dark-background border border-black">
       <div className="flex items-center gap-8">
         <h1 className="text-2xl font-bold">OP GovGraph</h1>
         <div className="border-l pl-8 flex-grow relative">
