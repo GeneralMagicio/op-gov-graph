@@ -377,7 +377,7 @@ const GraphPage = () => {
   }, [selectedSearchedNode, processedGraphData.nodes]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
       <GraphHeader
         searchTerm={searchTerm}
         onSearch={handleSearch}
@@ -419,7 +419,7 @@ const GraphPage = () => {
               nodeCanvasObject={paintNode}
               onNodeHover={handleNodeHover}
               linkWidth={(link) => (highlightLinks.has(link) ? 2 : 0.5)}
-              backgroundColor="white"
+              backgroundColor="linear-gradient(to bottom, #131B2F, #162c45)"
               onLinkHover={handleLinkHover as any}
               nodeColor={(node) => {
                 if (node.type === "citizens") {
