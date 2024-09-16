@@ -13,7 +13,7 @@ const config: Config = {
         dark: {
           background: "#121b2f", // Main background color
           surface: "#071026", // Sidebar and card background color
-          primary: "#61dafb", // Primary accent color (cyan)
+          primary: "#00F6FF", // Primary accent color (cyan)
           secondary: "#bb86fc", // Secondary accent color (purple)
           text: {
             primary: "#E3E8F3", // Primary text color
