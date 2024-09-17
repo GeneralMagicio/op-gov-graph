@@ -1,7 +1,7 @@
 import React from "react";
 import SearchResultsDropdown from "./SearchResultsDropdown";
 import { Node } from "../types";
-
+import { Search } from "lucide-react";
 interface GraphHeaderProps {
   searchTerm: string;
   onSearch: (term: string) => void;
@@ -23,23 +23,68 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
   };
 
   return (
-    <header className="p-4 bg-dark-background border border-black">
-      <div className="flex items-center gap-8">
-        <h1 className="text-2xl font-bold">OP GovGraph</h1>
-        <div className="border-l pl-8 flex-grow relative">
-          <input
-            type="text"
-            placeholder="Search by address, ENS or Farcaster ID"
-            className="w-96 p-2 rounded"
-            value={searchTerm}
-            onChange={handleInputChange}
-            onClick={onSearchInputClick}
-          />
-          <SearchResultsDropdown
-            searchResults={searchResults}
-            onSelectNode={onSelectSearchedNode}
-          />
-        </div>
+    <header className="bg-dark-background text-dark-text-secondary p-4 flex justify-between items-center border-b border-black">
+      <div className="flex items-center">
+        {/* Logo here */}
+        <h1 className="text-xl font-bold text-dark-text-primary">
+          OP Gov Graph FYI
+        </h1>
+      </div>
+
+      <nav className="flex-grow flex justify-center">
+        <ul className="flex space-x-6">
+          <li>
+            <a
+              href="#"
+              className="text-dark-text-primary pb-6 border-b-2 border-dark-primary"
+            >
+              Network
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-dark-text-primary transition-colors"
+            >
+              Docs
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-dark-text-primary transition-colors"
+            >
+              Github
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="hover:text-dark-text-primary transition-colors"
+            >
+              Suggest features
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Search"
+          className="bg-dark-surface text-dark-text-primary pl-10 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-dark-primary w-72"
+          value={searchTerm}
+          onChange={handleInputChange}
+          onClick={onSearchInputClick}
+        />
+        <Search
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary"
+          size={18}
+        />
+        <SearchResultsDropdown
+          searchResults={searchResults}
+          onSelectNode={onSelectSearchedNode}
+        />
       </div>
     </header>
   );
