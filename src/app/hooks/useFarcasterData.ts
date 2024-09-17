@@ -10,6 +10,9 @@ interface FarcasterData {
 
 export const useFarcasterData = () => {
   const [farcasterData, setFarcasterData] = useState<FarcasterData>({});
+  const [addressToUserIdMap, setAddressToUserIdMap] = useState<{
+    [address: string]: string;
+  }>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchFarcasterData = useCallback(async () => {
@@ -22,6 +25,7 @@ export const useFarcasterData = () => {
       );
       const data = await response.json();
       const processedData: FarcasterData = {};
+      const addressMap: { [address: string]: string } = {};
 
       data.forEach((citizen: any) => {
         if (citizen.userId) {
@@ -30,10 +34,12 @@ export const useFarcasterData = () => {
             profileImage: citizen.profileImage,
             profileName: citizen.profileName,
           };
+          addressMap[citizen.id.toLowerCase()] = citizen.userId;
         }
       });
 
       setFarcasterData(processedData);
+      setAddressToUserIdMap(addressMap);
     } catch (error) {
       console.error("Error fetching Farcaster data:", error);
     } finally {
@@ -55,5 +61,17 @@ export const useFarcasterData = () => {
     [farcasterData]
   );
 
-  return { getFarcasterDataForConnections, isLoading };
+  const getFarcasterDataByAddress = useCallback(
+    (address: string) => {
+      const userId = addressToUserIdMap[address.toLowerCase()];
+      return userId ? farcasterData[userId] : undefined;
+    },
+    [farcasterData, addressToUserIdMap]
+  );
+
+  return {
+    getFarcasterDataForConnections,
+    getFarcasterDataByAddress,
+    isLoading,
+  };
 };
