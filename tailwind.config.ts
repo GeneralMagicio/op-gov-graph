@@ -6,12 +6,21 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        dark: {
+          background: "#121b2f", // Main background color
+          surface: "#071026", // Sidebar and card background color
+          primary: "#00F6FF", // Primary accent color (cyan)
+          secondary: "#bb86fc", // Secondary accent color (purple)
+          text: {
+            primary: "#E3E8F3", // Primary text color
+            secondary: "#7B8191", // Secondary text color
+          },
+          border: "#2d3748", // Border color
+        },
       },
     },
   },

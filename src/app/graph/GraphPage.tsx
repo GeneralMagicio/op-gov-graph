@@ -16,10 +16,20 @@ import ForceGraph2D, {
 import d3 from "d3";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
-import { NodeWithNeighbors, GraphDataWithNeighbors, Link, Node } from "./types";
+import {
+  NodeWithNeighbors,
+  GraphDataWithNeighbors,
+  Link,
+  Node,
+  NodeLinkType,
+} from "./types";
 import { useGraphData } from "../hooks/useGraphData";
 import RightSidebar from "./components/RightSidebar";
 import { useSearchCitizens } from "../hooks/useSearchCitizens";
+import {
+  CONNECTION_TYPES,
+  getConnectionTypeByKey,
+} from "./types/connectionTypes";
 
 const NODE_R = 10;
 
@@ -27,16 +37,16 @@ const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
     "citizens",
   ]);
+
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
-    useState<string[]>([
-      "TECHolder",
-      "RegenScore",
-      "TrustedSeed",
-      "FarcasterConnection",
-      "BadgeHolderReferral",
-      "RegenPOAP",
-      "CitizenTransaction",
-      // "RefiDAO",
+    useState<NodeLinkType[]>([
+      NodeLinkType.TECHolder,
+      NodeLinkType.RegenScore,
+      NodeLinkType.TrustedSeed,
+      NodeLinkType.FarcasterConnection,
+      NodeLinkType.BadgeHolderReferral,
+      NodeLinkType.RegenPOAP,
+      NodeLinkType.CitizenTransaction,
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
@@ -146,37 +156,20 @@ const GraphPage = () => {
 
   const getNodeColor = (node: Node) => {
     if (node.type === "citizens") return "#a4b2e1";
-    if (node.id === "TECHolder") return "blue";
-    if (node.id === "RegenScore") return "green";
-    if (node.id === "TrustedSeed") return "red";
-    if (node.id === "RegenPOAP") return "indigo";
-    // if (node.id === "RefiDAO") return "yellow";
-
-    return "#3388ff";
+    const connectionType = CONNECTION_TYPES.find(
+      (type) => type.key === (node.type as NodeLinkType)
+    );
+    return connectionType ? connectionType.color : "#3388ff";
   };
 
   const getLinkColor = useCallback((link: Link, highlighted: boolean) => {
-    const opacity = highlighted ? 1 : 0.2;
-    switch (link.type) {
-      case "FarcasterConnection":
-        return `rgba(128, 0, 128, ${opacity})`; // purple
-      case "TECHolder":
-        return `rgba(0, 0, 255, ${opacity})`; // blue
-      case "RegenScore":
-        return `rgba(0, 128, 0, ${opacity})`; // green
-      case "TrustedSeed":
-        return `rgba(255, 0, 0, ${opacity})`; // red
-      case "BadgeHolderReferral":
-        return `rgba(255, 165, 0, ${opacity})`; // orange
-      case "RegenPOAP":
-        return `rgba(75, 0, 130, ${opacity})`; // indigo
-      case "CitizenTransaction":
-        return `rgba(255, 192, 203, ${opacity})`; // pink
-      // case "RefiDAO":
-      //   return `rgba(255, 255, 0, ${opacity})`; // yellow
-      default:
-        return `rgba(153, 153, 153, ${opacity})`; // #999
-    }
+    const opacity = highlighted ? 1 : 0.1;
+    const connectionType = getConnectionTypeByKey(link.type);
+    return connectionType
+      ? `${connectionType.color}${Math.round(opacity * 255)
+          .toString(16)
+          .padStart(2, "0")}`
+      : `rgba(153, 153, 153, ${opacity})`;
   }, []);
 
   const paintNode = useCallback(
@@ -207,7 +200,7 @@ const GraphPage = () => {
         ctx.stroke();
       }
 
-      ctx.fillStyle = isHighlighted ? "red" : "black";
+      ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
       const labelY = (node.y || 0) + NODE_R + fontSize;
 
       if (node.type === "citizens") {
@@ -228,39 +221,15 @@ const GraphPage = () => {
     const filteredNodes = lowercaseGraphData.nodes.filter(
       (node) =>
         selectedNodesCheckBox.includes(node.type || "") ||
-        node.type === "TECHolder" ||
-        node.type === "RegenScore" ||
-        node.type === "TrustedSeed" ||
-        node.type === "RegenPOAP"
-      // node.type === "RefiDAO"
+        CONNECTION_TYPES.some(
+          (type) => type.key === (node.type as NodeLinkType)
+        )
     );
 
     const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
-    console.log("nodeds", nodeIds);
     const filteredLinks = lowercaseGraphData.links.filter((link) => {
       const isValidLink = nodeIds.has(link.source) && nodeIds.has(link.target);
-      if (link.type === "CitizenTransaction") {
-        console.log("CitizenTransactionLink:", link);
-      }
-      return (
-        isValidLink &&
-        ((selectedConnectionsCheckBox.includes("TECHolder") &&
-          link.type === "TECHolder") ||
-          (selectedConnectionsCheckBox.includes("RegenScore") &&
-            link.type === "RegenScore") ||
-          (selectedConnectionsCheckBox.includes("TrustedSeed") &&
-            link.type === "TrustedSeed") ||
-          (selectedConnectionsCheckBox.includes("FarcasterConnection") &&
-            link.type === "FarcasterConnection") ||
-          (selectedConnectionsCheckBox.includes("BadgeHolderReferral") &&
-            link.type === "BadgeHolderReferral") ||
-          (selectedConnectionsCheckBox.includes("RegenPOAP") &&
-            link.type === "RegenPOAP") ||
-          (selectedConnectionsCheckBox.includes("CitizenTransaction") &&
-            link.type === "CitizenTransaction"))
-        // (selectedConnectionsCheckBox.includes("RefiDAO") &&
-        //   link.type === "RefiDAO")
-      );
+      return isValidLink && selectedConnectionsCheckBox.includes(link.type);
     });
 
     return { nodes: filteredNodes, links: filteredLinks };
@@ -377,7 +346,7 @@ const GraphPage = () => {
   }, [selectedSearchedNode, processedGraphData.nodes]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
       <GraphHeader
         searchTerm={searchTerm}
         onSearch={handleSearch}
@@ -419,30 +388,9 @@ const GraphPage = () => {
               nodeCanvasObject={paintNode}
               onNodeHover={handleNodeHover}
               linkWidth={(link) => (highlightLinks.has(link) ? 2 : 0.5)}
-              backgroundColor="white"
+              backgroundColor="linear-gradient(to bottom, #131B2F, #162c45)"
               onLinkHover={handleLinkHover as any}
-              nodeColor={(node) => {
-                if (node.type === "citizens") {
-                  return "#a4b2e1";
-                }
-                if (node.type === "TECHolder") {
-                  return "blue";
-                }
-                if (node.type === "RegenScore") {
-                  return "green";
-                }
-                if (node.type === "TrustedSeed") {
-                  return "red";
-                }
-                if (node.type === "RegenPOAP") {
-                  return "indigo";
-                }
-                if (node.type === "RefiDAO") {
-                  return "yellow";
-                } else {
-                  return "#3388ff";
-                }
-              }}
+              nodeColor={getNodeColor}
               linkColor={(link) => getLinkColor(link, highlightLinks.has(link))}
               onNodeClick={handleNodeClick}
             />
