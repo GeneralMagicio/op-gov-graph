@@ -1,4 +1,6 @@
 import React from "react";
+import { CONNECTION_TYPES } from "../types/connectionTypes";
+import { Check } from "lucide-react";
 
 interface IGraphSidebarProps {
   selectedNodesCheckBox: string[];
@@ -16,27 +18,20 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
   setSelectedConnectionsCheckBox,
 }) => {
   const nodeOptions = ["Citizens"];
-  const connectionOptions = [
-    { name: "TECHolder", color: "blue" },
-    { name: "RegenScore", color: "green" },
-    { name: "TrustedSeed", color: "red" },
-    { name: "FarcasterConnection", color: "purple" },
-    { name: "BadgeHolderReferral", color: "orange" },
-    { name: "RegenPOAP", color: "indigo" },
-    { name: "CitizenTransaction", color: "pink" },
-    // { name: "RefiDAO", color: "yellow" },
-  ];
 
   return (
-    <aside className="p-4 flex-shrink-0">
-      <div className="mb-4">
-        <h2 className="font-semibold mb-2">Nodes</h2>
+    <aside
+      className="p-4 flex-shrink-0 text-dark-text-primary"
+      style={{ background: "linear-gradient(to bottom, #131B2F, #162c45)" }}
+    >
+      <div className="mb-6 bg-[#24304B] rounded-lg p-4">
         <div className="space-y-2">
           {nodeOptions.map((node) => (
-            <div key={node} className="flex items-center flex-shrink-0">
-              <label className="flex items-center w-full text-gray-700 text-sm">
+            <div key={node} className="flex items-center">
+              <div className="relative flex items-center">
                 <input
                   type="checkbox"
+                  id={node}
                   checked={selectedNodesCheckBox.includes(node.toLowerCase())}
                   onChange={() => {
                     setSelectedNodesCheckBox((prev) =>
@@ -45,42 +40,53 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
                         : [...prev, node.toLowerCase()]
                     );
                   }}
-                  className="mr-2"
+                  className="appearance-none w-4 h-4 border border-dark-text-secondary rounded-md bg-transparent focus:outline-none focus:ring-2 focus:ring-dark-primary"
                 />
+                {selectedNodesCheckBox.includes(node.toLowerCase()) && (
+                  <Check
+                    className="absolute left-0.5 top-0.5 w-3 h-3 text-dark-text-secondary pointer-events-none"
+                    strokeWidth={3}
+                  />
+                )}
+              </div>
+              <label htmlFor={node} className="ml-3 text-sm text-white">
                 {node}
               </label>
             </div>
           ))}
         </div>
       </div>
-      <div>
-        <h2 className="font-semibold mb-2">Connections</h2>
+      <div className="bg-[#24304B] rounded-lg p-4">
         <div className="space-y-2">
-          {connectionOptions.map((connection) => (
-            <div
-              key={connection.name}
-              className="flex items-center flex-shrink-0"
-            >
-              <label className="flex items-center w-full text-gray-700 text-sm">
+          {CONNECTION_TYPES.map((connection) => (
+            <div key={connection.key} className="flex items-center">
+              <div className="relative flex items-center">
                 <input
                   type="checkbox"
-                  checked={selectedConnectionsCheckBox.includes(
-                    connection.name
-                  )}
+                  id={connection.key}
+                  checked={selectedConnectionsCheckBox.includes(connection.key)}
                   onChange={() => {
                     setSelectedConnectionsCheckBox((prev) =>
-                      prev.includes(connection.name)
-                        ? prev.filter((c) => c !== connection.name)
-                        : [...prev, connection.name]
+                      prev.includes(connection.key)
+                        ? prev.filter((c) => c !== connection.key)
+                        : [...prev, connection.key]
                     );
                   }}
-                  className="mr-2"
+                  className="appearance-none w-4 h-4 border border-dark-text-secondary rounded-md bg-transparent focus:outline-none focus:ring-2 focus:ring-dark-primary"
                 />
-                <div
-                  className="w-4 h-4 mr-2 rounded-full"
-                  style={{ backgroundColor: connection.color }}
-                ></div>
-                {connection.name}
+                {selectedConnectionsCheckBox.includes(connection.key) && (
+                  <Check
+                    className="absolute left-0.5 top-0.5 w-3 h-3 text-dark-text-secondary pointer-events-none"
+                    strokeWidth={3}
+                  />
+                )}
+              </div>
+              <label
+                htmlFor={connection.key}
+                className="ml-3 text-sm"
+                style={{ color: connection.color }}
+              >
+                {connection.text}
               </label>
             </div>
           ))}
