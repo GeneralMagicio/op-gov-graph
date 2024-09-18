@@ -1,13 +1,14 @@
 import React from "react";
 import { CONNECTION_TYPES } from "../types/connectionTypes";
 import { Check } from "lucide-react";
+import { NodeLinkType } from "../types";
 
 interface IGraphSidebarProps {
   selectedNodesCheckBox: string[];
   setSelectedNodesCheckBox: React.Dispatch<React.SetStateAction<string[]>>;
-  selectedConnectionsCheckBox: string[];
+  selectedConnectionsCheckBox: NodeLinkType[];
   setSelectedConnectionsCheckBox: React.Dispatch<
-    React.SetStateAction<string[]>
+    React.SetStateAction<NodeLinkType[]>
   >;
 }
 
