@@ -43,24 +43,27 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
           </li>
           <li>
             <a
-              href="#"
+              href="https://govgraph.fyi/"
               className="hover:text-dark-text-primary transition-colors"
+              target="_blank"
             >
               Docs
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href="https://github.com/GeneralMagicio/op-gov-graph"
               className="hover:text-dark-text-primary transition-colors"
+              target="_blank"
             >
               Github
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href="https://github.com/GeneralMagicio/op-gov-graph/issues"
               className="hover:text-dark-text-primary transition-colors"
+              target="_blank"
             >
               Suggest features
             </a>
