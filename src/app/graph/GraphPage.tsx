@@ -31,7 +31,8 @@ import {
   getConnectionTypeByKey,
 } from "./types/connectionTypes";
 
-const NODE_R = 10;
+const MIN_NODE_R = 5;
+const MAX_NODE_R = 12;
 
 const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
@@ -172,51 +173,6 @@ const GraphPage = () => {
       : `rgba(153, 153, 153, ${opacity})`;
   }, []);
 
-  const paintNode = useCallback(
-    (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
-      const label = node.name || node.id;
-      const fontSize = 8 / globalScale;
-      ctx.font = `${fontSize}px Sans-Serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
-      const isHighlighted = node === hoverNode || highlightNodes.has(node);
-      const isSearchSelected =
-        selectedSearchedNode &&
-        node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
-
-      ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3; // Reduce opacity for non-highlighted nodes
-
-      ctx.beginPath();
-      ctx.arc(node.x || 0, node.y || 0, NODE_R, 0, 2 * Math.PI, false);
-
-      ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
-      ctx.fill();
-
-      // Add stroke for selectedSearchedNode
-      if (isSearchSelected) {
-        ctx.strokeStyle = "#FF00FF"; // Magenta stroke for selectedSearchedNode
-        ctx.lineWidth = 3;
-        ctx.stroke();
-      }
-
-      ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
-      const labelY = (node.y || 0) + NODE_R + fontSize;
-
-      if (node.type === "citizens") {
-        let label =
-          node.ens ||
-          (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
-        ctx.fillText(label, node.x || 0, labelY);
-      } else {
-        ctx.fillText(label, node.x || 0, labelY);
-      }
-
-      ctx.globalAlpha = 1; // Reset global alpha
-    },
-    [hoverNode, highlightNodes, selectedSearchedNode]
-  );
-
   const filteredGraphData = useMemo(() => {
     const filteredNodes = lowercaseGraphData.nodes.filter(
       (node) =>
@@ -278,13 +234,67 @@ const GraphPage = () => {
     return gData;
   }, [graphData]);
 
-  console.log("processedGraphData", processedGraphData.nodes[1]);
+  const getNodeRadius = useCallback(
+    (node: Node) => {
+      if (node.type !== "citizens") return MIN_NODE_R;
+      const degree = node.degree || 0;
+      const maxDegree = Math.max(
+        ...processedGraphData.nodes.map((n) => n.degree || 0)
+      );
+      return MIN_NODE_R + (MAX_NODE_R - MIN_NODE_R) * (degree / maxDegree);
+    },
+    [processedGraphData]
+  );
+
+  const paintNode = useCallback(
+    (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
+      const nodeRadius = getNodeRadius(node);
+      const fontSize = 8 / globalScale;
+      ctx.font = `${fontSize}px Sans-Serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const isHighlighted = node === hoverNode || highlightNodes.has(node);
+      const isSearchSelected =
+        selectedSearchedNode &&
+        node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
+
+      // ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
+
+      ctx.beginPath();
+      ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+
+      ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
+      ctx.fill();
+
+      if (isSearchSelected) {
+        ctx.strokeStyle = "#FF00FF";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      // Draw label
+      ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
+      const labelY = (node.y || 0) + nodeRadius + fontSize;
+      ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
+      if (node.type === "citizens") {
+        let label =
+          node.ens ||
+          (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
+        ctx.fillText(label, node.x || 0, labelY);
+      } else {
+        ctx.fillText(node.name || node.id, node.x || 0, labelY);
+      }
+
+      ctx.globalAlpha = 1;
+    },
+    [hoverNode, highlightNodes, selectedSearchedNode, getNodeRadius]
+  );
 
   useEffect(() => {
     setTimeout(() => {
       // fgRef.current?.zoomToFit(500, 250);
       fgRef.current?.zoom(0.5, 500);
-      console.log("fgRef.cu", fgRef.current);
       // Dynamic force based on node degree
       fgRef.current?.d3Force("charge")?.strength((node: any) => {
         if (node.degree === 0) {
@@ -316,7 +326,7 @@ const GraphPage = () => {
 
       fgRef.current?.d3Force(
         "collision",
-        d3.forceCollide().radius(NODE_R * 1.5)
+        d3.forceCollide().radius(MIN_NODE_R * 1.5)
       );
     }, 100);
   }, [fgRef, filteredGraphData, selectedConnectionsCheckBox]);
@@ -372,10 +382,11 @@ const GraphPage = () => {
                 >
               }
               graphData={processedGraphData}
-              nodeRelSize={NODE_R}
+              nodeRelSize={MAX_NODE_R}
+              nodeVal={(node) => Math.pow(getNodeRadius(node) / MAX_NODE_R, 2)}
               nodeLabel={(node) => {
                 if (node.type === "citizens") {
-                  return node.ens ?? node.id;
+                  return `${node.ens ?? node.id} (Connections: ${node.degree})`;
                 }
                 return node.name ?? node.id;
               }}
@@ -384,7 +395,7 @@ const GraphPage = () => {
               linkDirectionalParticleWidth={(link) =>
                 highlightLinks.has(link) ? 4 : 0
               }
-              nodeCanvasObjectMode={() => "before"}
+              nodeCanvasObjectMode={() => "replace"}
               nodeCanvasObject={paintNode}
               onNodeHover={handleNodeHover}
               linkWidth={(link) => (highlightLinks.has(link) ? 2 : 0.5)}
