@@ -34,6 +34,8 @@ import {
 const MIN_NODE_R = 5;
 const MAX_NODE_R = 12;
 
+const imageCache = new Map<string, HTMLImageElement>();
+
 const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
     "citizens",
@@ -60,6 +62,7 @@ const GraphPage = () => {
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
 
   const {
     searchTerm,
@@ -246,6 +249,23 @@ const GraphPage = () => {
     [processedGraphData]
   );
 
+  const loadImage = useCallback((src: string): Promise<HTMLImageElement> => {
+    return new Promise((resolve, reject) => {
+      if (imageCache.has(src)) {
+        resolve(imageCache.get(src)!);
+      } else {
+        const img = new Image();
+        img.onload = () => {
+          imageCache.set(src, img);
+          setImagesLoaded((prev) => new Set(prev).add(src));
+          resolve(img);
+        };
+        img.onerror = reject;
+        img.src = src;
+      }
+    });
+  }, []);
+
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const nodeRadius = getNodeRadius(node);
@@ -259,13 +279,42 @@ const GraphPage = () => {
         selectedSearchedNode &&
         node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
 
-      // ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
-
+      ctx.save();
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+      ctx.clip();
 
-      ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
-      ctx.fill();
+      if (node.profileImage && imagesLoaded.has(node.profileImage)) {
+        // If the image is loaded, draw it
+        const img = imageCache.get(node.profileImage)!;
+        ctx.drawImage(
+          img,
+          (node.x || 0) - nodeRadius,
+          (node.y || 0) - nodeRadius,
+          nodeRadius * 2,
+          nodeRadius * 2
+        );
+      } else {
+        // If there's no profile image or it's not loaded yet, use the original color fill
+        ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
+        ctx.fill();
+
+        // If there's a profile image and it's not loaded, start loading it
+        if (node.profileImage && !imagesLoaded.has(node.profileImage)) {
+          loadImage(node.profileImage).catch(() => {
+            // If image loading fails, do nothing (the color fill will remain)
+          });
+        }
+      }
+
+      ctx.restore();
+
+      // Draw border
+      ctx.beginPath();
+      ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+      ctx.strokeStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
+      ctx.lineWidth = 2;
+      ctx.stroke();
 
       if (isSearchSelected) {
         ctx.strokeStyle = "#FF00FF";
@@ -288,7 +337,14 @@ const GraphPage = () => {
 
       ctx.globalAlpha = 1;
     },
-    [hoverNode, highlightNodes, selectedSearchedNode, getNodeRadius]
+    [
+      hoverNode,
+      highlightNodes,
+      selectedSearchedNode,
+      getNodeRadius,
+      loadImage,
+      imagesLoaded,
+    ]
   );
 
   useEffect(() => {
@@ -354,6 +410,19 @@ const GraphPage = () => {
       }
     }
   }, [selectedSearchedNode, processedGraphData.nodes]);
+
+  useEffect(() => {
+    // Preload images for visible nodes
+    const visibleNodes = processedGraphData.nodes.filter(
+      (node: Node) => node.profileImage
+    );
+    const imagesToLoad = visibleNodes.map((node: Node) => node.profileImage!);
+
+    // Use Promise.all to load images concurrently
+    Promise.all(imagesToLoad.map((src) => loadImage(src))).catch((error) => {
+      console.error("Error preloading images:", error);
+    });
+  }, [processedGraphData, loadImage]);
 
   return (
     <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
