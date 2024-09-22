@@ -13,7 +13,7 @@ import ForceGraph2D, {
   NodeObject,
   LinkObject,
 } from "react-force-graph-2d";
-import d3 from "d3";
+import * as d3 from "d3";
 import GraphHeader from "./components/GraphHeader";
 import GraphSidebar from "./components/GraphSidebar";
 import {
@@ -62,7 +62,6 @@ const GraphPage = () => {
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
-  const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
 
   const {
     searchTerm,
@@ -75,6 +74,9 @@ const GraphPage = () => {
 
   const fgRef =
     useRef<ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>>(null);
+
+  const imagesLoadedRef = useRef<Set<string>>(new Set());
+  const canvasCache = useRef<Map<string, HTMLCanvasElement>>(new Map());
 
   const lowercaseGraphData = useMemo(() => {
     return {
@@ -125,10 +127,13 @@ const GraphPage = () => {
     updateHighlight();
   };
 
-  const handleNodeClick = useCallback((node: Node) => {
-    setSelectedNode(node);
-    resetSearch();
-  }, []);
+  const handleNodeClick = useCallback(
+    (node: Node) => {
+      setSelectedNode(node);
+      resetSearch();
+    },
+    [resetSearch]
+  );
 
   const handleCloseRightSidebar = useCallback(() => {
     setSelectedNode(null);
@@ -192,13 +197,13 @@ const GraphPage = () => {
     });
 
     return { nodes: filteredNodes, links: filteredLinks };
-  }, [graphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
+  }, [lowercaseGraphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
   const processedGraphData = useMemo(() => {
     const gData: GraphDataWithNeighbors = { ...filteredGraphData };
 
     // Calculate the degree of each node (number of connections)
-    const nodeDegreeMap = new Map();
+    const nodeDegreeMap = new Map<string, number>();
     gData.nodes.forEach((node) => {
       nodeDegreeMap.set(node.id, 0);
     });
@@ -212,7 +217,7 @@ const GraphPage = () => {
       node.degree = nodeDegreeMap.get(node.id) || 0;
     });
 
-    // cross-link node objects
+    // Cross-link node objects
     gData.links.forEach((link) => {
       const a = gData.nodes.find(
         (n) => n.id === link.source
@@ -235,7 +240,7 @@ const GraphPage = () => {
     });
 
     return gData;
-  }, [graphData]);
+  }, [filteredGraphData]);
 
   const getNodeRadius = useCallback(
     (node: Node) => {
@@ -257,7 +262,7 @@ const GraphPage = () => {
         const img = new Image();
         img.onload = () => {
           imageCache.set(src, img);
-          setImagesLoaded((prev) => new Set(prev).add(src));
+          imagesLoadedRef.current.add(src);
           resolve(img);
         };
         img.onerror = reject;
@@ -265,6 +270,31 @@ const GraphPage = () => {
       }
     });
   }, []);
+
+  console.log("imagesLoadedRef", imagesLoadedRef);
+  console.log("canvasCache", canvasCache);
+  console.log("imageCache", imageCache);
+
+  const getPreRenderedCanvas = useCallback(
+    (src: string, nodeRadius: number): HTMLCanvasElement => {
+      if (canvasCache.current.has(src)) {
+        return canvasCache.current.get(src)!;
+      }
+
+      const img = imageCache.get(src)!;
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d")!;
+      const size = nodeRadius * 2;
+
+      canvas.width = size;
+      canvas.height = size;
+      ctx.drawImage(img, 0, 0, size, size);
+
+      canvasCache.current.set(src, canvas);
+      return canvas;
+    },
+    []
+  );
 
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
@@ -284,25 +314,31 @@ const GraphPage = () => {
       ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
       ctx.clip();
 
-      if (node.profileImage && imagesLoaded.has(node.profileImage)) {
-        // If the image is loaded, draw it
-        const img = imageCache.get(node.profileImage)!;
+      if (node.profileImage && imagesLoadedRef.current.has(node.profileImage)) {
+        // Use pre-rendered canvas
+        const preRenderedCanvas = getPreRenderedCanvas(
+          node.profileImage,
+          nodeRadius
+        );
         ctx.drawImage(
-          img,
+          preRenderedCanvas,
           (node.x || 0) - nodeRadius,
           (node.y || 0) - nodeRadius,
           nodeRadius * 2,
           nodeRadius * 2
         );
       } else {
-        // If there's no profile image or it's not loaded yet, use the original color fill
+        // Fill circle with color
         ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
         ctx.fill();
 
-        // If there's a profile image and it's not loaded, start loading it
-        if (node.profileImage && !imagesLoaded.has(node.profileImage)) {
+        // Initiate image loading if not already loaded
+        if (
+          node.profileImage &&
+          !imagesLoadedRef.current.has(node.profileImage)
+        ) {
           loadImage(node.profileImage).catch(() => {
-            // If image loading fails, do nothing (the color fill will remain)
+            // Handle image load failure if necessary
           });
         }
       }
@@ -343,49 +379,69 @@ const GraphPage = () => {
       selectedSearchedNode,
       getNodeRadius,
       loadImage,
-      imagesLoaded,
+      getPreRenderedCanvas,
     ]
   );
 
   useEffect(() => {
-    setTimeout(() => {
-      // fgRef.current?.zoomToFit(500, 250);
+    const timeout = setTimeout(() => {
+      // Initial Zoom Out
       fgRef.current?.zoom(0.5, 500);
-      // Dynamic force based on node degree
+
+      // Update Charge Force
       fgRef.current?.d3Force("charge")?.strength((node: any) => {
-        if (node.degree === 0) {
-          return -500;
-        }
-        return -60 - node.degree * 40;
+        // Nodes with higher degrees have less repulsion
+        return node.degree === 0 ? -300 : -60 - node.degree * 10;
       });
 
+      // Update Link Distance
       fgRef.current?.d3Force("link")?.distance((link: any) => {
         const sourceDegree = link.source.degree || 0;
         const targetDegree = link.target.degree || 0;
         const baseDistance = 100;
 
         if (sourceDegree === 0 || targetDegree === 0) {
-          return baseDistance * 0.3; // Bring nodes connected to no-degree nodes even closer
+          return baseDistance * 0.7; // Slightly closer for single connections
         }
 
-        return baseDistance - Math.min(sourceDegree, targetDegree) * 10;
+        return baseDistance - Math.min(sourceDegree, targetDegree) * 5;
       });
 
-      // Apply a radial force to nodes without connections to pull them even closer to the center
+      // Center Force (unchanged)
       fgRef.current?.d3Force("center", d3.forceCenter());
+
+      // Update Radial Force with Dynamic Strength
       fgRef.current?.d3Force(
         "radial",
         d3.forceRadial(50, 0, 0).strength((node: any) => {
-          return node.degree === 0 ? 1.2 : 0.05; // Stronger pull for unconnected nodes
+          const maxStrength = 1.2;
+          const minStrength = 0.05;
+          const maxDegree = Math.max(
+            ...processedGraphData.nodes.map((n) => n.degree || 0)
+          );
+
+          // Avoid division by zero
+          const normalizedDegree = maxDegree > 0 ? node.degree / maxDegree : 0;
+
+          return node.degree > 0
+            ? minStrength + normalizedDegree * (maxStrength - minStrength)
+            : 0.02;
         })
       );
 
+      // Collision Force (unchanged)
       fgRef.current?.d3Force(
         "collision",
         d3.forceCollide().radius(MIN_NODE_R * 1.5)
       );
+
+      // Restart the simulation to apply new forces
+      fgRef.current?.d3ReheatSimulation();
     }, 100);
-  }, [fgRef, filteredGraphData, selectedConnectionsCheckBox]);
+
+    // Cleanup function to clear the timeout if dependencies change
+    return () => clearTimeout(timeout);
+  }, [fgRef, processedGraphData, selectedConnectionsCheckBox]);
 
   useEffect(() => {
     if (selectedSearchedNode && fgRef.current) {
@@ -393,8 +449,6 @@ const GraphPage = () => {
         (n) => n.id.toLowerCase() === selectedSearchedNode.id.toLowerCase()
       );
       if (node && typeof node.x === "number" && typeof node.y === "number") {
-        const distanceToMove = 40;
-
         // Step 1: Zoom out
         fgRef.current.zoom(0.5, 300);
 
@@ -412,16 +466,22 @@ const GraphPage = () => {
   }, [selectedSearchedNode, processedGraphData.nodes]);
 
   useEffect(() => {
-    // Preload images for visible nodes
-    const visibleNodes = processedGraphData.nodes.filter(
-      (node: Node) => node.profileImage
-    );
-    const imagesToLoad = visibleNodes.map((node: Node) => node.profileImage!);
+    // Collect all unique profile images
+    const profileImages = processedGraphData.nodes
+      .filter((node) => node.profileImage)
+      .map((node) => node.profileImage!);
 
-    // Use Promise.all to load images concurrently
-    Promise.all(imagesToLoad.map((src) => loadImage(src))).catch((error) => {
-      console.error("Error preloading images:", error);
-    });
+    // Remove duplicates
+    const uniqueImages = Array.from(new Set(profileImages));
+
+    // Load all images
+    Promise.all(uniqueImages.map((src) => loadImage(src)))
+      .then(() => {
+        // All images loaded
+      })
+      .catch((error) => {
+        console.error("Error preloading images:", error);
+      });
   }, [processedGraphData, loadImage]);
 
   return (
