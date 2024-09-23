@@ -6,12 +6,12 @@ import {
   useCallback,
   useEffect,
   useRef,
-  MutableRefObject,
+  MutableRefObject
 } from "react";
 import ForceGraph2D, {
   ForceGraphMethods,
   NodeObject,
-  LinkObject,
+  LinkObject
 } from "react-force-graph-2d";
 import * as d3 from "d3";
 import GraphHeader from "./components/GraphHeader";
@@ -21,14 +21,14 @@ import {
   GraphDataWithNeighbors,
   Link,
   Node,
-  NodeLinkType,
+  NodeLinkType
 } from "./types";
 import { useGraphData } from "../hooks/useGraphData";
 import RightSidebar from "./components/RightSidebar";
 import { useSearchCitizens } from "../hooks/useSearchCitizens";
 import {
   CONNECTION_TYPES,
-  getConnectionTypeByKey,
+  getConnectionTypeByKey
 } from "./types/connectionTypes";
 
 const MIN_NODE_R = 5;
@@ -38,7 +38,7 @@ const imageCache = new Map<string, HTMLImageElement>();
 
 const GraphPage = () => {
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
-    "citizens",
+    "citizens"
   ]);
 
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
@@ -49,7 +49,7 @@ const GraphPage = () => {
       NodeLinkType.FarcasterConnection,
       NodeLinkType.BadgeHolderReferral,
       NodeLinkType.RegenPOAP,
-      NodeLinkType.CitizenTransaction,
+      NodeLinkType.CitizenTransaction
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
@@ -69,7 +69,7 @@ const GraphPage = () => {
     selectedSearchedNode,
     handleSearch,
     handleSelectSearchedNode,
-    resetSearch,
+    resetSearch
   } = useSearchCitizens(graphData.nodes);
 
   const fgRef =
@@ -82,7 +82,7 @@ const GraphPage = () => {
     return {
       nodes: graphData.nodes.map((node) => ({
         ...node,
-        id: node.id.toLowerCase(),
+        id: node.id.toLowerCase()
       })),
       links: graphData.links.map((link) => ({
         ...link,
@@ -93,8 +93,8 @@ const GraphPage = () => {
         target:
           typeof link.target === "string"
             ? link.target.toLowerCase()
-            : link.target,
-      })),
+            : link.target
+      }))
     };
   }, [graphData]);
 
@@ -251,6 +251,7 @@ const GraphPage = () => {
       );
       return MIN_NODE_R + (MAX_NODE_R - MIN_NODE_R) * (degree / maxDegree);
     },
+
     [processedGraphData]
   );
 
@@ -270,10 +271,6 @@ const GraphPage = () => {
       }
     });
   }, []);
-
-  console.log("imagesLoadedRef", imagesLoadedRef);
-  console.log("canvasCache", canvasCache);
-  console.log("imageCache", imageCache);
 
   const getPreRenderedCanvas = useCallback(
     (src: string, nodeRadius: number): HTMLCanvasElement => {
@@ -379,7 +376,7 @@ const GraphPage = () => {
       selectedSearchedNode,
       getNodeRadius,
       loadImage,
-      getPreRenderedCanvas,
+      getPreRenderedCanvas
     ]
   );
 
