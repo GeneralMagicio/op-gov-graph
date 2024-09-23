@@ -192,7 +192,11 @@ const GraphPage = () => {
 
     const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
     const filteredLinks = lowercaseGraphData.links.filter((link) => {
-      const isValidLink = nodeIds.has(link.source) && nodeIds.has(link.target);
+      const sourceId = link.source;
+      const targetId = link.target;
+      const isValidLink =
+        nodeIds.has(sourceId.toLowerCase()) &&
+        nodeIds.has(targetId.toLowerCase());
       return isValidLink && selectedConnectionsCheckBox.includes(link.type);
     });
 
@@ -200,8 +204,10 @@ const GraphPage = () => {
   }, [lowercaseGraphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
 
   const processedGraphData = useMemo(() => {
-    const gData: GraphDataWithNeighbors = { ...filteredGraphData };
-
+    const gData: GraphDataWithNeighbors = {
+      nodes: JSON.parse(JSON.stringify(filteredGraphData.nodes)),
+      links: JSON.parse(JSON.stringify(filteredGraphData.links))
+    };
     // Calculate the degree of each node (number of connections)
     const nodeDegreeMap = new Map<string, number>();
     gData.nodes.forEach((node) => {
@@ -382,32 +388,20 @@ const GraphPage = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // Initial Zoom Out
-      fgRef.current?.zoom(0.5, 500);
-
-      // Update Charge Force
       fgRef.current?.d3Force("charge")?.strength((node: any) => {
-        // Nodes with higher degrees have less repulsion
         return node.degree === 0 ? -300 : -60 - node.degree * 10;
       });
 
-      // Update Link Distance
       fgRef.current?.d3Force("link")?.distance((link: any) => {
         const sourceDegree = link.source.degree || 0;
         const targetDegree = link.target.degree || 0;
         const baseDistance = 100;
-
-        if (sourceDegree === 0 || targetDegree === 0) {
-          return baseDistance * 0.7; // Slightly closer for single connections
-        }
-
-        return baseDistance - Math.min(sourceDegree, targetDegree) * 5;
+        return sourceDegree === 0 || targetDegree === 0
+          ? baseDistance * 0.7
+          : baseDistance - Math.min(sourceDegree, targetDegree) * 5;
       });
 
-      // Center Force (unchanged)
       fgRef.current?.d3Force("center", d3.forceCenter());
-
-      // Update Radial Force with Dynamic Strength
       fgRef.current?.d3Force(
         "radial",
         d3.forceRadial(50, 0, 0).strength((node: any) => {
@@ -416,27 +410,17 @@ const GraphPage = () => {
           const maxDegree = Math.max(
             ...processedGraphData.nodes.map((n) => n.degree || 0)
           );
-
-          // Avoid division by zero
           const normalizedDegree = maxDegree > 0 ? node.degree / maxDegree : 0;
-
           return node.degree > 0
             ? minStrength + normalizedDegree * (maxStrength - minStrength)
             : 0.02;
         })
       );
 
-      // Collision Force (unchanged)
-      fgRef.current?.d3Force(
-        "collision",
-        d3.forceCollide().radius(MIN_NODE_R * 1.5)
-      );
-
-      // Restart the simulation to apply new forces
+      fgRef.current?.d3Force("collision", d3.forceCollide().radius(5 * 1.5));
       fgRef.current?.d3ReheatSimulation();
     }, 100);
 
-    // Cleanup function to clear the timeout if dependencies change
     return () => clearTimeout(timeout);
   }, [fgRef, processedGraphData, selectedConnectionsCheckBox]);
 
