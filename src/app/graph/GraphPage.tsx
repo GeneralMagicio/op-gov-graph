@@ -490,10 +490,8 @@ const GraphPage = () => {
         onSelectSearchedNode={handleSelectSearchedNode}
         onSearchInputClick={handleCloseRightSidebar}
       />
-      <div className="flex">
+      <div className="flex flex-grow relative">
         <GraphSidebar
-          selectedNodesCheckBox={selectedNodesCheckBox}
-          setSelectedNodesCheckBox={setSelectedNodesCheckBox}
           selectedConnectionsCheckBox={selectedConnectionsCheckBox}
           setSelectedConnectionsCheckBox={setSelectedConnectionsCheckBox}
         />
