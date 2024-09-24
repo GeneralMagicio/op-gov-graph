@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchResultsDropdown from "./SearchResultsDropdown";
 import { Node } from "../types";
 import { Search } from "lucide-react";
+import Image from "next/image";
+
 interface GraphHeaderProps {
   searchTerm: string;
   onSearch: (term: string) => void;
@@ -25,10 +27,20 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
   return (
     <header className="bg-dark-background text-dark-text-secondary p-4 flex justify-between items-center border-b border-black">
       <div className="flex items-center">
-        {/* Logo here */}
-        <h1 className="text-xl font-bold text-dark-text-primary">
-          OP Gov Graph FYI
-        </h1>
+        <Image
+          src="/images/logo.png"
+          alt="OP Gov Graph FYI Logo"
+          width={50}
+          height={50}
+          className="mr-3"
+        />
+        <div className="flex font-bold items-center">
+          <h1 className="text-dark-primary text-[26px]">Gov</h1>
+          <h1 className="text-dark-text-primary text-[26px]">Graph</h1>
+          <h1 className="px-1 text-[12px] bg-dark-primary text-black rounded-sm ml-1 flex items-center">
+            .fyi
+          </h1>
+        </div>
       </div>
 
       <nav className="flex-grow flex justify-center">

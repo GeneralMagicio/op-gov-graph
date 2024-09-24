@@ -4,7 +4,7 @@ const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   darkMode: "class",
   theme: {
@@ -17,13 +17,16 @@ const config: Config = {
           secondary: "#bb86fc", // Secondary accent color (purple)
           text: {
             primary: "#E3E8F3", // Primary text color
-            secondary: "#7B8191", // Secondary text color
+            secondary: "#7B8191" // Secondary text color
           },
-          border: "#2d3748", // Border color
-        },
+          border: "#2d3748" // Border color
+        }
       },
-    },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif']
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };
 export default config;
