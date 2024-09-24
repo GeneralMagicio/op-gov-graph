@@ -30,6 +30,7 @@ import {
   CONNECTION_TYPES,
   getConnectionTypeByKey
 } from "./types/connectionTypes";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 const MIN_NODE_R = 5;
 const MAX_NODE_R = 12;
@@ -37,6 +38,10 @@ const MAX_NODE_R = 12;
 const imageCache = new Map<string, HTMLImageElement>();
 
 const GraphPage = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
     "citizens"
   ]);
@@ -130,14 +135,24 @@ const GraphPage = () => {
   const handleNodeClick = useCallback(
     (node: Node) => {
       setSelectedNode(node);
+      // Update the URL with the nodeId query parameter
+      router.push(`${pathname}?nodeId=${node.id}`);
       resetSearch();
     },
-    [resetSearch]
+    [router, pathname, resetSearch]
   );
 
   const handleCloseRightSidebar = useCallback(() => {
     setSelectedNode(null);
-  }, []);
+    // Remove the nodeId query parameter from the URL
+    router.push(pathname);
+  }, [router, pathname]);
+
+  const handleBackgroundClick = useCallback(() => {
+    if (selectedNode) {
+      handleCloseRightSidebar();
+    }
+  }, [selectedNode, handleCloseRightSidebar]);
 
   const handleNodeHover = (node: NodeWithNeighbors | null) => {
     highlightNodes.clear();
@@ -382,7 +397,8 @@ const GraphPage = () => {
       selectedSearchedNode,
       getNodeRadius,
       loadImage,
-      getPreRenderedCanvas
+      getPreRenderedCanvas,
+      getNodeColor
     ]
   );
 
@@ -465,6 +481,19 @@ const GraphPage = () => {
       });
   }, [processedGraphData, loadImage]);
 
+  // Initialize selectedNode from URL query parameter
+  useEffect(() => {
+    const nodeId = searchParams.get("nodeId");
+    if (nodeId) {
+      const node = processedGraphData.nodes.find(
+        (n) => n.id.toLowerCase() === nodeId.toLowerCase()
+      );
+      if (node) {
+        setSelectedNode(node);
+      }
+    }
+  }, [searchParams, processedGraphData.nodes]);
+
   return (
     <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
       <GraphHeader
@@ -512,6 +541,7 @@ const GraphPage = () => {
               nodeColor={getNodeColor}
               linkColor={(link) => getLinkColor(link, highlightLinks.has(link))}
               onNodeClick={handleNodeClick}
+              onBackgroundClick={handleBackgroundClick}
             />
           )}
         </main>
