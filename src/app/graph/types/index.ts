@@ -7,7 +7,7 @@ export enum NodeLinkType {
   FarcasterConnection = "FarcasterConnection",
   BadgeHolderReferral = "BadgeHolderReferral",
   RegenPOAP = "RegenPOAP",
-  CitizenTransaction = "CitizenTransaction",
+  CitizenTransaction = "CitizenTransaction"
   // RefiDAO = "RefiDAO",
 }
 
