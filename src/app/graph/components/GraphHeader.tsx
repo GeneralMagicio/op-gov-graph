@@ -15,7 +15,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
   onSearch,
   searchResults,
   onSelectSearchedNode,
-  onSearchInputClick,
+  onSearchInputClick
 }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
