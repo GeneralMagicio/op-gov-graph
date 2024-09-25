@@ -58,6 +58,7 @@ const GraphPage = () => {
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [clickedNode, setClickedNode] = useState<Node | null>(null);
 
   const graphData = useGraphData(
     selectedConnectionsCheckBox,
@@ -135,6 +136,7 @@ const GraphPage = () => {
   const handleNodeClick = useCallback(
     (node: Node) => {
       setSelectedNode(node);
+      setClickedNode(node);
       // Update the URL with the nodeId query parameter
       router.push(`${pathname}?nodeId=${node.id}`);
       resetSearch();
@@ -154,29 +156,58 @@ const GraphPage = () => {
     }
   }, [selectedNode, handleCloseRightSidebar]);
 
-  const handleNodeHover = (node: NodeWithNeighbors | null) => {
-    highlightNodes.clear();
-    highlightLinks.clear();
-    if (node) {
-      highlightNodes.add(node);
-      node.links?.forEach((link) => {
-        highlightLinks.add(link);
-        const targetNode =
-          typeof link.target === "object"
-            ? link.target
-            : graphData.nodes.find((n) => n.id === link.target);
-        const sourceNode =
-          typeof link.source === "object"
-            ? link.source
-            : graphData.nodes.find((n) => n.id === link.source);
-        if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
-        if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
-      });
-    }
+  const handleNodeHover = useCallback(
+    (node: NodeWithNeighbors | null) => {
+      if (node && node !== clickedNode) {
+        highlightNodes.clear();
+        highlightLinks.clear();
+        highlightNodes.add(node);
+        node.links?.forEach((link) => {
+          highlightLinks.add(link);
+          const targetNode =
+            typeof link.target === "object"
+              ? link.target
+              : graphData.nodes.find((n) => n.id === link.target);
+          const sourceNode =
+            typeof link.source === "object"
+              ? link.source
+              : graphData.nodes.find((n) => n.id === link.source);
+          if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
+          if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
+        });
+      } else if (!node && clickedNode) {
+        // If hovering away and there's a clicked node, restore its highlight
+        highlightNodes.clear();
+        highlightLinks.clear();
+        highlightNodes.add(clickedNode);
+        clickedNode.links?.forEach((link) => {
+          highlightLinks.add(link);
+          const targetNode =
+            typeof link.target === "object"
+              ? link.target
+              : graphData.nodes.find((n) => n.id === link.target);
+          const sourceNode =
+            typeof link.source === "object"
+              ? link.source
+              : graphData.nodes.find((n) => n.id === link.source);
+          if (targetNode && targetNode !== clickedNode)
+            highlightNodes.add(targetNode);
+          if (sourceNode && sourceNode !== clickedNode)
+            highlightNodes.add(sourceNode);
+        });
+      }
 
-    setHoverNode(node);
-    updateHighlight();
-  };
+      setHoverNode(node);
+      updateHighlight();
+    },
+    [
+      clickedNode,
+      graphData.nodes,
+      highlightNodes,
+      highlightLinks,
+      updateHighlight
+    ]
+  );
 
   const getNodeColor = (node: Node) => {
     if (node.type === "citizens") return "#a4b2e1";
@@ -366,7 +397,7 @@ const GraphPage = () => {
       // Draw border
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-      ctx.strokeStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
+      ctx.strokeStyle = isHighlighted ? "white" : getNodeColor(node);
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -537,7 +568,7 @@ const GraphPage = () => {
               onNodeHover={handleNodeHover}
               linkWidth={(link) => (highlightLinks.has(link) ? 2 : 0.5)}
               backgroundColor="linear-gradient(to bottom, #131B2F, #162c45)"
-              onLinkHover={handleLinkHover as any}
+              onLinkHover={!selectedNode && (handleLinkHover as any)}
               nodeColor={getNodeColor}
               linkColor={(link) => getLinkColor(link, highlightLinks.has(link))}
               onNodeClick={handleNodeClick}
