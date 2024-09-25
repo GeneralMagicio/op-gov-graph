@@ -66,6 +66,7 @@ export interface Node extends ICitizen {
     referredBy: BadgeHolderReferralInfo[];
     referred: BadgeHolderReferralInfo[];
   };
+  links?: Link[];
   // refiDAO?: boolean;
 }
 
