@@ -371,11 +371,17 @@ const GraphPage = () => {
       const img = imageCache.get(src)!;
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d")!;
-      const size = nodeRadius * 2;
+      const size = nodeRadius * 4; // Increase the size for higher resolution
 
       canvas.width = size;
       canvas.height = size;
       ctx.drawImage(img, 0, 0, size, size);
+
+      // Apply a circular mask
+      ctx.globalCompositeOperation = "destination-in";
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      ctx.fill();
 
       canvasCache.current.set(src, canvas);
       return canvas;
@@ -396,17 +402,16 @@ const GraphPage = () => {
         selectedSearchedNode &&
         node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
 
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-      ctx.clip();
-
       if (node.profileImage && imagesLoadedRef.current.has(node.profileImage)) {
         // Use pre-rendered canvas
         const preRenderedCanvas = getPreRenderedCanvas(
           node.profileImage,
-          nodeRadius
+          nodeRadius * 2 // Double the radius for higher quality
         );
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+        ctx.clip();
         ctx.drawImage(
           preRenderedCanvas,
           (node.x || 0) - nodeRadius,
@@ -414,8 +419,11 @@ const GraphPage = () => {
           nodeRadius * 2,
           nodeRadius * 2
         );
+        ctx.restore();
       } else {
         // Fill circle with color
+        ctx.beginPath();
+        ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
         ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
         ctx.fill();
 
@@ -430,18 +438,16 @@ const GraphPage = () => {
         }
       }
 
-      ctx.restore();
-
       // Draw border
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
       ctx.strokeStyle = isHighlighted ? "white" : getNodeColor(node);
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2 / globalScale;
       ctx.stroke();
 
       if (isSearchSelected) {
         ctx.strokeStyle = "#FF00FF";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2 / globalScale;
         ctx.stroke();
       }
 
