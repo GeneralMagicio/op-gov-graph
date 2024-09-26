@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Node, BadgeHolderReferralInfo } from "../types";
 import { useConvertAddressToENS } from "@/app/hooks/useConvertAddressToENS";
 import { useFarcasterData } from "@/app/hooks/useFarcasterData";
+import { useRouter, usePathname } from "next/navigation";
 
 interface RightSidebarProps {
   selectedNode: Node | null;
@@ -15,13 +16,15 @@ const formatAddress = (address: string) => {
 
 const RightSidebar: React.FC<RightSidebarProps> = ({
   selectedNode,
-  onClose,
+  onClose
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
   const {
     getFarcasterDataForConnections,
     getFarcasterDataByAddress,
-    isLoading,
+    isLoading
   } = useFarcasterData();
 
   const farcasterConnections = useMemo(() => {
@@ -44,6 +47,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
     setIsVisible(false);
     setTimeout(onClose, 300); // Delay onClose to allow animation to complete
   };
+
+  const handleConnectionClick = useCallback(
+    (connectionId: string) => {
+      router.push(`${pathname}?nodeId=${connectionId}`);
+    },
+    [router, pathname, handleClose]
+  );
 
   return (
     <div
@@ -82,6 +92,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
           <FarcasterConnectionsSection
             connections={farcasterConnections}
             isLoading={isLoading}
+            onConnectionClick={handleConnectionClick}
           />
         </div>
       )}
@@ -228,7 +239,8 @@ const FarcasterConnectionsSection: React.FC<{
     profileName?: string;
   }[];
   isLoading: boolean;
-}> = ({ connections, isLoading }) => {
+  onConnectionClick: (connectionId: string) => void;
+}> = ({ connections, isLoading, onConnectionClick }) => {
   if (isLoading) return <p>Loading Farcaster connections...</p>;
   if (connections.length === 0) return null;
 
@@ -237,7 +249,13 @@ const FarcasterConnectionsSection: React.FC<{
       <h3 className="text-lg font-semibold mb-2">Farcaster Connections</h3>
       {connections.map((connection, index) =>
         connection.profileImage || connection.profileName ? (
-          <div key={index} className="flex items-center mb-2">
+          <div
+            key={index}
+            className="flex items-center mb-2 cursor-pointer hover:bg-dark-hover transition-colors duration-200 rounded-md p-1"
+            onClick={() =>
+              onConnectionClick(connection.id || connection.userId)
+            }
+          >
             <img
               src={connection.profileImage || "/images/profile-ph.jpg"}
               alt="Connection"
