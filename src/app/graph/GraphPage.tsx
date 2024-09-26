@@ -109,6 +109,103 @@ const GraphPage = () => {
     setHighlightLinks(new Set(highlightLinks));
   };
 
+  const filteredGraphData = useMemo(() => {
+    const filteredNodes = lowercaseGraphData.nodes.filter(
+      (node) =>
+        selectedNodesCheckBox.includes(node.type || "") ||
+        CONNECTION_TYPES.some(
+          (type) => type.key === (node.type as NodeLinkType)
+        )
+    );
+
+    const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
+    const filteredLinks = lowercaseGraphData.links.filter((link) => {
+      const sourceId = link.source;
+      const targetId = link.target;
+      const isValidLink =
+        nodeIds.has(sourceId.toLowerCase()) &&
+        nodeIds.has(targetId.toLowerCase());
+      return isValidLink && selectedConnectionsCheckBox.includes(link.type);
+    });
+
+    return { nodes: filteredNodes, links: filteredLinks };
+  }, [lowercaseGraphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
+
+  const processedGraphData = useMemo(() => {
+    const gData: GraphDataWithNeighbors = {
+      nodes: JSON.parse(JSON.stringify(filteredGraphData.nodes)),
+      links: JSON.parse(JSON.stringify(filteredGraphData.links))
+    };
+    // Calculate the degree of each node (number of connections)
+    const nodeDegreeMap = new Map<string, number>();
+    gData.nodes.forEach((node) => {
+      nodeDegreeMap.set(node.id, 0);
+    });
+
+    gData.links.forEach((link) => {
+      nodeDegreeMap.set(link.source, (nodeDegreeMap.get(link.source) || 0) + 1);
+      nodeDegreeMap.set(link.target, (nodeDegreeMap.get(link.target) || 0) + 1);
+    });
+
+    gData.nodes.forEach((node) => {
+      node.degree = nodeDegreeMap.get(node.id) || 0;
+    });
+
+    // Cross-link node objects
+    gData.links.forEach((link) => {
+      const a = gData.nodes.find(
+        (n) => n.id === link.source
+      ) as NodeWithNeighbors;
+      const b = gData.nodes.find(
+        (n) => n.id === link.target
+      ) as NodeWithNeighbors;
+
+      if (a && b) {
+        !a.neighbors && (a.neighbors = []);
+        !b.neighbors && (b.neighbors = []);
+        a.neighbors.push(b);
+        b.neighbors.push(a);
+
+        !a.links && (a.links = []);
+        !b.links && (b.links = []);
+        a.links.push(link);
+        b.links.push(link);
+      }
+    });
+
+    return gData;
+  }, [filteredGraphData]);
+
+  const highlightNodeConnections = useCallback(
+    (node: Node | null) => {
+      highlightNodes.clear();
+      highlightLinks.clear();
+
+      if (node) {
+        highlightNodes.add(node);
+        node.links?.forEach((link) => {
+          highlightLinks.add(link);
+
+          const targetNode =
+            typeof link.target === "object"
+              ? link.target
+              : processedGraphData.nodes.find((n) => n.id === link.target);
+
+          const sourceNode =
+            typeof link.source === "object"
+              ? link.source
+              : processedGraphData.nodes.find((n) => n.id === link.source);
+
+          if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
+          if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
+        });
+      }
+
+      updateHighlight();
+    },
+    [processedGraphData.nodes]
+  );
+
   const handleLinkHover = (link: Link | null) => {
     highlightNodes.clear();
     highlightLinks.clear();
@@ -137,18 +234,26 @@ const GraphPage = () => {
     (node: Node) => {
       setSelectedNode(node);
       setClickedNode(node);
+      highlightNodeConnections(node);
+
       // Update the URL with the nodeId query parameter
       router.push(`${pathname}?nodeId=${node.id}`);
       resetSearch();
     },
-    [router, pathname, resetSearch]
+    [router, pathname, resetSearch, highlightNodeConnections]
   );
 
   const handleCloseRightSidebar = useCallback(() => {
     setSelectedNode(null);
+    setClickedNode(null); // Clear the clicked node
+    // Clear all highlights
+    highlightNodes.clear();
+    highlightLinks.clear();
+    updateHighlight();
+
     // Remove the nodeId query parameter from the URL
     router.push(pathname);
-  }, [router, pathname]);
+  }, [router, pathname, highlightNodes, highlightLinks, updateHighlight]);
 
   const handleBackgroundClick = useCallback(() => {
     if (selectedNode) {
@@ -226,73 +331,6 @@ const GraphPage = () => {
           .padStart(2, "0")}`
       : `rgba(153, 153, 153, ${opacity})`;
   }, []);
-
-  const filteredGraphData = useMemo(() => {
-    const filteredNodes = lowercaseGraphData.nodes.filter(
-      (node) =>
-        selectedNodesCheckBox.includes(node.type || "") ||
-        CONNECTION_TYPES.some(
-          (type) => type.key === (node.type as NodeLinkType)
-        )
-    );
-
-    const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
-    const filteredLinks = lowercaseGraphData.links.filter((link) => {
-      const sourceId = link.source;
-      const targetId = link.target;
-      const isValidLink =
-        nodeIds.has(sourceId.toLowerCase()) &&
-        nodeIds.has(targetId.toLowerCase());
-      return isValidLink && selectedConnectionsCheckBox.includes(link.type);
-    });
-
-    return { nodes: filteredNodes, links: filteredLinks };
-  }, [lowercaseGraphData, selectedNodesCheckBox, selectedConnectionsCheckBox]);
-
-  const processedGraphData = useMemo(() => {
-    const gData: GraphDataWithNeighbors = {
-      nodes: JSON.parse(JSON.stringify(filteredGraphData.nodes)),
-      links: JSON.parse(JSON.stringify(filteredGraphData.links))
-    };
-    // Calculate the degree of each node (number of connections)
-    const nodeDegreeMap = new Map<string, number>();
-    gData.nodes.forEach((node) => {
-      nodeDegreeMap.set(node.id, 0);
-    });
-
-    gData.links.forEach((link) => {
-      nodeDegreeMap.set(link.source, (nodeDegreeMap.get(link.source) || 0) + 1);
-      nodeDegreeMap.set(link.target, (nodeDegreeMap.get(link.target) || 0) + 1);
-    });
-
-    gData.nodes.forEach((node) => {
-      node.degree = nodeDegreeMap.get(node.id) || 0;
-    });
-
-    // Cross-link node objects
-    gData.links.forEach((link) => {
-      const a = gData.nodes.find(
-        (n) => n.id === link.source
-      ) as NodeWithNeighbors;
-      const b = gData.nodes.find(
-        (n) => n.id === link.target
-      ) as NodeWithNeighbors;
-
-      if (a && b) {
-        !a.neighbors && (a.neighbors = []);
-        !b.neighbors && (b.neighbors = []);
-        a.neighbors.push(b);
-        b.neighbors.push(a);
-
-        !a.links && (a.links = []);
-        !b.links && (b.links = []);
-        a.links.push(link);
-        b.links.push(link);
-      }
-    });
-
-    return gData;
-  }, [filteredGraphData]);
 
   const getNodeRadius = useCallback(
     (node: Node) => {
@@ -521,9 +559,19 @@ const GraphPage = () => {
       );
       if (node) {
         setSelectedNode(node);
+        setClickedNode(node);
+        highlightNodeConnections(node);
+
+        // Optionally center and zoom to the node
+        fgRef.current?.centerAt(node.x, node.y, 300);
+        // fgRef.current?.zoom(2, 300);
       }
     }
-  }, [searchParams, processedGraphData.nodes]);
+  }, [searchParams, processedGraphData.nodes, highlightNodeConnections]);
+
+  useEffect(() => {
+    highlightNodeConnections(clickedNode);
+  }, [clickedNode, highlightNodeConnections]);
 
   return (
     <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
