@@ -37,10 +37,10 @@ const MAX_NODE_R = 12;
 
 const imageCache = new Map<string, HTMLImageElement>();
 
-const GraphPage = () => {
+export default function GraphPage() {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
     "citizens"
@@ -637,6 +637,4 @@ const GraphPage = () => {
       </div>
     </div>
   );
-};
-
-export default GraphPage;
+}
