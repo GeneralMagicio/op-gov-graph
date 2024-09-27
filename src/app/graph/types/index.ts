@@ -7,7 +7,7 @@ export enum NodeLinkType {
   FarcasterConnection = "FarcasterConnection",
   BadgeHolderReferral = "BadgeHolderReferral",
   RegenPOAP = "RegenPOAP",
-  CitizenTransaction = "CitizenTransaction",
+  CitizenTransaction = "CitizenTransaction"
   // RefiDAO = "RefiDAO",
 }
 
@@ -66,6 +66,7 @@ export interface Node extends ICitizen {
     referredBy: BadgeHolderReferralInfo[];
     referred: BadgeHolderReferralInfo[];
   };
+  links?: Link[];
   // refiDAO?: boolean;
 }
 

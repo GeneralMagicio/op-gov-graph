@@ -1,10 +1,10 @@
-import Image from "next/image";
-import GraphPage from "./graph/GraphPage";
+import { Suspense } from 'react'
+import GraphPage from './graph/GraphPage'
 
 export default function Home() {
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <GraphPage />
-    </div>
-  );
+    </Suspense>
+  )
 }

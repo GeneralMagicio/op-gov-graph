@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+
+const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "OP GovGraph",
-  description: "OP GovGraph",
+  description: "OP GovGraph"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className="bg-dark-background">{children}</body>
+      <body className={`${poppins.className}`}>{children}</body>
     </html>
   );
 }

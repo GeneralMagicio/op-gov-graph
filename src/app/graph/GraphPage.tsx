@@ -30,13 +30,18 @@ import {
   CONNECTION_TYPES,
   getConnectionTypeByKey
 } from "./types/connectionTypes";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 const MIN_NODE_R = 5;
 const MAX_NODE_R = 12;
 
 const imageCache = new Map<string, HTMLImageElement>();
 
-const GraphPage = () => {
+export default function GraphPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
     "citizens"
   ]);
@@ -53,6 +58,7 @@ const GraphPage = () => {
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [clickedNode, setClickedNode] = useState<Node | null>(null);
 
   const graphData = useGraphData(
     selectedConnectionsCheckBox,
@@ -102,84 +108,6 @@ const GraphPage = () => {
     setHighlightNodes(new Set(highlightNodes));
     setHighlightLinks(new Set(highlightLinks));
   };
-
-  const handleLinkHover = (link: Link | null) => {
-    highlightNodes.clear();
-    highlightLinks.clear();
-
-    if (link) {
-      highlightLinks.add(link);
-      const sourceNode =
-        typeof link.source === "object"
-          ? link.source
-          : graphData.nodes.find((n) => n.id === link.source);
-      const targetNode =
-        typeof link.target === "object"
-          ? link.target
-          : graphData.nodes.find((n) => n.id === link.target);
-
-      if (sourceNode && targetNode) {
-        highlightNodes.add(sourceNode);
-        highlightNodes.add(targetNode);
-      }
-    }
-
-    updateHighlight();
-  };
-
-  const handleNodeClick = useCallback(
-    (node: Node) => {
-      setSelectedNode(node);
-      resetSearch();
-    },
-    [resetSearch]
-  );
-
-  const handleCloseRightSidebar = useCallback(() => {
-    setSelectedNode(null);
-  }, []);
-
-  const handleNodeHover = (node: NodeWithNeighbors | null) => {
-    highlightNodes.clear();
-    highlightLinks.clear();
-    if (node) {
-      highlightNodes.add(node);
-      node.links?.forEach((link) => {
-        highlightLinks.add(link);
-        const targetNode =
-          typeof link.target === "object"
-            ? link.target
-            : graphData.nodes.find((n) => n.id === link.target);
-        const sourceNode =
-          typeof link.source === "object"
-            ? link.source
-            : graphData.nodes.find((n) => n.id === link.source);
-        if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
-        if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
-      });
-    }
-
-    setHoverNode(node);
-    updateHighlight();
-  };
-
-  const getNodeColor = (node: Node) => {
-    if (node.type === "citizens") return "#a4b2e1";
-    const connectionType = CONNECTION_TYPES.find(
-      (type) => type.key === (node.type as NodeLinkType)
-    );
-    return connectionType ? connectionType.color : "#3388ff";
-  };
-
-  const getLinkColor = useCallback((link: Link, highlighted: boolean) => {
-    const opacity = highlighted ? 1 : 0.1;
-    const connectionType = getConnectionTypeByKey(link.type);
-    return connectionType
-      ? `${connectionType.color}${Math.round(opacity * 255)
-          .toString(16)
-          .padStart(2, "0")}`
-      : `rgba(153, 153, 153, ${opacity})`;
-  }, []);
 
   const filteredGraphData = useMemo(() => {
     const filteredNodes = lowercaseGraphData.nodes.filter(
@@ -248,6 +176,162 @@ const GraphPage = () => {
     return gData;
   }, [filteredGraphData]);
 
+  const highlightNodeConnections = useCallback(
+    (node: Node | null) => {
+      highlightNodes.clear();
+      highlightLinks.clear();
+
+      if (node) {
+        highlightNodes.add(node);
+        node.links?.forEach((link) => {
+          highlightLinks.add(link);
+
+          const targetNode =
+            typeof link.target === "object"
+              ? link.target
+              : processedGraphData.nodes.find((n) => n.id === link.target);
+
+          const sourceNode =
+            typeof link.source === "object"
+              ? link.source
+              : processedGraphData.nodes.find((n) => n.id === link.source);
+
+          if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
+          if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
+        });
+      }
+
+      updateHighlight();
+    },
+    [processedGraphData.nodes]
+  );
+
+  const handleLinkHover = (link: Link | null) => {
+    highlightNodes.clear();
+    highlightLinks.clear();
+
+    if (link) {
+      highlightLinks.add(link);
+      const sourceNode =
+        typeof link.source === "object"
+          ? link.source
+          : graphData.nodes.find((n) => n.id === link.source);
+      const targetNode =
+        typeof link.target === "object"
+          ? link.target
+          : graphData.nodes.find((n) => n.id === link.target);
+
+      if (sourceNode && targetNode) {
+        highlightNodes.add(sourceNode);
+        highlightNodes.add(targetNode);
+      }
+    }
+
+    updateHighlight();
+  };
+
+  const handleNodeClick = useCallback(
+    (node: Node) => {
+      setSelectedNode(node);
+      setClickedNode(node);
+      highlightNodeConnections(node);
+
+      // Update the URL with the nodeId query parameter
+      router.push(`${pathname}?nodeId=${node.id}`);
+      resetSearch();
+    },
+    [router, pathname, resetSearch, highlightNodeConnections]
+  );
+
+  const handleCloseRightSidebar = useCallback(() => {
+    setSelectedNode(null);
+    setClickedNode(null); // Clear the clicked node
+    // Clear all highlights
+    highlightNodes.clear();
+    highlightLinks.clear();
+    updateHighlight();
+
+    // Remove the nodeId query parameter from the URL
+    router.push(pathname);
+  }, [router, pathname, highlightNodes, highlightLinks, updateHighlight]);
+
+  const handleBackgroundClick = useCallback(() => {
+    if (selectedNode) {
+      handleCloseRightSidebar();
+    }
+  }, [selectedNode, handleCloseRightSidebar]);
+
+  const handleNodeHover = useCallback(
+    (node: NodeWithNeighbors | null) => {
+      if (node && node !== clickedNode) {
+        highlightNodes.clear();
+        highlightLinks.clear();
+        highlightNodes.add(node);
+        node.links?.forEach((link) => {
+          highlightLinks.add(link);
+          const targetNode =
+            typeof link.target === "object"
+              ? link.target
+              : graphData.nodes.find((n) => n.id === link.target);
+          const sourceNode =
+            typeof link.source === "object"
+              ? link.source
+              : graphData.nodes.find((n) => n.id === link.source);
+          if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
+          if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
+        });
+      } else if (!node && clickedNode) {
+        // If hovering away and there's a clicked node, restore its highlight
+        highlightNodes.clear();
+        highlightLinks.clear();
+        highlightNodes.add(clickedNode);
+        clickedNode.links?.forEach((link) => {
+          highlightLinks.add(link);
+          const targetNode =
+            typeof link.target === "object"
+              ? link.target
+              : graphData.nodes.find((n) => n.id === link.target);
+          const sourceNode =
+            typeof link.source === "object"
+              ? link.source
+              : graphData.nodes.find((n) => n.id === link.source);
+          if (targetNode && targetNode !== clickedNode)
+            highlightNodes.add(targetNode);
+          if (sourceNode && sourceNode !== clickedNode)
+            highlightNodes.add(sourceNode);
+        });
+      }
+
+      setHoverNode(node);
+      updateHighlight();
+    },
+    [
+      clickedNode,
+      graphData.nodes,
+      highlightNodes,
+      highlightLinks,
+      updateHighlight
+    ]
+  );
+
+  const getNodeColor = (node: Node) => {
+    if (node.type === "citizens") return "#a4b2e1";
+    const connectionType = CONNECTION_TYPES.find(
+      (type) => type.key === (node.type as NodeLinkType)
+    );
+    return connectionType ? connectionType.color : "#3388ff";
+  };
+
+  const getLinkColor = useCallback((link: Link, highlighted: boolean) => {
+    const opacity = highlighted ? 1 : 0.1;
+    const connectionType = getConnectionTypeByKey(link.type);
+    return connectionType
+      ? `${connectionType.color}${Math.round(opacity * 255)
+          .toString(16)
+          .padStart(2, "0")}`
+      : `rgba(153, 153, 153, ${opacity})`;
+  }, []);
+
   const getNodeRadius = useCallback(
     (node: Node) => {
       if (node.type !== "citizens") return MIN_NODE_R;
@@ -287,11 +371,17 @@ const GraphPage = () => {
       const img = imageCache.get(src)!;
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d")!;
-      const size = nodeRadius * 2;
+      const size = nodeRadius * 4; // Increase the size for higher resolution
 
       canvas.width = size;
       canvas.height = size;
       ctx.drawImage(img, 0, 0, size, size);
+
+      // Apply a circular mask
+      ctx.globalCompositeOperation = "destination-in";
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      ctx.fill();
 
       canvasCache.current.set(src, canvas);
       return canvas;
@@ -312,17 +402,16 @@ const GraphPage = () => {
         selectedSearchedNode &&
         node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
 
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-      ctx.clip();
-
       if (node.profileImage && imagesLoadedRef.current.has(node.profileImage)) {
         // Use pre-rendered canvas
         const preRenderedCanvas = getPreRenderedCanvas(
           node.profileImage,
-          nodeRadius
+          nodeRadius * 2 // Double the radius for higher quality
         );
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+        ctx.clip();
         ctx.drawImage(
           preRenderedCanvas,
           (node.x || 0) - nodeRadius,
@@ -330,8 +419,11 @@ const GraphPage = () => {
           nodeRadius * 2,
           nodeRadius * 2
         );
+        ctx.restore();
       } else {
         // Fill circle with color
+        ctx.beginPath();
+        ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
         ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
         ctx.fill();
 
@@ -346,18 +438,16 @@ const GraphPage = () => {
         }
       }
 
-      ctx.restore();
-
       // Draw border
       ctx.beginPath();
       ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-      ctx.strokeStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = isHighlighted ? "white" : getNodeColor(node);
+      ctx.lineWidth = 2 / globalScale;
       ctx.stroke();
 
       if (isSearchSelected) {
         ctx.strokeStyle = "#FF00FF";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2 / globalScale;
         ctx.stroke();
       }
 
@@ -382,7 +472,8 @@ const GraphPage = () => {
       selectedSearchedNode,
       getNodeRadius,
       loadImage,
-      getPreRenderedCanvas
+      getPreRenderedCanvas,
+      getNodeColor
     ]
   );
 
@@ -465,6 +556,29 @@ const GraphPage = () => {
       });
   }, [processedGraphData, loadImage]);
 
+  // Initialize selectedNode from URL query parameter
+  useEffect(() => {
+    const nodeId = searchParams.get("nodeId");
+    if (nodeId) {
+      const node = processedGraphData.nodes.find(
+        (n) => n.id.toLowerCase() === nodeId.toLowerCase()
+      );
+      if (node) {
+        setSelectedNode(node);
+        setClickedNode(node);
+        highlightNodeConnections(node);
+
+        // Optionally center and zoom to the node
+        fgRef.current?.centerAt(node.x, node.y, 300);
+        // fgRef.current?.zoom(2, 300);
+      }
+    }
+  }, [searchParams, processedGraphData.nodes, highlightNodeConnections]);
+
+  useEffect(() => {
+    highlightNodeConnections(clickedNode);
+  }, [clickedNode, highlightNodeConnections]);
+
   return (
     <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
       <GraphHeader
@@ -508,10 +622,11 @@ const GraphPage = () => {
               onNodeHover={handleNodeHover}
               linkWidth={(link) => (highlightLinks.has(link) ? 2 : 0.5)}
               backgroundColor="linear-gradient(to bottom, #131B2F, #162c45)"
-              onLinkHover={handleLinkHover as any}
+              onLinkHover={!selectedNode && (handleLinkHover as any)}
               nodeColor={getNodeColor}
               linkColor={(link) => getLinkColor(link, highlightLinks.has(link))}
               onNodeClick={handleNodeClick}
+              onBackgroundClick={handleBackgroundClick}
             />
           )}
         </main>
@@ -522,6 +637,4 @@ const GraphPage = () => {
       </div>
     </div>
   );
-};
-
-export default GraphPage;
+}
