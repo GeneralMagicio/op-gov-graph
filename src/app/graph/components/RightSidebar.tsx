@@ -3,6 +3,8 @@ import { Node, BadgeHolderReferralInfo } from "../types";
 import { useConvertAddressToENS } from "@/app/hooks/useConvertAddressToENS";
 import { useFarcasterData } from "@/app/hooks/useFarcasterData";
 import { useRouter, usePathname } from "next/navigation";
+import { Tooltip } from "react-tooltip";
+import { Info } from "lucide-react";
 
 interface RightSidebarProps {
   selectedNode: Node | null;
@@ -178,7 +180,20 @@ const BadgeholderReferralSection: React.FC<{
 
   return (
     <div className="mb-6">
-      <h3 className="text-lg font-semibold mb-2">Badgeholder Referral</h3>
+      <h3 className="text-lg font-semibold mb-2 flex items-center">
+        <span className="mr-2">Badgeholder Referral</span>
+        <Info
+          size={16}
+          className="text-dark-text-secondary cursor-help"
+          data-tooltip-id="badgeholder-referral-tooltip"
+        />
+      </h3>
+      <Tooltip
+        id="badgeholder-referral-tooltip"
+        place="top"
+        className="max-w-[300px] text-center"
+        content="Shows referral connections for RPGF (RetroPGF) rounds. 'Referred By' indicates who referred this badgeholder, while 'Referred' shows who this badgeholder referred for participation in specific RPGF rounds."
+      />
       {referrals.referredBy.map((referral, index) => (
         <ReferralItem
           key={`referredBy-${index}`}
@@ -246,7 +261,20 @@ const FarcasterConnectionsSection: React.FC<{
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-2">Following on Farcaster</h3>
+      <h3 className="text-lg font-semibold mb-2 flex items-center">
+        <span className="mr-2">Following on Farcaster</span>
+        <Info
+          size={16}
+          className="text-dark-text-secondary cursor-help"
+          data-tooltip-id="farcaster-following-tooltip"
+        />
+      </h3>
+      <Tooltip
+        id="farcaster-following-tooltip"
+        place="top"
+        className="max-w-xs whitespace-pre-line text-center"
+        content={`Accounts that this user follows\non the Farcaster network`}
+      />
       {connections.map((connection, index) =>
         connection.profileImage || connection.profileName ? (
           <div
