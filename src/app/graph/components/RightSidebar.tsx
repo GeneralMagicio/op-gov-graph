@@ -241,12 +241,12 @@ const FarcasterConnectionsSection: React.FC<{
   isLoading: boolean;
   onConnectionClick: (connectionId: string) => void;
 }> = ({ connections, isLoading, onConnectionClick }) => {
-  if (isLoading) return <p>Loading Farcaster connections...</p>;
+  if (isLoading) return <p>Loading Following on Farcaster...</p>;
   if (connections.length === 0) return null;
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-2">Farcaster Connections</h3>
+      <h3 className="text-lg font-semibold mb-2">Following on Farcaster</h3>
       {connections.map((connection, index) =>
         connection.profileImage || connection.profileName ? (
           <div
