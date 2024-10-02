@@ -273,7 +273,7 @@ const FarcasterConnectionsSection: React.FC<{
         id="farcaster-following-tooltip"
         place="top"
         className="max-w-xs whitespace-pre-line text-center"
-        content={`Accounts that this user follows\non the Farcaster network`}
+        content={`Citizens that this user follows\non the Farcaster network`}
       />
       {connections.map((connection, index) =>
         connection.profileImage || connection.profileName ? (
