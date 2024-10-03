@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { CONNECTION_TYPES } from "../types/connectionTypes";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { NodeLinkType } from "../types";
+import { Tooltip } from "react-tooltip";
 
 interface IGraphSidebarProps {
   selectedConnectionsCheckBox: NodeLinkType[];
@@ -55,7 +56,12 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
       >
         <div className="space-y-2">
           {CONNECTION_TYPES.map((connection) => (
-            <div key={connection.key} className="flex items-center">
+            <div
+              key={connection.key}
+              className="flex items-center"
+              data-tooltip-id={`${connection.key}-tooltip`}
+              data-tooltip-content={getTooltipContent(connection.key)}
+            >
               <div className="relative flex items-center">
                 <input
                   type="checkbox"
@@ -79,17 +85,43 @@ const GraphSidebar: React.FC<IGraphSidebarProps> = ({
               </div>
               <label
                 htmlFor={connection.key}
-                className="ml-3 text-xs"
+                className="ml-3 text-xs cursor-pointer"
                 style={{ color: connection.color }}
               >
                 {connection.text}
               </label>
+              <Tooltip
+                id={`${connection.key}-tooltip`}
+                place="right"
+                className="max-w-xs whitespace-pre-line text-center"
+              />
             </div>
           ))}
         </div>
       </div>
     </aside>
   );
+};
+
+const getTooltipContent = (connectionType: NodeLinkType): string => {
+  switch (connectionType) {
+    case NodeLinkType.FarcasterConnection:
+      return "Connections between users on the Farcaster network";
+    case NodeLinkType.BadgeHolderReferral:
+      return "Referral connections for RPGF (RetroPGF) rounds";
+    case NodeLinkType.TECHolder:
+      return "Token Engineering Commons (TEC) token holders";
+    case NodeLinkType.RegenScore:
+      return "Connections based on RegenScore, indicating regenerative finance activity";
+    case NodeLinkType.TrustedSeed:
+      return "Members of the Trusted Seed community";
+    case NodeLinkType.RegenPOAP:
+      return "Holders of Regenerative Finance POAPs";
+    case NodeLinkType.CitizenTransaction:
+      return "Transactions between citizens";
+    default:
+      return "Connection type information";
+  }
 };
 
 export default GraphSidebar;
