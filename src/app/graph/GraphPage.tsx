@@ -21,7 +21,8 @@ import {
   GraphDataWithNeighbors,
   Link,
   Node,
-  NodeLinkType
+  NodeLinkType,
+  NodeType
 } from "./types";
 import { useGraphData } from "../hooks/useGraphData";
 import RightSidebar from "./components/RightSidebar";
@@ -42,9 +43,7 @@ export default function GraphPage() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [selectedNodesCheckBox, setSelectedNodesCheckBox] = useState<string[]>([
-    "citizens"
-  ]);
+  const selectedNodesCheckBox = useRef([NodeType.Citizen]);
 
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<NodeLinkType[]>([
@@ -62,7 +61,7 @@ export default function GraphPage() {
 
   const graphData = useGraphData(
     selectedConnectionsCheckBox,
-    selectedNodesCheckBox
+    selectedNodesCheckBox.current
   );
 
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
@@ -112,9 +111,9 @@ export default function GraphPage() {
   const filteredGraphData = useMemo(() => {
     const filteredNodes = lowercaseGraphData.nodes.filter(
       (node) =>
-        selectedNodesCheckBox.includes(node.type || "") ||
+        selectedNodesCheckBox.current.includes(node.type || "") ||
         CONNECTION_TYPES.some(
-          (type) => type.key === (node.type as NodeLinkType)
+          (type) => type.key === (node.type as unknown as NodeLinkType)
         )
     );
 
@@ -315,9 +314,9 @@ export default function GraphPage() {
   );
 
   const getNodeColor = (node: Node) => {
-    if (node.type === "citizens") return "#a4b2e1";
+    if (node.type === NodeType.Citizen) return "#a4b2e1";
     const connectionType = CONNECTION_TYPES.find(
-      (type) => type.key === (node.type as NodeLinkType)
+      (type) => type.key === (node.type as unknown as NodeLinkType)
     );
     return connectionType ? connectionType.color : "#3388ff";
   };
@@ -334,7 +333,7 @@ export default function GraphPage() {
 
   const getNodeRadius = useCallback(
     (node: Node) => {
-      if (node.type !== "citizens") return MIN_NODE_R;
+      if (node.type !== NodeType.Citizen) return MIN_NODE_R;
       const degree = node.degree || 0;
       const maxDegree = Math.max(
         ...processedGraphData.nodes.map((n) => n.degree || 0)
@@ -455,7 +454,7 @@ export default function GraphPage() {
       ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
       const labelY = (node.y || 0) + nodeRadius + fontSize;
       ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
-      if (node.type === "citizens") {
+      if (node.type === NodeType.Citizen) {
         let label =
           node.ens ||
           (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
@@ -607,7 +606,7 @@ export default function GraphPage() {
               nodeRelSize={MAX_NODE_R}
               nodeVal={(node) => Math.pow(getNodeRadius(node) / MAX_NODE_R, 2)}
               nodeLabel={(node) => {
-                if (node.type === "citizens") {
+                if (node.type === NodeType.Citizen) {
                   return `${node.ens ?? node.id} (Connections: ${node.degree})`;
                 }
                 return node.name ?? node.id;
