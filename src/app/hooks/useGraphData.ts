@@ -13,7 +13,7 @@ import {
   RegenPOAPHolder,
   CitizenTransaction,
   BadgeHolderReferralInfo,
-  // RefiDAO,
+  NodeType
 } from "../graph/types";
 
 const DATA_URLS = {
@@ -25,7 +25,7 @@ const DATA_URLS = {
   badgeHolders: "/data/BadgeHolders.json",
   regenPOAP: "/data/RegenPOAP.json",
   citizenTransactions: "/data/citizenTransactions.json",
-  refiDAO: "/data/RefiDao.json", // Add this line
+  refiDAO: "/data/RefiDao.json" // Add this line
 };
 
 interface CitizenWithFarcaster extends ICitizen {
@@ -50,7 +50,7 @@ const fetchData = async <T>(url: string): Promise<T> => {
   return response.json();
 };
 
-const createNode = (id: string, type: string): Node => ({ id, type });
+const createNode = (id: string, type: NodeType): Node => ({ id, type });
 
 const createLink = (
   source: string,
@@ -59,7 +59,7 @@ const createLink = (
 ): Link => ({
   source: source,
   target,
-  type,
+  type
 });
 
 const processBadgeHolders = (
@@ -105,11 +105,11 @@ const processConnections = (
 ): Link[] => {
   const links: Link[] = [];
   const specialNodes = {
-    TECHolder: createNode("TECHolder", "TECHolder"),
-    RegenScore: createNode("RegenScore", "RegenScore"),
-    TrustedSeed: createNode("TrustedSeed", "TrustedSeed"),
-    RegenPOAP: createNode("RegenPOAP", "RegenPOAP"),
-    // RefiDAO: createNode("RefiDAO", "RefiDAO"),
+    TECHolder: createNode("TECHolder", NodeType.TECHolder),
+    RegenScore: createNode("RegenScore", NodeType.RegenScore),
+    TrustedSeed: createNode("TrustedSeed", NodeType.TrustedSeed),
+    RegenPOAP: createNode("RegenPOAP", NodeType.RegenPOAP)
+    // RefiDAO: createNode("RefiDAO", NodeType.RefiDAO),
   };
 
   // Process citizen connections
@@ -188,7 +188,7 @@ export const useGraphData = (
 ): GraphData => {
   const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
-    links: [],
+    links: []
   });
 
   const fetchAllData = useCallback(async () => {
@@ -200,7 +200,7 @@ export const useGraphData = (
       farcasterConnections,
       badgeHolders,
       regenPOAPHolders,
-      citizenTransactions,
+      citizenTransactions
       // refiDAOHolders,
     ] = await Promise.all([
       fetchData<CitizenWithFarcaster[]>(DATA_URLS.citizensWithFarcaster),
@@ -210,7 +210,7 @@ export const useGraphData = (
       fetchData<FarcasterConnection[]>(DATA_URLS.farcasterConnections),
       fetchData<BadgeHolder[]>(DATA_URLS.badgeHolders),
       fetchData<RegenPOAPHolder[]>(DATA_URLS.regenPOAP),
-      fetchData<CitizenTransaction[]>(DATA_URLS.citizenTransactions),
+      fetchData<CitizenTransaction[]>(DATA_URLS.citizenTransactions)
       // fetchData<RefiDAO[]>(DATA_URLS.refiDAO),
     ]);
 
@@ -222,7 +222,7 @@ export const useGraphData = (
       farcasterConnections,
       badgeHolders,
       regenPOAPHolders,
-      citizenTransactions,
+      citizenTransactions
       // refiDAOHolders,
     };
   }, [selectedConnectionsCheckBox, selectedNodesCheckBox]);
@@ -237,7 +237,7 @@ export const useGraphData = (
         farcasterConnections,
         badgeHolders,
         regenPOAPHolders,
-        citizenTransactions,
+        citizenTransactions
         // refiDAOHolders,
       } = data;
 
@@ -256,24 +256,24 @@ export const useGraphData = (
         if (referredBy !== "0x0000000000000000000000000000000000000000") {
           const referredByData = badgeHolderReferrals.get(referredBy) || {
             referredBy: [],
-            referred: [],
+            referred: []
           };
           referredByData.referred.push({
             address: recipient,
             rpgfRound: badgeHolder.rpgfRound,
-            referredMethod: badgeHolder.referredMethod,
+            referredMethod: badgeHolder.referredMethod
           });
           badgeHolderReferrals.set(referredBy, referredByData);
 
           // Update referredBy for recipient
           const recipientData = badgeHolderReferrals.get(recipient) || {
             referredBy: [],
-            referred: [],
+            referred: []
           };
           recipientData.referredBy.push({
             address: referredBy,
             rpgfRound: badgeHolder.rpgfRound,
-            referredMethod: badgeHolder.referredMethod,
+            referredMethod: badgeHolder.referredMethod
           });
           badgeHolderReferrals.set(recipient, recipientData);
         }
@@ -302,23 +302,23 @@ export const useGraphData = (
 
         return {
           ...citizen,
-          type: "citizens",
+          type: NodeType.Citizen,
           tecBalance: tecHolder?.balance,
           regenScore: regenScore?.score,
           trustedSeed: !!trustedSeed,
           regenPOAP: !!regenPOAP,
           hasFarcaster: !!citizen.userId,
-          badgeHolderReferrals: badgeHolderReferral,
+          badgeHolderReferrals: badgeHolderReferral
           // refiDAO: !!refiDAO,
         };
       });
 
       nodes.push(
-        createNode("TECHolder", "TECHolder"),
-        createNode("RegenScore", "RegenScore"),
-        createNode("TrustedSeed", "TrustedSeed"),
-        createNode("RegenPOAP", "RegenPOAP")
-        // createNode("RefiDAO", "RefiDAO")
+        createNode("TECHolder", NodeType.TECHolder),
+        createNode("RegenScore", NodeType.RegenScore),
+        createNode("TrustedSeed", NodeType.TrustedSeed),
+        createNode("RegenPOAP", NodeType.RegenPOAP)
+        // createNode("RefiDAO", NodeType.RefiDAO)
       );
 
       const links = processConnections(

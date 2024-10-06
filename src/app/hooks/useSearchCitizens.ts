@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { Node } from "../graph/types";
+import { Node, NodeType } from "../graph/types";
 
 export const useSearchCitizens = (nodes: Node[]) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,7 +16,7 @@ export const useSearchCitizens = (nodes: Node[]) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
 
     return nodes.filter((node) => {
-      if (node.type !== "citizens") return false;
+      if (node.type !== NodeType.Citizen) return false;
 
       const matchesAddress = normalizeString(node.id).includes(
         normalizedSearchTerm
@@ -53,6 +53,6 @@ export const useSearchCitizens = (nodes: Node[]) => {
     handleSearch,
     handleSelectSearchedNode,
     resetSearch,
-    setSearchTerm,
+    setSearchTerm
   };
 };
