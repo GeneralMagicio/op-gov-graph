@@ -9,21 +9,44 @@ import {
   jsonb,
   timestamp,
   varchar,
-  index
+  index,
+  pgEnum
 } from "drizzle-orm/pg-core";
+
+// Create enum types
+export const nodeTypeEnum = pgEnum("node_type", [
+  "Citizen",
+  "TECHolder",
+  "RegenScore",
+  "TrustedSeed",
+  "RegenPOAP"
+]);
+export const linkTypeEnum = pgEnum("link_type", [
+  "FarcasterConnection",
+  "BadgeHolderReferral",
+  "RegenPOAP",
+  "RegenScore",
+  "TrustedSeed",
+  "CitizenTransaction",
+  "TECHolder"
+]);
 
 export const networks = pgTable("networks", {
   id: serial("id").primaryKey(),
   name: text("name").notNull().unique(),
-  description: text("description")
+  description: text("description"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export const nodes = pgTable(
   "nodes",
   {
     id: text("id").primaryKey(),
-    networkId: integer("network_id").references(() => networks.id),
-    type: text("type").notNull(),
+    networkId: integer("network_id").references(() => networks.id, {
+      onDelete: "cascade"
+    }),
+    type: nodeTypeEnum("type").notNull(),
     ens: text("ens"),
     userId: text("user_id"),
     identity: text("identity"),
@@ -38,7 +61,9 @@ export const nodes = pgTable(
     trustedSeed: boolean("trusted_seed"),
     regenPOAP: boolean("regen_poap"),
     hasFarcaster: boolean("has_farcaster"),
-    data: jsonb("data")
+    data: jsonb("data"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
   (table) => {
     return {
@@ -52,10 +77,16 @@ export const links = pgTable(
   "links",
   {
     id: serial("id").primaryKey(),
-    sourceId: text("source_id").references(() => nodes.id),
-    targetId: text("target_id").references(() => nodes.id),
-    type: text("type").notNull(),
-    data: jsonb("data")
+    sourceId: text("source_id").references(() => nodes.id, {
+      onDelete: "cascade"
+    }),
+    targetId: text("target_id").references(() => nodes.id, {
+      onDelete: "cascade"
+    }),
+    type: linkTypeEnum("type").notNull(),
+    data: jsonb("data"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
   (table) => {
     return {
@@ -69,32 +100,44 @@ export const links = pgTable(
 export const tecHolders = pgTable("tec_holders", {
   id: text("id")
     .primaryKey()
-    .references(() => nodes.id),
+    .references(() => nodes.id, { onDelete: "cascade" }),
   balance: text("balance").notNull(),
-  pendingBalanceUpdate: text("pending_balance_update")
+  pendingBalanceUpdate: text("pending_balance_update"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export const regenScores = pgTable("regen_scores", {
   id: text("id")
     .primaryKey()
-    .references(() => nodes.id),
+    .references(() => nodes.id, { onDelete: "cascade" }),
   score: integer("score").notNull(),
   address: text("address").notNull(),
-  meta: text("meta")
+  meta: text("meta"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export const trustedSeeds = pgTable("trusted_seeds", {
   id: text("id")
     .primaryKey()
-    .references(() => nodes.id)
+    .references(() => nodes.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export const farcasterConnections = pgTable(
   "farcaster_connections",
   {
     id: serial("id").primaryKey(),
-    sourceId: text("source_id").references(() => nodes.id),
-    targetId: text("target_id").references(() => nodes.id)
+    sourceId: text("source_id").references(() => nodes.id, {
+      onDelete: "cascade"
+    }),
+    targetId: text("target_id").references(() => nodes.id, {
+      onDelete: "cascade"
+    }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
   (table) => {
     return {
@@ -109,31 +152,43 @@ export const badgeHolders = pgTable("badge_holders", {
   attester: text("attester").notNull(),
   recipient: text("recipient")
     .notNull()
-    .references(() => nodes.id),
+    .references(() => nodes.id, { onDelete: "cascade" }),
   rpgfRound: text("rpgf_round").notNull(),
-  referredBy: text("referred_by").references(() => nodes.id),
-  referredMethod: text("referred_method")
+  referredBy: text("referred_by").references(() => nodes.id, {
+    onDelete: "set null"
+  }),
+  referredMethod: text("referred_method"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export const regenPOAPs = pgTable("regen_poaps", {
   id: serial("id").primaryKey(),
-  nodeId: text("node_id").references(() => nodes.id),
+  nodeId: text("node_id").references(() => nodes.id, { onDelete: "cascade" }),
   collection: text("collection").notNull(),
-  count: integer("count").notNull()
+  count: integer("count").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export const transactions = pgTable(
   "transactions",
   {
     id: serial("id").primaryKey(),
-    networkId: integer("network_id").references(() => networks.id),
+    networkId: integer("network_id").references(() => networks.id, {
+      onDelete: "cascade"
+    }),
     date: timestamp("date").notNull(),
-    fromId: text("from_id").references(() => nodes.id),
-    toId: text("to_id").references(() => nodes.id),
+    fromId: text("from_id").references(() => nodes.id, {
+      onDelete: "set null"
+    }),
+    toId: text("to_id").references(() => nodes.id, { onDelete: "set null" }),
     tokenName: text("token_name").notNull(),
     tokenSymbol: text("token_symbol").notNull(),
     value: text("value").notNull(),
-    hash: varchar("hash", { length: 66 }).notNull()
+    hash: varchar("hash", { length: 66 }).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
   (table) => {
     return {
@@ -143,10 +198,3 @@ export const transactions = pgTable(
     };
   }
 );
-
-export const refiDAOs = pgTable("refi_daos", {
-  id: serial("id").primaryKey(),
-  address: text("address")
-    .notNull()
-    .references(() => nodes.id)
-});
