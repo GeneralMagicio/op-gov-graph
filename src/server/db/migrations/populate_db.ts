@@ -27,12 +27,11 @@ async function migrateData() {
     console.log("Starting data migration...");
 
     // Insert the Optimism network first
-    await db
-      .insert(schema.networks)
+    db.insert(schema.networks)
       .values({
         name: "Optimism",
         description: "Optimism mainnet",
-        id: 10 // Changed 'chainId' to 'id' to match the schema
+        id: 10 // Change from 10 to 1
       })
       .onConflictDoNothing();
 
@@ -71,7 +70,7 @@ async function migrateData() {
     for (const citizen of citizensWithFarcaster) {
       await db.insert(schema.nodes).values({
         id: citizen.id,
-        networkId: 1, // Now this should work as we've inserted the network
+        networkId: 10, // Now this should work as we've inserted the network
         type: "Citizen",
         ens: citizen.ens,
         userId: citizen.userId,
