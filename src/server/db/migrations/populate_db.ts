@@ -7,6 +7,7 @@ import { ilike } from "drizzle-orm/expressions";
 import * as schema from "../schema";
 import * as fs from "fs/promises";
 import * as path from "path";
+import { NodeType } from "../../../app/graph/types";
 
 const sql = postgres(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -76,24 +77,49 @@ async function migrateData() {
       return;
     }
 
+    // Insert special nodes
+    const specialNodes = [
+      { id: NodeType.TECHolder, type: NodeType.TECHolder },
+      { id: NodeType.RegenScore, type: NodeType.RegenScore },
+      { id: NodeType.TrustedSeed, type: NodeType.TrustedSeed },
+      { id: NodeType.RegenPOAP, type: NodeType.RegenPOAP }
+    ];
+
+    for (const node of specialNodes) {
+      await db
+        .insert(schema.nodes)
+        .values({
+          id: node.id,
+          networkId: 10,
+          type: node.type,
+          isSpecial: true
+        })
+        .onConflictDoUpdate({
+          target: schema.nodes.id,
+          set: { isSpecial: true }
+        });
+      console.log(`Inserted/updated special node: ${node.id}`);
+    }
+
     // Insert nodes
     for (const citizen of citizensWithFarcaster) {
       await db
         .insert(schema.nodes)
         .values({
-          id: citizen.id,
+          id: citizen.id.toLowerCase(),
           networkId: 10,
           type: "Citizen",
           ens: citizen.ens,
           userId: citizen.userId,
-          identity: citizen.identity,
+          identity: citizen.identity.toLowerCase(),
           profileImage: citizen.profileImage,
           profileName: citizen.profileName,
           profileDisplayName: citizen.profileDisplayName,
           profileBio: citizen.profileBio,
-          userAddress: citizen.userAddress,
+          userAddress: citizen.userAddress.toLowerCase(),
           chainId: citizen.chainId,
-          hasFarcaster: !!citizen.userId
+          hasFarcaster: !!citizen.userId,
+          isSpecial: false
         })
         .onConflictDoNothing();
     }
@@ -105,7 +131,7 @@ async function migrateData() {
       await db
         .insert(schema.tecHolders)
         .values({
-          id: holder.id,
+          id: holder.id.toLowerCase(),
           balance: holder.balance,
           pendingBalanceUpdate: holder.pendingBalanceUpdate
         })
@@ -123,7 +149,7 @@ async function migrateData() {
         await db
           .insert(schema.links)
           .values({
-            sourceId: holder.id,
+            sourceId: holder.id.toLowerCase(),
             targetId: "TECHolder",
             type: "TECHolder"
           })
@@ -139,13 +165,13 @@ async function migrateData() {
     // Insert Regen Scores
     for (const score of regenScoresData) {
       await db.insert(schema.regenScores).values({
-        id: score.id,
+        id: score.id.toLowerCase(),
         score: score.score,
         address: score.address,
         meta: score.meta
       });
       await db.insert(schema.links).values({
-        sourceId: score.id,
+        sourceId: score.id.toLowerCase(),
         targetId: "RegenScore",
         type: "RegenScore"
       });
@@ -154,10 +180,10 @@ async function migrateData() {
     // Insert Trusted Seeds
     for (const seed of trustedSeedData) {
       await db.insert(schema.trustedSeeds).values({
-        id: seed.id
+        id: seed.id.toLowerCase()
       });
       await db.insert(schema.links).values({
-        sourceId: seed.id,
+        sourceId: seed.id.toLowerCase(),
         targetId: "TrustedSeed",
         type: "TrustedSeed"
       });
@@ -166,12 +192,12 @@ async function migrateData() {
     // Insert Farcaster Connections
     for (const connection of farcasterConnectionsData) {
       await db.insert(schema.farcasterConnections).values({
-        sourceId: connection.source,
-        targetId: connection.target
+        sourceId: connection.source.toLowerCase(),
+        targetId: connection.target.toLowerCase()
       });
       await db.insert(schema.links).values({
-        sourceId: connection.source,
-        targetId: connection.target,
+        sourceId: connection.source.toLowerCase(),
+        targetId: connection.target.toLowerCase(),
         type: "FarcasterConnection"
       });
     }
@@ -179,16 +205,16 @@ async function migrateData() {
     // Insert Badge Holders
     for (const badge of badgeHoldersData) {
       await db.insert(schema.badgeHolders).values({
-        attester: badge.attester,
-        recipient: badge.recipient,
+        attester: badge.attester.toLowerCase(),
+        recipient: badge.recipient.toLowerCase(),
         rpgfRound: badge.rpgfRound,
-        referredBy: badge.referredBy,
+        referredBy: badge.referredBy.toLowerCase(),
         referredMethod: badge.referredMethod
       });
       if (badge.referredBy !== "0x0000000000000000000000000000000000000000") {
         await db.insert(schema.links).values({
-          sourceId: badge.referredBy,
-          targetId: badge.recipient,
+          sourceId: badge.referredBy.toLowerCase(),
+          targetId: badge.recipient.toLowerCase(),
           type: "BadgeHolderReferral"
         });
       }
@@ -197,12 +223,12 @@ async function migrateData() {
     // Insert Regen POAPs
     for (const poap of regenPOAPData) {
       await db.insert(schema.regenPOAPs).values({
-        nodeId: poap.Collection,
+        nodeId: poap.Collection.toLowerCase(),
         collection: poap.Collection,
         count: poap.Count
       });
       await db.insert(schema.links).values({
-        sourceId: poap.Collection,
+        sourceId: poap.Collection.toLowerCase(),
         targetId: "RegenPOAP",
         type: "RegenPOAP"
       });
@@ -213,16 +239,16 @@ async function migrateData() {
       await db.insert(schema.transactions).values({
         networkId: 10, // Assuming Optimism network has id 1
         date: new Date(transaction.date),
-        fromId: transaction.from,
-        toId: transaction.to,
+        fromId: transaction.from.toLowerCase(),
+        toId: transaction.to.toLowerCase(),
         tokenName: transaction.tokenName,
         tokenSymbol: transaction.tokenSymbol,
         value: transaction.value.toString(),
         hash: transaction.hash
       });
       await db.insert(schema.links).values({
-        sourceId: transaction.from,
-        targetId: transaction.to,
+        sourceId: transaction.from.toLowerCase(),
+        targetId: transaction.to.toLowerCase(),
         type: "CitizenTransaction"
       });
     }
