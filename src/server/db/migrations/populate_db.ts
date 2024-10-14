@@ -1,6 +1,9 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { eq } from "drizzle-orm";
+import { ilike } from "drizzle-orm/expressions";
+
 import * as schema from "../schema";
 import * as fs from "fs/promises";
 import * as path from "path";
@@ -26,14 +29,21 @@ async function migrateData() {
   try {
     console.log("Starting data migration...");
 
-    // Insert the Optimism network first
-    db.insert(schema.networks)
+    console.log("Attempting to insert Optimism network...");
+    const result = await db
+      .insert(schema.networks)
       .values({
         name: "Optimism",
         description: "Optimism mainnet",
-        id: 10 // Change from 10 to 1
+        id: 10
       })
       .onConflictDoNothing();
+
+    if (result.length > 0) {
+      console.log("Optimism network inserted successfully.");
+    } else {
+      console.log("Optimism network was not inserted. It might already exist.");
+    }
 
     // Load JSON data
     const dataFiles = [
@@ -68,37 +78,64 @@ async function migrateData() {
 
     // Insert nodes
     for (const citizen of citizensWithFarcaster) {
-      await db.insert(schema.nodes).values({
-        id: citizen.id,
-        networkId: 10, // Now this should work as we've inserted the network
-        type: "Citizen",
-        ens: citizen.ens,
-        userId: citizen.userId,
-        identity: citizen.identity,
-        profileImage: citizen.profileImage,
-        profileName: citizen.profileName,
-        profileDisplayName: citizen.profileDisplayName,
-        profileBio: citizen.profileBio,
-        userAddress: citizen.userAddress,
-        chainId: citizen.chainId,
-        hasFarcaster: !!citizen.userId
-      });
+      await db
+        .insert(schema.nodes)
+        .values({
+          id: citizen.id,
+          networkId: 10,
+          type: "Citizen",
+          ens: citizen.ens,
+          userId: citizen.userId,
+          identity: citizen.identity,
+          profileImage: citizen.profileImage,
+          profileName: citizen.profileName,
+          profileDisplayName: citizen.profileDisplayName,
+          profileBio: citizen.profileBio,
+          userAddress: citizen.userAddress,
+          chainId: citizen.chainId,
+          hasFarcaster: !!citizen.userId
+        })
+        .onConflictDoNothing();
     }
 
     // Insert TEC holders
+    console.log("Inserting TEC holders");
     for (const holder of tecHoldersData) {
-      await db.insert(schema.tecHolders).values({
-        id: holder.id,
-        balance: holder.balance,
-        pendingBalanceUpdate: holder.pendingBalanceUpdate
-      });
-      await db.insert(schema.links).values({
-        sourceId: holder.id,
-        targetId: "TECHolder",
-        type: "TECHolder"
-      });
-    }
+      // Insert into tec_holders table regardless of whether the ID exists in nodes
+      await db
+        .insert(schema.tecHolders)
+        .values({
+          id: holder.id,
+          balance: holder.balance,
+          pendingBalanceUpdate: holder.pendingBalanceUpdate
+        })
+        .onConflictDoNothing();
 
+      // Check if the holder ID exists in the nodes table before creating a link
+      const nodeExists = await db
+        .select({ id: schema.nodes.id })
+        .from(schema.nodes)
+        .where(ilike(schema.nodes.id, holder.id))
+        .execute();
+
+      if (nodeExists.length > 0) {
+        console.log(`Node found for TEC holder ID: ${holder.id}`);
+        await db
+          .insert(schema.links)
+          .values({
+            sourceId: holder.id,
+            targetId: "TECHolder",
+            type: "TECHolder"
+          })
+          .onConflictDoNothing();
+        console.log(`Link created for TEC holder ID: ${holder.id}`);
+      } else {
+        console.log(
+          `Node not found for TEC holder ID: ${holder.id}}Skipping link creation.`
+        );
+      }
+    }
+    console.log("Inserted TEC holders");
     // Insert Regen Scores
     for (const score of regenScoresData) {
       await db.insert(schema.regenScores).values({
@@ -174,7 +211,7 @@ async function migrateData() {
     // Insert Citizen Transactions
     for (const transaction of citizenTransactionsData) {
       await db.insert(schema.transactions).values({
-        networkId: 1, // Assuming Optimism network has id 1
+        networkId: 10, // Assuming Optimism network has id 1
         date: new Date(transaction.date),
         fromId: transaction.from,
         toId: transaction.to,
