@@ -12,7 +12,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "generate-transactions": "ts-node -r dotenv/config scripts/generateCitizenTransactions.ts"
+    "generate-transactions": "ts-node -r dotenv/config scripts/generateCitizenTransactions.ts",
+    "db:populate": "node --experimental-specifier-resolution=node --loader ts-node/esm src/server/db/migrations/populate_db.ts"
   },
   "dependencies": {
     "@next/third-parties": "^14.2.14",
@@ -41,6 +42,14 @@
     "viem": "^2.21.18",
     "zod": "^3.23.8"
   },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "project": "./tsconfig.json",
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
   "devDependencies": {
     "@types/node": "^22.5.2",
     "@types/pg": "^8.11.10",
@@ -52,6 +61,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5"
   }
 }
