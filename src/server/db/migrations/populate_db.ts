@@ -231,16 +231,37 @@ async function migrateData() {
           .limit(1);
 
         if (matchingNode.length > 0) {
-          // If there's a matching node, create a link
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: score.address.toLowerCase(), // Use the address as sourceId
-              targetId: "RegenScore", // This is the special node
-              type: "RegenScore"
-            })
-            .onConflictDoNothing();
-          console.log(`Created RegenScore link for address: ${score.address}`);
+          // Check if the link already exists
+          const existingLink = await db
+            .select()
+            .from(schema.links)
+            .where(
+              and(
+                eq(schema.links.sourceId, score.address.toLowerCase()),
+                eq(schema.links.targetId, "RegenScore"),
+                eq(schema.links.type, "RegenScore")
+              )
+            )
+            .limit(1);
+
+          // If the link doesn't exist, create it
+          if (existingLink.length === 0) {
+            await db
+              .insert(schema.links)
+              .values({
+                sourceId: score.address.toLowerCase(),
+                targetId: "RegenScore",
+                type: "RegenScore"
+              })
+              .onConflictDoNothing();
+            console.log(
+              `Created RegenScore link for address: ${score.address}`
+            );
+          } else {
+            console.log(
+              `RegenScore link already exists for address: ${score.address}`
+            );
+          }
         } else {
           console.log(
             `No matching node found for RegenScore address: ${score.address}`
