@@ -1,13 +1,14 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { ilike } from "drizzle-orm/expressions";
 
 import * as schema from "../schema";
 import * as fs from "fs/promises";
 import * as path from "path";
 import { NodeType } from "../../../app/graph/types";
+import { removeDuplicateTECHolderLinks } from "../scripts/removeDuplicateLinks";
 
 const sql = postgres(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -29,7 +30,7 @@ async function loadJsonFile(filename: string) {
 async function migrateData() {
   try {
     console.log("Starting data migration...");
-
+    await removeDuplicateTECHolderLinks();
     console.log("Attempting to insert Optimism network...");
     const result = await db
       .insert(schema.networks)
@@ -134,6 +135,7 @@ async function migrateData() {
     console.log("Inserting TEC holders...");
     for (const holder of tecHoldersData) {
       try {
+        // Insert or update TEC holder
         await db
           .insert(schema.tecHolders)
           .values({
@@ -141,9 +143,15 @@ async function migrateData() {
             balance: holder.balance,
             pendingBalanceUpdate: holder.pendingBalanceUpdate
           })
-          .onConflictDoNothing();
-      // Check if the holder ID exists in the nodes table before creating a link
+          .onConflictDoUpdate({
+            target: schema.tecHolders.id,
+            set: {
+              balance: holder.balance,
+              pendingBalanceUpdate: holder.pendingBalanceUpdate
+            }
+          });
 
+        // Check if the holder ID exists in the nodes table
         const nodeExists = await db
           .select({ id: schema.nodes.id })
           .from(schema.nodes)
@@ -151,14 +159,36 @@ async function migrateData() {
           .execute();
 
         if (nodeExists.length > 0) {
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: holder.id?.toLowerCase() ?? "",
-              targetId: "TECHolder",
-              type: "TECHolder"
-            })
-            .onConflictDoNothing();
+          // Check if the link already exists
+          const existingLink = await db
+            .select()
+            .from(schema.links)
+            .where(
+              and(
+                eq(schema.links.sourceId, holder.id?.toLowerCase() ?? ""),
+                eq(schema.links.targetId, "TECHolder"),
+                eq(schema.links.type, "TECHolder")
+              )
+            )
+            .execute();
+
+          // If the link doesn't exist, create it
+          if (existingLink.length === 0) {
+            await db
+              .insert(schema.links)
+              .values({
+                sourceId: holder.id?.toLowerCase() ?? "",
+                targetId: "TECHolder",
+                type: "TECHolder"
+              })
+              .onConflictDoNothing();
+
+            console.log(`Created new TEC Holder link for ${holder.id}`);
+          } else {
+            console.log(`TEC Holder link already exists for ${holder.id}`);
+          }
+        } else {
+          console.log(`Node does not exist for TEC Holder ${holder.id}`);
         }
       } catch (error) {
         console.error(`Error processing TEC holder: ${holder.id}`, error);
