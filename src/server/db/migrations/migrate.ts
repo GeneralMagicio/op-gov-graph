@@ -4,7 +4,7 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { Pool } from "pg";
 import dotenv from "dotenv";
-import { networks, nodes, nodeTypeEnum } from "./schema";
+import { networks, nodes, nodeTypeEnum } from "../schema";
 
 dotenv.config();
 
