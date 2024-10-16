@@ -277,14 +277,6 @@ async function migrateData() {
     console.log("Inserting Trusted Seeds...");
     for (const seed of trustedSeedData) {
       try {
-        // Insert into trusted_seeds table regardless of node existence
-        await db
-          .insert(schema.trustedSeeds)
-          .values({
-            id: seed.id.toLowerCase()
-          })
-          .onConflictDoNothing();
-
         // Check if there's a corresponding node
         const matchingNode = await db
           .select()
@@ -293,6 +285,14 @@ async function migrateData() {
           .limit(1);
 
         if (matchingNode.length > 0) {
+          // Insert into trusted_seeds table
+          await db
+            .insert(schema.trustedSeeds)
+            .values({
+              id: seed.id.toLowerCase()
+            })
+            .onConflictDoNothing();
+
           // Check if the link already exists
           const existingLink = await db
             .select()
@@ -321,9 +321,7 @@ async function migrateData() {
             console.log(`TrustedSeed link already exists for: ${seed.id}`);
           }
         } else {
-          console.log(
-            `No matching node found for TrustedSeed link: ${seed.id}`
-          );
+          console.log(`No matching node found for TrustedSeed: ${seed.id}`);
         }
       } catch (error) {
         console.error(`Error processing TrustedSeed: ${seed.id}`, error);
