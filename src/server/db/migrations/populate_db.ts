@@ -544,23 +544,67 @@ async function migrateData() {
     console.log("Finished inserting Regen POAPs");
 
     // Insert Citizen Transactions
+    console.log("Inserting Citizen Transactions");
     for (const transaction of citizenTransactionsData) {
-      await db.insert(schema.transactions).values({
-        networkId: 10,
-        date: new Date(transaction.date),
-        fromId: transaction.from.toLowerCase(),
-        toId: transaction.to.toLowerCase(),
-        tokenName: transaction.tokenName,
-        tokenSymbol: transaction.tokenSymbol,
-        value: transaction.value.toString(),
-        hash: transaction.hash
-      });
-      await db.insert(schema.links).values({
-        sourceId: transaction.from.toLowerCase(),
-        targetId: transaction.to.toLowerCase(),
-        type: "CitizenTransaction"
-      });
+      try {
+        // Check if transaction already exists
+        const existingTransaction = await db
+          .select()
+          .from(schema.transactions)
+          .where(eq(schema.transactions.hash, transaction.hash))
+          .limit(1);
+
+        if (existingTransaction.length === 0) {
+          await db.insert(schema.transactions).values({
+            networkId: 10,
+            date: new Date(transaction.date),
+            fromId: transaction.from.toLowerCase(),
+            toId: transaction.to.toLowerCase(),
+            tokenName: transaction.tokenName,
+            tokenSymbol: transaction.tokenSymbol,
+            value: transaction.value.toString(),
+            hash: transaction.hash
+          });
+          console.log(`Inserted transaction: ${transaction.hash}`);
+        } else {
+          console.log(`Transaction already exists: ${transaction.hash}`);
+        }
+
+        // Check if link already exists
+        const existingLink = await db
+          .select()
+          .from(schema.links)
+          .where(
+            and(
+              eq(schema.links.sourceId, transaction.from.toLowerCase()),
+              eq(schema.links.targetId, transaction.to.toLowerCase()),
+              eq(schema.links.type, "CitizenTransaction")
+            )
+          )
+          .limit(1);
+
+        if (existingLink.length === 0) {
+          await db.insert(schema.links).values({
+            sourceId: transaction.from.toLowerCase(),
+            targetId: transaction.to.toLowerCase(),
+            type: "CitizenTransaction"
+          });
+          console.log(
+            `Created CitizenTransaction link for: ${transaction.hash}`
+          );
+        } else {
+          console.log(
+            `CitizenTransaction link already exists for: ${transaction.hash}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `Error processing Citizen Transaction: ${transaction.hash}`,
+          error
+        );
+      }
     }
+    console.log("Finished inserting Citizen Transactions");
 
     console.log("Data migration completed successfully.");
   } catch (error) {
