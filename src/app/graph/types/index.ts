@@ -16,7 +16,7 @@ export enum NodeType {
   TECHolder = "TECHolder",
   RegenScore = "RegenScore",
   TrustedSeed = "TrustedSeed",
-  RegenPOAP = "RegenPOAP",
+  RegenPOAP = "RegenPOAP"
   // RefiDAO = "RefiDAO", // Uncomment if needed in the future
 }
 
@@ -52,6 +52,7 @@ export interface ICitizen {
   profileBio?: string;
   userAddress?: string;
   chainId?: string;
+  isSpecial?: boolean;
   followings?: {
     id: string;
     blockchain: string;

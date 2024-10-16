@@ -1,3 +1,6 @@
+// Import and validate the environment variables
+await import("./src/env.js");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -5,10 +8,10 @@ const nextConfig = {
       {
         source: "/graph",
         destination: "/",
-        permanent: true,
-      },
+        permanent: true
+      }
     ];
-  },
+  }
 };
 
 export default nextConfig;
