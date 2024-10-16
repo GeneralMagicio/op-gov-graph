@@ -63,7 +63,8 @@ export const nodes = pgTable(
     hasFarcaster: boolean("has_farcaster"),
     data: jsonb("data"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow().notNull()
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+    isSpecial: boolean("is_special").default(false).notNull()
   },
   (table) => {
     return {
@@ -98,9 +99,7 @@ export const links = pgTable(
 );
 
 export const tecHolders = pgTable("tec_holders", {
-  id: text("id")
-    .primaryKey()
-    .references(() => nodes.id, { onDelete: "cascade" }),
+  id: text("id").primaryKey(),
   balance: text("balance").notNull(),
   pendingBalanceUpdate: text("pending_balance_update"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -108,9 +107,7 @@ export const tecHolders = pgTable("tec_holders", {
 });
 
 export const regenScores = pgTable("regen_scores", {
-  id: text("id")
-    .primaryKey()
-    .references(() => nodes.id, { onDelete: "cascade" }),
+  id: text("id").primaryKey(),
   score: integer("score").notNull(),
   address: text("address").notNull(),
   meta: text("meta"),
