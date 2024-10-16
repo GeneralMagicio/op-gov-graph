@@ -8,7 +8,10 @@ import * as schema from "../schema";
 import * as fs from "fs/promises";
 import * as path from "path";
 import { NodeType } from "../../../app/graph/types";
-import { removeDuplicateTECHolderLinks } from "../scripts/removeDuplicateLinks";
+import {
+  removeDuplicateRegenScoreLinks,
+  removeDuplicateTECHolderLinks
+} from "../scripts/removeDuplicateLinks";
 
 const sql = postgres(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -31,6 +34,7 @@ async function migrateData() {
   try {
     console.log("Starting data migration...");
     await removeDuplicateTECHolderLinks();
+    await removeDuplicateRegenScoreLinks();
     console.log("Attempting to insert Optimism network...");
     const result = await db
       .insert(schema.networks)
@@ -196,20 +200,57 @@ async function migrateData() {
     }
     console.log("Finished inserting TEC holders");
     console.log("Inserted TEC holders");
+
     // Insert Regen Scores
+    console.log("Inserting Regen Scores...");
     for (const score of regenScoresData) {
-      await db.insert(schema.regenScores).values({
-        id: score.id.toLowerCase(),
-        score: score.score,
-        address: score.address,
-        meta: score.meta
-      });
-      await db.insert(schema.links).values({
-        sourceId: score.id.toLowerCase(),
-        targetId: "RegenScore",
-        type: "RegenScore"
-      });
+      try {
+        // Insert into regen_scores table
+        await db
+          .insert(schema.regenScores)
+          .values({
+            id: score.id.toLowerCase(),
+            score: score.score,
+            address: score.address.toLowerCase(),
+            meta: score.meta
+          })
+          .onConflictDoUpdate({
+            target: schema.regenScores.id,
+            set: {
+              score: score.score,
+              address: score.address.toLowerCase(),
+              meta: score.meta
+            }
+          });
+
+        // Check if there's a corresponding node
+        const matchingNode = await db
+          .select()
+          .from(schema.nodes)
+          .where(eq(schema.nodes.id, score.address.toLowerCase()))
+          .limit(1);
+
+        if (matchingNode.length > 0) {
+          // If there's a matching node, create a link
+          await db
+            .insert(schema.links)
+            .values({
+              sourceId: score.address.toLowerCase(), // Use the address as sourceId
+              targetId: "RegenScore", // This is the special node
+              type: "RegenScore"
+            })
+            .onConflictDoNothing();
+          console.log(`Created RegenScore link for address: ${score.address}`);
+        } else {
+          console.log(
+            `No matching node found for RegenScore address: ${score.address}`
+          );
+        }
+      } catch (error) {
+        console.error(`Error processing RegenScore: ${score.id}`, error);
+      }
     }
+    console.log("Finished inserting Regen Scores");
 
     // Insert Trusted Seeds
     for (const seed of trustedSeedData) {
