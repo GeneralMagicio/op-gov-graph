@@ -152,7 +152,7 @@ export const badgeHolders = pgTable("badge_holders", {
     .references(() => nodes.id, { onDelete: "cascade" }),
   rpgfRound: text("rpgf_round").notNull(),
   referredBy: text("referred_by").references(() => nodes.id, {
-    onDelete: "set null"
+    onDelete: "cascade"
   }),
   referredMethod: text("referred_method"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
