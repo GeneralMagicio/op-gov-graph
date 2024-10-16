@@ -102,65 +102,69 @@ async function migrateData() {
     }
 
     // Insert nodes
+    console.log("Inserting nodes...");
     for (const citizen of citizensWithFarcaster) {
-      await db
-        .insert(schema.nodes)
-        .values({
-          id: citizen.id.toLowerCase(),
-          networkId: 10,
-          type: "Citizen",
-          ens: citizen.ens,
-          userId: citizen.userId,
-          identity: citizen.identity.toLowerCase(),
-          profileImage: citizen.profileImage,
-          profileName: citizen.profileName,
-          profileDisplayName: citizen.profileDisplayName,
-          profileBio: citizen.profileBio,
-          userAddress: citizen.userAddress.toLowerCase(),
-          chainId: citizen.chainId,
-          hasFarcaster: !!citizen.userId,
-          isSpecial: false
-        })
-        .onConflictDoNothing();
-    }
-
-    // Insert TEC holders
-    console.log("Inserting TEC holders");
-    for (const holder of tecHoldersData) {
-      // Insert into tec_holders table regardless of whether the ID exists in nodes
-      await db
-        .insert(schema.tecHolders)
-        .values({
-          id: holder.id.toLowerCase(),
-          balance: holder.balance,
-          pendingBalanceUpdate: holder.pendingBalanceUpdate
-        })
-        .onConflictDoNothing();
-
-      // Check if the holder ID exists in the nodes table before creating a link
-      const nodeExists = await db
-        .select({ id: schema.nodes.id })
-        .from(schema.nodes)
-        .where(ilike(schema.nodes.id, holder.id))
-        .execute();
-
-      if (nodeExists.length > 0) {
-        console.log(`Node found for TEC holder ID: ${holder.id}`);
+      try {
         await db
-          .insert(schema.links)
+          .insert(schema.nodes)
           .values({
-            sourceId: holder.id.toLowerCase(),
-            targetId: "TECHolder",
-            type: "TECHolder"
+            id: citizen.id?.toLowerCase() ?? "",
+            networkId: 10,
+            type: "Citizen",
+            ens: citizen.ens,
+            userId: citizen.userId,
+            identity: citizen.identity?.toLowerCase() ?? "",
+            profileImage: citizen.profileImage,
+            profileName: citizen.profileName,
+            profileDisplayName: citizen.profileDisplayName,
+            profileBio: citizen.profileBio,
+            userAddress: citizen.userAddress?.toLowerCase() ?? "",
+            chainId: citizen.chainId,
+            hasFarcaster: !!citizen.userId,
+            isSpecial: false
           })
           .onConflictDoNothing();
-        console.log(`Link created for TEC holder ID: ${holder.id}`);
-      } else {
-        console.log(
-          `Node not found for TEC holder ID: ${holder.id}}Skipping link creation.`
-        );
+      } catch (error) {
+        console.error(`Error inserting node: ${citizen.id}`, error);
       }
     }
+    console.log("Finished inserting nodes");
+
+    // Insert TEC holders
+    console.log("Inserting TEC holders...");
+    for (const holder of tecHoldersData) {
+      try {
+        await db
+          .insert(schema.tecHolders)
+          .values({
+            id: holder.id?.toLowerCase() ?? "",
+            balance: holder.balance,
+            pendingBalanceUpdate: holder.pendingBalanceUpdate
+          })
+          .onConflictDoNothing();
+      // Check if the holder ID exists in the nodes table before creating a link
+
+        const nodeExists = await db
+          .select({ id: schema.nodes.id })
+          .from(schema.nodes)
+          .where(ilike(schema.nodes.id, holder.id ?? ""))
+          .execute();
+
+        if (nodeExists.length > 0) {
+          await db
+            .insert(schema.links)
+            .values({
+              sourceId: holder.id?.toLowerCase() ?? "",
+              targetId: "TECHolder",
+              type: "TECHolder"
+            })
+            .onConflictDoNothing();
+        }
+      } catch (error) {
+        console.error(`Error processing TEC holder: ${holder.id}`, error);
+      }
+    }
+    console.log("Finished inserting TEC holders");
     console.log("Inserted TEC holders");
     // Insert Regen Scores
     for (const score of regenScoresData) {
