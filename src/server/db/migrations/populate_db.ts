@@ -406,19 +406,79 @@ async function migrateData() {
 
     // Insert Badge Holders
     for (const badge of badgeHoldersData) {
-      await db.insert(schema.badgeHolders).values({
-        attester: badge.attester.toLowerCase(),
-        recipient: badge.recipient.toLowerCase(),
-        rpgfRound: badge.rpgfRound,
-        referredBy: badge.referredBy.toLowerCase(),
-        referredMethod: badge.referredMethod
-      });
-      if (badge.referredBy !== "0x0000000000000000000000000000000000000000") {
-        await db.insert(schema.links).values({
-          sourceId: badge.referredBy.toLowerCase(),
-          targetId: badge.recipient.toLowerCase(),
-          type: "BadgeHolderReferral"
-        });
+      try {
+        // Check if the badge holder already exists
+        const existingBadgeHolder = await db
+          .select()
+          .from(schema.badgeHolders)
+          .where(
+            and(
+              eq(schema.badgeHolders.attester, badge.attester.toLowerCase()),
+              eq(schema.badgeHolders.recipient, badge.recipient.toLowerCase()),
+              eq(schema.badgeHolders.rpgfRound, badge.rpgfRound)
+            )
+          )
+          .limit(1);
+
+        if (existingBadgeHolder.length === 0) {
+          await db
+            .insert(schema.badgeHolders)
+            .values({
+              attester: badge.attester.toLowerCase(),
+              recipient: badge.recipient.toLowerCase(),
+              rpgfRound: badge.rpgfRound,
+              referredBy: badge.referredBy.toLowerCase(),
+              referredMethod: badge.referredMethod
+            })
+            .onConflictDoNothing();
+          console.log(
+            `Created BadgeHolder: ${badge.recipient} for round ${badge.rpgfRound}`
+          );
+
+          if (
+            badge.referredBy !== "0x0000000000000000000000000000000000000000"
+          ) {
+            // Check if the link already exists
+            const existingLink = await db
+              .select()
+              .from(schema.links)
+              .where(
+                and(
+                  eq(schema.links.sourceId, badge.referredBy.toLowerCase()),
+                  eq(schema.links.targetId, badge.recipient.toLowerCase()),
+                  eq(schema.links.type, "BadgeHolderReferral")
+                )
+              )
+              .limit(1);
+
+            if (existingLink.length === 0) {
+              await db
+                .insert(schema.links)
+                .values({
+                  sourceId: badge.referredBy.toLowerCase(),
+                  targetId: badge.recipient.toLowerCase(),
+                  type: "BadgeHolderReferral"
+                })
+                .onConflictDoNothing();
+              console.log(
+                `Created BadgeHolderReferral link: ${badge.referredBy} -> ${badge.recipient}`
+              );
+            } else {
+              console.log(
+                `BadgeHolderReferral link already exists: ${badge.referredBy} -> ${badge.recipient}`
+              );
+            }
+          }
+        } else {
+          console.log(
+            `BadgeHolder already exists: ${badge.recipient} for round ${badge.rpgfRound}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `Error processing BadgeHolder: ${badge.recipient}`,
+          error
+        );
       }
     }
 
