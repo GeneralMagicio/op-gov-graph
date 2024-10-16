@@ -8,10 +8,7 @@ import * as schema from "../schema";
 import * as fs from "fs/promises";
 import * as path from "path";
 import { NodeType } from "../../../app/graph/types";
-import {
-  removeDuplicateRegenScoreLinks,
-  removeDuplicateTECHolderLinks
-} from "../scripts/removeDuplicateLinks";
+import { removeDuplicateLinks } from "../scripts/removeDuplicateLinks";
 
 const sql = postgres(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -33,8 +30,7 @@ async function loadJsonFile(filename: string) {
 async function migrateData() {
   try {
     console.log("Starting data migration...");
-    await removeDuplicateTECHolderLinks();
-    await removeDuplicateRegenScoreLinks();
+    await removeDuplicateLinks();
     console.log("Attempting to insert Optimism network...");
     const result = await db
       .insert(schema.networks)
