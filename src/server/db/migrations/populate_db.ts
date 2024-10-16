@@ -330,6 +330,7 @@ async function migrateData() {
     console.log("Finished inserting Trusted Seeds");
 
     // Insert Farcaster Connections
+    console.log("Inserting Farcaster Connections...");
     for (const connection of farcasterConnectionsData) {
       try {
         // Check if the connection already exists in farcasterConnections table
@@ -403,8 +404,10 @@ async function migrateData() {
         );
       }
     }
+    console.log("Finished inserting Farcaster Connections");
 
     // Insert Badge Holders
+    console.log("Inserting Badge Holders...");
     for (const badge of badgeHoldersData) {
       try {
         // Check if the badge holder already exists
@@ -481,25 +484,69 @@ async function migrateData() {
         );
       }
     }
+    console.log("Finished inserting Badge Holders");
 
     // Insert Regen POAPs
+    console.log("Inserting Regen POAPs...");
     for (const poap of regenPOAPData) {
-      await db.insert(schema.regenPOAPs).values({
-        nodeId: poap.Collection.toLowerCase(),
-        collection: poap.Collection,
-        count: poap.Count
-      });
-      await db.insert(schema.links).values({
-        sourceId: poap.Collection.toLowerCase(),
-        targetId: "RegenPOAP",
-        type: "RegenPOAP"
-      });
+      try {
+        // Check if the POAP already exists
+        const existingPOAP = await db
+          .select()
+          .from(schema.regenPOAPs)
+          .where(eq(schema.regenPOAPs.nodeId, poap.Collection.toLowerCase()))
+          .limit(1);
+
+        if (existingPOAP.length === 0) {
+          await db
+            .insert(schema.regenPOAPs)
+            .values({
+              nodeId: poap.Collection.toLowerCase(),
+              collection: poap.Collection,
+              count: poap.Count
+            })
+            .onConflictDoNothing();
+          console.log(`Inserted Regen POAP: ${poap.Collection}`);
+        } else {
+          console.log(`Regen POAP already exists: ${poap.Collection}`);
+        }
+
+        // Check if the link already exists
+        const existingLink = await db
+          .select()
+          .from(schema.links)
+          .where(
+            and(
+              eq(schema.links.sourceId, poap.Collection.toLowerCase()),
+              eq(schema.links.targetId, "RegenPOAP"),
+              eq(schema.links.type, "RegenPOAP")
+            )
+          )
+          .limit(1);
+
+        if (existingLink.length === 0) {
+          await db
+            .insert(schema.links)
+            .values({
+              sourceId: poap.Collection.toLowerCase(),
+              targetId: "RegenPOAP",
+              type: "RegenPOAP"
+            })
+            .onConflictDoNothing();
+          console.log(`Created RegenPOAP link for: ${poap.Collection}`);
+        } else {
+          console.log(`RegenPOAP link already exists for: ${poap.Collection}`);
+        }
+      } catch (error) {
+        console.error(`Error processing Regen POAP: ${poap.Collection}`, error);
+      }
     }
+    console.log("Finished inserting Regen POAPs");
 
     // Insert Citizen Transactions
     for (const transaction of citizenTransactionsData) {
       await db.insert(schema.transactions).values({
-        networkId: 10, // Assuming Optimism network has id 1
+        networkId: 10,
         date: new Date(transaction.date),
         fromId: transaction.from.toLowerCase(),
         toId: transaction.to.toLowerCase(),
