@@ -274,16 +274,60 @@ async function migrateData() {
     console.log("Finished inserting Regen Scores");
 
     // Insert Trusted Seeds
+    console.log("Inserting Trusted Seeds...");
     for (const seed of trustedSeedData) {
-      await db.insert(schema.trustedSeeds).values({
-        id: seed.id.toLowerCase()
-      });
-      await db.insert(schema.links).values({
-        sourceId: seed.id.toLowerCase(),
-        targetId: "TrustedSeed",
-        type: "TrustedSeed"
-      });
+      try {
+        // Check if there's a corresponding node
+        const matchingNode = await db
+          .select()
+          .from(schema.nodes)
+          .where(eq(schema.nodes.id, seed.id.toLowerCase()))
+          .limit(1);
+
+        if (matchingNode.length > 0) {
+          // Insert into trusted_seeds table
+          await db
+            .insert(schema.trustedSeeds)
+            .values({
+              id: seed.id.toLowerCase()
+            })
+            .onConflictDoNothing();
+
+          // Check if the link already exists
+          const existingLink = await db
+            .select()
+            .from(schema.links)
+            .where(
+              and(
+                eq(schema.links.sourceId, seed.id.toLowerCase()),
+                eq(schema.links.targetId, "TrustedSeed"),
+                eq(schema.links.type, "TrustedSeed")
+              )
+            )
+            .limit(1);
+
+          // If the link doesn't exist, create it
+          if (existingLink.length === 0) {
+            await db
+              .insert(schema.links)
+              .values({
+                sourceId: seed.id.toLowerCase(),
+                targetId: "TrustedSeed",
+                type: "TrustedSeed"
+              })
+              .onConflictDoNothing();
+            console.log(`Created TrustedSeed link for: ${seed.id}`);
+          } else {
+            console.log(`TrustedSeed link already exists for: ${seed.id}`);
+          }
+        } else {
+          console.log(`No matching node found for TrustedSeed: ${seed.id}`);
+        }
+      } catch (error) {
+        console.error(`Error processing TrustedSeed: ${seed.id}`, error);
+      }
     }
+    console.log("Finished inserting Trusted Seeds");
 
     // Insert Farcaster Connections
     for (const connection of farcasterConnectionsData) {
