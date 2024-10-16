@@ -116,9 +116,7 @@ export const regenScores = pgTable("regen_scores", {
 });
 
 export const trustedSeeds = pgTable("trusted_seeds", {
-  id: text("id")
-    .primaryKey()
-    .references(() => nodes.id, { onDelete: "cascade" }),
+  id: text("id").primaryKey(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
