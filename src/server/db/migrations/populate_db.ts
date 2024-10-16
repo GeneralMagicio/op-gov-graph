@@ -331,15 +331,77 @@ async function migrateData() {
 
     // Insert Farcaster Connections
     for (const connection of farcasterConnectionsData) {
-      await db.insert(schema.farcasterConnections).values({
-        sourceId: connection.source.toLowerCase(),
-        targetId: connection.target.toLowerCase()
-      });
-      await db.insert(schema.links).values({
-        sourceId: connection.source.toLowerCase(),
-        targetId: connection.target.toLowerCase(),
-        type: "FarcasterConnection"
-      });
+      try {
+        // Check if the connection already exists in farcasterConnections table
+        const existingConnection = await db
+          .select()
+          .from(schema.farcasterConnections)
+          .where(
+            and(
+              eq(
+                schema.farcasterConnections.sourceId,
+                connection.source.toLowerCase()
+              ),
+              eq(
+                schema.farcasterConnections.targetId,
+                connection.target.toLowerCase()
+              )
+            )
+          )
+          .limit(1);
+
+        if (existingConnection.length === 0) {
+          // Insert into farcasterConnections table
+          await db
+            .insert(schema.farcasterConnections)
+            .values({
+              sourceId: connection.source.toLowerCase(),
+              targetId: connection.target.toLowerCase()
+            })
+            .onConflictDoNothing();
+
+          // Check if the link already exists in links table
+          const existingLink = await db
+            .select()
+            .from(schema.links)
+            .where(
+              and(
+                eq(schema.links.sourceId, connection.source.toLowerCase()),
+                eq(schema.links.targetId, connection.target.toLowerCase()),
+                eq(schema.links.type, "FarcasterConnection")
+              )
+            )
+            .limit(1);
+
+          // If the link doesn't exist, create it
+          if (existingLink.length === 0) {
+            await db
+              .insert(schema.links)
+              .values({
+                sourceId: connection.source.toLowerCase(),
+                targetId: connection.target.toLowerCase(),
+                type: "FarcasterConnection"
+              })
+              .onConflictDoNothing();
+            console.log(
+              `Created FarcasterConnection link for: ${connection.source} -> ${connection.target}`
+            );
+          } else {
+            console.log(
+              `FarcasterConnection link already exists for: ${connection.source} -> ${connection.target}`
+            );
+          }
+        } else {
+          console.log(
+            `FarcasterConnection already exists for: ${connection.source} -> ${connection.target}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `Error processing FarcasterConnection: ${connection.source} -> ${connection.target}`,
+          error
+        );
+      }
     }
 
     // Insert Badge Holders
