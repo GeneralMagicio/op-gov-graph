@@ -38,6 +38,7 @@ interface CitizenWithFarcaster extends ICitizen {
   profileBio?: string;
   userAddress?: string;
   chainId?: string;
+  isSpecial?: boolean;
   followings?: {
     id: string;
     blockchain: string;
@@ -47,7 +48,8 @@ interface CitizenWithFarcaster extends ICitizen {
 
 const fetchData = async <T>(url: string): Promise<T> => {
   const response = await fetch(url);
-  return response.json();
+  const data: unknown = await response.json();
+  return data as T;
 };
 
 const createNode = (id: string, type: NodeType): Node => ({ id, type });
