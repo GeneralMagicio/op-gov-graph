@@ -1,5 +1,6 @@
 // src/db/schema.ts
 
+import { table } from "console";
 import {
   pgTable,
   serial,
