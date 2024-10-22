@@ -58,6 +58,7 @@ export default function GraphPage() {
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [clickedNode, setClickedNode] = useState<Node | null>(null);
 
   // const graphData = useGraphData(
@@ -248,6 +249,7 @@ export default function GraphPage() {
   const handleNodeClick = useCallback(
     (node: Node) => {
       setSelectedNode(node);
+      setSelectedNodeId(node.id);
       setClickedNode(node);
       highlightNodeConnections(node);
 
@@ -260,8 +262,8 @@ export default function GraphPage() {
 
   const handleCloseRightSidebar = useCallback(() => {
     setSelectedNode(null);
-    setClickedNode(null); // Clear the clicked node
-    // Clear all highlights
+    setSelectedNodeId(null);
+    setClickedNode(null);
     highlightNodes.clear();
     highlightLinks.clear();
     updateHighlight();
@@ -577,6 +579,7 @@ export default function GraphPage() {
   useEffect(() => {
     const nodeId = searchParams.get("nodeId");
     if (nodeId) {
+      setSelectedNodeId(nodeId);
       const node = processedGraphData.nodes.find(
         (n) => n.id.toLowerCase() === nodeId.toLowerCase()
       );
@@ -660,6 +663,7 @@ export default function GraphPage() {
           )}
         </main>
         <RightSidebar
+          selectedNodeId={selectedNodeId}
           selectedNode={selectedNode}
           onClose={handleCloseRightSidebar}
         />
