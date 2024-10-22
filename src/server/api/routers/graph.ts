@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { nodes, links } from "@/server/db/schema";
-import { eq, and, inArray } from "drizzle-orm";
+import { eq, and, inArray, or } from "drizzle-orm";
 import { NodeLinkType, NodeType } from "@/app/graph/types";
 
 export const graphRouter = createTRPCRouter({
@@ -23,9 +23,12 @@ export const graphRouter = createTRPCRouter({
         .where(
           and(
             eq(nodes.networkId, networkId),
-            inArray(
-              nodes.type,
-              selectedNodeTypes as (typeof NodeType.Citizen)[]
+            or(
+              inArray(
+                nodes.type,
+                selectedNodeTypes as (typeof NodeType.Citizen)[]
+              ),
+              eq(nodes.isSpecial, true)
             )
           )
         );
