@@ -26,9 +26,14 @@ export interface RegenPOAPHolder {
 }
 
 export interface BadgeHolderReferralInfo {
-  address: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  attester: string;
+  recipient: string;
   rpgfRound: string;
-  referredMethod: string;
+  referredBy: string | null;
+  referredMethod: string | null;
 }
 
 export interface Link {
