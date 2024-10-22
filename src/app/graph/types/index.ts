@@ -16,7 +16,7 @@ export enum NodeType {
   TECHolder = "TECHolder",
   RegenScore = "RegenScore",
   TrustedSeed = "TrustedSeed",
-  RegenPOAP = "RegenPOAP",
+  RegenPOAP = "RegenPOAP"
   // RefiDAO = "RefiDAO", // Uncomment if needed in the future
 }
 
@@ -26,9 +26,14 @@ export interface RegenPOAPHolder {
 }
 
 export interface BadgeHolderReferralInfo {
-  address: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  attester: string;
+  recipient: string;
   rpgfRound: string;
-  referredMethod: string;
+  referredBy: string | null;
+  referredMethod: string | null;
 }
 
 export interface Link {
@@ -52,6 +57,7 @@ export interface ICitizen {
   profileBio?: string;
   userAddress?: string;
   chainId?: string;
+  isSpecial?: boolean;
   followings?: {
     id: string;
     blockchain: string;

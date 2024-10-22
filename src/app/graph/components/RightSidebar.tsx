@@ -1,12 +1,14 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Node, BadgeHolderReferralInfo } from "../types";
 import { useConvertAddressToENS } from "@/app/hooks/useConvertAddressToENS";
 import { useFarcasterData } from "@/app/hooks/useFarcasterData";
 import { useRouter, usePathname } from "next/navigation";
 import { Tooltip } from "react-tooltip";
 import { Info } from "lucide-react";
+import { api } from "@/trpc/react";
 
 interface RightSidebarProps {
+  selectedNodeId: string | null;
   selectedNode: Node | null;
   onClose: () => void;
 }
@@ -17,45 +19,80 @@ const formatAddress = (address: string) => {
 };
 
 const RightSidebar: React.FC<RightSidebarProps> = ({
-  selectedNode,
-  onClose
+  selectedNodeId,
+  onClose,
+  selectedNode
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
   const router = useRouter();
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(false);
-  const {
-    getFarcasterDataForConnections,
-    getFarcasterDataByAddress,
-    isLoading
-  } = useFarcasterData();
 
-  const farcasterConnections = useMemo(() => {
-    if (!selectedNode?.followings) return [];
-    const connectionIds = selectedNode.followings.map(
-      (f) => f.followingProfileId
+  const { getFarcasterDataByAddress, isLoading: isFarcasterLoading } =
+    useFarcasterData();
+
+  const { data: nodeData, isLoading: isNodeLoading } =
+    api.node.getById.useQuery(
+      { id: selectedNodeId || "" },
+      { enabled: !!selectedNodeId && !selectedNode }
     );
-    return getFarcasterDataForConnections(connectionIds);
-  }, [selectedNode?.followings, getFarcasterDataForConnections]);
 
-  useEffect(() => {
-    if (selectedNode) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  }, [selectedNode]);
+  const { data: farcasterConnections = [], isLoading: isConnectionsLoading } =
+    api.farcaster.getConnectionsForNode.useQuery(
+      { nodeId: selectedNodeId || "" },
+      { enabled: !!selectedNodeId }
+    );
 
-  const handleClose = () => {
-    setIsVisible(false);
-    setTimeout(onClose, 300); // Delay onClose to allow animation to complete
-  };
+  const filteredFarcasterConnections = farcasterConnections.filter(
+    (connection) => connection !== null
+  );
+
+  const { data: badgeHolderReferrals, isLoading: isReferralsLoading } =
+    api.badgeHolder.getReferralsForNode.useQuery(
+      { nodeId: selectedNodeId || "" },
+      { enabled: !!selectedNodeId }
+    );
+
+  const formattedReferrals = React.useMemo(() => {
+    if (!badgeHolderReferrals) return undefined;
+    return {
+      referredBy: badgeHolderReferrals.referredBy.map((ref) => ({
+        ...ref,
+        address: ref.referredBy
+      })),
+      referred: badgeHolderReferrals.referred.map((ref) => ({
+        ...ref,
+        address: ref.recipient
+      }))
+    };
+  }, [badgeHolderReferrals]);
+
+  console.log("Referrals", formattedReferrals);
 
   const handleConnectionClick = useCallback(
     (connectionId: string) => {
       router.push(`${pathname}?nodeId=${connectionId}`);
     },
-    [router, pathname, handleClose]
+    [router, pathname, onClose]
   );
+
+  useEffect(() => {
+    if (selectedNodeId || selectedNode) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [selectedNodeId, selectedNode]);
+
+  const displayNode = selectedNode || nodeData;
+
+  if (isNodeLoading) {
+    return <div className="p-6">Loading...</div>;
+  }
+
+  if (!displayNode || !selectedNode) {
+    return null;
+  }
 
   return (
     <div
@@ -63,46 +100,61 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
         isVisible ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      {selectedNode && (
-        <div className="p-6">
-          <button
-            onClick={handleClose}
-            className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+      <div className="p-6">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <ProfileSection
+          node={selectedNode}
+          connections={filteredFarcasterConnections}
+        />
+        <BadgesSection node={selectedNode} />
+        <BadgeholderReferralSection
+          referrals={formattedReferrals}
+          getFarcasterDataByAddress={getFarcasterDataByAddress}
+        />
 
-          <ProfileSection node={selectedNode} />
-          <BadgesSection node={selectedNode} />
-          <BadgeholderReferralSection
-            referrals={selectedNode.badgeHolderReferrals}
-            getFarcasterDataByAddress={getFarcasterDataByAddress}
-          />
-          <FarcasterConnectionsSection
-            connections={farcasterConnections}
-            isLoading={isLoading}
-            onConnectionClick={handleConnectionClick}
-          />
-        </div>
-      )}
+        <FarcasterConnectionsSection
+          connections={filteredFarcasterConnections}
+          isLoading={isFarcasterLoading || isConnectionsLoading}
+          onConnectionClick={handleConnectionClick}
+        />
+      </div>
     </div>
   );
 };
 
-const ProfileSection: React.FC<{ node: Node }> = ({ node }) => {
+const ProfileSection: React.FC<{ node: Node; connections: string[] }> = ({
+  node,
+  connections
+}) => {
+  if (!node) return null;
+  // console.log("nodeeee", node);
+  // const { data: connectionData = [] } =
+  //   api.farcaster.getDataForConnections.useQuery(
+  //     { connectionIds: connections },
+  //     { enabled: connections.length > 0 }
+  //   );
+
+  // if (isLoading) return <p>Loading Following on Farcaster...</p>;
+  // if (connections.length === 0) return null;
+
   return (
     <div className="flex flex-col items-center mb-6">
       <img
@@ -123,7 +175,7 @@ const ProfileSection: React.FC<{ node: Node }> = ({ node }) => {
           >
             @{node.profileName}
           </a>
-          <p>· {node.followings?.length || 0} followings</p>
+          <p>· {connections?.length || 0} followings</p>
         </div>
       )}
       {node.profileBio && (
@@ -177,7 +229,7 @@ const BadgeholderReferralSection: React.FC<{
     (referrals.referredBy.length === 0 && referrals.referred.length === 0)
   )
     return null;
-
+  console.log("Reffff", referrals.referredBy);
   return (
     <div className="mb-6">
       <h3 className="text-lg font-semibold mb-2 flex items-center">
@@ -221,9 +273,13 @@ const ReferralItem: React.FC<{
     address: string
   ) => { profileImage?: string; profileName?: string } | undefined;
 }> = ({ referral, type, getFarcasterDataByAddress }) => {
-  const { ensName } = useConvertAddressToENS(referral.address);
-  const farcasterData = getFarcasterDataByAddress(referral.address);
+  const address =
+    type === "Referred By" ? referral.referredBy : referral.recipient;
+  const { ensName } = useConvertAddressToENS(address ?? "");
+  const farcasterData = getFarcasterDataByAddress(address ?? "");
 
+  console.log("refa", farcasterData);
+  if (!referral) return null;
   return (
     <div className="flex items-center mb-2">
       <img
@@ -236,7 +292,7 @@ const ReferralItem: React.FC<{
           {type}{" "}
           {farcasterData?.profileName ||
             formatAddress(ensName) ||
-            formatAddress(referral.address)}
+            formatAddress(address ?? "")}
         </p>
         <p className="text-xs text-dark-text-secondary">
           RPGF Round: {referral.rpgfRound}
@@ -247,15 +303,17 @@ const ReferralItem: React.FC<{
 };
 
 const FarcasterConnectionsSection: React.FC<{
-  connections: {
-    userId: string;
-    id?: string;
-    profileImage?: string;
-    profileName?: string;
-  }[];
+  connections: string[];
   isLoading: boolean;
   onConnectionClick: (connectionId: string) => void;
 }> = ({ connections, isLoading, onConnectionClick }) => {
+  const { data: connectionData = [] } =
+    api.farcaster.getDataForConnections.useQuery(
+      { connectionIds: connections },
+      { enabled: connections.length > 0 }
+    );
+  console.log("ConnectionData", connectionData);
+  console.log("Connections", connections);
   if (isLoading) return <p>Loading Following on Farcaster...</p>;
   if (connections.length === 0) return null;
 
@@ -275,26 +333,24 @@ const FarcasterConnectionsSection: React.FC<{
         className="max-w-xs whitespace-pre-line text-center"
         content={`Citizens that this user follows\non the Farcaster network`}
       />
-      {connections.map((connection, index) =>
-        connection.profileImage || connection.profileName ? (
-          <div
-            key={index}
-            className="flex items-center mb-2 cursor-pointer hover:bg-dark-hover transition-colors duration-200 rounded-md p-1"
-            onClick={() =>
-              onConnectionClick(connection.id || connection.userId)
-            }
-          >
-            <img
-              src={connection.profileImage || "/images/profile-ph.jpg"}
-              alt="Connection"
-              className="w-6 h-6 rounded-full mr-2"
-            />
-            <p className="text-sm">
-              {connection.profileName || connection.id || connection.userId}
-            </p>
-          </div>
-        ) : null
-      )}
+      {connectionData.map((connection, index) => (
+        <div
+          key={index}
+          className="flex items-center mb-2 cursor-pointer hover:bg-dark-hover transition-colors duration-200 rounded-md p-1"
+          onClick={() => onConnectionClick(connection.id)}
+        >
+          <img
+            src={connection.profileImage || "/images/profile-ph.jpg"}
+            alt="Connection"
+            className="w-6 h-6 rounded-full mr-2"
+          />
+          <p className="text-sm">
+            {connection.profileName ||
+              connection.profileDisplayName ||
+              formatAddress(connection.id)}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };
