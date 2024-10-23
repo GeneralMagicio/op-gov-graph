@@ -2,6 +2,7 @@
   "name": "op-govgraph",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,7 +23,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-force-graph-2d": "^1.25.5",
-    "tailwind-merge": "^2.4.0"
+    "react-tooltip": "^5.28.0",
+    "tailwind-merge": "^2.4.0",
+    "viem": "^2.21.18"
   },
   "devDependencies": {
     "@types/node": "^22.5.2",

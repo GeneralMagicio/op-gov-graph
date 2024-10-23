@@ -31925,10 +31925,6 @@
     "ens": "meglister.eth"
   },
   {
-    "id": "0xABF28f8D9adFB2255F4a059e37d3BcE9104969dB",
-    "ens": "meglister.eth"
-  },
-  {
     "id": "0x7899d9b1181cbB427b0b1BE0684C096C260F7474",
     "ens": "minimalgravitas.eth",
     "userId": "18791",
@@ -49527,9 +49523,7 @@
     "id": "0x66946def4ba6153C500D743b7A5FebfC1654d6bD",
     "ens": null,
     "userId": "384391",
-    "userAssociatedAddresses": [
-      "0x66946def4ba6153c500d743b7a5febfc1654d6bd"
-    ],
+    "userAssociatedAddresses": ["0x66946def4ba6153c500d743b7a5febfc1654d6bd"],
     "identity": "0x66946def4ba6153C500D743b7A5FebfC1654d6bD",
     "profileImage": "https://i.imgur.com/bMqHdX9.jpg",
     "profileName": "fujiar",

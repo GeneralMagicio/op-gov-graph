@@ -11,6 +11,15 @@ export enum NodeLinkType {
   // RefiDAO = "RefiDAO",
 }
 
+export enum NodeType {
+  Citizen = "Citizen",
+  TECHolder = "TECHolder",
+  RegenScore = "RegenScore",
+  TrustedSeed = "TrustedSeed",
+  RegenPOAP = "RegenPOAP",
+  // RefiDAO = "RefiDAO", // Uncomment if needed in the future
+}
+
 export interface RegenPOAPHolder {
   Collection: string;
   Count: number;
@@ -52,11 +61,11 @@ export interface ICitizen {
 
 export interface Node extends ICitizen {
   id: string;
+  type: NodeType;
   degree?: number;
   name?: string;
   x?: number;
   y?: number;
-  type?: string;
   tecBalance?: string;
   regenScore?: number;
   trustedSeed?: boolean;
