@@ -1,7 +1,7 @@
 // src/server/services/airStack/airstackService.ts
 import { init, fetchQuery } from "@airstack/node";
-import { nodes } from "../../db/schema.js";
-import { eq } from "drizzle-orm";
+import { nodes, farcasterConnections, links } from "../../db/schema.js";
+import { eq, and } from "drizzle-orm";
 import { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { z } from "zod";
 import { config } from "dotenv";
@@ -60,6 +60,27 @@ interface AirstackSocialResponse {
         profileName: string;
         identity: string;
       }[];
+    };
+  };
+  error?: {
+    message: string;
+  };
+}
+
+interface AirstackFollowingResponse {
+  data: {
+    SocialFollowings: {
+      Following: {
+        id: string;
+        blockchain: string;
+        followingProfileId: string;
+      }[];
+      pageInfo: {
+        hasNextPage: boolean;
+        nextCursor: string;
+        prevCursor: string;
+        hasPrevPage: boolean;
+      };
     };
   };
   error?: {
@@ -138,6 +159,52 @@ export class AirstackService {
     }
   }
 
+  private async getFarcasterFollowings(profileTokenId: string, cursor = "") {
+    const query = `
+      query SocialFollowingsDetails {
+        SocialFollowings(
+          input: {
+            filter: {
+              dappName: {_eq: farcaster}, 
+              followerProfileId: {_eq: "${profileTokenId}"}
+            },
+            blockchain: ALL,
+            limit: 200,
+            cursor: "${cursor}"
+          }
+        ) {
+          Following {
+            id
+            blockchain
+            followingProfileId
+          }
+          pageInfo {
+            hasNextPage
+            nextCursor
+            prevCursor
+            hasPrevPage
+          }
+        }
+      }
+    `;
+
+    try {
+      const response: AirstackFollowingResponse = await fetchQuery(query);
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      return response.data.SocialFollowings;
+    } catch (error) {
+      console.error(
+        `Error fetching Farcaster followings for profile ${profileTokenId}:`,
+        error
+      );
+      return null;
+    }
+  }
+
   async updateSingleCitizen(address: string) {
     const farcasterData = await this.getFarcasterData(address);
 
@@ -165,6 +232,138 @@ export class AirstackService {
       console.log(`Updated Farcaster data for ${address}`);
     } catch (error) {
       console.error(`Error updating Farcaster data for ${address}:`, error);
+    }
+  }
+
+  async updateFarcasterFollowings(address: string) {
+    const farcasterData = await this.getFarcasterData(address);
+
+    if (!farcasterData?.userId) {
+      console.log(`No Farcaster userId found for address ${address}`);
+      return;
+    }
+
+    try {
+      const citizens = await this.db
+        .select({
+          id: nodes.id,
+          userId: nodes.userId
+        })
+        .from(nodes)
+        .where(eq(nodes.type, "Citizen"));
+
+      const citizenMap = new Map(
+        citizens
+          .filter((c) => c.userId)
+          .map((c) => [c.userId, c.id.toLowerCase()])
+      );
+
+      let hasNextPage = true;
+      let cursor = "";
+      let totalProcessed = 0;
+
+      while (hasNextPage) {
+        const followingsData = await this.getFarcasterFollowings(
+          farcasterData.userId,
+          cursor
+        );
+
+        if (!followingsData) {
+          console.log(
+            `No followings data returned for userId ${farcasterData.userId}`
+          );
+          break;
+        }
+
+        const { Following, pageInfo } = followingsData;
+
+        for (const following of Following) {
+          try {
+            const targetCitizenAddress = citizenMap.get(
+              following.followingProfileId
+            );
+
+            if (!targetCitizenAddress) {
+              continue;
+            }
+
+            const sourceAddress = address.toLowerCase();
+
+            // Check if farcaster connection already exists
+            const existingFarcasterConnection = await this.db
+              .select()
+              .from(farcasterConnections)
+              .where(
+                and(
+                  eq(farcasterConnections.sourceId, sourceAddress),
+                  eq(farcasterConnections.targetId, targetCitizenAddress)
+                )
+              )
+              .limit(1);
+
+            // Check if link already exists
+            const existingLink = await this.db
+              .select()
+              .from(links)
+              .where(
+                and(
+                  eq(links.sourceId, sourceAddress),
+                  eq(links.targetId, targetCitizenAddress),
+                  eq(links.type, "FarcasterConnection")
+                )
+              )
+              .limit(1);
+
+            // Only insert if connections don't exist
+            if (existingFarcasterConnection.length === 0) {
+              await this.db.insert(farcasterConnections).values({
+                sourceId: sourceAddress,
+                targetId: targetCitizenAddress
+              });
+              console.log(
+                `Created Farcaster connection: ${sourceAddress} -> ${targetCitizenAddress}`
+              );
+            }
+
+            if (existingLink.length === 0) {
+              await this.db.insert(links).values({
+                sourceId: sourceAddress,
+                targetId: targetCitizenAddress,
+                type: "FarcasterConnection"
+              });
+              console.log(
+                `Created Link: ${sourceAddress} -> ${targetCitizenAddress}`
+              );
+            }
+          } catch (error) {
+            console.error(
+              `Error processing following relationship for ${following.followingProfileId}:`,
+              error
+            );
+          }
+        }
+
+        totalProcessed += Following.length;
+        console.log(
+          `Processed ${totalProcessed} followings for ${farcasterData.userId}`
+        );
+
+        hasNextPage = pageInfo.hasNextPage;
+        cursor = pageInfo.nextCursor;
+
+        if (hasNextPage) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+      }
+
+      console.log(
+        `Completed updating Farcaster followings for ${farcasterData.userId}`
+      );
+    } catch (error) {
+      console.error(
+        `Error updating Farcaster followings for ${address}:`,
+        error
+      );
     }
   }
 
@@ -199,6 +398,43 @@ export class AirstackService {
       console.log("Completed updating Farcaster data for all citizens");
     } catch (error) {
       console.error("Error updating all citizens:", error);
+      throw error;
+    }
+  }
+
+  async updateAllFarcasterFollowings() {
+    try {
+      // Get all citizens with Farcaster profiles
+      const farcasterCitizens = await this.db
+        .select({
+          id: nodes.id
+        })
+        .from(nodes)
+        .where(and(eq(nodes.type, "Citizen"), eq(nodes.hasFarcaster, true)));
+
+      console.log(
+        `Found ${farcasterCitizens.length} citizens with Farcaster to update`
+      );
+
+      // Process in batches to avoid rate limits
+      const batchSize = 5;
+      for (let i = 0; i < farcasterCitizens.length; i += batchSize) {
+        const batch = farcasterCitizens.slice(i, i + batchSize);
+
+        // Process batch concurrently
+        await Promise.all(
+          batch.map((citizen) => this.updateFarcasterFollowings(citizen.id))
+        );
+
+        // Add delay between batches
+        if (i + batchSize < farcasterCitizens.length) {
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+        }
+      }
+
+      console.log("Completed updating Farcaster followings for all citizens");
+    } catch (error) {
+      console.error("Error updating all Farcaster followings:", error);
       throw error;
     }
   }

@@ -41,7 +41,13 @@ async function main() {
 
     // Get AirstackService instance
     const airstackService = AirstackService.getInstance(db);
+
+    // Update user profiles
     await airstackService.updateAllCitizens();
+
+    // Update following relationships
+    console.log("Starting Farcaster followings update...");
+    await airstackService.updateAllFarcasterFollowings();
 
     console.log("Farcaster data update completed successfully");
   } catch (error) {
