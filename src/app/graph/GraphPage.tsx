@@ -24,7 +24,7 @@ import {
   NodeLinkType,
   NodeType
 } from "./types";
-import { useGraphData } from "../hooks/useGraphData";
+
 import RightSidebar from "./components/RightSidebar";
 import { useSearchCitizens } from "../hooks/useSearchCitizens";
 import {
@@ -60,11 +60,6 @@ export default function GraphPage() {
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [clickedNode, setClickedNode] = useState<Node | null>(null);
-
-  // const graphData = useGraphData(
-  //   selectedConnectionsCheckBox,
-  //   selectedNodesCheckBox.current
-  // );
 
   const {
     data: graphData,
