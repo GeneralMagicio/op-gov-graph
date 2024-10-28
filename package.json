@@ -13,11 +13,13 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "generate-transactions": "ts-node -r dotenv/config scripts/generateCitizenTransactions.ts",
-    "db:populate": "node --experimental-specifier-resolution=node --loader ts-node/esm src/server/db/migrations/populate_db.ts",
-    "update-farcaster": "cross-env NODE_ENV=development tsx src/scripts/updateFarcasterData.ts",
-    "update-farcaster-prod": "cross-env NODE_ENV=production tsx src/scripts/updateFarcasterData.ts",
-    "remove-duplicates": "node --experimental-specifier-resolution=node --loader ts-node/esm src/scripts/removeDuplicates.ts",
-    "remove-duplicates-prod": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node --loader ts-node/esm src/scripts/removeDuplicates.ts"
+    "db:populate": "node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/populate_db.ts",
+    "update-farcaster": "cross-env NODE_ENV=development tsx scripts/migrations/updateFarcasterData.ts",
+    "update-farcaster-prod": "cross-env NODE_ENV=production tsx scripts/migrations/updateFarcasterData.ts",
+    "remove-duplicates": "node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicates.ts",
+    "remove-duplicates-prod": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicates.ts",
+    "migrate:delegates": "tsx -r dotenv/config scripts/migrations/migrateDelegates.ts",
+    "fix-node-types": "tsx scripts/migrations/fixNodeTypes.ts"
   },
   "dependencies": {
     "@airstack/node": "^0.0.7",
