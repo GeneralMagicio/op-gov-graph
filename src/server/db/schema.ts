@@ -20,8 +20,10 @@ export const nodeTypeEnum = pgEnum("node_type", [
   "TECHolder",
   "RegenScore",
   "TrustedSeed",
-  "RegenPOAP"
+  "RegenPOAP",
+  "Delegate"
 ]);
+
 export const linkTypeEnum = pgEnum("link_type", [
   "FarcasterConnection",
   "BadgeHolderReferral",
@@ -48,6 +50,7 @@ export const nodes = pgTable(
       onDelete: "cascade"
     }),
     type: nodeTypeEnum("type").notNull(),
+    nodeTypes: text("node_types").array().notNull().default([]),
     ens: text("ens"),
     userId: text("user_id"),
     identity: text("identity"),
@@ -62,10 +65,19 @@ export const nodes = pgTable(
     trustedSeed: boolean("trusted_seed"),
     regenPOAP: boolean("regen_poap"),
     hasFarcaster: boolean("has_farcaster"),
+    isSpecial: boolean("is_special"),
+    // New delegate-related fields
+    ensAddress: text("ens_address"),
+    farcasterUrl: text("farcaster_url"),
+    twitterUrl: text("twitter_url"),
+    roles: text("roles"),
+    ambassadorOf: text("ambassador_of"),
+    opRewardsEarned: text("op_rewards_earned"),
+    isDelegate: boolean("is_delegate").default(false),
+    description: text("description"),
     data: jsonb("data"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at").defaultNow().notNull(),
-    isSpecial: boolean("is_special").default(false).notNull()
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
   (table) => {
     return {
