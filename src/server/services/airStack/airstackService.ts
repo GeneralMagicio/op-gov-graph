@@ -1,7 +1,7 @@
 // src/server/services/airStack/airstackService.ts
 import { init, fetchQuery } from "@airstack/node";
 import { nodes, farcasterConnections, links } from "../../db/schema.js";
-import { eq, and } from "drizzle-orm";
+import { eq, and, or } from "drizzle-orm";
 import { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { z } from "zod";
 import { config } from "dotenv";
@@ -205,7 +205,7 @@ export class AirstackService {
     }
   }
 
-  async updateSingleCitizen(address: string) {
+  async updateSinglePersonNode(address: string) {
     const farcasterData = await this.getFarcasterData(address);
 
     if (!farcasterData) {
@@ -244,18 +244,23 @@ export class AirstackService {
     }
 
     try {
-      const citizens = await this.db
+      const personNodes = await this.db
         .select({
           id: nodes.id,
           userId: nodes.userId
         })
         .from(nodes)
-        .where(eq(nodes.type, "Citizen"));
+        .where(
+          or(
+            eq(nodes.type, "Citizen"),
+            eq(nodes.type, "Delegate")
+          )
+        );
 
-      const citizenMap = new Map(
-        citizens
-          .filter((c) => c.userId)
-          .map((c) => [c.userId, c.id.toLowerCase()])
+      const personNodeMap = new Map(
+        personNodes
+          .filter((node) => node.userId)
+          .map((node) => [node.userId, node.id.toLowerCase()])
       );
 
       let hasNextPage = true;
@@ -279,11 +284,11 @@ export class AirstackService {
 
         for (const following of Following) {
           try {
-            const targetCitizenAddress = citizenMap.get(
+            const targetPersonNodeAddress = personNodeMap.get(
               following.followingProfileId
             );
 
-            if (!targetCitizenAddress) {
+            if (!targetPersonNodeAddress) {
               continue;
             }
 
@@ -296,7 +301,7 @@ export class AirstackService {
               .where(
                 and(
                   eq(farcasterConnections.sourceId, sourceAddress),
-                  eq(farcasterConnections.targetId, targetCitizenAddress)
+                  eq(farcasterConnections.targetId, targetPersonNodeAddress)
                 )
               )
               .limit(1);
@@ -308,7 +313,7 @@ export class AirstackService {
               .where(
                 and(
                   eq(links.sourceId, sourceAddress),
-                  eq(links.targetId, targetCitizenAddress),
+                  eq(links.targetId, targetPersonNodeAddress),
                   eq(links.type, "FarcasterConnection")
                 )
               )
@@ -318,21 +323,21 @@ export class AirstackService {
             if (existingFarcasterConnection.length === 0) {
               await this.db.insert(farcasterConnections).values({
                 sourceId: sourceAddress,
-                targetId: targetCitizenAddress
+                targetId: targetPersonNodeAddress
               });
               console.log(
-                `Created Farcaster connection: ${sourceAddress} -> ${targetCitizenAddress}`
+                `Created Farcaster connection: ${sourceAddress} -> ${targetPersonNodeAddress}`
               );
             }
 
             if (existingLink.length === 0) {
               await this.db.insert(links).values({
                 sourceId: sourceAddress,
-                targetId: targetCitizenAddress,
+                targetId: targetPersonNodeAddress,
                 type: "FarcasterConnection"
               });
               console.log(
-                `Created Link: ${sourceAddress} -> ${targetCitizenAddress}`
+                `Created Link: ${sourceAddress} -> ${targetPersonNodeAddress}`
               );
             }
           } catch (error) {
@@ -367,72 +372,77 @@ export class AirstackService {
     }
   }
 
-  async updateAllCitizens() {
+  async updateAllPersonNodes() {
     try {
-      // Get all citizen nodes
-      const citizens = await this.db
+      const personNodes = await this.db
         .select({
           id: nodes.id
         })
         .from(nodes)
-        .where(eq(nodes.type, "Citizen"));
-
-      console.log(`Found ${citizens.length} citizens to update`);
-
-      // Process in batches to avoid rate limits
-      const batchSize = 10;
-      for (let i = 0; i < citizens.length; i += batchSize) {
-        const batch = citizens.slice(i, i + batchSize);
-
-        // Process batch concurrently
-        await Promise.all(
-          batch.map((citizen) => this.updateSingleCitizen(citizen.id))
+        .where(
+          or(
+            eq(nodes.type, "Citizen"),
+            eq(nodes.type, "Delegate")
+          )
         );
 
-        // Add delay between batches to respect rate limits
-        if (i + batchSize < citizens.length) {
+      console.log(`Found ${personNodes.length} person nodes to update`);
+
+      const batchSize = 10;
+      for (let i = 0; i < personNodes.length; i += batchSize) {
+        const batch = personNodes.slice(i, i + batchSize);
+
+        await Promise.all(
+          batch.map((node) => this.updateSinglePersonNode(node.id))
+        );
+
+        if (i + batchSize < personNodes.length) {
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       }
 
-      console.log("Completed updating Farcaster data for all citizens");
+      console.log("Completed updating Farcaster data for all person nodes");
     } catch (error) {
-      console.error("Error updating all citizens:", error);
+      console.error("Error updating all person nodes:", error);
       throw error;
     }
   }
 
   async updateAllFarcasterFollowings() {
     try {
-      // Get all citizens with Farcaster profiles
-      const farcasterCitizens = await this.db
+      const farcasterPersonNodes = await this.db
         .select({
           id: nodes.id
         })
         .from(nodes)
-        .where(and(eq(nodes.type, "Citizen"), eq(nodes.hasFarcaster, true)));
-
-      console.log(
-        `Found ${farcasterCitizens.length} citizens with Farcaster to update`
-      );
-
-      // Process in batches to avoid rate limits
-      const batchSize = 5;
-      for (let i = 0; i < farcasterCitizens.length; i += batchSize) {
-        const batch = farcasterCitizens.slice(i, i + batchSize);
-
-        // Process batch concurrently
-        await Promise.all(
-          batch.map((citizen) => this.updateFarcasterFollowings(citizen.id))
+        .where(
+          and(
+            or(
+              eq(nodes.type, "Citizen"),
+              eq(nodes.type, "Delegate")
+            ),
+            eq(nodes.hasFarcaster, true)
+          )
         );
 
-        // Add delay between batches
-        if (i + batchSize < farcasterCitizens.length) {
+      console.log(
+        `Found ${farcasterPersonNodes.length} person nodes with Farcaster to update`
+      );
+
+      const batchSize = 5;
+      for (let i = 0; i < farcasterPersonNodes.length; i += batchSize) {
+        const batch = farcasterPersonNodes.slice(i, i + batchSize);
+
+        await Promise.all(
+          batch.map((node) => this.updateFarcasterFollowings(node.id))
+        );
+
+        if (i + batchSize < farcasterPersonNodes.length) {
           await new Promise((resolve) => setTimeout(resolve, 2000));
         }
       }
 
-      console.log("Completed updating Farcaster followings for all citizens");
+      console.log("Completed updating Farcaster followings for all person nodes");
     } catch (error) {
       console.error("Error updating all Farcaster followings:", error);
       throw error;
