@@ -33,7 +33,7 @@ const sql = postgres(process.env.DATABASE_URL);
 const db = drizzle(sql);
 
 // Import services
-import { AirstackService } from "../server/services/airStack/airstackService.js";
+import { AirstackService } from "../../src/server/services/airStack/airstackService";
 
 async function main() {
   try {
@@ -43,7 +43,7 @@ async function main() {
     const airstackService = AirstackService.getInstance(db);
 
     // Update user profiles
-    await airstackService.updateAllCitizens();
+    await airstackService.updateAllPersonNodes();
 
     // Update following relationships
     console.log("Starting Farcaster followings update...");

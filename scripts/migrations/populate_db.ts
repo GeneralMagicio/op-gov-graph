@@ -4,11 +4,11 @@ import postgres from "postgres";
 import { eq, and } from "drizzle-orm";
 import { ilike } from "drizzle-orm/expressions";
 
-import * as schema from "../schema";
+import * as schema from "../../src/server/db/schema";
 import * as fs from "fs/promises";
 import * as path from "path";
-import { NodeType } from "../../../app/graph/types";
-import { removeDuplicateLinks } from "../scripts/removeDuplicateLinks";
+import { NodeType } from "../../src/app/graph/types";
+import { removeDuplicateLinks } from "./removeDuplicateLinks";
 
 const sql = postgres(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
