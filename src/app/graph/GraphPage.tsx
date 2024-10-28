@@ -44,7 +44,7 @@ export default function GraphPage() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const selectedNodesCheckBox = useRef([NodeType.Citizen]);
+  const selectedNodesCheckBox = useRef([NodeType.Citizen, NodeType.Delegate]);
 
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<NodeLinkType[]>([
@@ -329,7 +329,33 @@ export default function GraphPage() {
   );
 
   const getNodeColor = useCallback((node: Node) => {
-    if (node.type === NodeType.Citizen) return "#a4b2e1";
+    // Colors for different node types
+    const colors = {
+      [NodeType.Citizen]: "white",
+      [NodeType.Delegate]: "#FF7E67", // Warm orange color for delegates
+      citizenAndDelegate: "#FFD700" // Gold color for nodes that are both citizen and delegate
+    };
+
+    // If the node has multiple types (using the new nodeTypes array)
+    if (Array.isArray(node.nodeTypes)) {
+      const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+      const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+
+      // If node is both citizen and delegate
+      if (hasDelegate && hasCitizen) {
+        return colors.citizenAndDelegate;
+      }
+      // If node is just a delegate
+      if (hasDelegate) {
+        return colors[NodeType.Delegate];
+      }
+      // If node is just a citizen
+      if (hasCitizen) {
+        return colors[NodeType.Citizen];
+      }
+    }
+
+    // For connection type nodes, use the existing connection type colors
     const connectionType = CONNECTION_TYPES.find(
       (type) => type.key === (node.type as unknown as NodeLinkType)
     );
@@ -403,6 +429,23 @@ export default function GraphPage() {
     []
   );
 
+  // Add this helper function at the component level
+  const getHighlightColor = (node: Node) => {
+    if (Array.isArray(node.nodeTypes)) {
+      const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+      const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+
+      if (hasDelegate && hasCitizen) {
+        return "#FFE55C"; // Brighter gold for hover state
+      }
+      if (hasDelegate) {
+        return "#FF9E87"; // Brighter orange for delegate hover
+      }
+    }
+    return "white"; // Default hover color
+  };
+
+  // Update the paintNode function to use the moved getHighlightColor function
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const nodeRadius = getNodeRadius(node);
@@ -416,11 +459,50 @@ export default function GraphPage() {
         selectedSearchedNode &&
         node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
 
+      // Helper function to draw strokes based on node types
+      const drawStrokes = () => {
+        const strokeWidth = 2 / globalScale;
+        if (Array.isArray(node.nodeTypes)) {
+          const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+          const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+
+          if (hasDelegate && hasCitizen) {
+            // Draw outer gold stroke
+            ctx.beginPath();
+            ctx.arc(node.x || 0, node.y || 0, nodeRadius + strokeWidth, 0, 2 * Math.PI, false);
+            ctx.strokeStyle = isHighlighted ? "#FFE55C" : "#FFD700";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+
+            // Draw inner white stroke
+            ctx.beginPath();
+            ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+          } else if (hasDelegate) {
+            // Single gold stroke for delegates
+            ctx.beginPath();
+            ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+            ctx.strokeStyle = isHighlighted ? "#FFE55C" : "#FFD700";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+          } else if (hasCitizen) {
+            // Single white stroke for citizens
+            ctx.beginPath();
+            ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+          }
+        }
+      };
+
       if (node.profileImage && imagesLoadedRef.current.has(node.profileImage)) {
         // Use pre-rendered canvas
         const preRenderedCanvas = getPreRenderedCanvas(
           node.profileImage,
-          nodeRadius * 2 // Double the radius for higher quality
+          nodeRadius * 2
         );
         ctx.save();
         ctx.beginPath();
@@ -434,30 +516,26 @@ export default function GraphPage() {
           nodeRadius * 2
         );
         ctx.restore();
+
+        // Draw strokes after the image
+        drawStrokes();
       } else {
         // Fill circle with color
         ctx.beginPath();
         ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
+        ctx.fillStyle = isHighlighted ? getHighlightColor(node) : getNodeColor(node);
         ctx.fill();
 
+        // Draw strokes
+        drawStrokes();
+
         // Initiate image loading if not already loaded
-        if (
-          node.profileImage &&
-          !imagesLoadedRef.current.has(node.profileImage)
-        ) {
+        if (node.profileImage && !imagesLoadedRef.current.has(node.profileImage)) {
           loadImage(node.profileImage).catch(() => {
             // Handle image load failure if necessary
           });
         }
       }
-
-      // Draw border
-      ctx.beginPath();
-      ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-      ctx.strokeStyle = isHighlighted ? "white" : getNodeColor(node);
-      ctx.lineWidth = 2 / globalScale;
-      ctx.stroke();
 
       if (isSearchSelected) {
         ctx.strokeStyle = "#FF00FF";
@@ -487,7 +565,8 @@ export default function GraphPage() {
       getNodeRadius,
       loadImage,
       getPreRenderedCanvas,
-      getNodeColor
+      getNodeColor,
+      getHighlightColor
     ]
   );
 
