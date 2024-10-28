@@ -16,7 +16,8 @@ export enum NodeType {
   TECHolder = "TECHolder",
   RegenScore = "RegenScore",
   TrustedSeed = "TrustedSeed",
-  RegenPOAP = "RegenPOAP"
+  RegenPOAP = "RegenPOAP",
+  Delegate = "Delegate"
   // RefiDAO = "RefiDAO", // Uncomment if needed in the future
 }
 
@@ -77,6 +78,7 @@ export interface Node extends ICitizen {
   trustedSeed?: boolean;
   regenPOAP?: boolean;
   hasFarcaster?: boolean;
+  nodeTypes: NodeType[];
   badgeHolderReferrals?: {
     referredBy: BadgeHolderReferralInfo[];
     referred: BadgeHolderReferralInfo[];
