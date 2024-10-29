@@ -7,7 +7,13 @@ export default {
   dialect: "postgresql",
   dbCredentials: {
     url: env.DATABASE_URL,
+    // ssl: true,
+    // password: env.POSTGRES_PASSWORD,
+    // user: env.POSTGRES_USER,
+    // host: env.POSTGRES_HOST,
+    // database: env.POSTGRES_DATABASE,
+    // port: env.POSTGRES_PORT
   },
   verbose: true,
-  strict: true,
+  strict: true
 } satisfies Config;
