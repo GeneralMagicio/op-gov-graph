@@ -38,3 +38,8 @@ next-env.d.ts
 
 .cursorrules
 instructions.md
+
+# Database backups
+*.sql
+backup_*.sql
+backup/
