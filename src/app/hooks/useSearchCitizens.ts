@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { Node, NodeType } from "../graph/types";
 
-export const useSearchCitizens = (nodes: Node[]) => {
+export const useSearchCitizens = (nodes: Node[] = []) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSearchedNode, setSelectedSearchedNode] = useState<Node | null>(
     null
