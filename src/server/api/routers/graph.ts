@@ -1,21 +1,26 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { nodes, links } from "@/server/db/schema";
-import { eq, and, inArray, or } from "drizzle-orm";
+import { eq, and, inArray, or, arrayContains, sql } from "drizzle-orm";
 import { NodeLinkType, NodeType } from "@/app/graph/types";
+
+const nodeTypeEnum = z.enum([NodeType.Citizen, NodeType.Delegate]);
 
 export const graphRouter = createTRPCRouter({
   getGraphData: publicProcedure
     .input(
       z.object({
         networkId: z.number(),
-        selectedNodeTypes: z.array(z.string()),
+        selectedNodeTypes: z.array(nodeTypeEnum),
         selectedLinkTypes: z.array(z.string())
       })
     )
     .query(async ({ ctx, input }) => {
       const { db } = ctx;
       const { networkId, selectedNodeTypes, selectedLinkTypes } = input;
+
+      // Convert array to proper PostgreSQL format
+      const nodeTypesArray = `{${selectedNodeTypes.map((type) => `"${type}"`).join(",")}}`;
 
       const nodesData = await db
         .select()
@@ -24,32 +29,23 @@ export const graphRouter = createTRPCRouter({
           and(
             eq(nodes.networkId, networkId),
             or(
-              inArray(
-                nodes.type,
-                selectedNodeTypes as (typeof NodeType.Citizen)[]
-              ),
+              // Use proper array overlap operator with string literal
+              sql`${nodes.nodeTypes} && ${sql`${nodeTypesArray}::text[]`}`,
               eq(nodes.isSpecial, true)
             )
           )
         );
+
+      const nodeIds = nodesData.map((node) => node.id);
 
       const linksData = await db
         .select()
         .from(links)
         .where(
           and(
-            inArray(
-              links.sourceId,
-              nodesData.map((node) => node.id)
-            ),
-            inArray(
-              links.targetId,
-              nodesData.map((node) => node.id)
-            ),
-            inArray(
-              links.type,
-              selectedLinkTypes as (typeof NodeLinkType.FarcasterConnection)[]
-            )
+            inArray(links.sourceId, nodeIds),
+            inArray(links.targetId, nodeIds),
+            inArray(links.type, selectedLinkTypes as any[]) // Type assertion for enum compatibility
           )
         );
 
@@ -58,7 +54,6 @@ export const graphRouter = createTRPCRouter({
         links: linksData
       };
     }),
-
   addNode: publicProcedure
     .input(
       z.object({
