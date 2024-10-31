@@ -3,14 +3,19 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { badgeHolders } from "../../src/server/db/schema";
 import { inArray } from "drizzle-orm";
+import { env } from "../../src/env.js";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL environment variable is not set");
+const isProduction = env.NODE_ENV === "production";
+
+if (isProduction && !env.DATABASE_URL.includes("neon.tech")) {
+  throw new Error(
+    "Production DATABASE_URL is not properly set to Vercel/Neon database"
+  );
 }
 
-const sql = postgres(process.env.DATABASE_URL, {
+const sql = postgres(env.DATABASE_URL, {
   max: 1,
-  ssl: false,
+  ssl: isProduction ? { rejectUnauthorized: false } : false,
   connect_timeout: 10,
   debug: (connection_id, str) => {
     console.log(`[${connection_id}] ${str}`);
@@ -21,7 +26,16 @@ const db = drizzle(sql);
 
 async function removeDuplicateBadgeHolders() {
   try {
+    console.log(
+      `Running on ${isProduction ? "production" : "development"} database`
+    );
     console.log("Starting duplicate badge holders removal process...");
+
+    if (isProduction) {
+      console.log("WARNING: You are about to modify production data!");
+      console.log("Press Ctrl+C within 5 seconds to abort...");
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
 
     const allBadgeHolders = await db
       .select({
@@ -65,7 +79,7 @@ async function removeDuplicateBadgeHolders() {
     console.log(`Keeping ${keepIds.size} unique badge holders`);
 
     if (duplicateIds.size > 0) {
-      const batchSize = 100;
+      const batchSize = isProduction ? 50 : 100;
       const duplicateIdsArray = Array.from(duplicateIds);
 
       for (let i = 0; i < duplicateIdsArray.length; i += batchSize) {
@@ -76,7 +90,9 @@ async function removeDuplicateBadgeHolders() {
         console.log(`Deleted batch of ${batch.length} duplicate badge holders`);
 
         if (i + batchSize < duplicateIdsArray.length) {
-          await new Promise((resolve) => setTimeout(resolve, 100));
+          await new Promise((resolve) =>
+            setTimeout(resolve, isProduction ? 500 : 100)
+          );
         }
       }
 
