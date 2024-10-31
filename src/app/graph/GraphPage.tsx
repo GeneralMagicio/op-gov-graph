@@ -61,13 +61,17 @@ export default function GraphPage() {
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [clickedNode, setClickedNode] = useState<Node | null>(null);
 
+  const [selectedNodeTypes, setSelectedNodeTypes] = useState<
+    Array<NodeType.Citizen | NodeType.Delegate>
+  >([NodeType.Citizen, NodeType.Delegate]);
+
   const {
     data: graphData,
     isLoading,
     error
   } = api.graph.getGraphData.useQuery({
-    networkId: 10, // Optimism network ID
-    selectedNodeTypes: selectedNodesCheckBox.current,
+    networkId: 10,
+    selectedNodeTypes: selectedNodeTypes,
     selectedLinkTypes: selectedConnectionsCheckBox
   });
 
@@ -469,28 +473,56 @@ export default function GraphPage() {
           if (hasDelegate && hasCitizen) {
             // Draw outer gold stroke
             ctx.beginPath();
-            ctx.arc(node.x || 0, node.y || 0, nodeRadius + strokeWidth, 0, 2 * Math.PI, false);
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius + strokeWidth,
+              0,
+              2 * Math.PI,
+              false
+            );
             ctx.strokeStyle = isHighlighted ? "#FFE55C" : "#FFD700";
             ctx.lineWidth = strokeWidth;
             ctx.stroke();
 
             // Draw inner white stroke
             ctx.beginPath();
-            ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius,
+              0,
+              2 * Math.PI,
+              false
+            );
             ctx.strokeStyle = "white";
             ctx.lineWidth = strokeWidth;
             ctx.stroke();
           } else if (hasDelegate) {
             // Single gold stroke for delegates
             ctx.beginPath();
-            ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius,
+              0,
+              2 * Math.PI,
+              false
+            );
             ctx.strokeStyle = isHighlighted ? "#FFE55C" : "#FFD700";
             ctx.lineWidth = strokeWidth;
             ctx.stroke();
           } else if (hasCitizen) {
             // Single white stroke for citizens
             ctx.beginPath();
-            ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius,
+              0,
+              2 * Math.PI,
+              false
+            );
             ctx.strokeStyle = "white";
             ctx.lineWidth = strokeWidth;
             ctx.stroke();
@@ -523,14 +555,19 @@ export default function GraphPage() {
         // Fill circle with color
         ctx.beginPath();
         ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = isHighlighted ? getHighlightColor(node) : getNodeColor(node);
+        ctx.fillStyle = isHighlighted
+          ? getHighlightColor(node)
+          : getNodeColor(node);
         ctx.fill();
 
         // Draw strokes
         drawStrokes();
 
         // Initiate image loading if not already loaded
-        if (node.profileImage && !imagesLoadedRef.current.has(node.profileImage)) {
+        if (
+          node.profileImage &&
+          !imagesLoadedRef.current.has(node.profileImage)
+        ) {
           loadImage(node.profileImage).catch(() => {
             // Handle image load failure if necessary
           });
@@ -698,6 +735,16 @@ export default function GraphPage() {
         <GraphSidebar
           selectedConnectionsCheckBox={selectedConnectionsCheckBox}
           setSelectedConnectionsCheckBox={setSelectedConnectionsCheckBox}
+          selectedNodeTypes={selectedNodeTypes}
+          setSelectedNodeTypes={(newTypes) => {
+            // Ensure at least one type is selected
+            if (newTypes.length === 0) {
+              return;
+            }
+            setSelectedNodeTypes(
+              newTypes as (NodeType.Citizen | NodeType.Delegate)[]
+            );
+          }}
         />
 
         <main className="max-w-fit flex-grow overflow-hidden flex justify-center items-center">
