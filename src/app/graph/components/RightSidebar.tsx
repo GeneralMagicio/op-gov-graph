@@ -4,7 +4,7 @@ import { useConvertAddressToENS } from "@/app/hooks/useConvertAddressToENS";
 import { useFarcasterData } from "@/app/hooks/useFarcasterData";
 import { useRouter, usePathname } from "next/navigation";
 import { Tooltip } from "react-tooltip";
-import { Info } from "lucide-react";
+import { Info, X } from "lucide-react";
 import { api } from "@/trpc/react";
 
 interface RightSidebarProps {
@@ -78,11 +78,20 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 
   useEffect(() => {
     if (selectedNodeId || selectedNode) {
-      setIsVisible(true);
+      setTimeout(() => {
+        setIsVisible(true);
+      }, 50);
     } else {
       setIsVisible(false);
     }
   }, [selectedNodeId, selectedNode]);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      onClose();
+    }, 300);
+  };
 
   const displayNode = selectedNode || nodeData;
 
@@ -96,35 +105,24 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 
   return (
     <div
-      className={`fixed right-0 top-0 h-full w-72 bg-dark-surface text-dark-text-primary overflow-y-auto transition-transform transform ease-in-out duration-300 ${
-        isVisible ? "translate-x-0" : "translate-x-full"
-      }`}
+      className={`fixed right-0 top-0 h-full w-72 bg-dark-surface text-dark-text-primary overflow-y-auto 
+        transform transition-transform duration-300 ease-in-out
+        ${isVisible ? "translate-x-0" : "translate-x-full"}`}
     >
       <div className="p-6">
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+          onClick={handleClose}
+          className="absolute top-4 right-4 text-dark-text-secondary hover:text-dark-text-primary transition-colors duration-200"
+          aria-label="Close sidebar"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <X size={24} />
         </button>
         <ProfileSection
           node={selectedNode}
           connections={filteredFarcasterConnections}
         />
         <BadgesSection node={selectedNode} />
+        <RolesSection node={selectedNode} />
         <BadgeholderReferralSection
           referrals={formattedReferrals}
           getFarcasterDataByAddress={getFarcasterDataByAddress}
@@ -145,15 +143,6 @@ const ProfileSection: React.FC<{ node: Node; connections: string[] }> = ({
   connections
 }) => {
   if (!node) return null;
-  // console.log("nodeeee", node);
-  // const { data: connectionData = [] } =
-  //   api.farcaster.getDataForConnections.useQuery(
-  //     { connectionIds: connections },
-  //     { enabled: connections.length > 0 }
-  //   );
-
-  // if (isLoading) return <p>Loading Following on Farcaster...</p>;
-  // if (connections.length === 0) return null;
 
   return (
     <div className="flex flex-col items-center mb-6">
@@ -177,6 +166,24 @@ const ProfileSection: React.FC<{ node: Node; connections: string[] }> = ({
           </a>
           <p>· {connections?.length || 0} followings</p>
         </div>
+      )}
+      {node.twitterUrl && (
+        <a
+          href={node.twitterUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 text-dark-primary hover:underline flex items-center gap-1"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          Twitter Profile
+        </a>
       )}
       {node.profileBio && (
         <div>
@@ -207,6 +214,71 @@ const BadgesSection: React.FC<{ node: Node }> = ({ node }) => {
             ✓
           </span>{" "}
           <span>RegenScore · {node.regenScore}</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const RolesSection: React.FC<{ node: Node }> = ({ node }) => {
+  // Check if any of the relevant fields exist
+  const hasRoleInfo =
+    node.roles || node.ambassadorOf || node.opRewardsEarned || node.description;
+
+  if (!hasRoleInfo) return null;
+
+  return (
+    <div className="mb-6">
+      <h3 className="text-lg font-semibold mb-3 flex items-center">
+        <span className="mr-2">Community Roles</span>
+        <Info
+          size={16}
+          className="text-dark-text-secondary cursor-help"
+          data-tooltip-id="roles-info-tooltip"
+        />
+      </h3>
+      <Tooltip
+        id="roles-info-tooltip"
+        place="top"
+        className="max-w-[300px] text-center"
+        content="Information about this user's roles and contributions in the community"
+      />
+
+      {node.roles && (
+        <div className="mb-3">
+          <h4 className="text-sm font-medium text-dark-text-secondary mb-2">
+            Roles
+          </h4>
+          <p className="text-sm font-bold text-dark-text-primary">
+            {node.roles}
+          </p>
+        </div>
+      )}
+
+      {node.ambassadorOf && (
+        <div className="mb-3">
+          <h4 className="text-sm font-medium text-dark-text-secondary mb-2">
+            Ambassador of
+          </h4>
+          <p className="text-sm text-dark-text-primary">{node.ambassadorOf}</p>
+        </div>
+      )}
+
+      {node.opRewardsEarned && (
+        <div className="mb-3">
+          <h4 className="text-sm font-medium text-dark-text-secondary mb-2">
+            OP Rewards Earned
+          </h4>
+          <p className="text-sm">{node.opRewardsEarned} OP</p>
+        </div>
+      )}
+
+      {node.description && (
+        <div className="mb-3">
+          <h4 className="text-sm font-medium text-dark-text-secondary mb-2">
+            About
+          </h4>
+          <p className="text-sm text-dark-text-primary">{node.description}</p>
         </div>
       )}
     </div>
