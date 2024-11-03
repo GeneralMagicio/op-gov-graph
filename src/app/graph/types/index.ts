@@ -85,6 +85,12 @@ export interface Node extends ICitizen {
   };
   links?: Link[];
   // refiDAO?: boolean;
+  isDelegate?: boolean;
+  roles?: string;
+  ambassadorOf?: string;
+  opRewardsEarned?: string;
+  description?: string;
+  twitterUrl?: string;
 }
 
 export interface GraphData {
