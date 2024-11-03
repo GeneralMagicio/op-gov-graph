@@ -75,8 +75,6 @@ export default function GraphPage() {
     selectedLinkTypes: selectedConnectionsCheckBox
   });
 
-  console.log("GraphData", graphData);
-
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
   const [hoverNode, setHoverNode] = useState<Node | null>(null);
