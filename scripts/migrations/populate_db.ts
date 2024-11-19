@@ -80,10 +80,10 @@ async function migrateData() {
 
     // Insert special nodes
     const specialNodes = [
-      { id: NodeType.TECHolder, type: NodeType.TECHolder },
-      { id: NodeType.RegenScore, type: NodeType.RegenScore },
-      { id: NodeType.TrustedSeed, type: NodeType.TrustedSeed },
-      { id: NodeType.RegenPOAP, type: NodeType.RegenPOAP }
+      { id: NodeType.TECHolder, nodeTypes: [NodeType.TECHolder] },
+      { id: NodeType.RegenScore, nodeTypes: [NodeType.RegenScore] },
+      { id: NodeType.TrustedSeed, nodeTypes: [NodeType.TrustedSeed] },
+      { id: NodeType.RegenPOAP, nodeTypes: [NodeType.RegenPOAP] }
     ];
 
     for (const node of specialNodes) {
@@ -92,7 +92,7 @@ async function migrateData() {
         .values({
           id: node.id,
           networkId: 10,
-          type: node.type,
+          nodeTypes: node.nodeTypes,
           isSpecial: true
         })
         .onConflictDoUpdate({
@@ -111,7 +111,7 @@ async function migrateData() {
           .values({
             id: citizen.id?.toLowerCase() ?? "",
             networkId: 10,
-            type: "Citizen",
+            nodeTypes: ["Citizen"],
             ens: citizen.ens,
             userId: citizen.userId,
             identity: citizen.identity?.toLowerCase() ?? "",

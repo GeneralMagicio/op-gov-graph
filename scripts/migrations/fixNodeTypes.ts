@@ -70,7 +70,7 @@ async function fixNodeTypes() {
     // Process each node
     for (const node of allNodes) {
       const nodeTypes: NodeType[] = [];
-      let primaryType: NodeType = node.type as NodeType;
+      let primaryType: NodeType = node.nodeTypes[0] as NodeType;
       const nodeId = node.id.toLowerCase();
 
       // Handle special nodes first
@@ -114,7 +114,7 @@ async function fixNodeTypes() {
         }
 
         // Log changes when fixing incorrectly set types
-        if (node.type === NodeType.Delegate && isCitizen) {
+        if (node.nodeTypes.includes(NodeType.Delegate) && isCitizen) {
           console.log(
             `Fixing node ${nodeId}: Was incorrectly set to Delegate, restoring to Citizen`
           );
@@ -125,7 +125,6 @@ async function fixNodeTypes() {
       await db
         .update(nodes)
         .set({
-          type: primaryType,
           nodeTypes: nodeTypes,
           updatedAt: new Date()
         })

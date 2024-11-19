@@ -86,7 +86,6 @@ async function migrateDelegates() {
           .update(nodes)
           .set({
             nodeTypes,
-            type: NodeType.Delegate,
             ensAddress: delegate.ensAddress,
             farcasterUrl: delegate.farcasterUrl,
             twitterUrl: delegate.twitterUrl,
@@ -105,7 +104,6 @@ async function migrateDelegates() {
         await db.insert(nodes).values({
           id: delegate.id.toLowerCase(),
           networkId: 10, // Optimism network
-          type: NodeType.Delegate,
           nodeTypes: [NodeType.Delegate],
           ensAddress: delegate.ensAddress,
           farcasterUrl: delegate.farcasterUrl,

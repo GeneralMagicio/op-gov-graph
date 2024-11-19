@@ -252,8 +252,8 @@ export class AirstackService {
         .from(nodes)
         .where(
           or(
-            eq(nodes.type, "Citizen"),
-            eq(nodes.type, "Delegate")
+            eq(nodes.nodeTypes, ["Citizen"]),
+            eq(nodes.nodeTypes, ["Delegate"])
           )
         );
 
@@ -381,8 +381,8 @@ export class AirstackService {
         .from(nodes)
         .where(
           or(
-            eq(nodes.type, "Citizen"),
-            eq(nodes.type, "Delegate")
+            eq(nodes.nodeTypes, ["Citizen"]),
+            eq(nodes.nodeTypes, ["Delegate"])
           )
         );
 
@@ -418,8 +418,8 @@ export class AirstackService {
         .where(
           and(
             or(
-              eq(nodes.type, "Citizen"),
-              eq(nodes.type, "Delegate")
+              eq(nodes.nodeTypes, ["Citizen"]),
+              eq(nodes.nodeTypes, ["Delegate"])
             ),
             eq(nodes.hasFarcaster, true)
           )
@@ -442,7 +442,9 @@ export class AirstackService {
         }
       }
 
-      console.log("Completed updating Farcaster followings for all person nodes");
+      console.log(
+        "Completed updating Farcaster followings for all person nodes"
+      );
     } catch (error) {
       console.error("Error updating all Farcaster followings:", error);
       throw error;
