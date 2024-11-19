@@ -122,8 +122,12 @@ export default function GraphPage() {
   const filteredGraphData = useMemo(() => {
     const filteredNodes = lowercaseGraphData?.nodes?.filter(
       (node) =>
-        selectedNodesCheckBox.current.includes(node.type as NodeType) ||
-        CONNECTION_TYPES.some((type) => type.key === node.type)
+        selectedNodesCheckBox.current.some((type) =>
+          node.nodeTypes.includes(type)
+        ) ||
+        CONNECTION_TYPES.some((type) =>
+          node.nodeTypes.includes(type.key as unknown as NodeType)
+        )
     );
 
     const nodeIds = new Set(
@@ -334,32 +338,26 @@ export default function GraphPage() {
     // Colors for different node types
     const colors = {
       [NodeType.Citizen]: "white",
-      [NodeType.Delegate]: "#FF7E67", // Warm orange color for delegates
-      citizenAndDelegate: "#FFD700" // Gold color for nodes that are both citizen and delegate
+      [NodeType.Delegate]: "#FF7E67",
+      citizenAndDelegate: "#FFD700"
     };
 
-    // If the node has multiple types (using the new nodeTypes array)
-    if (Array.isArray(node.nodeTypes)) {
-      const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
-      const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+    const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+    const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
 
-      // If node is both citizen and delegate
-      if (hasDelegate && hasCitizen) {
-        return colors.citizenAndDelegate;
-      }
-      // If node is just a delegate
-      if (hasDelegate) {
-        return colors[NodeType.Delegate];
-      }
-      // If node is just a citizen
-      if (hasCitizen) {
-        return colors[NodeType.Citizen];
-      }
+    if (hasDelegate && hasCitizen) {
+      return colors.citizenAndDelegate;
+    }
+    if (hasDelegate) {
+      return colors[NodeType.Delegate];
+    }
+    if (hasCitizen) {
+      return colors[NodeType.Citizen];
     }
 
-    // For connection type nodes, use the existing connection type colors
-    const connectionType = CONNECTION_TYPES.find(
-      (type) => type.key === (node.type as unknown as NodeLinkType)
+    // For special nodes (like TECHolder, RegenScore, etc.)
+    const connectionType = CONNECTION_TYPES.find((type) =>
+      node.nodeTypes.includes(type.key as unknown as NodeType)
     );
     return connectionType ? connectionType.color : "#3388ff";
   }, []);
@@ -376,14 +374,13 @@ export default function GraphPage() {
 
   const getNodeRadius = useCallback(
     (node: Node) => {
-      if (node.type !== NodeType.Citizen) return MIN_NODE_R;
+      if (!node.nodeTypes.includes(NodeType.Citizen)) return MIN_NODE_R;
       const degree = node.degree || 0;
       const maxDegree = Math.max(
         ...processedGraphData.nodes.map((n) => n.degree || 0)
       );
       return MIN_NODE_R + (MAX_NODE_R - MIN_NODE_R) * (degree / maxDegree);
     },
-
     [processedGraphData]
   );
 
@@ -582,7 +579,7 @@ export default function GraphPage() {
       ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
       const labelY = (node.y || 0) + nodeRadius + fontSize;
       ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
-      if (node.type === NodeType.Citizen) {
+      if (node.nodeTypes.includes(NodeType.Citizen)) {
         let label =
           node.ens ||
           (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
@@ -758,7 +755,7 @@ export default function GraphPage() {
               nodeRelSize={MAX_NODE_R}
               nodeVal={(node) => Math.pow(getNodeRadius(node) / MAX_NODE_R, 2)}
               nodeLabel={(node) => {
-                if (node.type === NodeType.Citizen) {
+                if (node.nodeTypes.includes(NodeType.Citizen)) {
                   return `${node.ens ?? node.id} (Connections: ${node.degree})`;
                 }
                 return node.name ?? node.id;

@@ -49,7 +49,6 @@ export const nodes = pgTable(
     networkId: integer("network_id").references(() => networks.id, {
       onDelete: "cascade"
     }),
-    type: nodeTypeEnum("type").notNull(),
     nodeTypes: text("node_types").array().notNull().default([]),
     ens: text("ens"),
     userId: text("user_id"),
@@ -81,8 +80,7 @@ export const nodes = pgTable(
   },
   (table) => {
     return {
-      networkIdx: index("node_network_idx").on(table.networkId),
-      typeIdx: index("node_type_idx").on(table.type)
+      networkIdx: index("node_network_idx").on(table.networkId)
     };
   }
 );

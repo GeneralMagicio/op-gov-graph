@@ -61,7 +61,6 @@ async function main() {
           .values({
             id: `sample-${type.toLowerCase()}`,
             networkId: optimismNetwork.id,
-            type: type,
             nodeTypes: [type],
             ens: `sample-${type.toLowerCase()}.eth`,
             isDelegate: type === "Delegate"
