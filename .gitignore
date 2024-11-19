@@ -42,5 +42,6 @@ instructions.md
 
 # Database backups
 *.sql
-backup_*.sql
-backup/
+backup-*.sql
+backup-*.sql.gz
+backups/
