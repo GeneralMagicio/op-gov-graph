@@ -18,7 +18,8 @@ export const env = createEnv({
     AIRSTACK_API_KEY: z.string().min(1),
     NODE_ENV: z
       .enum(["development", "test", "production"])
-      .default("development")
+      .default("development"),
+    AGORA_API_KEY: z.string().min(1)
   },
   /**
    * Specify your client-side environment variables schema here. This way you can ensure the app
@@ -44,7 +45,8 @@ export const env = createEnv({
     POSTGRES_PORT: process.env.POSTGRES_PORT,
     DATABASE_URL: process.env.DATABASE_URL,
     AIRSTACK_API_KEY: process.env.AIRSTACK_API_KEY,
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
+    AGORA_API_KEY: process.env.AGORA_API_KEY
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
