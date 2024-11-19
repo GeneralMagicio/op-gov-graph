@@ -19,7 +19,6 @@ export const graphRouter = createTRPCRouter({
       const { db } = ctx;
       const { networkId, selectedNodeTypes, selectedLinkTypes } = input;
 
-      // Convert array to proper PostgreSQL format
       const nodeTypesArray = `{${selectedNodeTypes.map((type) => `"${type}"`).join(",")}}`;
 
       const nodesData = await db
@@ -29,7 +28,6 @@ export const graphRouter = createTRPCRouter({
           and(
             eq(nodes.networkId, networkId),
             or(
-              // Use proper array overlap operator with string literal
               sql`${nodes.nodeTypes} && ${sql`${nodeTypesArray}::text[]`}`,
               eq(nodes.isSpecial, true)
             )
@@ -45,7 +43,7 @@ export const graphRouter = createTRPCRouter({
           and(
             inArray(links.sourceId, nodeIds),
             inArray(links.targetId, nodeIds),
-            inArray(links.type, selectedLinkTypes as any[]) // Type assertion for enum compatibility
+            inArray(links.type, selectedLinkTypes as any[])
           )
         );
 
@@ -58,21 +56,19 @@ export const graphRouter = createTRPCRouter({
     .input(
       z.object({
         networkId: z.number(),
-        type: z.string()
-        // Add other node properties here
+        nodeTypes: z.array(z.string())
       })
     )
     .mutation(async ({ ctx, input }) => {
       const { db } = ctx;
-      const { networkId, type } = input;
-      const id = crypto.randomUUID(); // Generate a unique ID for the node
+      const { networkId, nodeTypes } = input;
+      const id = crypto.randomUUID();
       const newNode = await db
         .insert(nodes)
         .values({
           id,
           networkId,
-          type: type as (typeof nodes.type.enumValues)[number],
-          // Add other default values for required fields here
+          nodeTypes,
           createdAt: new Date(),
           updatedAt: new Date()
         })
@@ -84,7 +80,6 @@ export const graphRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string()
-        // Add other updatable properties here
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -112,7 +107,6 @@ export const graphRouter = createTRPCRouter({
         sourceId: z.string(),
         targetId: z.string(),
         type: z.string()
-        // Add other link properties here
       })
     )
     .mutation(async ({ ctx, input }) => {
