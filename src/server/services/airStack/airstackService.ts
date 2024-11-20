@@ -1,7 +1,7 @@
 // src/server/services/airStack/airstackService.ts
 import { init, fetchQuery } from "@airstack/node";
 import { nodes, farcasterConnections, links } from "../../db/schema.js";
-import { eq, and, or } from "drizzle-orm";
+import { eq, and, or, not, isNull } from "drizzle-orm";
 import { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { z } from "zod";
 import { config } from "dotenv";
@@ -416,13 +416,8 @@ export class AirstackService {
         })
         .from(nodes)
         .where(
-          and(
-            or(
-              eq(nodes.nodeTypes, ["Citizen"]),
-              eq(nodes.nodeTypes, ["Delegate"])
-            ),
-            eq(nodes.hasFarcaster, true)
-          )
+          // Only select nodes that have a userId (Farcaster users)
+          not(isNull(nodes.userId))
         );
 
       console.log(
