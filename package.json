@@ -19,6 +19,7 @@
     "remove-duplicates": "node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicates.ts",
     "remove-duplicates-prod": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicates.ts",
     "migrate:delegates": "tsx -r dotenv/config scripts/migrations/migrateDelegates.ts",
+    "migrate:delegates-agora": "tsx -r dotenv/config scripts/migrations/migrateDelegatesAgora.ts",
     "fix-node-types": "tsx scripts/migrations/fixNodeTypes.ts",
     "remove-duplicate-badge-holders": "cross-env NODE_ENV=development node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicateBadgeHolders.ts",
     "remove-duplicate-badge-holders:prod": "cross-env NODE_ENV=production node --env-file=.env.production --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicateBadgeHolders.ts --env production",
