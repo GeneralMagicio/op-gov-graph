@@ -21,6 +21,17 @@ export enum NodeType {
   // RefiDAO = "RefiDAO", // Uncomment if needed in the future
 }
 
+export type TopIssue = {
+  type: string;
+  value: string;
+};
+
+export type VotingPower = {
+  total: string;
+  direct: string;
+  advanced: string;
+};
+
 export interface RegenPOAPHolder {
   Collection: string;
   Count: number;
