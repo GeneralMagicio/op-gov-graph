@@ -579,15 +579,26 @@ export default function GraphPage() {
       ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
       const labelY = (node.y || 0) + nodeRadius + fontSize;
       ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
-      if (node.nodeTypes.includes(NodeType.Citizen)) {
-        let label =
-          node.ens ||
+
+      // Modified label logic - check for ENS regardless of node type
+      let label = "";
+      if (node.ens && node.ens.trim() !== "") {
+        // Show ENS name if available for any node type
+        label = node.ens;
+      } else if (node.nodeTypes.includes(NodeType.Delegate)) {
+        // For delegates without ENS, show name or truncated address
+        label =
+          node.name ||
           (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
-        ctx.fillText(label, node.x || 0, labelY);
+      } else if (node.nodeTypes.includes(NodeType.Citizen)) {
+        // For citizens without ENS, show truncated address
+        label = node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "";
       } else {
-        ctx.fillText(node.name || node.id, node.x || 0, labelY);
+        // For other node types
+        label = node.name || node.id || "";
       }
 
+      ctx.fillText(label, node.x || 0, labelY);
       ctx.globalAlpha = 1;
     },
     [
