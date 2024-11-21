@@ -19,7 +19,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-    AGORA_API_KEY: z.string().min(1)
+    AGORA_API_KEY: z.string().min(1),
+    NEXT_PUBLIC_ALCHEMY_RPC_URL: z.string().url()
   },
   /**
    * Specify your client-side environment variables schema here. This way you can ensure the app
@@ -46,7 +47,8 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     AIRSTACK_API_KEY: process.env.AIRSTACK_API_KEY,
     NODE_ENV: process.env.NODE_ENV,
-    AGORA_API_KEY: process.env.AGORA_API_KEY
+    AGORA_API_KEY: process.env.AGORA_API_KEY,
+    NEXT_PUBLIC_ALCHEMY_RPC_URL: process.env.NEXT_PUBLIC_ALCHEMY_RPC_URL
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
