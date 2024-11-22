@@ -372,16 +372,91 @@ export default function GraphPage() {
       : `rgba(153, 153, 153, ${opacity})`;
   }, []);
 
+  const { minLogVotingPower, maxLogVotingPower } = useMemo(() => {
+    const votingPowers = processedGraphData.nodes
+      .filter(
+        (n) =>
+          n.nodeTypes.includes(NodeType.Delegate) &&
+          !n.nodeTypes.includes(NodeType.Citizen) &&
+          n.votingPower?.total
+      )
+      .map((n) => parseFloat(n.votingPower!.total))
+      .filter((vp) => vp > 0); // Exclude zero or negative values
+
+    if (votingPowers.length === 0) {
+      // Handle case when there are no valid voting powers
+      return { minLogVotingPower: 0, maxLogVotingPower: 0 };
+    }
+
+    const minVotingPower = Math.min(...votingPowers);
+    const maxVotingPower = Math.max(...votingPowers);
+
+    const minLogVP = Math.log(minVotingPower);
+    const maxLogVP = Math.log(maxVotingPower);
+
+    return { minLogVotingPower: minLogVP, maxLogVotingPower: maxLogVP };
+  }, [processedGraphData.nodes]);
+
+  const maxDegree = useMemo(() => {
+    const degrees = processedGraphData.nodes
+      .filter((n) => n.nodeTypes.includes(NodeType.Citizen))
+      .map((n) => n.degree || 0);
+
+    return degrees.length > 0 ? Math.max(...degrees) : 0;
+  }, [processedGraphData.nodes]);
+
   const getNodeRadius = useCallback(
     (node: Node) => {
-      if (!node.nodeTypes.includes(NodeType.Citizen)) return MIN_NODE_R;
-      const degree = node.degree || 0;
-      const maxDegree = Math.max(
-        ...processedGraphData.nodes.map((n) => n.degree || 0)
-      );
-      return MIN_NODE_R + (MAX_NODE_R - MIN_NODE_R) * (degree / maxDegree);
+      const minR = MIN_NODE_R;
+      const maxR = MAX_NODE_R;
+
+      // Delegate nodes
+      if (
+        node.nodeTypes.includes(NodeType.Delegate) &&
+        !node.nodeTypes.includes(NodeType.Citizen)
+      ) {
+        if (
+          !node.votingPower?.total ||
+          minLogVotingPower === maxLogVotingPower
+        ) {
+          return minR;
+        }
+
+        const votingPower = parseFloat(node.votingPower.total);
+
+        // Ensure voting power is positive
+        if (votingPower <= 0) {
+          return minR;
+        }
+
+        const logVotingPower = Math.log(votingPower);
+        const ratio =
+          (logVotingPower - minLogVotingPower) /
+          (maxLogVotingPower - minLogVotingPower);
+
+        // Clamp ratio between 0 and 1
+        const clampedRatio = Math.max(0, Math.min(1, ratio));
+
+        return minR + (maxR - minR) * clampedRatio;
+      }
+
+      if (node.nodeTypes.includes(NodeType.Citizen)) {
+        if (maxDegree === 0) {
+          return minR;
+        }
+
+        const degree = node.degree || 0;
+        const ratio = degree / maxDegree;
+
+        // Clamp ratio between 0 and 1
+        const clampedRatio = Math.max(0, Math.min(1, ratio));
+
+        return minR + (maxR - minR) * clampedRatio;
+      }
+
+      return minR;
     },
-    [processedGraphData]
+    [minLogVotingPower, maxLogVotingPower, maxDegree]
   );
 
   const loadImage = useCallback((src: string): Promise<HTMLImageElement> => {
