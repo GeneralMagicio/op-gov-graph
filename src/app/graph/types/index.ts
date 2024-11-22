@@ -101,6 +101,7 @@ export interface Node extends ICitizen {
   opRewardsEarned?: string;
   description?: string;
   twitterUrl?: string;
+  votingPower?: VotingPower;
 }
 
 export interface GraphData {
