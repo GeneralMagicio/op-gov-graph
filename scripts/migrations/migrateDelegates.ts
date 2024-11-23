@@ -22,7 +22,7 @@ if (!process.env.DATABASE_URL) {
 const dbUrlForLogging = process.env.DATABASE_URL.replace(/:([^:@]+)@/, ":***@");
 console.log("Connecting to database:", dbUrlForLogging);
 
-interface DelegateData {
+export interface DelegateData {
   ensAddress: string;
   farcasterUrl: string;
   twitterUrl: string;

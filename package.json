@@ -19,11 +19,14 @@
     "remove-duplicates": "node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicates.ts",
     "remove-duplicates-prod": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicates.ts",
     "migrate:delegates": "tsx -r dotenv/config scripts/migrations/migrateDelegates.ts",
+    "migrate:delegates-agora": "tsx -r dotenv/config scripts/migrations/migrateDelegatesAgora.ts",
     "fix-node-types": "tsx scripts/migrations/fixNodeTypes.ts",
     "remove-duplicate-badge-holders": "cross-env NODE_ENV=development node --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicateBadgeHolders.ts",
     "remove-duplicate-badge-holders:prod": "cross-env NODE_ENV=production node --env-file=.env.production --experimental-specifier-resolution=node --loader ts-node/esm scripts/migrations/removeDuplicateBadgeHolders.ts --env production",
     "backup-db": "NODE_OPTIONS='--loader ts-node/esm' ts-node --esm scripts/backupDatabase.ts",
-    "backup-db:compressed": "NODE_OPTIONS='--loader ts-node/esm' ts-node --esm scripts/backupDatabase.ts --compress"
+    "backup-db:compressed": "NODE_OPTIONS='--loader ts-node/esm' ts-node --esm scripts/backupDatabase.ts --compress",
+    "update-ens": "cross-env NODE_ENV=development tsx -r dotenv/config scripts/migrations/updateNodesENS.ts",
+    "update-ens:prod": "cross-env NODE_ENV=production tsx -r dotenv/config scripts/migrations/updateNodesENS.ts"
   },
   "dependencies": {
     "@airstack/node": "^0.0.7",
@@ -43,6 +46,7 @@
     "drizzle-orm": "^0.33.0",
     "lucide-react": "^0.441.0",
     "next": "14.2.5",
+    "p-limit": "^6.1.0",
     "pg": "^8.13.0",
     "postgres": "^3.4.4",
     "prettier": "^3.3.3",

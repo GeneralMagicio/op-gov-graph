@@ -1,5 +1,6 @@
 // src/db/schema.ts
 
+import { TopIssue, VotingPower } from "@/app/graph/types";
 import { table } from "console";
 import {
   pgTable,
@@ -45,6 +46,7 @@ export const networks = pgTable("networks", {
 export const nodes = pgTable(
   "nodes",
   {
+    // Existing fields
     id: text("id").primaryKey(),
     networkId: integer("network_id").references(() => networks.id, {
       onDelete: "cascade"
@@ -65,7 +67,8 @@ export const nodes = pgTable(
     regenPOAP: boolean("regen_poap"),
     hasFarcaster: boolean("has_farcaster"),
     isSpecial: boolean("is_special"),
-    // New delegate-related fields
+
+    // Existing delegate-related fields
     ensAddress: text("ens_address"),
     farcasterUrl: text("farcaster_url"),
     twitterUrl: text("twitter_url"),
@@ -75,6 +78,15 @@ export const nodes = pgTable(
     isDelegate: boolean("is_delegate").default(false),
     description: text("description"),
     data: jsonb("data"),
+
+    // New delegate-specific fields from API
+    votingPower: jsonb("voting_power").$type<VotingPower | null>(),
+    delegateStatement: jsonb("delegate_statement").$type<string | null>(),
+    discordUrl: text("discord_url"),
+    topIssues: jsonb("top_issues").$type<TopIssue[] | null>(),
+    endorsed: boolean("endorsed"),
+
+    // Timestamps
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
