@@ -193,6 +193,42 @@ export default function GraphPage() {
     return gData;
   }, [filteredGraphData]);
 
+  // Delegate with highest and lowest voting power
+  const { maxVotingPowerDelegate, minVotingPowerDelegate } = useMemo(() => {
+    const delegateNodes = processedGraphData.nodes.filter(
+      (n) =>
+        n.nodeTypes.includes(NodeType.Delegate) &&
+        !n.nodeTypes.includes(NodeType.Citizen) &&
+        n.votingPower?.total
+    );
+
+    const sortedDelegates = [...delegateNodes].sort((a, b) => {
+      const vpA = parseFloat(a.votingPower!.total);
+      const vpB = parseFloat(b.votingPower!.total);
+      return vpB - vpA;
+    });
+
+    const maxDelegate = sortedDelegates[0];
+    const minDelegate = sortedDelegates[sortedDelegates.length - 1];
+
+    console.log("Delegate with highest voting power:", {
+      id: maxDelegate?.id,
+      ens: maxDelegate?.ens,
+      votingPower: maxDelegate?.votingPower?.total
+    });
+
+    console.log("Delegate with lowest voting power:", {
+      id: minDelegate?.id,
+      ens: minDelegate?.ens,
+      votingPower: minDelegate?.votingPower?.total
+    });
+
+    return {
+      maxVotingPowerDelegate: maxDelegate,
+      minVotingPowerDelegate: minDelegate
+    };
+  }, [processedGraphData.nodes]);
+
   const highlightNodeConnections = useCallback(
     (node: Node | null) => {
       highlightNodes.clear();
