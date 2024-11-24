@@ -45,3 +45,4 @@ instructions.md
 backup-*.sql
 backup-*.sql.gz
 backups/
+commands.md
