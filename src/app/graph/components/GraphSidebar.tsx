@@ -27,7 +27,7 @@ const NODE_TYPES: Array<{
   {
     key: NodeType.Delegate,
     text: "Delegates",
-    color: "#FF7E67"
+    color: "#FFD700"
   }
 ];
 
