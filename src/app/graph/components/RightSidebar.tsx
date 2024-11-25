@@ -18,6 +18,20 @@ const formatAddress = (address: string) => {
   return `${address.slice(0, 4)}...${address.slice(-4)}`;
 };
 
+const convertUsernameToXAddress = (username: string) => {
+  // Extract username from full URL if present
+  if (username.includes('twitter.com/') || username.includes('x.com/')) {
+    const matches = username.match(/(?:twitter\.com\/|x\.com\/)([^\/\?]+)/);
+    username = matches ? matches[1] : username;
+  }
+  // Remove any https://x.com/ if it's at the start of the username
+  username = username.replace(/^https?:\/\/x\.com\//, '');
+  // Remove any @ symbol if present
+  username = username.replace('@', '');
+
+  return `https://x.com/${username}`;
+};
+
 const RightSidebar: React.FC<RightSidebarProps> = ({
   selectedNodeId,
   onClose,
@@ -122,6 +136,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
           connections={filteredFarcasterConnections}
         />
         <BadgesSection node={selectedNode} />
+        <VotingPowerSection node={selectedNode} />
         <RolesSection node={selectedNode} />
         <BadgeholderReferralSection
           referrals={formattedReferrals}
@@ -169,7 +184,7 @@ const ProfileSection: React.FC<{ node: Node; connections: string[] }> = ({
       )}
       {node.twitterUrl && (
         <a
-          href={node.twitterUrl}
+          href={convertUsernameToXAddress(node.twitterUrl)}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-2 text-dark-primary hover:underline flex items-center gap-1"
@@ -220,8 +235,34 @@ const BadgesSection: React.FC<{ node: Node }> = ({ node }) => {
   );
 };
 
+const VotingPowerSection: React.FC<{ node: Node }> = ({ node }) => {
+  if (!node.votingPower?.total) return null;
+
+  return (
+    <div className="mb-6">
+      <h3 className="text-lg font-semibold mb-3 flex items-center">
+        <span className="mr-2">Voting Power</span>
+        <Info
+          size={16}
+          className="text-dark-text-secondary cursor-help"
+          data-tooltip-id="voting-power-tooltip"
+        />
+      </h3>
+      <Tooltip
+        id="voting-power-tooltip"
+        place="top"
+        className="max-w-[300px] text-center"
+        content="Total voting power this delegate holds in the DAO"
+      />
+      <div className="text-dark-text-primary break-words text-sm">
+        {Number(node.votingPower.total).toLocaleString()}
+      </div>
+      <div className="text-sm text-dark-text-secondary">total votes</div>
+    </div>
+  );
+};
+
 const RolesSection: React.FC<{ node: Node }> = ({ node }) => {
-  // Check if any of the relevant fields exist
   const hasRoleInfo =
     node.roles || node.ambassadorOf || node.opRewardsEarned || node.description;
 
