@@ -22,7 +22,11 @@ async function loadJsonFile(filename: string) {
   }
 }
 
-async function checkLinkExists(sourceId: string, targetId: string, type: string) {
+async function checkLinkExists(
+  sourceId: string,
+  targetId: string,
+  type: string
+) {
   const existingLink = await db
     .select()
     .from(schema.links)
@@ -30,6 +34,7 @@ async function checkLinkExists(sourceId: string, targetId: string, type: string)
       and(
         eq(schema.links.sourceId, sourceId),
         eq(schema.links.targetId, targetId),
+        // @ts-ignore
         eq(schema.links.type, type)
       )
     )
@@ -45,7 +50,9 @@ async function linkDelegateNodes() {
     // First, load and insert TrustedSeed members
     console.log("Loading TrustedSeed members from JSON...");
     const trustedSeedMembers = await loadJsonFile("TrustedSeed.json");
-    console.log(`Found ${trustedSeedMembers.length} TrustedSeed members in JSON`);
+    console.log(
+      `Found ${trustedSeedMembers.length} TrustedSeed members in JSON`
+    );
 
     // Insert TrustedSeed members into the database
     for (const member of trustedSeedMembers) {
@@ -59,7 +66,10 @@ async function linkDelegateNodes() {
           .onConflictDoNothing();
         console.log(`Added/Verified TrustedSeed member: ${lowercaseId}`);
       } catch (error) {
-        console.error(`Error inserting TrustedSeed member ${lowercaseId}:`, error);
+        console.error(
+          `Error inserting TrustedSeed member ${lowercaseId}:`,
+          error
+        );
       }
     }
 
@@ -82,7 +92,10 @@ async function linkDelegateNodes() {
           .onConflictDoNothing();
         console.log(`Added/Verified RegenPOAP: ${lowercaseCollection}`);
       } catch (error) {
-        console.error(`Error inserting RegenPOAP ${lowercaseCollection}:`, error);
+        console.error(
+          `Error inserting RegenPOAP ${lowercaseCollection}:`,
+          error
+        );
       }
     }
 
@@ -112,16 +125,16 @@ async function linkDelegateNodes() {
           "TECHolder"
         );
         if (!linkExists) {
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: delegateId,
-              targetId: NodeType.TECHolder,
-              type: "TECHolder"
-            });
+          await db.insert(schema.links).values({
+            sourceId: delegateId,
+            targetId: NodeType.TECHolder,
+            type: "TECHolder"
+          });
           console.log(`Added TEC Holder link for delegate: ${delegateId}`);
         } else {
-          console.log(`TEC Holder link already exists for delegate: ${delegateId}`);
+          console.log(
+            `TEC Holder link already exists for delegate: ${delegateId}`
+          );
         }
       }
 
@@ -139,16 +152,16 @@ async function linkDelegateNodes() {
           "RegenScore"
         );
         if (!linkExists) {
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: delegateId,
-              targetId: NodeType.RegenScore,
-              type: "RegenScore"
-            });
+          await db.insert(schema.links).values({
+            sourceId: delegateId,
+            targetId: NodeType.RegenScore,
+            type: "RegenScore"
+          });
           console.log(`Added RegenScore link for delegate: ${delegateId}`);
         } else {
-          console.log(`RegenScore link already exists for delegate: ${delegateId}`);
+          console.log(
+            `RegenScore link already exists for delegate: ${delegateId}`
+          );
         }
       }
 
@@ -166,16 +179,16 @@ async function linkDelegateNodes() {
           "TrustedSeed"
         );
         if (!linkExists) {
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: delegateId,
-              targetId: NodeType.TrustedSeed,
-              type: "TrustedSeed"
-            });
+          await db.insert(schema.links).values({
+            sourceId: delegateId,
+            targetId: NodeType.TrustedSeed,
+            type: "TrustedSeed"
+          });
           console.log(`Added TrustedSeed link for delegate: ${delegateId}`);
         } else {
-          console.log(`TrustedSeed link already exists for delegate: ${delegateId}`);
+          console.log(
+            `TrustedSeed link already exists for delegate: ${delegateId}`
+          );
         }
       }
 
@@ -192,16 +205,16 @@ async function linkDelegateNodes() {
           "RegenPOAP"
         );
         if (!linkExists) {
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: delegateId,
-              targetId: NodeType.RegenPOAP,
-              type: "RegenPOAP"
-            });
+          await db.insert(schema.links).values({
+            sourceId: delegateId,
+            targetId: NodeType.RegenPOAP,
+            type: "RegenPOAP"
+          });
           console.log(`Added RegenPOAP link for delegate: ${delegateId}`);
         } else {
-          console.log(`RegenPOAP link already exists for delegate: ${delegateId}`);
+          console.log(
+            `RegenPOAP link already exists for delegate: ${delegateId}`
+          );
         }
       }
 
@@ -218,13 +231,11 @@ async function linkDelegateNodes() {
           "BadgeHolderReferral"
         );
         if (!linkExists) {
-          await db
-            .insert(schema.links)
-            .values({
-              sourceId: delegateId,
-              targetId: referral.recipient,
-              type: "BadgeHolderReferral"
-            });
+          await db.insert(schema.links).values({
+            sourceId: delegateId,
+            targetId: referral.recipient,
+            type: "BadgeHolderReferral"
+          });
           console.log(
             `Added BadgeHolderReferral link from delegate ${delegateId} to ${referral.recipient}`
           );
