@@ -17,8 +17,20 @@ export enum NodeType {
   RegenScore = "RegenScore",
   TrustedSeed = "TrustedSeed",
   RegenPOAP = "RegenPOAP",
+  Delegate = "Delegate"
   // RefiDAO = "RefiDAO", // Uncomment if needed in the future
 }
+
+export type TopIssue = {
+  type: string;
+  value: string;
+};
+
+export type VotingPower = {
+  total: string;
+  direct: string;
+  advanced: string;
+};
 
 export interface RegenPOAPHolder {
   Collection: string;
@@ -26,9 +38,14 @@ export interface RegenPOAPHolder {
 }
 
 export interface BadgeHolderReferralInfo {
-  address: string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  attester: string;
+  recipient: string;
   rpgfRound: string;
-  referredMethod: string;
+  referredBy: string | null;
+  referredMethod: string | null;
 }
 
 export interface Link {
@@ -52,6 +69,7 @@ export interface ICitizen {
   profileBio?: string;
   userAddress?: string;
   chainId?: string;
+  isSpecial?: boolean;
   followings?: {
     id: string;
     blockchain: string;
@@ -61,7 +79,6 @@ export interface ICitizen {
 
 export interface Node extends ICitizen {
   id: string;
-  type: NodeType;
   degree?: number;
   name?: string;
   x?: number;
@@ -71,12 +88,20 @@ export interface Node extends ICitizen {
   trustedSeed?: boolean;
   regenPOAP?: boolean;
   hasFarcaster?: boolean;
+  nodeTypes: NodeType[];
   badgeHolderReferrals?: {
     referredBy: BadgeHolderReferralInfo[];
     referred: BadgeHolderReferralInfo[];
   };
   links?: Link[];
   // refiDAO?: boolean;
+  isDelegate?: boolean;
+  roles?: string;
+  ambassadorOf?: string;
+  opRewardsEarned?: string;
+  description?: string;
+  twitterUrl?: string;
+  votingPower?: VotingPower;
 }
 
 export interface GraphData {

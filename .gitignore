@@ -27,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.production
 
 # vercel
 .vercel
@@ -36,3 +38,11 @@ yarn-error.log*
 next-env.d.ts
 
 .cursorrules
+instructions.md
+
+# Database backups
+*.sql
+backup-*.sql
+backup-*.sql.gz
+backups/
+commands.md

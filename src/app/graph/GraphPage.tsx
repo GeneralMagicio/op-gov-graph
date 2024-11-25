@@ -24,7 +24,7 @@ import {
   NodeLinkType,
   NodeType
 } from "./types";
-import { useGraphData } from "../hooks/useGraphData";
+
 import RightSidebar from "./components/RightSidebar";
 import { useSearchCitizens } from "../hooks/useSearchCitizens";
 import {
@@ -32,6 +32,7 @@ import {
   getConnectionTypeByKey
 } from "./types/connectionTypes";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { api } from "@/trpc/react";
 
 const MIN_NODE_R = 5;
 const MAX_NODE_R = 12;
@@ -43,7 +44,7 @@ export default function GraphPage() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const selectedNodesCheckBox = useRef([NodeType.Citizen]);
+  const selectedNodesCheckBox = useRef([NodeType.Citizen, NodeType.Delegate]);
 
   const [selectedConnectionsCheckBox, setSelectedConnectionsCheckBox] =
     useState<NodeLinkType[]>([
@@ -57,12 +58,22 @@ export default function GraphPage() {
     ]);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [clickedNode, setClickedNode] = useState<Node | null>(null);
 
-  const graphData = useGraphData(
-    selectedConnectionsCheckBox,
-    selectedNodesCheckBox.current
-  );
+  const [selectedNodeTypes, setSelectedNodeTypes] = useState<
+    Array<NodeType.Citizen | NodeType.Delegate>
+  >([NodeType.Citizen, NodeType.Delegate]);
+
+  const {
+    data: graphData,
+    isLoading,
+    error
+  } = api.graph.getGraphData.useQuery({
+    networkId: 10,
+    selectedNodeTypes: selectedNodeTypes,
+    selectedLinkTypes: selectedConnectionsCheckBox
+  });
 
   const [highlightNodes, setHighlightNodes] = useState<Set<Node>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<Link>>(new Set());
@@ -75,7 +86,7 @@ export default function GraphPage() {
     handleSearch,
     handleSelectSearchedNode,
     resetSearch
-  } = useSearchCitizens(graphData.nodes);
+  } = useSearchCitizens((graphData?.nodes as Node[]) ?? []);
 
   const fgRef =
     useRef<ForceGraphMethods<NodeObject<Node>, LinkObject<Node, Link>>>(null);
@@ -85,20 +96,20 @@ export default function GraphPage() {
 
   const lowercaseGraphData = useMemo(() => {
     return {
-      nodes: graphData.nodes.map((node) => ({
+      nodes: graphData?.nodes.map((node) => ({
         ...node,
         id: node.id.toLowerCase()
       })),
-      links: graphData.links.map((link) => ({
+      links: graphData?.links.map((link) => ({
         ...link,
         source:
-          typeof link.source === "string"
-            ? link.source.toLowerCase()
-            : link.source,
+          typeof link?.sourceId === "string"
+            ? link.sourceId.toLowerCase()
+            : link.sourceId,
         target:
-          typeof link.target === "string"
-            ? link.target.toLowerCase()
-            : link.target
+          typeof link.targetId === "string"
+            ? link.targetId.toLowerCase()
+            : link.targetId
       }))
     };
   }, [graphData]);
@@ -109,22 +120,29 @@ export default function GraphPage() {
   };
 
   const filteredGraphData = useMemo(() => {
-    const filteredNodes = lowercaseGraphData.nodes.filter(
+    const filteredNodes = lowercaseGraphData?.nodes?.filter(
       (node) =>
-        selectedNodesCheckBox.current.includes(node.type || "") ||
-        CONNECTION_TYPES.some(
-          (type) => type.key === (node.type as unknown as NodeLinkType)
+        selectedNodesCheckBox.current.some((type) =>
+          node.nodeTypes.includes(type)
+        ) ||
+        CONNECTION_TYPES.some((type) =>
+          node.nodeTypes.includes(type.key as unknown as NodeType)
         )
     );
 
-    const nodeIds = new Set(filteredNodes.map((node) => node.id.toLowerCase()));
-    const filteredLinks = lowercaseGraphData.links.filter((link) => {
+    const nodeIds = new Set(
+      filteredNodes?.map((node) => node.id.toLowerCase())
+    );
+    const filteredLinks = lowercaseGraphData?.links?.filter((link) => {
       const sourceId = link.source;
       const targetId = link.target;
       const isValidLink =
-        nodeIds.has(sourceId.toLowerCase()) &&
-        nodeIds.has(targetId.toLowerCase());
-      return isValidLink && selectedConnectionsCheckBox.includes(link.type);
+        nodeIds.has((sourceId as string)?.toLowerCase() ?? "") &&
+        nodeIds.has((targetId as string)?.toLowerCase() ?? "");
+      return (
+        isValidLink &&
+        selectedConnectionsCheckBox.includes(link.type as NodeLinkType)
+      );
     });
 
     return { nodes: filteredNodes, links: filteredLinks };
@@ -132,8 +150,8 @@ export default function GraphPage() {
 
   const processedGraphData = useMemo(() => {
     const gData: GraphDataWithNeighbors = {
-      nodes: JSON.parse(JSON.stringify(filteredGraphData.nodes)),
-      links: JSON.parse(JSON.stringify(filteredGraphData.links))
+      nodes: JSON.parse(JSON.stringify(filteredGraphData?.nodes ?? [])),
+      links: JSON.parse(JSON.stringify(filteredGraphData?.links ?? []))
     };
     // Calculate the degree of each node (number of connections)
     const nodeDegreeMap = new Map<string, number>();
@@ -175,6 +193,42 @@ export default function GraphPage() {
     return gData;
   }, [filteredGraphData]);
 
+  // Delegate with highest and lowest voting power
+  const { maxVotingPowerDelegate, minVotingPowerDelegate } = useMemo(() => {
+    const delegateNodes = processedGraphData.nodes.filter(
+      (n) =>
+        n.nodeTypes.includes(NodeType.Delegate) &&
+        !n.nodeTypes.includes(NodeType.Citizen) &&
+        n.votingPower?.total
+    );
+
+    const sortedDelegates = [...delegateNodes].sort((a, b) => {
+      const vpA = parseFloat(a.votingPower!.total);
+      const vpB = parseFloat(b.votingPower!.total);
+      return vpB - vpA;
+    });
+
+    const maxDelegate = sortedDelegates[0];
+    const minDelegate = sortedDelegates[sortedDelegates.length - 1];
+
+    console.log("Delegate with highest voting power:", {
+      id: maxDelegate?.id,
+      ens: maxDelegate?.ens,
+      votingPower: maxDelegate?.votingPower?.total
+    });
+
+    console.log("Delegate with lowest voting power:", {
+      id: minDelegate?.id,
+      ens: minDelegate?.ens,
+      votingPower: minDelegate?.votingPower?.total
+    });
+
+    return {
+      maxVotingPowerDelegate: maxDelegate,
+      minVotingPowerDelegate: minDelegate
+    };
+  }, [processedGraphData.nodes]);
+
   const highlightNodeConnections = useCallback(
     (node: Node | null) => {
       highlightNodes.clear();
@@ -214,15 +268,15 @@ export default function GraphPage() {
       const sourceNode =
         typeof link.source === "object"
           ? link.source
-          : graphData.nodes.find((n) => n.id === link.source);
+          : graphData?.nodes.find((n) => n.id === link.source);
       const targetNode =
         typeof link.target === "object"
           ? link.target
-          : graphData.nodes.find((n) => n.id === link.target);
+          : graphData?.nodes.find((n) => n.id === link.target);
 
       if (sourceNode && targetNode) {
-        highlightNodes.add(sourceNode);
-        highlightNodes.add(targetNode);
+        highlightNodes.add(sourceNode as Node);
+        highlightNodes.add(targetNode as Node);
       }
     }
 
@@ -232,6 +286,7 @@ export default function GraphPage() {
   const handleNodeClick = useCallback(
     (node: Node) => {
       setSelectedNode(node);
+      setSelectedNodeId(node.id);
       setClickedNode(node);
       highlightNodeConnections(node);
 
@@ -244,8 +299,8 @@ export default function GraphPage() {
 
   const handleCloseRightSidebar = useCallback(() => {
     setSelectedNode(null);
-    setClickedNode(null); // Clear the clicked node
-    // Clear all highlights
+    setSelectedNodeId(null);
+    setClickedNode(null);
     highlightNodes.clear();
     highlightLinks.clear();
     updateHighlight();
@@ -271,13 +326,15 @@ export default function GraphPage() {
           const targetNode =
             typeof link.target === "object"
               ? link.target
-              : graphData.nodes.find((n) => n.id === link.target);
+              : graphData?.nodes.find((n) => n.id === link.target);
           const sourceNode =
             typeof link.source === "object"
               ? link.source
-              : graphData.nodes.find((n) => n.id === link.source);
-          if (targetNode && targetNode !== node) highlightNodes.add(targetNode);
-          if (sourceNode && sourceNode !== node) highlightNodes.add(sourceNode);
+              : graphData?.nodes.find((n) => n.id === link.source);
+          if (targetNode && targetNode !== node)
+            highlightNodes.add(targetNode as Node);
+          if (sourceNode && sourceNode !== node)
+            highlightNodes.add(sourceNode as Node);
         });
       } else if (!node && clickedNode) {
         // If hovering away and there's a clicked node, restore its highlight
@@ -289,15 +346,15 @@ export default function GraphPage() {
           const targetNode =
             typeof link.target === "object"
               ? link.target
-              : graphData.nodes.find((n) => n.id === link.target);
+              : graphData?.nodes.find((n) => n.id === link.target);
           const sourceNode =
             typeof link.source === "object"
               ? link.source
-              : graphData.nodes.find((n) => n.id === link.source);
+              : graphData?.nodes.find((n) => n.id === link.source);
           if (targetNode && targetNode !== clickedNode)
-            highlightNodes.add(targetNode);
+            highlightNodes.add(targetNode as Node);
           if (sourceNode && sourceNode !== clickedNode)
-            highlightNodes.add(sourceNode);
+            highlightNodes.add(sourceNode as Node);
         });
       }
 
@@ -306,20 +363,40 @@ export default function GraphPage() {
     },
     [
       clickedNode,
-      graphData.nodes,
+      graphData?.nodes,
       highlightNodes,
       highlightLinks,
       updateHighlight
     ]
   );
 
-  const getNodeColor = (node: Node) => {
-    if (node.type === NodeType.Citizen) return "#a4b2e1";
-    const connectionType = CONNECTION_TYPES.find(
-      (type) => type.key === (node.type as unknown as NodeLinkType)
+  const getNodeColor = useCallback((node: Node) => {
+    // Colors for different node types
+    const colors = {
+      [NodeType.Citizen]: "white",
+      [NodeType.Delegate]: "#FF7E67",
+      citizenAndDelegate: "#FFD700"
+    };
+
+    const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+    const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+
+    if (hasDelegate && hasCitizen) {
+      return colors.citizenAndDelegate;
+    }
+    if (hasDelegate) {
+      return colors[NodeType.Delegate];
+    }
+    if (hasCitizen) {
+      return colors[NodeType.Citizen];
+    }
+
+    // For special nodes (like TECHolder, RegenScore, etc.)
+    const connectionType = CONNECTION_TYPES.find((type) =>
+      node.nodeTypes.includes(type.key as unknown as NodeType)
     );
     return connectionType ? connectionType.color : "#3388ff";
-  };
+  }, []);
 
   const getLinkColor = useCallback((link: Link, highlighted: boolean) => {
     const opacity = highlighted ? 1 : 0.1;
@@ -331,17 +408,91 @@ export default function GraphPage() {
       : `rgba(153, 153, 153, ${opacity})`;
   }, []);
 
+  const { minLogVotingPower, maxLogVotingPower } = useMemo(() => {
+    const votingPowers = processedGraphData.nodes
+      .filter(
+        (n) =>
+          n.nodeTypes.includes(NodeType.Delegate) &&
+          !n.nodeTypes.includes(NodeType.Citizen) &&
+          n.votingPower?.total
+      )
+      .map((n) => parseFloat(n.votingPower!.total))
+      .filter((vp) => vp > 0); // Exclude zero or negative values
+
+    if (votingPowers.length === 0) {
+      // Handle case when there are no valid voting powers
+      return { minLogVotingPower: 0, maxLogVotingPower: 0 };
+    }
+
+    const minVotingPower = Math.min(...votingPowers);
+    const maxVotingPower = Math.max(...votingPowers);
+
+    const minLogVP = Math.log(minVotingPower);
+    const maxLogVP = Math.log(maxVotingPower);
+
+    return { minLogVotingPower: minLogVP, maxLogVotingPower: maxLogVP };
+  }, [processedGraphData.nodes]);
+
+  const maxDegree = useMemo(() => {
+    const degrees = processedGraphData.nodes
+      .filter((n) => n.nodeTypes.includes(NodeType.Citizen))
+      .map((n) => n.degree || 0);
+
+    return degrees.length > 0 ? Math.max(...degrees) : 0;
+  }, [processedGraphData.nodes]);
+
   const getNodeRadius = useCallback(
     (node: Node) => {
-      if (node.type !== NodeType.Citizen) return MIN_NODE_R;
-      const degree = node.degree || 0;
-      const maxDegree = Math.max(
-        ...processedGraphData.nodes.map((n) => n.degree || 0)
-      );
-      return MIN_NODE_R + (MAX_NODE_R - MIN_NODE_R) * (degree / maxDegree);
-    },
+      const minR = MIN_NODE_R;
+      const maxR = MAX_NODE_R;
 
-    [processedGraphData]
+      // Delegate nodes
+      if (
+        node.nodeTypes.includes(NodeType.Delegate) &&
+        !node.nodeTypes.includes(NodeType.Citizen)
+      ) {
+        if (
+          !node.votingPower?.total ||
+          minLogVotingPower === maxLogVotingPower
+        ) {
+          return minR;
+        }
+
+        const votingPower = parseFloat(node.votingPower.total);
+
+        // Ensure voting power is positive
+        if (votingPower <= 0) {
+          return minR;
+        }
+
+        const logVotingPower = Math.log(votingPower);
+        const ratio =
+          (logVotingPower - minLogVotingPower) /
+          (maxLogVotingPower - minLogVotingPower);
+
+        // Clamp ratio between 0 and 1
+        const clampedRatio = Math.max(0, Math.min(1, ratio));
+
+        return minR + (maxR - minR) * clampedRatio;
+      }
+
+      if (node.nodeTypes.includes(NodeType.Citizen)) {
+        if (maxDegree === 0) {
+          return minR;
+        }
+
+        const degree = node.degree || 0;
+        const ratio = degree / maxDegree;
+
+        // Clamp ratio between 0 and 1
+        const clampedRatio = Math.max(0, Math.min(1, ratio));
+
+        return minR + (maxR - minR) * clampedRatio;
+      }
+
+      return minR;
+    },
+    [minLogVotingPower, maxLogVotingPower, maxDegree]
   );
 
   const loadImage = useCallback((src: string): Promise<HTMLImageElement> => {
@@ -388,6 +539,23 @@ export default function GraphPage() {
     []
   );
 
+  // Add this helper function at the component level
+  const getHighlightColor = (node: Node) => {
+    if (Array.isArray(node.nodeTypes)) {
+      const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+      const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+
+      if (hasDelegate && hasCitizen) {
+        return "#FFE55C"; // Brighter gold for hover state
+      }
+      if (hasDelegate) {
+        return "#FF9E87"; // Brighter orange for delegate hover
+      }
+    }
+    return "white"; // Default hover color
+  };
+
+  // Update the paintNode function to use the moved getHighlightColor function
   const paintNode = useCallback(
     (node: Node, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const nodeRadius = getNodeRadius(node);
@@ -401,11 +569,78 @@ export default function GraphPage() {
         selectedSearchedNode &&
         node.id.toLowerCase() === selectedSearchedNode.id.toLowerCase();
 
+      // Helper function to draw strokes based on node types
+      const drawStrokes = () => {
+        const strokeWidth = 2 / globalScale;
+        if (Array.isArray(node.nodeTypes)) {
+          const hasDelegate = node.nodeTypes.includes(NodeType.Delegate);
+          const hasCitizen = node.nodeTypes.includes(NodeType.Citizen);
+
+          if (hasDelegate && hasCitizen) {
+            // Draw outer gold stroke
+            ctx.beginPath();
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius + strokeWidth,
+              0,
+              2 * Math.PI,
+              false
+            );
+            ctx.strokeStyle = isHighlighted ? "#FFE55C" : "#FFD700";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+
+            // Draw inner white stroke
+            ctx.beginPath();
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius,
+              0,
+              2 * Math.PI,
+              false
+            );
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+          } else if (hasDelegate) {
+            // Single gold stroke for delegates
+            ctx.beginPath();
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius,
+              0,
+              2 * Math.PI,
+              false
+            );
+            ctx.strokeStyle = isHighlighted ? "#FFE55C" : "#FFD700";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+          } else if (hasCitizen) {
+            // Single white stroke for citizens
+            ctx.beginPath();
+            ctx.arc(
+              node.x || 0,
+              node.y || 0,
+              nodeRadius,
+              0,
+              2 * Math.PI,
+              false
+            );
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = strokeWidth;
+            ctx.stroke();
+          }
+        }
+      };
+
       if (node.profileImage && imagesLoadedRef.current.has(node.profileImage)) {
         // Use pre-rendered canvas
         const preRenderedCanvas = getPreRenderedCanvas(
           node.profileImage,
-          nodeRadius * 2 // Double the radius for higher quality
+          nodeRadius * 2
         );
         ctx.save();
         ctx.beginPath();
@@ -419,12 +654,20 @@ export default function GraphPage() {
           nodeRadius * 2
         );
         ctx.restore();
+
+        // Draw strokes after the image
+        drawStrokes();
       } else {
         // Fill circle with color
         ctx.beginPath();
         ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = isHighlighted ? "#32CD32" : getNodeColor(node);
+        ctx.fillStyle = isHighlighted
+          ? getHighlightColor(node)
+          : getNodeColor(node);
         ctx.fill();
+
+        // Draw strokes
+        drawStrokes();
 
         // Initiate image loading if not already loaded
         if (
@@ -437,13 +680,6 @@ export default function GraphPage() {
         }
       }
 
-      // Draw border
-      ctx.beginPath();
-      ctx.arc(node.x || 0, node.y || 0, nodeRadius, 0, 2 * Math.PI, false);
-      ctx.strokeStyle = isHighlighted ? "white" : getNodeColor(node);
-      ctx.lineWidth = 2 / globalScale;
-      ctx.stroke();
-
       if (isSearchSelected) {
         ctx.strokeStyle = "#FF00FF";
         ctx.lineWidth = 2 / globalScale;
@@ -454,15 +690,26 @@ export default function GraphPage() {
       ctx.fillStyle = isHighlighted ? "#6EE6B6" : "white";
       const labelY = (node.y || 0) + nodeRadius + fontSize;
       ctx.globalAlpha = isHighlighted || isSearchSelected ? 1 : 0.3;
-      if (node.type === NodeType.Citizen) {
-        let label =
-          node.ens ||
+
+      // Modified label logic - check for ENS regardless of node type
+      let label = "";
+      if (node.ens && node.ens.trim() !== "") {
+        // Show ENS name if available for any node type
+        label = node.ens;
+      } else if (node.nodeTypes.includes(NodeType.Delegate)) {
+        // For delegates without ENS, show name or truncated address
+        label =
+          node.name ||
           (node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "");
-        ctx.fillText(label, node.x || 0, labelY);
+      } else if (node.nodeTypes.includes(NodeType.Citizen)) {
+        // For citizens without ENS, show truncated address
+        label = node.id ? `${node.id.slice(0, 4)}...${node.id.slice(-4)}` : "";
       } else {
-        ctx.fillText(node.name || node.id, node.x || 0, labelY);
+        // For other node types
+        label = node.name || node.id || "";
       }
 
+      ctx.fillText(label, node.x || 0, labelY);
       ctx.globalAlpha = 1;
     },
     [
@@ -472,7 +719,8 @@ export default function GraphPage() {
       getNodeRadius,
       loadImage,
       getPreRenderedCanvas,
-      getNodeColor
+      getNodeColor,
+      getHighlightColor
     ]
   );
 
@@ -559,6 +807,7 @@ export default function GraphPage() {
   useEffect(() => {
     const nodeId = searchParams.get("nodeId");
     if (nodeId) {
+      setSelectedNodeId(nodeId);
       const node = processedGraphData.nodes.find(
         (n) => n.id.toLowerCase() === nodeId.toLowerCase()
       );
@@ -578,6 +827,18 @@ export default function GraphPage() {
     highlightNodeConnections(clickedNode);
   }, [clickedNode, highlightNodeConnections]);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!graphData) {
+    return <div>No data</div>;
+  }
+
   return (
     <div className="flex flex-col h-screen bg-dark-background text-dark-text-primary">
       <GraphHeader
@@ -591,6 +852,16 @@ export default function GraphPage() {
         <GraphSidebar
           selectedConnectionsCheckBox={selectedConnectionsCheckBox}
           setSelectedConnectionsCheckBox={setSelectedConnectionsCheckBox}
+          selectedNodeTypes={selectedNodeTypes}
+          setSelectedNodeTypes={(newTypes) => {
+            // Ensure at least one type is selected
+            if (newTypes.length === 0) {
+              return;
+            }
+            setSelectedNodeTypes(
+              newTypes as (NodeType.Citizen | NodeType.Delegate)[]
+            );
+          }}
         />
 
         <main className="max-w-fit flex-grow overflow-hidden flex justify-center items-center">
@@ -606,7 +877,7 @@ export default function GraphPage() {
               nodeRelSize={MAX_NODE_R}
               nodeVal={(node) => Math.pow(getNodeRadius(node) / MAX_NODE_R, 2)}
               nodeLabel={(node) => {
-                if (node.type === NodeType.Citizen) {
+                if (node.nodeTypes.includes(NodeType.Citizen)) {
                   return `${node.ens ?? node.id} (Connections: ${node.degree})`;
                 }
                 return node.name ?? node.id;
@@ -630,6 +901,7 @@ export default function GraphPage() {
           )}
         </main>
         <RightSidebar
+          selectedNodeId={selectedNodeId}
           selectedNode={selectedNode}
           onClose={handleCloseRightSidebar}
         />
