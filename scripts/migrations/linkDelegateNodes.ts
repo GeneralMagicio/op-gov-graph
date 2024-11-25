@@ -103,7 +103,14 @@ async function linkDelegateNodes() {
     const delegateNodes = await db
       .select()
       .from(schema.nodes)
-      .where(inArray(schema.nodes.nodeTypes, [["Delegate"]]));
+      .where(
+        inArray(schema.nodes.nodeTypes, [
+          ["Delegate"],
+          ["Citizen"],
+          ["Delegate", "Citizen"],
+          ["Citizen", "Delegate"]
+        ])
+      );
 
     console.log(`Found ${delegateNodes.length} delegate nodes`);
 
