@@ -55,7 +55,8 @@ const VouchingCard = () => {
             <p className="text-center mb-4">
               Your score is: {isLoading ? "..." : userSybilScore}
             </p>
-            {userSybilScore && userSybilScore >= VOUCH_THRESHOLD ? (
+            {isLoading ||
+            (userSybilScore && userSybilScore >= VOUCH_THRESHOLD) ? (
               <VouchForm
                 currentAddress={address!}
                 refetchVouchedFor={refetchVouchedFor}
@@ -73,8 +74,12 @@ const VouchingCard = () => {
             <h2 className="text-xl font-bold mb-6 text-center">
               Vouching Stats
             </h2>
-            {error && <p className="text-center text-red-500">Error: {error.message}</p>}
-            {isLoading && <p className="text-center text-gray-500">Loading...</p>}
+            {error && (
+              <p className="text-center text-red-500">Error: {error.message}</p>
+            )}
+            {isLoading && (
+              <p className="text-center text-gray-500">Loading...</p>
+            )}
             {!isLoading && !error && (
               <div className="flex justify-around">
                 <div className="flex flex-col border border-gray-400 p-4 rounded-xl text-center gap-4">

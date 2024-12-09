@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { api } from "@/trpc/react";
 import Toast from "./Toast";
+import { isAddressENS, getAddressFromENS } from "@/app/utils/wallet";
 
 interface VouchFormProps {
   currentAddress: string;
@@ -11,11 +12,14 @@ interface VouchFormProps {
 const VouchForm: React.FC<VouchFormProps> = ({
   currentAddress,
   refetchVouchedFor,
-  refetchVouchesReceived,
+  refetchVouchesReceived
 }) => {
   const vouchAnAddress = api.vouching.vouch.useMutation();
   const [vouchAddress, setVouchAddress] = useState("");
-  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const addressRegex = /^0x[a-fA-F0-9]{40}$/;
 
@@ -29,13 +33,34 @@ const VouchForm: React.FC<VouchFormProps> = ({
       return;
     }
 
+    let walletAddress = vouchAddress;
+
+    if (isAddressENS(vouchAddress)) {
+      const address = await getAddressFromENS(vouchAddress);
+
+      if (!address) {
+        showToast("Invalid ENS name", "error");
+        return;
+      }
+
+      walletAddress = address;
+    } else if (!addressRegex.test(vouchAddress)) {
+      showToast("Please enter a valid wallet address.", "error");
+      return;
+    }
+
+    console.log("Vouching for address:", walletAddress);
+
     try {
       await vouchAnAddress.mutateAsync({
         vouchingAddress: currentAddress,
-        walletAddress: vouchAddress,
+        walletAddress: walletAddress
       });
 
-      showToast(`You vouched for ${vouchAddress}`, "success");
+      showToast(
+        `You have successfully vouched for ${walletAddress}.`,
+        "success"
+      );
       setVouchAddress("");
       refetchVouchedFor();
       refetchVouchesReceived();
@@ -57,7 +82,10 @@ const VouchForm: React.FC<VouchFormProps> = ({
       <button
         onClick={handleVouch}
         className="w-full mt-3 px-4 py-2 bg-blue-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-        disabled={!vouchAddress || !addressRegex.test(vouchAddress)}
+        disabled={
+          !vouchAddress ||
+          (!addressRegex.test(vouchAddress) && !isAddressENS(vouchAddress))
+        }
       >
         Vouch
       </button>
@@ -73,4 +101,3 @@ const VouchForm: React.FC<VouchFormProps> = ({
 };
 
 export default VouchForm;
-

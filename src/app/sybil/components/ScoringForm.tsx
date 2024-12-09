@@ -3,9 +3,14 @@
 import { useState } from "react";
 import { api } from "@/trpc/react";
 import { isAddressENS, getAddressFromENS } from "@/app/utils/wallet";
+import Toast from "@/app/vouch/components/Toast";
 
 const ScoringForm = () => {
   const [walletAddress, setWalletAddress] = useState("");
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const addressRegex = /^0x[a-fA-F0-9]{40}$/;
 
@@ -26,7 +31,7 @@ const ScoringForm = () => {
       const address = await getAddressFromENS(walletAddress);
 
       if (!address) {
-        alert("Invalid ENS name");
+        setToast({ message: "Invalid ENS name", type: "error" });
         return;
       }
 
@@ -73,6 +78,13 @@ const ScoringForm = () => {
           )}
         </div>
       </div>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };
