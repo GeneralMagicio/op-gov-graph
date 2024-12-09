@@ -20,7 +20,7 @@ export const metadata = {
 };
 
 export const wagmiConfig = createConfig({
-  chains: [optimism, mainnet, arbitrum, polygon, base, gnosis],
+  chains: [mainnet, optimism, arbitrum, polygon, base, gnosis],
   ssr: true,
   storage: createStorage({
     storage: cookieStorage

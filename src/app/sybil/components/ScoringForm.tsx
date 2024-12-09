@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { api } from "@/trpc/react";
+import { isAddressENS, getAddressFromENS } from "@/app/utils/wallet";
 
 const ScoringForm = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -12,16 +13,25 @@ const ScoringForm = () => {
     data: sybilScore,
     isLoading,
     error,
-    refetch,
+    refetch
   } = api.sybilScoring.calculateSybilScore.useQuery(
     { walletAddress },
     {
-      enabled: false,
+      enabled: false
     }
   );
 
-  const handleCalculateClick = () => {
-    if (walletAddress && addressRegex.test(walletAddress)) {
+  const handleCalculateClick = async () => {
+    if (isAddressENS(walletAddress)) {
+      const address = await getAddressFromENS(walletAddress);
+
+      if (!address) {
+        alert("Invalid ENS name");
+        return;
+      }
+
+      refetch();
+    } else if (walletAddress && addressRegex.test(walletAddress)) {
       refetch();
     }
   };
@@ -36,7 +46,7 @@ const ScoringForm = () => {
             type="text"
             value={walletAddress}
             onChange={(e) => setWalletAddress(e.target.value)}
-            placeholder="Enter Wallet Address"
+            placeholder="Enter Wallet Address or ENS Name"
             className="w-full border border-gray-300 rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -44,7 +54,11 @@ const ScoringForm = () => {
         <button
           onClick={handleCalculateClick}
           className="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
-          disabled={isLoading || !walletAddress || !addressRegex.test(walletAddress)}
+          disabled={
+            isLoading ||
+            !walletAddress ||
+            (!addressRegex.test(walletAddress) && !isAddressENS(walletAddress))
+          }
         >
           Calculate
         </button>

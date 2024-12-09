@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SearchResultsDropdown from "./SearchResultsDropdown";
 import { Node } from "../types";
 import { Search } from "lucide-react";

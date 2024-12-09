@@ -46,7 +46,7 @@ export interface IPOAP {
 export const getPOAPs = async (walletAddress: string): Promise<IPOAP[]> => {
   const variables = {
     limit: 100,
-    offset: 100,
+    offset: 0,
     order_by: {
       id: "desc"
     },

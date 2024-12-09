@@ -44,7 +44,7 @@ const VouchingCard = () => {
   }, [vouchedForData, vouchesReceivedData]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-dark-background text-white flex flex-col items-center justify-center">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-xl">
         <h1 className="text-3xl font-bold text-center mb-6">Vouching Page</h1>
         {!isConnected ? (
