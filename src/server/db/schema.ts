@@ -1,7 +1,6 @@
 // src/db/schema.ts
 
 import { TopIssue, VotingPower } from "@/app/graph/types";
-import { table } from "console";
 import {
   pgTable,
   serial,
@@ -215,6 +214,24 @@ export const transactions = pgTable(
       networkIdx: index("transaction_network_idx").on(table.networkId),
       fromIdx: index("transaction_from_idx").on(table.fromId),
       toIdx: index("transaction_to_idx").on(table.toId)
+    };
+  }
+);
+
+export const vouches = pgTable(
+  "vouches",
+  {
+    id: serial("id").primaryKey(),
+    vouchingAddress: text("vouching_address").notNull(),
+    vouchedAddress: text("vouched_address").notNull(),
+    vouchNumber: integer("vouch_number").default(1).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
+  },
+  (table) => {
+    return {
+      vouchingIdx: index("vouch_vouching_idx").on(table.vouchingAddress),
+      vouchedIdx: index("vouch_vouched_idx").on(table.vouchedAddress)
     };
   }
 );

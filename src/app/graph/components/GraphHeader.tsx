@@ -3,6 +3,7 @@ import SearchResultsDropdown from "./SearchResultsDropdown";
 import { Node } from "../types";
 import { Search } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface GraphHeaderProps {
   searchTerm: string;
@@ -52,6 +53,14 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
             >
               Network
             </a>
+          </li>
+          <li>
+            <Link
+              href="/vouch"
+              className="hover:text-dark-text-primary transition-colors"
+            >
+              Vouch
+            </Link>
           </li>
           <li>
             <a
