@@ -1,6 +1,6 @@
 {
-  "id": "bc6d83e1-fa29-45d5-b036-7c92ae885784",
-  "prevId": "ec4cca07-0c64-4d99-8981-afe3aa3567fe",
+  "id": "8c9a16de-b755-43e9-bc21-1c07ed11c5a0",
+  "prevId": "bc6d83e1-fa29-45d5-b036-7c92ae885784",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -974,6 +974,86 @@
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.vouches": {
+      "name": "vouches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "vouching_address": {
+          "name": "vouching_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vouched_address": {
+          "name": "vouched_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "vouch_number": {
+          "name": "vouch_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "vouch_vouching_idx": {
+          "name": "vouch_vouching_idx",
+          "columns": [
+            {
+              "expression": "vouching_address",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "vouch_vouched_idx": {
+          "name": "vouch_vouched_idx",
+          "columns": [
+            {
+              "expression": "vouched_address",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }
